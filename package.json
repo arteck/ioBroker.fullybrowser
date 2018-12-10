@@ -1,7 +1,7 @@
 {
   "name": "iobroker.fullyBrowser",
   "version": "0.0.5",
-  "description": "Manage you Fully Browser",
+  "description": "Manage yours Fully Browser",
   "main": "main.js",
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --exit"

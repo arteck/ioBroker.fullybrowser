@@ -15,6 +15,7 @@ var result;
 var err;
 var ip;
 var port;
+var psw;
 var timer     = null;
 var stopTimer = null;
 var isStopping = false;
@@ -102,202 +103,73 @@ process.on('SIGINT', function () {
 });
 
 
-function createState(name, ip, callback) {
-    var hs_sw_ver;
-    var hs_hw_ver;
-    var hs_model;
-    var hs_mac;
-    var hs_sysinfo;
+/**
+ * Fetches the Fully Browser information and updates the states in ioBroker.
+ * Also, it creates all the info states.
+ */
+function getFullyBrowserInfo() {
 
-// plug HS110
-    var hs_current;
-    var hs_power;
-    var hs_total;
-    var hs_ip;
-    var hs_state;
+    var statusURL = 'http://' + FULLY_IP + ':' + FULLY_PORT + '/?cmd=deviceInfo&type=json&password=' + FULLY_PASSWORD;
 
+    var thisRequest = require('request');
+
+    var thisOptions = {
+        uri: statusURL,
+        method: "GET",
+        timeout: 2000,
+        followRedirect: false,
+        maxRedirects: 0
+    };
+
+    thisRequest(thisOptions, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var fullyInfoObject = JSON.parse(body);
+            var count = 0;
+            for (let lpEntry in fullyInfoObject) {
+                // looks like Fully is regularly adding more information, so we create the states on the fly
+                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
+                createState(STATE_PATH + 'Info.' + lpEntry, {'name':lpEntry, 'type':lpType, 'read':true, 'write':false, 'role':'info'});
+                setStateDelayed(STATE_PATH + 'Info.' + lpEntry, fullyInfoObject[lpEntry], 200);
+                count++;
+            }
+            if (FDEBUG) log('Fully Browser: ' + count + ' Informationen abgerufen und in Datenpunkte geschrieben.');
+            setState(STATE_PATH + 'Info2.' + 'isFullyAlive', true);
+        }
+        else {
+            log('Fully Browser: Folgender Fehler bei http-Request aufgetreten: ' + error, 'warn');
+            setState(STATE_PATH + 'Info2.' + 'isFullyAlive', false);
+        }
+        setState(STATE_PATH + 'Info2.' + 'lastInfoUpdate', Date.now());
+    });
+
+}
+
+
+
+function createState(ip, port, psw, callback) {
     var id = ip.replace(/[.\s]+/g, '_');
 
-    client.getDevice({host: ip}).then((result) => {
-        if (result) {
-            hs_model = result.model;
-            hs_state = result.sysInfo.relay_state;
+    // Commands: Buttons
+    adapter.createState('', id, 'loadStartURL', {'name':'loadStartURL', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'clearCache', {'name':'clearCache', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'restartApp', {'name':'restartApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'exitApp', {'name':'exitApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'screenOn', {'name':'screenOn', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'screenOff', {'name':'screenOff', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'forceSleep', {'name':'forceSleep', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'triggerMotion', {'name':'triggerMotion', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'startScreensaver', {'name':'startScreensaver', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'stopScreensaver', {'name':'stopScreensaver', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'startDaydream', {'name':'startDaydream', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'stopDaydream', {'name':'stopDaydream', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'toForeground', {'name':'toForeground', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'popFragment', {'name':'popFragment', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'enableLockedMode', {'name':'enableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'disableLockedMode', {'name':'disableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'textToSpeech', {'name':'textToSpeech', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+    adapter.createState('', id, 'loadURL', {'name':'loadURL', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+    adapter.createState('', id, 'startApplication', {'name':'startApplication', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
 
-            if (hs_state == 0) {
-                hs_state = false;
-            } else {
-                hs_state = true;
-            }
-
-            adapter.createState('', id, 'last_update', {
-                name: name || ip,
-                def: -1,
-                type: 'string',
-                read: 'true',
-                write: 'true',
-                role: 'value',
-                desc: 'last update'
-            }, {
-                ip: ip
-            }, callback);
-
-            adapter.createState('', id, 'state', {
-                name: name || ip,
-                def: hs_state,
-                type: 'boolean',
-                read: 'true',
-                write: 'true',
-                role: 'switch',
-                desc: 'Switch on/off'
-            }, {
-                ip: ip
-            }, callback);
-
-            adapter.createState('', id, 'mac', {
-                name: name || ip,
-                def: result.mac,
-                type: 'string',
-                read: 'true',
-                write: 'true',
-                role: 'value',
-                desc: 'Mac address'
-            }, {
-                ip: ip
-            }, callback);
-
-            adapter.createState('', id, 'sw_ver', {
-                name: name || ip,
-                def: result.softwareVersion,
-                type: 'string',
-                read: 'true',
-                write: 'true',
-                role: 'value',
-                desc: 'sw_ver'
-            }, {
-                ip: ip
-            }, callback);
-
-            adapter.createState('', id, 'hw_ver', {
-                name: name || ip,
-                def: result.hardwareVersion,
-                type: 'string',
-                read: 'true',
-                write: 'true',
-                role: 'value',
-                desc: 'hw_ver'
-            }, {
-                ip: ip
-            }, callback);
-
-            adapter.createState('', id, 'model', {
-                name: name || ip,
-                def: hs_model,
-                type: 'string',
-                read: 'true',
-                write: 'true',
-                role: 'value',
-                desc: 'model'
-            }, {
-                ip: ip
-            }, callback);
-
-            // plug HS110
-            if (hs_model.indexOf("110") != -1) {
-                adapter.createState('', id, 'current', {
-                    name: name || ip,
-                    def: 0,
-                    type: 'string',
-                    read: 'true',
-                    write: 'true',
-                    role: 'value',
-                    desc: 'current'
-                }, {
-                    ip: ip
-                }, callback);
-                adapter.createState('', id, 'power', {
-                    name: name || ip,
-                    def: 0,
-                    type: 'string',
-                    read: 'true',
-                    write: 'true',
-                    role: 'value',
-                    desc: 'power'
-                }, {
-                    ip: ip
-                }, callback);
-                adapter.createState('', id, 'totalNow', {
-                    name: name || ip,
-                    def: 0,
-                    type: 'string',
-                    read: 'true',
-                    write: 'true',
-                    role: 'value',
-                    desc: 'totalNow'
-                }, {
-                    ip: ip
-                }, callback);
-                adapter.createState('', id, 'totalMonthNow', {
-                    name: name || ip,
-                    def: 0,
-                    type: 'string',
-                    read: 'true',
-                    write: 'true',
-                    role: 'value',
-                    desc: 'totalMonthNow'
-                }, {
-                    ip: ip
-                }, callback);
-                adapter.createState('', id, 'voltage', {
-                    name: name || ip,
-                    def: 0,
-                    type: 'string',
-                    read: 'true',
-                    write: 'true',
-                    role: 'value',
-                    desc: 'voltage'
-                }, {
-                    ip: ip
-                }, callback);
-            }
-
-            if (hs_model.indexOf("LB") != -1) {
-                adapter.createState('', id, 'brightness', {
-                    name: name || ip,
-                    def: 100,
-                    type: 'string',
-                    read: 'true',
-                    write: 'true',
-                    role: 'value',
-                    desc: 'brightness'
-                }, {
-                    ip: ip
-                }, callback);
-                adapter.createState('', id, 'totalNow', {
-                    name: name || ip,
-                    def: 0,
-                    type: 'string',
-                    read: 'true',
-                    write: 'true',
-                    role: 'value',
-                    desc: 'totalNow'
-                }, {
-                    ip: ip
-                }, callback);
-                adapter.createState('', id, 'totalMonthNow', {
-                    name: name || ip,
-                    def: 0,
-                    type: 'string',
-                    read: 'true',
-                    write: 'true',
-                    role: 'value',
-                    desc: 'totalMonthNow'
-                }, {
-                    ip: ip
-                }, callback);
-            }
-        }
-    });
-    adapter.log.debug(hs_model + ' generated ' + ip);
 }
 
 function addState(name, ip, callback) {
@@ -333,11 +205,11 @@ function syncConfig(callback) {
                     configToAdd.splice(pos, 1);
                     for (var u = 0; u < adapter.config.devices.length; u++) {
                         if (adapter.config.devices[u].ip == ip) {
-                            if (_states[j].common.name !== (adapter.config.devices[u].name || adapter.config.devices[u].ip)) {
+                            if (_states[j].common.name !== (adapter.config.devices[u].ip)) {
                                 tasks.push({
                                     type: 'extendObject',
                                     id:   _states[j]._id,
-                                    data: {common: {name: (adapter.config.devices[u].name || adapter.config.devices[u].ip), read: true, write: false}}
+                                    data: {common: {name: (adapter.config.devices[u].ip), read: true, write: false}}
                                 });
                             } else if (typeof _states[j].common.read !== 'boolean') {
                                 tasks.push({
@@ -370,7 +242,7 @@ function syncConfig(callback) {
                 for (var r = 0; r < adapter.config.devices.length; r++) {
                     if (configToAdd.indexOf(adapter.config.devices[r].ip) !== -1) {
                         count++;
-                        addState(adapter.config.devices[r].name, adapter.config.devices[r].ip, function () {
+                        addState(adapter.config.devices[r].ip, function () {
                             if (!--count && callback) {
                                 callback();
                             }
@@ -421,160 +293,7 @@ function processTasks(tasks, callback) {
     }
 }
 
-function updateDevice(ip) {
-
-    var hs_state;
-    var hs_sw_ver;
-    var hs_hw_ver;
-    var hs_model;
-    var hs_mac;
-    var hs_lastupdate;
-
-// plug HS110
-    var hs_current;
-    var hs_power;
-    var hs_total;
-    var hs_voltage;
-    var hs_emeter;
-    var lb_bright;
-
-    client.getDevice({host: ip}).then(function(result) {
-        if (result) {
-            var jetzt = new Date();
-            var hh =  jetzt.getHours();
-            var mm =  jetzt.getMinutes();
-            var ss =  jetzt.getSeconds();
-            var jahr  = jetzt.getFullYear();
-            var monat = jetzt.getMonth()+1;  // von 0 - 11 also +1
-            var tag   = jetzt.getDate();
-
-            if(hh < 10){hh = '0'+ hh;}
-            if(mm < 10){mm = '0'+ mm;}
-            if(ss < 10){ss = '0'+ ss;}
-
-            hs_lastupdate = jahr + '.' + monat + '.' + tag + ' ' + hh + ':' + mm + ':' + ss;
-
-            hs_mac    = result.mac;
-            hs_sw_ver = result.softwareVersion;
-            hs_hw_ver = result.hardwareVersion;
-            hs_model  = result.model;
-
-            if (hs_model.indexOf("LB") != -1) {
-                hs_state = result.sysInfo.light_state.on_off;
-            } else {
-                hs_state = result.sysInfo.relay_state;
-            }
-
-            if (hs_state == 0) {
-                hs_state = false;
-            } else {
-                hs_state = true;
-            }
-
-            adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.sw_ver'  , hs_sw_ver || 'undefined', true);
-            adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.hw_ver'  , hs_hw_ver || 'undefined', true);
-            adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.model'   , hs_model  || 'undefined', true);
-            adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.mac'     , hs_mac    || 'undefined', true);
-            adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.state'   , hs_state, true);
-
-            adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.last_update', hs_lastupdate || '-1', true);
-
-            adapter.log.debug('Refresh ' + ip + ' Model = '+ result.model + ' state = ' + hs_state + ' update = ' + hs_lastupdate);
-
-            if (hs_model.indexOf("110") != -1) {
-                result.emeter.getRealtime().then((resultRealtime) => {
-                    if (typeof resultRealtime != "undefined") {
-                        if (hs_hw_ver == "2.0") {
-                            hs_current = resultRealtime.current_ma;
-
-                            if (resultRealtime.power_mw > 0) {
-                                hs_power = resultRealtime.power_mw / 1000;
-                            } else {
-                                hs_power = resultRealtime.power_mw;
-                            }
-
-/*                          if (result.total_wh > 0 ) {
-                                hs_total = result.total_wh / 1000;
-                            } else {
-                                hs_total = result.total_wh;
-                            }
-*/
-                            if (resultRealtime.voltage_mv > 0) {
-                                hs_voltage = resultRealtime.voltage_mv / 1000;
-                            } else {
-                                hs_voltage = resultRealtime.voltage_mv;
-                            }
-                        } else {
-                            hs_current = resultRealtime.current;
-                            hs_power = resultRealtime.power;
-                            hs_total = resultRealtime.total;
-                            hs_voltage = 0;
-                        }
-                        
-                        adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.current', hs_current || '0', true);
-                        adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.power', hs_power || '0', true);
-                        adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.voltage', hs_voltage || '0', true);
-                        adapter.log.debug('Refresh Data HS110 ' + ip);
-                    }
-                });
-            }
-
-            if (hs_model.indexOf("110") != -1
-            ||  hs_model.indexOf("LB")  != -1) {
-                result.emeter.getMonthStats(jahr).then((resultMonthStats) => {
-                    var mothList = resultMonthStats.month_list;
-                    var energy_v = 0;
-                    for (var i = 0; i < mothList.length; i++) {
-                        if (mothList[i].month === monat) {
-                            if (mothList[i].energy != undefined) {
-                                energy_v = mothList[i].energy;
-                                break;
-                            } else {
-                                energy_v = mothList[i].energy_wh / 1000;
-                                break;
-                            }
-                        }
-                    }
-                    adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.totalMonthNow', energy_v || '0', true);
-                    adapter.log.debug('Month value '  + hs_model + ' ' + ip);
-                });
-
-                result.emeter.getDayStats(jahr, monat).then((resultDayStats) => {
-                    var dayList = resultDayStats.day_list;
-                    var energy_v = 0;
-                    for (var i = 0; i < dayList.length; i++) {
-                        if (dayList[i].day === tag) {
-                            if (dayList[i].energy != undefined) {
-                                energy_v = dayList[i].energy;
-                                break;
-                            } else {
-                                energy_v = dayList[i].energy_wh / 1000;
-                                break;
-                            }
-                        }
-                    }
-                    adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.totalNow', energy_v || '0', true);
-
-                    adapter.log.debug('Day value ' + hs_model + ' ' + energy_v + ' ' + ip);
-                });
-            }
-        // Bulb
-            if (hs_model.indexOf("LB") != -1) {
-                if (result.sysInfo.is_dimmable == 1) {
-                    var devLight = result.lighting.getLightState();
-                    lb_bright = result.sysInfo.light_state.brightness;
-                    adapter.setForeignState(adapter.namespace + '.' + ip.replace(/[.\s]+/g, '_') + '.brightness'   , lb_bright, true);
-                }
-            }
-        }
-    })
-    .catch(function(result) {
-        adapter.log.debug('IP not found : ' + ip );
-    });
-}
-
-
-function getHS(hosts) {
+function getHost(hosts) {
     if (stopTimer) clearTimeout(stopTimer);
 
     if (!hosts) {
@@ -590,7 +309,7 @@ function getHS(hosts) {
 
     if (!hosts.length) {
         timer = setTimeout(function () {
-            getHS();
+            getHost();
         }, adapter.config.interval);
         return;
     }
@@ -602,7 +321,7 @@ function getHS(hosts) {
 
     if (!isStopping)  {
         setTimeout(function () {
-            getHS(hosts);
+            getHost(hosts);
         }, 0);
     };
 
@@ -626,7 +345,7 @@ function main() {
     }
 
     syncConfig(function () {
-        getHS();
+        getHost();
 
     });
 
