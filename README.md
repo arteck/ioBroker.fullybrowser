@@ -13,7 +13,7 @@
 fullyBrowser Adapter for ioBroker
 ------------------------------------------------------------------------------
 
-Manage your Fully Browser
+Manage yours Fully Browser
  
 <b>NodeJs >> 6.x.x </b>
 
