@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "_from": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master",
   "_id": "iobroker.fullyBrowser@0.0.5",
   "_inBundle": false,
@@ -11,6 +12,14 @@
     "rawSpec": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master",
     "saveSpec": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master",
     "fetchSpec": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master"
+=======
+  "name": "iobroker.fullyBrowser",
+  "version": "0.0.5",
+  "description": "Manage yours Fully Browser",
+  "main": "main.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha --exit"
+>>>>>>> 4b0e951805ccc12f147cf8f5b65a2342acf8e60a
   },
   "_requiredBy": [
     "#USER"
@@ -33,8 +42,11 @@
     "lodash.isequal": "^4.5.0",
     "loglevel": "^1.5.1"
   },
+<<<<<<< HEAD
   "deprecated": false,
   "description": "Manage yours Fully Browser",
+=======
+>>>>>>> 4b0e951805ccc12f147cf8f5b65a2342acf8e60a
   "devDependencies": {
     "chai": "^4.1.2",
     "gulp": "^3.9.1",

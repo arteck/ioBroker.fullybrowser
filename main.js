@@ -80,6 +80,7 @@ process.on('SIGINT', function () {
  * Fetches the Fully Browser information and updates the states in ioBroker.
  * Also, it creates all the info states.
  */
+<<<<<<< HEAD
 
 function updateDevice(ip,port,psw) {
     var id = ip.replace(/[.\s]+/g, '_');
@@ -103,15 +104,76 @@ function updateDevice(ip,port,psw) {
        //         adapter.createState('', id, lpEntry, {'name':lpEntry, 'type':lpType, 'read':true, 'write':false, 'role':'info'}, {ip: ip}, callback);
                 adapter.setForeignState(adapter.namespace + '.' + id + lpEntry, fullyInfoObject[lpEntry], true);
 
+=======
+function getFullyBrowserInfo() {
+
+    var statusURL = 'http://' + FULLY_IP + ':' + FULLY_PORT + '/?cmd=deviceInfo&type=json&password=' + FULLY_PASSWORD;
+
+    var thisRequest = require('request');
+
+    var thisOptions = {
+        uri: statusURL,
+        method: "GET",
+        timeout: 2000,
+        followRedirect: false,
+        maxRedirects: 0
+    };
+
+    thisRequest(thisOptions, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var fullyInfoObject = JSON.parse(body);
+            var count = 0;
+            for (let lpEntry in fullyInfoObject) {
+                // looks like Fully is regularly adding more information, so we create the states on the fly
+                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
+                createState(STATE_PATH + 'Info.' + lpEntry, {'name':lpEntry, 'type':lpType, 'read':true, 'write':false, 'role':'info'});
+                setStateDelayed(STATE_PATH + 'Info.' + lpEntry, fullyInfoObject[lpEntry], 200);
+>>>>>>> 4b0e951805ccc12f147cf8f5b65a2342acf8e60a
                 count++;
             }
+            if (FDEBUG) log('Fully Browser: ' + count + ' Informationen abgerufen und in Datenpunkte geschrieben.');
+            setState(STATE_PATH + 'Info2.' + 'isFullyAlive', true);
         }
         else {
             log('Fully Browser: Folgender Fehler bei http-Request aufgetreten: ' + error, 'warn');
             setState(STATE_PATH + 'Info2.' + 'isFullyAlive', false);
         }
+<<<<<<< HEAD
         adapter.setForeignState(adapter.namespace + '.' + id + lastInfoUpdate, Date.now(), true);
     });
+=======
+        setState(STATE_PATH + 'Info2.' + 'lastInfoUpdate', Date.now());
+    });
+
+}
+
+
+
+function createState(ip, port, psw, callback) {
+    var id = ip.replace(/[.\s]+/g, '_');
+
+    // Commands: Buttons
+    adapter.createState('', id, 'loadStartURL', {'name':'loadStartURL', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'clearCache', {'name':'clearCache', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'restartApp', {'name':'restartApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'exitApp', {'name':'exitApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'screenOn', {'name':'screenOn', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'screenOff', {'name':'screenOff', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'forceSleep', {'name':'forceSleep', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'triggerMotion', {'name':'triggerMotion', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'startScreensaver', {'name':'startScreensaver', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'stopScreensaver', {'name':'stopScreensaver', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'startDaydream', {'name':'startDaydream', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'stopDaydream', {'name':'stopDaydream', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'toForeground', {'name':'toForeground', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'popFragment', {'name':'popFragment', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'enableLockedMode', {'name':'enableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'disableLockedMode', {'name':'disableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState('', id, 'textToSpeech', {'name':'textToSpeech', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+    adapter.createState('', id, 'loadURL', {'name':'loadURL', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+    adapter.createState('', id, 'startApplication', {'name':'startApplication', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+
+>>>>>>> 4b0e951805ccc12f147cf8f5b65a2342acf8e60a
 }
 
 
@@ -325,6 +387,10 @@ function main() {
 
     syncConfig(function () {
         getHost();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b0e951805ccc12f147cf8f5b65a2342acf8e60a
     });
 
     adapter.subscribeStates('*');
