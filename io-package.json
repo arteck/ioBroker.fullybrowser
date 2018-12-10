@@ -1,0 +1,58 @@
+{
+  "common": {
+    "name": "fullyBrowser",
+    "version": "0.0.5",
+    "materialize": true,
+    "news": {
+      "0.0.18": {
+        "en": "beta",
+        "de": "beta",
+        "ru": "?????????"
+      }
+    },
+    "title": "fullyBrowser Adapter",
+        "titleLang": {
+          "en": "fullyBrowser adapter",
+          "de": "fullyBrowser Adapter",
+          "ru": "Адаптер fullyBrowser",
+          "pt": "adaptador fullyBrowser",
+          "nl": "fullyBrowser-adapter",
+          "fr": "fullyBrowser adaptateur",
+          "it": "fullyBrowser ",
+          "es": "adaptador fullyBrowser",
+          "pl": "fullyBrowser adapter"
+        },
+        "desc": {
+          "en": "Manage yours Fully Browser",
+          "de": "verwalte deinen Fully Browser mit ioBroker",
+          "ru": "подключает устройства Fully Browser к ioBroker",
+          "pt": "liga dispositivos Fully Browser a ioBroker",
+          "nl": "verbindt Fully Browser met ioBroker",
+          "fr": "connecte les Fully Browser à ioBroker",
+          "it": "collega Fully Browser a ioBroker",
+          "es": "conecta Fully Browser a ioBroker",
+          "pl": "łączy Fully Browser ioBroker"
+        },
+        "authors": [
+            "arteck <arteck@outlook.com>"
+        ],
+        "license":                  "MIT",
+        "platform":                 "Javascript/Node.js",
+        "mode":                     "daemon",
+        "messagebox":               true,
+	     	"enabled":                  true,
+        "readme":                   "https://github.com/arteck/ioBroker.fullyBrowser/blob/master/README.md",
+        "loglevel":                 "info",
+        "restartAdapters":          [
+          "hs100"
+        ],        
+        "keywords":                 ["fullyBrowser", "Fully Browser"],
+        "icon":                     "fullyBrowser.png",
+    "materialize": true,
+        "extIcon":                  "https://raw.githubusercontent.com/arteck/ioBroker.fullyBrowser/master/admin/fully.png",
+        "type":                     "software"
+    },
+    "native": {
+    },
+    "objects": []
+}

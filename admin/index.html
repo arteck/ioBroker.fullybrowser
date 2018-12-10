@@ -1,0 +1,124 @@
+<html>
+
+<link rel="stylesheet" type="text/css" href="../../lib/css/themes/jquery-ui/redmond/jquery-ui.min.css"/>
+<link rel="stylesheet" type="text/css" href="../../lib/css/jqGrid/ui.jqgrid-4.5.4.css"/>
+<link rel="stylesheet" type="text/css" href="../../lib/css/jquery.multiselect-1.13.css"/>
+<script type="text/javascript" src="../../lib/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="../../socket.io/socket.io.js"></script>
+<script type="text/javascript" src="../../lib/js/jquery-ui-1.10.3.full.min.js"></script>
+<script type="text/javascript" src="../../lib/js/jqGrid/jquery.jqGrid-4.5.4.min.js"></script>
+<script type="text/javascript" src="../../lib/js/jqGrid/grid.locale-all.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
+<script type="text/javascript" src="../../js/translate.js"></script>
+<script type="text/javascript" src="../../js/adapter-settings.js"></script>
+<script type="text/javascript" src="words.js"></script>
+
+<style>
+    .table_header {
+        background-color: blue;
+        color: white;
+    }
+    .ip {
+        width: 150px;
+        text-align: right;
+    }
+</style>
+<!-- you have to define 2 functions in the global scope: -->
+<script type="text/javascript">
+    var devices = [];
+
+    // the function loadSettings has to exist ...
+    function load(settings, onChange) {
+        if (!settings) return;
+        devices = settings.devices || [];
+        for (var key in settings) {
+            if (!settings.hasOwnProperty(key)) continue;
+            var $value = $('#' + key + '.value');
+            if ($value.attr('type') === 'checkbox') {
+                $value.prop('checked', settings[key]).change(function() {
+                    if ($('#auth').prop('checked')) {
+                        $('#secure').prop('checked', true);
+                    }
+                    onChange();
+                    showHideSettings();
+                });
+            } else {
+                $value.val(settings[key]).change(function() {
+                    onChange();
+                }).keyup(function() {
+                    onChange();
+                });
+            }
+        }
+
+        if (typeof values2table === 'function') {
+            $('#devices').hide();
+            $('#pager-devices').hide();
+            values2table('values', devices, onChange);
+        } else {
+            editTable('devices', ['name', 'ip', 'port', 'room', 'active'], devices, 350);
+            $('#values').hide();
+        }
+        onChange(false);
+    }
+    // ... and the function save has to exist.
+    // you have to make sure the callback is called with the settings object as first param!
+    function save(callback) {
+        // example: select elements with class=value and build settings object
+        var obj = {};
+        $('.value').each(function () {
+            var $this = $(this);
+            if ($this.attr('type') === 'checkbox') {
+                obj[$this.attr('id')] = $this.prop('checked',true);
+            } else {
+                obj[$this.attr('id')] = $this.val();
+            }
+        });
+        // Get edited table
+        if (typeof table2values === 'function') {
+            obj.devices = table2values('values');
+        } else {
+            obj.devices = getTableResult('devices', ['name', 'ip', 'room', 'port', 'active']);
+        }
+        callback(obj);
+    }
+</script>
+
+<!-- you have to put your config page in a div with id adapter-container -->
+<div id="adapter-container">
+
+    <table><tr>
+        <td><img src="fully.png" width="64" height="64"></td>
+        <td style="padding-top: 20px;padding-left: 10px"><h3 class="translate">settings</h3></td>
+    </tr></table>
+
+    <table>
+        <tr>
+            <td class="translate">interval</td>
+            <td><input class="value number" id="interval" type="input" size="6"/></td>
+        </tr>
+    </table>
+
+    <table id="devices"></table>
+    <div id="pager-devices"></div>
+    <div id="values" style="width: 100%; height: calc(100% - 195px)">
+        <button class="table-button-add" style="margin-left: 10px; width: 1.5em; height: 1.5em"></button>
+        <div style="width: 100%; height: calc(100% - 30px); overflow: auto;">
+            <table class="table-values" style="width: 100%;">
+                <thead>
+                <tr>
+                    <th data-name="_index"   style="width: 40px" class="translate"></th>
+                    <th data-name="name"     style="width: 30%" class="translate">name</th>
+                    <th data-name="ip"       class="translate">ipaddress</th>
+                    <th data-name="port"       class="translate">port</th>
+                    <th data-name="active"   style="width: 20px; " class="translate" data-type="checkbox">Enabled</th>
+                    <th data-buttons="delete" style="width: 40px"></th>
+                </tr>
+
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+</html>

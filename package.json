@@ -1,0 +1,37 @@
+{
+  "name": "iobroker.fullyBrowser",
+  "version": "0.0.5",
+  "description": "Manage you Fully Browser",
+  "main": "main.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arteck/ioBroker.fullyBrowser.git"
+  },
+  "keywords": [
+    "fullyBrowser",
+    "Fully Browser",
+    "iobroker"
+  ],
+  "author": "arteck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arteck/ioBroker.fullyBrowser/issues"
+  },
+  "homepage": "https://github.com/arteck/ioBroker.fullyBrowser#readme",
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "commander": "^2.11.0",
+    "lodash.defaultto": "^4.14.0",
+    "lodash.groupby": "^4.6.0",
+    "lodash.isequal": "^4.5.0",
+    "loglevel": "^1.5.1"
+
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "mocha": "^4.1.0",
+    "chai": "^4.1.2"
+  }
+}
