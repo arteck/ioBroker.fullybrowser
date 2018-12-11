@@ -105,10 +105,10 @@ function updateDevice(ip,port,psw) {
 
 
 
-function createState(host, callback) {
-    var ip = host[0];
-    var port = host[1];
-    var psw = host[2];
+function createState(oneHost, callback) {
+    var ip = oneHost[0];
+    var port = oneHost[1];
+    var psw = oneHost[2];
     
     var id = ip.replace(/[.\s]+/g, '_');
     var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
@@ -171,9 +171,9 @@ function createState(host, callback) {
     
     }
 
-function addState(host, callback) {
-    adapter.getObject(host[0], function (err, obj) {
-        createState(host, callback);
+function addState(oneHost, callback) {
+    adapter.getObject(host, function (err, obj) {
+        createState(oneHost, callback);
     });
 }
 
