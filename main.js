@@ -116,29 +116,45 @@ function updateDevice(ip,port,psw) {
 
 
 
-function createState(ip, callback) {
+function createState(ip, port,psw, callback) {
     var id = ip.replace(/[.\s]+/g, '_');
+    var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
+    var thisRequest = require('request');
+    var infoStr = 'Info';
+    var commandsStr = 'Commands';
+    
 
-    adapter.createChannel(id, 'Buttons', 'Buttons', {"name": "Buttons","type": "string", "role": "Group"}, {ip: ip}, callback);
+    var thisOptions = {
+        uri: statusURL,
+        method: "GET",
+        timeout: 2000,
+        followRedirect: false,
+        maxRedirects: 0
+    };
 
-    adapter.createState(id, 'Buttons', 'loadStartURL', {'name':'loadStartURL', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'clearCache', {'name':'clearCache', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'restartApp', {'name':'restartApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'exitApp', {'name':'exitApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'screenOn', {'name':'screenOn', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'screenOff', {'name':'screenOff', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'forceSleep', {'name':'forceSleep', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'triggerMotion', {'name':'triggerMotion', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'startScreensaver', {'name':'startScreensaver', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'stopScreensaver', {'name':'stopScreensaver', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'startDaydream', {'name':'startDaydream', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'stopDaydream', {'name':'stopDaydream', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'toForeground', {'name':'toForeground', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'popFragment', {'name':'popFragment', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'enableLockedMode', {'name':'enableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
-    adapter.createState(id, 'Buttons', 'disableLockedMode', {'name':'disableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createChannel(id, commandsStr, commandsStr, {"name": "Buttons","type": "string", "role": "Group"}, {ip: ip}, callback);
 
-    adapter.createChannel(id, 'Info', 'Info', {"name": "Info","type": "string", "role": "Group"}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'loadStartURL', {'name':'loadStartURL', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'clearCache', {'name':'clearCache', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'restartApp', {'name':'restartApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'exitApp', {'name':'exitApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'screenOn', {'name':'screenOn', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'screenOff', {'name':'screenOff', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'forceSleep', {'name':'forceSleep', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'triggerMotion', {'name':'triggerMotion', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'startScreensaver', {'name':'startScreensaver', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'stopScreensaver', {'name':'stopScreensaver', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'startDaydream', {'name':'startDaydream', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'stopDaydream', {'name':'stopDaydream', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'toForeground', {'name':'toForeground', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'popFragment', {'name':'popFragment', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'enableLockedMode', {'name':'enableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'disableLockedMode', {'name':'disableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'startApplication', {'name':'startApplication', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'loadURL', {'name':'loadURL', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'textToSpeech', {'name':'textToSpeech', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+
+    adapter.createChannel(id, infoStr, infoStr, {"name": "Info","type": "string", "role": "Group"}, {ip: ip}, callback);
 
 
 
@@ -146,10 +162,29 @@ function createState(ip, callback) {
 
 
     adapter.createState('', id, 'lastInfoUpdate', {'name':'Date/Time of last information update from Fully Browser', 'type':'number', 'read':true, 'write':false, 'role':'value.time'}, {ip: ip}, callback);
-    adapter.createState('', id, 'startApplication', {'name':'startApplication', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
-    adapter.createState('', id, 'loadURL', {'name':'loadURL', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
-    adapter.createState('', id, 'textToSpeech', {'name':'textToSpeech', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
-}
+    
+   
+
+    thisRequest(thisOptions, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var fullyInfoObject = JSON.parse(body);
+            var count = 0;
+            for (let lpEntry in fullyInfoObject) {
+                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
+                adapter.createState(id, infoStr, lpEntry, {'name':lpEntry, 'type':lpType, 'read':true, 'write':false, 'role':'info'}, {ip: ip}, callback);
+                adapter.setForeignState(adapter.namespace + '.' + id + infoStr + lpEntry, fullyInfoObject[lpEntry], true);
+
+                count++;
+            }
+        }
+        else {
+            log('Fully Browser: Folgender Fehler bei http-Request aufgetreten: ' + error, 'warn');
+       //     setState(STATE_PATH + 'Info2.' + 'isFullyAlive', false);
+        }
+        adapter.setForeignState(adapter.namespace + '.' + id + lastInfoUpdate, Date.now(), true);
+    });
+    
+    }
 
 function addState(ip, callback) {
     adapter.getObject(host, function (err, obj) {
