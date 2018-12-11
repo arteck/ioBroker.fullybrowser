@@ -32,7 +32,7 @@
     "lodash.groupby": "^4.6.0",
     "lodash.isequal": "^4.5.0",
     "loglevel": "^1.5.1",
-    "request": "*"
+    "request": "^2.85.0"
 
   },
   "deprecated": false,
