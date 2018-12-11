@@ -44,7 +44,7 @@
         "readme":                   "https://github.com/arteck/ioBroker.fullyBrowser/blob/master/README.md",
         "loglevel":                 "info",
         "restartAdapters":          [
-          "hs100"
+          "fullyBrowser"
         ],        
         "keywords":                 ["fullyBrowser", "Fully Browser"],
         "icon":                     "fully.png",
