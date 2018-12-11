@@ -1,8 +1,8 @@
 /**
  *
- *      ioBroker hs100 Adapter
+ *      ioBroker fullyBrowser Adapter
  *
- *      (c) 2014-2017 arteck <arteck@outlook.com>
+ *      (c) 2014-2018 arteck <arteck@outlook.com>
  *
  *      MIT License
  *
@@ -13,12 +13,11 @@ const utils   = require(__dirname + '/lib/utils'); // Get common adapter utils
 
 var result;
 var err;
-var ip;
-var port;
-var psw;
+
 var timer     = null;
 var stopTimer = null;
 var isStopping = false;
+var host  = ''; // Name of the PC
 
 
 var adapter = new utils.Adapter({
@@ -50,7 +49,7 @@ function stop() {
     }
 }
 
-var host  = ''; // Name of the PC, where the ping runs
+
 
 adapter.on('objectChange', function (id, obj) {
     adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
@@ -58,28 +57,18 @@ adapter.on('objectChange', function (id, obj) {
 
 adapter.on('stateChange', function (id, state) {
 
+    
+    
+    
+    
+    
+    
 });
-
-function findAndReplace(object, value, replacevalue) {
-    for (var x in object) {
-        if (object.hasOwnProperty(x)) {
-            if (x === value) {
-                object[x] = parseInt(replacevalue);
-            }
-        }
-    }
-}
 
 
 process.on('SIGINT', function () {
     if (timer) clearTimeout(timer);
 });
-
-
-/**
- * Fetches the Fully Browser information and updates the states in ioBroker.
- * Also, it creates all the info states.
- */
 
 function updateDevice(ip,port,psw) {
     var id = ip.replace(/[.\s]+/g, '_');
@@ -101,14 +90,14 @@ function updateDevice(ip,port,psw) {
             for (let lpEntry in fullyInfoObject) {
                 let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
        //         adapter.createState('', id, lpEntry, {'name':lpEntry, 'type':lpType, 'read':true, 'write':false, 'role':'info'}, {ip: ip}, callback);
-                adapter.setForeignState(adapter.namespace + '.' + id + lpEntry, fullyInfoObject[lpEntry], true);
+                adapter.setForeignState(adapter.namespace + '.' + id + infoStr + lpEntry, fullyInfoObject[lpEntry], true);
 
                 count++;
             }
         }
         else {
             log('Fully Browser: Folgender Fehler bei http-Request aufgetreten: ' + error, 'warn');
-            setState(STATE_PATH + 'Info2.' + 'isFullyAlive', false);
+ //           setState(STATE_PATH + 'Info2.' + 'isFullyAlive', false);
         }
         adapter.setForeignState(adapter.namespace + '.' + id + lastInfoUpdate, Date.now(), true);
     });
@@ -116,7 +105,11 @@ function updateDevice(ip,port,psw) {
 
 
 
-function createState(ip, port,psw, callback) {
+function createState(host, callback) {
+    var ip = host[0];
+    var port = host[1];
+    var psw = host[2];
+    
     var id = ip.replace(/[.\s]+/g, '_');
     var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
     var thisRequest = require('request');
@@ -131,6 +124,7 @@ function createState(ip, port,psw, callback) {
         followRedirect: false,
         maxRedirects: 0
     };
+    adapter.createState('', id, 'lastInfoUpdate', {'name':'Date/Time of last information update from Fully Browser', 'type':'number', 'read':true, 'write':false, 'role':'value.time'}, {ip: ip}, callback);
 
     adapter.createChannel(id, commandsStr, commandsStr, {"name": "Buttons","type": "string", "role": "Group"}, {ip: ip}, callback);
 
@@ -156,15 +150,6 @@ function createState(ip, port,psw, callback) {
 
     adapter.createChannel(id, infoStr, infoStr, {"name": "Info","type": "string", "role": "Group"}, {ip: ip}, callback);
 
-
-
-
-
-
-    adapter.createState('', id, 'lastInfoUpdate', {'name':'Date/Time of last information update from Fully Browser', 'type':'number', 'read':true, 'write':false, 'role':'value.time'}, {ip: ip}, callback);
-    
-   
-
     thisRequest(thisOptions, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var fullyInfoObject = JSON.parse(body);
@@ -186,9 +171,9 @@ function createState(ip, port,psw, callback) {
     
     }
 
-function addState(ip, callback) {
-    adapter.getObject(host, function (err, obj) {
-        createState(ip, callback);
+function addState(host, callback) {
+    adapter.getObject(host[0], function (err, obj) {
+        createState(host, callback);
     });
 }
 
@@ -196,10 +181,12 @@ function syncConfig(callback) {
     adapter.getStatesOf('', host, function (err, _states) {
         var configToDelete = [];
         var configToAdd    = [];
+        var allHosts       = [];
         var k;
         var id;
         if (adapter.config.devices) {
             for (k = 0; k < adapter.config.devices.length; k++) {
+                allHosts.push(adapter.config.devices[k].ip, adapter.config.devices[k].port, adapter.config.devices[k].psw);
                 configToAdd.push(adapter.config.devices[k].ip);
             }
         }
@@ -256,7 +243,8 @@ function syncConfig(callback) {
                 for (var r = 0; r < adapter.config.devices.length; r++) {
                     if (configToAdd.indexOf(adapter.config.devices[r].ip) !== -1) {
                         count++;
-                        addState(adapter.config.devices[r].ip, function () {
+                        var oneHost = allHosts[r]; 
+                        addState(oneHost, function () {
                             if (!--count && callback) {
                                 callback();
                             }
@@ -308,16 +296,19 @@ function processTasks(tasks, callback) {
 }
 
 function getHost(hosts) {
+    var oneHost;
+    
     if (stopTimer) clearTimeout(stopTimer);
 
     if (!hosts) {
         hosts = [];
-        host = [];
+        
         for (var i = 0; i < adapter.config.devices.length; i++) {
+            oneHost = [];
             if (adapter.config.devices[i].ip.length > 5) {
                 if (adapter.config.devices[i].active) {
-                    host.push(adapter.config.devices[i].ip, adapter.config.devices[i].port ,adapter.config.devices[i].psw);
-                    hosts.push(host);
+                    oneHost.push(adapter.config.devices[i].ip, adapter.config.devices[i].port, adapter.config.devices[i].psw);
+                    hosts.push(oneHost);
                 }
             }
         }
