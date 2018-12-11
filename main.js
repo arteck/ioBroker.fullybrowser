@@ -10,6 +10,7 @@
 
 'use strict';
 const utils   = require(__dirname + '/lib/utils'); // Get common adapter utils
+var thisRequest = require('request');
 
 var result;
 var err;
@@ -17,7 +18,10 @@ var err;
 var timer     = null;
 var stopTimer = null;
 var isStopping = false;
+var infoStr = 'Info';
+var commandsStr = 'Commands';
 var host  = ''; // Name of the PC
+var allHosts       = [];
 
 
 var adapter = new utils.Adapter({
@@ -73,7 +77,7 @@ process.on('SIGINT', function () {
 function updateDevice(ip,port,psw) {
     var id = ip.replace(/[.\s]+/g, '_');
     var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
-    var thisRequest = require('request');
+    var vari = '';
 
     var thisOptions = {
         uri: statusURL,
@@ -83,23 +87,25 @@ function updateDevice(ip,port,psw) {
         maxRedirects: 0
     };
 
-    thisRequest(thisOptions, function(error, response, body) {
+    new thisRequest(thisOptions, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var fullyInfoObject = JSON.parse(body);
             var count = 0;
             for (let lpEntry in fullyInfoObject) {
                 let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
-       //         adapter.createState('', id, lpEntry, {'name':lpEntry, 'type':lpType, 'read':true, 'write':false, 'role':'info'}, {ip: ip}, callback);
-                adapter.setForeignState(adapter.namespace + '.' + id + infoStr + lpEntry, fullyInfoObject[lpEntry], true);
+                adapter.createState(id, infoStr, lpEntry, {
+                    'name': lpEntry,
+                    'type': lpType,
+                    'read': true,
+                    'write': false,
+                    'role': 'info'
+                });
+                vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
+                adapter.setForeignState(vari, fullyInfoObject[lpEntry], true);
 
                 count++;
             }
         }
-        else {
-            log('Fully Browser: Folgender Fehler bei http-Request aufgetreten: ' + error, 'warn');
- //           setState(STATE_PATH + 'Info2.' + 'isFullyAlive', false);
-        }
-        adapter.setForeignState(adapter.namespace + '.' + id + lastInfoUpdate, Date.now(), true);
     });
 }
 
@@ -109,13 +115,12 @@ function createState(oneHost, callback) {
     var ip = oneHost[0];
     var port = oneHost[1];
     var psw = oneHost[2];
-    
+    var vari = '';
     var id = ip.replace(/[.\s]+/g, '_');
     var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
-    var thisRequest = require('request');
-    var infoStr = 'Info';
-    var commandsStr = 'Commands';
-    
+
+
+    adapter.createChannel(id, infoStr, infoStr, {"name": "Info","type": "string", "role": "Group"}, {ip: ip}, callback);
 
     var thisOptions = {
         uri: statusURL,
@@ -124,7 +129,31 @@ function createState(oneHost, callback) {
         followRedirect: false,
         maxRedirects: 0
     };
+
+    new thisRequest(thisOptions, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            var fullyInfoObject = JSON.parse(body);
+            var count = 0;
+            for (let lpEntry in fullyInfoObject) {
+                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
+                adapter.createState(id, infoStr, lpEntry, {
+                    'name': lpEntry,
+                    'type': lpType,
+                    'read': true,
+                    'write': false,
+                    'role': 'info'
+                }, {ip: ip}, callback);
+                vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
+                adapter.setForeignState(vari, fullyInfoObject[lpEntry], true);
+
+                count++;
+            }
+        }
+    });
+
     adapter.createState('', id, 'lastInfoUpdate', {'name':'Date/Time of last information update from Fully Browser', 'type':'number', 'read':true, 'write':false, 'role':'value.time'}, {ip: ip}, callback);
+    vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
+    adapter.setForeignState(vari, Date.now(), true);
 
     adapter.createChannel(id, commandsStr, commandsStr, {"name": "Buttons","type": "string", "role": "Group"}, {ip: ip}, callback);
 
@@ -147,29 +176,7 @@ function createState(oneHost, callback) {
     adapter.createState(id, commandsStr, 'startApplication', {'name':'startApplication', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'loadURL', {'name':'loadURL', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'textToSpeech', {'name':'textToSpeech', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
-
-    adapter.createChannel(id, infoStr, infoStr, {"name": "Info","type": "string", "role": "Group"}, {ip: ip}, callback);
-
-    thisRequest(thisOptions, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var fullyInfoObject = JSON.parse(body);
-            var count = 0;
-            for (let lpEntry in fullyInfoObject) {
-                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
-                adapter.createState(id, infoStr, lpEntry, {'name':lpEntry, 'type':lpType, 'read':true, 'write':false, 'role':'info'}, {ip: ip}, callback);
-                adapter.setForeignState(adapter.namespace + '.' + id + infoStr + lpEntry, fullyInfoObject[lpEntry], true);
-
-                count++;
-            }
-        }
-        else {
-            log('Fully Browser: Folgender Fehler bei http-Request aufgetreten: ' + error, 'warn');
-       //     setState(STATE_PATH + 'Info2.' + 'isFullyAlive', false);
-        }
-        adapter.setForeignState(adapter.namespace + '.' + id + lastInfoUpdate, Date.now(), true);
-    });
-    
-    }
+}
 
 function addState(oneHost, callback) {
     adapter.getObject(host, function (err, obj) {
@@ -181,12 +188,15 @@ function syncConfig(callback) {
     adapter.getStatesOf('', host, function (err, _states) {
         var configToDelete = [];
         var configToAdd    = [];
-        var allHosts       = [];
+        allHosts = [];
+
         var k;
         var id;
         if (adapter.config.devices) {
             for (k = 0; k < adapter.config.devices.length; k++) {
-                allHosts.push(adapter.config.devices[k].ip, adapter.config.devices[k].port, adapter.config.devices[k].psw);
+                var oneHost = [];
+                oneHost.push(adapter.config.devices[k].ip, adapter.config.devices[k].port, adapter.config.devices[k].psw);
+                allHosts.push(oneHost);
                 configToAdd.push(adapter.config.devices[k].ip);
             }
         }
