@@ -47,7 +47,7 @@
           "hs100"
         ],        
         "keywords":                 ["fullyBrowser", "Fully Browser"],
-        "icon":                     "fullyBrowser.png",
+        "icon":                     "fully.png",
     "materialize": true,
         "extIcon":                  "https://raw.githubusercontent.com/arteck/ioBroker.fullyBrowser/master/admin/fully.png",
         "type":                     "software"

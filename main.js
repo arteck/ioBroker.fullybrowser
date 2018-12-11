@@ -10,7 +10,7 @@
 
 'use strict';
 const utils   = require(__dirname + '/lib/utils'); // Get common adapter utils
-var thisRequest = require('request');
+const request = require('request');
 
 var result;
 var err;
@@ -53,22 +53,91 @@ function stop() {
     }
 }
 
-
-
 adapter.on('objectChange', function (id, obj) {
     adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
 });
 
 adapter.on('stateChange', function (id, state) {
+    var comm;
+    var dp;
+    var ip;
+    var tmp  = id.split('.');
 
-    
-    
-    
-    
-    
-    
+    if (tmp.length > 4) {
+        dp   = tmp.pop();
+        comm = tmp.pop();
+    } else {
+        dp   = tmp.pop();
+    }
+
+    var idx  = tmp.pop();
+
+    ip = idx.replace(/[_\s]+/g, '.');
+
+    switch(dp) {
+        case 'textToSpeech':
+            if (state.ack != null) {
+                if (state && !state.ack) {
+                    var txtSp = state.val;
+                    txtSp = txtSp.replace(/[^a-zA-Z0-9ß-ü]/g,'');  // Just keep letters, numbers, and umlauts
+                    txtSp = txtSp.replace(/ +/g, ' '); // Remove multiple spaces
+                    if (txtSp.length > 1) {
+                        fullySendCommand(ip, dp +'&text=' + txtSp);
+                    }
+                }
+            }
+            break;
+        case 'loadURL':
+            if (state.ack != null) {
+                if (state && !state.ack) {
+                    var strUrl = state.val;
+                    strUrl = strUrl.replace(/ /g, ""); // Remove Spaces
+                    if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
+
+                    if (strUrl.length > 10) {
+                        fullySendCommand(ip, dp + '&url=' + strUrl);
+                    }
+                }
+            }
+            break;
+
+        case 'startApplication':
+            if (state.ack != null) {
+                if (state && !state.ack) {
+                    var strApp = state.val;
+                    strApp = strApp.replace(/ /g, ""); // Remove Spaces
+
+                    if (strApp.length > 2) {
+                        fullySendCommand(ip, dp + '&package=' + strApp);
+                    }
+                }
+            }
+            break;
+        default:
+            if (comm === commandsStr) {
+                if (state.ack != null) {
+                    if (state && !state.ack) {
+                            fullySendCommand(ip, dp);
+                    }
+                }
+            }
+            break;
+    }
 });
 
+function fullySendCommand(ip, strCommand) {
+    var getHost = getHostForSet(ip);
+    var ip      = getHost[0];
+    var port    = getHost[1];
+    var psw     = getHost[2];
+
+    var options = {
+        url: 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
+    };
+
+    request(options, function (error, response, body) {
+    });
+}
 
 process.on('SIGINT', function () {
     if (timer) clearTimeout(timer);
@@ -87,10 +156,9 @@ function updateDevice(ip,port,psw) {
         maxRedirects: 0
     };
 
-    new thisRequest(thisOptions, function(error, response, body) {
+    request(thisOptions, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var fullyInfoObject = JSON.parse(body);
-            var count = 0;
             for (let lpEntry in fullyInfoObject) {
                 let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
                 adapter.createState(id, infoStr, lpEntry, {
@@ -102,14 +170,18 @@ function updateDevice(ip,port,psw) {
                 });
                 vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
                 adapter.setForeignState(vari, fullyInfoObject[lpEntry], true);
-
-                count++;
             }
+            vari = adapter.namespace + '.' + id + '.isFullyAlive';
+            adapter.setForeignState(vari, true, true);
+        } else {
+            vari = adapter.namespace + '.' + id + '.isFullyAlive';
+            adapter.setForeignState(vari, false, true);
         }
     });
+
+    vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
+    adapter.setForeignState(vari, Date.now(), true);
 }
-
-
 
 function createState(oneHost, callback) {
     var ip = oneHost[0];
@@ -119,6 +191,8 @@ function createState(oneHost, callback) {
     var id = ip.replace(/[.\s]+/g, '_');
     var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
 
+    adapter.createState('', id, 'lastInfoUpdate', {'name':'Date/Time of last information update from Fully Browser', 'type':'number', 'read':true, 'write':false, 'role':'value.time'}, {ip: ip}, callback);
+    adapter.createState('', id, 'isFullyAlive', {'name':'Is Fully Browser Alive?', 'type':'boolean', 'read':true, 'write':false, 'role':'info'}, {ip: ip}, callback);
 
     adapter.createChannel(id, infoStr, infoStr, {"name": "Info","type": "string", "role": "Group"}, {ip: ip}, callback);
 
@@ -130,10 +204,9 @@ function createState(oneHost, callback) {
         maxRedirects: 0
     };
 
-    new thisRequest(thisOptions, function(error, response, body) {
+    request(thisOptions, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var fullyInfoObject = JSON.parse(body);
-            var count = 0;
             for (let lpEntry in fullyInfoObject) {
                 let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
                 adapter.createState(id, infoStr, lpEntry, {
@@ -145,18 +218,20 @@ function createState(oneHost, callback) {
                 }, {ip: ip}, callback);
                 vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
                 adapter.setForeignState(vari, fullyInfoObject[lpEntry], true);
-
-                count++;
             }
+            vari = adapter.namespace + '.' + id + '.isFullyAlive';
+            adapter.setForeignState(vari, true, true);
+        } else {
+            vari = adapter.namespace + '.' + id + '.isFullyAlive';
+            adapter.setForeignState(vari, false, true);
         }
     });
 
-    adapter.createState('', id, 'lastInfoUpdate', {'name':'Date/Time of last information update from Fully Browser', 'type':'number', 'read':true, 'write':false, 'role':'value.time'}, {ip: ip}, callback);
+
     vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
-    adapter.setForeignState(vari, Date.now(), true);
+    adapter.setForeignState(vari, Date.now(), true)
 
     adapter.createChannel(id, commandsStr, commandsStr, {"name": "Buttons","type": "string", "role": "Group"}, {ip: ip}, callback);
-
     adapter.createState(id, commandsStr, 'loadStartURL', {'name':'loadStartURL', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'clearCache', {'name':'clearCache', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'restartApp', {'name':'restartApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
@@ -305,6 +380,22 @@ function processTasks(tasks, callback) {
     }
 }
 
+function getHostForSet(ip) {
+    var hostSet = [];
+    for (var i = 0; i < adapter.config.devices.length; i++) {
+        if (adapter.config.devices[i].ip.length > 5) {
+            if (adapter.config.devices[i].active) {
+                if (adapter.config.devices[i].ip === ip) {
+                    hostSet.push(adapter.config.devices[i].ip, adapter.config.devices[i].port, adapter.config.devices[i].psw);
+                    break;
+                }
+            }
+        }
+    }
+
+    return hostSet;
+}
+
 function getHost(hosts) {
     var oneHost;
     
@@ -324,7 +415,7 @@ function getHost(hosts) {
         }
     }
 
-    if (!hosts.length) {
+    if (hosts.length === 0) {
         timer = setTimeout(function () {
             getHost();
         }, adapter.config.interval);
