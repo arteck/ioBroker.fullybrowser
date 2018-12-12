@@ -1,10 +1,10 @@
 {
   "common": {
     "name": "fullyBrowser",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "materialize": true,
     "news": {
-      "0.0.18": {
+      "0.0.6": {
         "en": "beta",
         "de": "beta",
         "ru": "?????????"
