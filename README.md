@@ -18,5 +18,5 @@ Manage yours [Fully Kiosk Browser](https://www.ozerov.de/fully-kiosk-browser)
 <b>NodeJs >> 6.x.x </b>
 
 ## Changelog
-### 0.0.1 (2018-12-10)
+### 0.0.5 (2018-12-10)
 * (arteck) first free test version
