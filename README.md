@@ -2,11 +2,11 @@
 # ioBroker.fullyBrowser
 =================
 
-[![NPM version](http://img.shields.io/npm/v/iobroker.fully.svg)](https://www.npmjs.com/package/iobroker.fullyBrowser)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.fully.svg)](https://www.npmjs.com/package/iobroker.fullyBrowser)
-[![Tests](https://travis-ci.org/ioBroker/ioBroker.fully.svg?branch=master)](https://travis-ci.org/ioBroker/ioBroker.fullyBrowser)
+[![NPM version](http://img.shields.io/npm/v/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
+[![Tests](https://travis-ci.org/ioBroker/ioBroker.fullybrowser.svg?branch=master)](https://travis-ci.org/ioBroker/ioBroker.fullybrowser)
 
-[![NPM](https://nodei.co/npm/iobroker.fully.png?downloads=true)](https://nodei.co/npm/iobroker.fullyBrowser/)
+[![NPM](https://nodei.co/npm/iobroker.fullybrowser.png?downloads=true)](https://nodei.co/npm/iobroker.fullybrowser/)
 
 
 
