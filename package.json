@@ -1,27 +1,26 @@
 {
-  "_from": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master",
-  "_inBundle": false,
-  "_integrity": "sha512-cZ+WGffWdFcB7OXdizUNX+18Dfvr5wDLCWM++VshUAqTPEQ/exklQBTfPbHkb0r+MJkoJvBcycURlvh9tT/RuQ==",
-  "_location": "/iobroker.fullyBrowser",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "remote",
-    "raw": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master",
-    "rawSpec": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master",
-    "saveSpec": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master",
-    "fetchSpec": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master"
+  "name": "iobroker.fullyBrowser",
+  "version": "0.0.5",
+  "description": "Manage yours Fully Browser",
+  "main": "main.js",
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha --exit"
   },
-  "_requiredBy": [
-    "#USER"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arteck/ioBroker.fullyBrowser.git"
+  },
+  "keywords": [
+    "fullyBrowser",
+    "Fully Browser",
+    "iobroker"
   ],
-  "_resolved": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master",
-  "_spec": "https://github.com/arteck/iobroker.fullyBrowser/tarball/master",
-  "_where": "I:\\source\\ioBroker\\node_modules\\iobroker",
   "author": "arteck",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/arteck/ioBroker.fullyBrowser/issues"
   },
-  "bundleDependencies": false,
+  "homepage": "https://github.com/arteck/ioBroker.fullyBrowser#readme",
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "commander": "^2.11.0",
@@ -31,32 +30,9 @@
     "loglevel": "^1.5.1",
     "request": "^2.85.0"
   },
-  "deprecated": false,
-  "description": "Manage yours Fully Browser",
   "devDependencies": {
-    "chai": "^4.1.2",
     "gulp": "^3.9.1",
-    "mocha": "^4.1.0"
-  },
-  "homepage": "https://github.com/arteck/ioBroker.fullyBrowser#readme",
-  "keywords": [
-    "fullyBrowser",
-    "Fully Browser",
-    "iobroker"
-  ],
-  "license": "MIT",
-  "main": "main.js",
-  "name": "iobroker.fullybrowser",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arteck/ioBroker.fullyBrowser.git"
-  },
-  "scripts": {
-    "test": "node node_modules/mocha/bin/mocha --exit"
-  },
-  "version": "0.0.5",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
+    "mocha": "^4.1.0",
+    "chai": "^4.1.2"
   }
 }
