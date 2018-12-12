@@ -251,6 +251,7 @@ function createState(oneHost, callback) {
     adapter.createState(id, commandsStr, 'startApplication', {'name':'startApplication', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'loadURL', {'name':'loadURL', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'textToSpeech', {'name':'textToSpeech', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'setStringSetting', {'name':'setStringSetting', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
 }
 
 function addState(oneHost, callback) {
