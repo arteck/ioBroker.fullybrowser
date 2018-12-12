@@ -13,7 +13,7 @@
 fullyBrowser Adapter for ioBroker
 ------------------------------------------------------------------------------
 
-Manage yours Fully Browser
+Manage yours [Fully Kiosk Browser](https://www.ozerov.de/fully-kiosk-browser)
  
 <b>NodeJs >> 6.x.x </b>
 
