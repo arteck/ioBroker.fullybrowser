@@ -20,6 +20,7 @@ var stopTimer = null;
 var isStopping = false;
 var infoStr = 'Info';
 var commandsStr = 'Commands';
+var setStr = 'setStringSetting';
 var host  = ''; // Name of the PC
 var allHosts       = [];
 
@@ -74,54 +75,49 @@ adapter.on('stateChange', function (id, state) {
 
     ip = idx.replace(/[_\s]+/g, '.');
 
-    switch(dp) {
-        case 'textToSpeech':
-            if (state.ack != null) {
-                if (state && !state.ack) {
+    if (state.ack != null) {
+       if (state && !state.ack) {
+    
+            switch(dp) {
+                case 'setStringSetting':
+                    var txtKey = state.val;
+                    if (txtKey.length > 1) {
+                        fullySendCommand(ip, dp + txtKey);
+                    }                    
+                    break;
+                case 'textToSpeech':
                     var txtSp = state.val;
                     txtSp = txtSp.replace(/[^a-zA-Z0-9ß-ü]/g,'');  // Just keep letters, numbers, and umlauts
                     txtSp = txtSp.replace(/ +/g, ' '); // Remove multiple spaces
                     if (txtSp.length > 1) {
                         fullySendCommand(ip, dp +'&text=' + txtSp);
                     }
-                }
-            }
-            break;
-        case 'loadURL':
-            if (state.ack != null) {
-                if (state && !state.ack) {
+                    break;
+                case 'loadURL':
                     var strUrl = state.val;
                     strUrl = strUrl.replace(/ /g, ""); // Remove Spaces
                     if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
 
                     if (strUrl.length > 10) {
                         fullySendCommand(ip, dp + '&url=' + strUrl);
-                    }
-                }
-            }
-            break;
+                    }          
+                    break;
 
-        case 'startApplication':
-            if (state.ack != null) {
-                if (state && !state.ack) {
+                case 'startApplication':
                     var strApp = state.val;
                     strApp = strApp.replace(/ /g, ""); // Remove Spaces
 
                     if (strApp.length > 2) {
                         fullySendCommand(ip, dp + '&package=' + strApp);
                     }
-                }
-            }
-            break;
-        default:
-            if (comm === commandsStr) {
-                if (state.ack != null) {
-                    if (state && !state.ack) {
-                            fullySendCommand(ip, dp);
+                    break;
+                default:
+                    if (comm === commandsStr) 
+                        fullySendCommand(ip, dp);
                     }
-                }
+                    break;
             }
-            break;
+        }
     }
 });
 
@@ -250,6 +246,7 @@ function createState(oneHost, callback) {
     adapter.createState(id, commandsStr, 'disableLockedMode', {'name':'disableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'startApplication', {'name':'startApplication', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'loadURL', {'name':'loadURL', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+  
     adapter.createState(id, commandsStr, 'textToSpeech', {'name':'textToSpeech', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'setStringSetting', {'name':'setStringSetting', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
 }
