@@ -114,8 +114,7 @@ adapter.on('stateChange', function (id, state) {
                 default:
                     if (comm === commandsStr) 
                         fullySendCommand(ip, dp);
-                    }
-                    break;
+                    }                    
             }
         }
     }
