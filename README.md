@@ -13,7 +13,7 @@
 fullyBrowser Adapter for ioBroker
 ------------------------------------------------------------------------------
 
-Manage yours [Fully Kiosk Browser](https://www.ozerov.de/fully-kiosk-browser) Plus Account
+Manage yours [Fully Kiosk Browser](https://www.ozerov.de/fully-kiosk-browser) (a Plus Accountmust be present)
 
 You can set on/off the Display or start any app on your Tablet.
 
