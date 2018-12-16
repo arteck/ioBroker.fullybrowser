@@ -7,3 +7,4 @@ admin/i18n
 node_modules
 .git
 /node_modules
+/doku
