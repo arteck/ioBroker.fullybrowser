@@ -1,14 +1,19 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "materialize": true,
     "news": {
+      "0.0.7": {
+        "en": "corr 'no config' bug",
+        "de": "korrektur 'no config' bug",
+        "ru": "corr 'no config' bug"
+      },
       "0.0.6": {
         "en": "beta",
         "de": "beta",
         "ru": "beta"
-      }
+      }      
     },
     "title": "fullyBrowser",
         "titleLang": {

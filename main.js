@@ -26,7 +26,7 @@ var allHosts       = [];
 
 
 var adapter = new utils.Adapter({
-    name: 'fullyBrowser',
+    name: 'fullybrowser',
     ready: function () {
         main();
     }

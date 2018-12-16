@@ -31,5 +31,8 @@ a small excerpt of the possibilities
 
 
 ## Changelog
+### 0.0.7 (2018-12-16)
+* (arteck) bug 'no config' corr
+
 ### 0.0.6 (2018-12-10)
 * (arteck) first free test version
