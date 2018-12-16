@@ -19,6 +19,7 @@ You can set on/off the Display or start any app on your Tablet.
 
 a small excerpt of the possibilities
 
+![möglichkeiten](https://github.com/arteck/iobroker.fullyBrowser/blob/master/doku/auszug.png)
 
 
 
