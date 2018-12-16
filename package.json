@@ -1,5 +1,5 @@
 {
-  "name": "iobroker.fullyBrowser",
+  "name": "iobroker.fullybrowser",
   "version": "0.0.6",
   "description": "Manage yours Fully Browser",
   "main": "main.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arteck/ioBroker.fullyBrowser.git"
+    "url": "git+https://github.com/arteck/ioBroker.fullybrowser.git"
   },
   "keywords": [
     "fullyBrowser",
@@ -18,9 +18,9 @@
   "author": "arteck",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/arteck/ioBroker.fullyBrowser/issues"
+    "url": "https://github.com/arteck/ioBroker.fullybrowser/issues"
   },
-  "homepage": "https://github.com/arteck/ioBroker.fullyBrowser#readme",
+  "homepage": "https://github.com/arteck/ioBroker.fullybrowser#readme",
   "dependencies": {
     "loglevel": "^1.5.1",
     "request": "^2.85.0"

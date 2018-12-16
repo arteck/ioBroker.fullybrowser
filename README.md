@@ -1,5 +1,5 @@
 ![Logo](admin/fully.png)
-# ioBroker.fullyBrowser
+# ioBroker.fullybrowser
 =================
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
