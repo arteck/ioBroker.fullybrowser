@@ -7,20 +7,20 @@
       "0.0.6": {
         "en": "beta",
         "de": "beta",
-        "ru": "?????????"
+        "ru": "beta"
       }
     },
-    "title": "fullyBrowser Adapter",
+    "title": "fullyBrowser",
         "titleLang": {
-          "en": "fullyBrowser adapter",
-          "de": "fullyBrowser Adapter",
-          "ru": "Адаптер fullyBrowser",
-          "pt": "adaptador fullyBrowser",
-          "nl": "fullyBrowser-adapter",
-          "fr": "fullyBrowser adaptateur",
+          "en": "fullyBrowser",
+          "de": "fullyBrowser",
+          "ru": "fullyBrowser",
+          "pt": "fullyBrowser",
+          "nl": "fullyBrowser",
+          "fr": "fullyBrowser",
           "it": "fullyBrowser ",
-          "es": "adaptador fullyBrowser",
-          "pl": "fullyBrowser adapter"
+          "es": "fullyBrowser",
+          "pl": "fullyBrowser"
         },
         "desc": {
           "en": "Manage yours Fully Browser",
@@ -39,7 +39,6 @@
         "license":                  "MIT",
         "platform":                 "Javascript/Node.js",
         "mode":                     "daemon",
-        "messagebox":               true,
 	     	"enabled":                  true,
         "readme":                   "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
         "loglevel":                 "info",
@@ -50,7 +49,7 @@
         "icon":                     "fully.png",
     "materialize": true,
         "extIcon":                  "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
-        "type":                     "software"
+        "type":                     "hardware"
     },
     "native": {
     },
