@@ -229,6 +229,8 @@ function createState(oneHost, callback) {
     adapter.createChannel(id, commandsStr, commandsStr, {"name": "Buttons","type": "string", "role": "Group"}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'loadStartURL', {'name':'loadStartURL', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'clearCache', {'name':'clearCache', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'clearWebstorage', {'name':'clearWebstorage', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'clearCookies', {'name':'clearCookies', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'restartApp', {'name':'restartApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'exitApp', {'name':'exitApp', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'screenOn', {'name':'screenOn', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);

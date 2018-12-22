@@ -1,9 +1,14 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "materialize": true,
     "news": {
+      "0.0.8": {
+        "en": "psw field crypted, clear added",
+        "de": "psw-Feld verschlüsselt, clear added",
+        "ru": "PSW поле зашифровано, clear added"
+      },
       "0.0.7": {
         "en": "corr 'no config' bug",
         "de": "korrektur 'no config' bug",
