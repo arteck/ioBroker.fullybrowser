@@ -33,7 +33,7 @@ a small excerpt of the possibilities
 ## Changelog
 ### 0.0.8 (2018-12-22)
 * (arteck) psw field crypted
-           clear added
+*          clear added
  
 ### 0.0.7 (2018-12-16)
 * (arteck) bug 'no config' corr
