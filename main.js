@@ -209,19 +209,18 @@ function createState(oneHost, callback) {
                     'role': 'info'
                 }, {ip: ip}, callback);
                 vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
-                adapter.setForeignState(vari, fullyInfoObject[lpEntry], true);
+                adapter.setState(vari, fullyInfoObject[lpEntry], true);
             }
             vari = adapter.namespace + '.' + id + '.isFullyAlive';
-            adapter.setForeignState(vari, true, true);
+            adapter.setState(vari, true, true);
         } else {
             vari = adapter.namespace + '.' + id + '.isFullyAlive';
-            adapter.setForeignState(vari, false, true);
+            adapter.setState(vari, false, true);
         }
+        
+        vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
+        adapter.setState(vari, Date.now(), true)
     });
-
-
-    vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
-    adapter.setForeignState(vari, Date.now(), true)
 
     adapter.createChannel(id, commandsStr, commandsStr, {"name": "Buttons","type": "string", "role": "Group"}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'loadStartURL', {'name':'loadStartURL', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
