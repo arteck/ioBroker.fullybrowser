@@ -155,14 +155,7 @@ function updateDevice(ip,port,psw) {
         if (!error && response.statusCode == 200) {
             var fullyInfoObject = JSON.parse(body);
             for (let lpEntry in fullyInfoObject) {
-                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
-                adapter.createState(id, infoStr, lpEntry, {
-                    'name': lpEntry,
-                    'type': lpType,
-                    'read': true,
-                    'write': false,
-                    'role': 'info'
-                });
+                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean           
                 vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
                 if (fullyInfoObject[lpEntry] !== undefined 
                 &&  fullyInfoObject[lpEntry] !== null) {
