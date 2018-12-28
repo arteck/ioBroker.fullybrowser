@@ -164,7 +164,10 @@ function updateDevice(ip,port,psw) {
                     'role': 'info'
                 });
                 vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
-                adapter.setForeignState(vari, fullyInfoObject[lpEntry], true);
+                if (fullyInfoObject[lpEntry] !== undefined 
+                &&  fullyInfoObject[lpEntry] !== null) {
+                  adapter.setForeignState(vari, fullyInfoObject[lpEntry], true);
+                }
             }
             vari = adapter.namespace + '.' + id + '.isFullyAlive';
             adapter.setForeignState(vari, true, true);
