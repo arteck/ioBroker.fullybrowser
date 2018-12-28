@@ -155,23 +155,24 @@ function updateDevice(ip,port,psw) {
         if (!error && response.statusCode == 200) {
             var fullyInfoObject = JSON.parse(body);
             for (let lpEntry in fullyInfoObject) {
-                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean           
+                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
+            
                 vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
                 if (fullyInfoObject[lpEntry] !== undefined 
                 &&  fullyInfoObject[lpEntry] !== null) {
-                  adapter.setForeignState(vari, fullyInfoObject[lpEntry], true);
+                  adapter.setState(vari, fullyInfoObject[lpEntry], true);
+                   adapter.log.info(vari + ' ' + fullyInfoObject[lpEntry]);
                 }
             }
             vari = adapter.namespace + '.' + id + '.isFullyAlive';
-            adapter.setForeignState(vari, true, true);
+            adapter.setState(vari, true, true);
         } else {
             vari = adapter.namespace + '.' + id + '.isFullyAlive';
-            adapter.setForeignState(vari, false, true);
+            adapter.setState(vari, false, true);
         }
+        vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
+        adapter.setForeignState(vari, Date.now(), true);
     });
-
-    vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
-    adapter.setForeignState(vari, Date.now(), true);
 }
 
 function createState(oneHost, callback) {
