@@ -161,7 +161,7 @@ function updateDevice(ip,port,psw) {
                 if (fullyInfoObject[lpEntry] !== undefined 
                 &&  fullyInfoObject[lpEntry] !== null) {
                   adapter.setState(vari, fullyInfoObject[lpEntry], true);
-                   adapter.log.info(vari + ' ' + fullyInfoObject[lpEntry]);
+                  adapter.log.debug(vari + ' ' + fullyInfoObject[lpEntry]);
                 }
             }
             vari = adapter.namespace + '.' + id + '.isFullyAlive';
