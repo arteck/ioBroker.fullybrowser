@@ -32,7 +32,7 @@ a small excerpt of the possibilities
 
 ## Changelog
 
-### 0.0.9 (2018-12-28)
+### 0.0.10 (2018-12-28)
 * (arteck)
 
 
