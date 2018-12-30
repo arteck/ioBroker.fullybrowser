@@ -55,13 +55,15 @@
         "restartAdapters":          [
           "fullyBrowser"
         ],        
-        "keywords":                 ["fullyBrowser", "Fully Browser"],
+        "keywords":                 ["fullyBrowser", "Fully Browser", "Fully Kiosk Browser"],
         "icon":                     "fully.png",
-    "materialize": true,
+        "materialize": true,
         "extIcon":                  "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
-        "type":                     "hardware"
+        "type":                     "hardware",
+        "singletonHost": true
     },
     "native": {
+        "interval": 120000
     },
     "objects": []
 }
