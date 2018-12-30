@@ -57,10 +57,10 @@
         ],        
         "keywords":                 ["fullyBrowser", "Fully Browser", "Fully Kiosk Browser"],
         "icon":                     "fully.png",
-        "materialize": true,
+        "materialize":              true,
         "extIcon":                  "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
         "type":                     "hardware",
-        "singletonHost": true
+        "singletonHost":            true
     },
     "native": {
         "interval": 120000
