@@ -49,7 +49,7 @@
         "license":                  "MIT",
         "platform":                 "Javascript/Node.js",
         "mode":                     "daemon",
-	     	"enabled":                  true,
+	"enabled":                  false,
         "readme":                   "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
         "loglevel":                 "info",
         "restartAdapters":          [
