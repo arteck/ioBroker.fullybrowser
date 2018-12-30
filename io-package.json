@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "materialize": true,
     "news": {
       "0.0.8": {
