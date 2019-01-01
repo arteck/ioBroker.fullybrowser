@@ -32,8 +32,8 @@ a small excerpt of the possibilities
 
 ## Changelog
 
-### 0.0.10 (2018-12-28)
-* (arteck)
+### 0.0.11 (2019-01-01)
+* (arteck) exception handling
 
 
 ### 0.0.8 (2018-12-22)
