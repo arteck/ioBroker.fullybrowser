@@ -131,6 +131,9 @@ function fullySendCommand(ip, strCommand) {
     };
 
     request(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
+        }
     });
 }
 
