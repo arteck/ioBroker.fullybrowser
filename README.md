@@ -6,7 +6,6 @@
 [![Downloads](https://img.shields.io/npm/dm/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
 [![Tests](https://travis-ci.org/ioBroker/ioBroker.fullybrowser.svg?branch=master)](https://travis-ci.org/ioBroker/ioBroker.fullybrowser)
 
-[![NPM](https://nodei.co/npm/iobroker.fullybrowser.png?downloads=true)](https://nodei.co/npm/iobroker.fullybrowser/)
 
 
 
