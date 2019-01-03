@@ -443,9 +443,9 @@ function main() {
             return;
         }
     } catch(err) {
-      adapter.log.info('No one IP configured');
-            stop();
-            return;        
+       adapter.log.info('No one IP configured');
+       stop();
+       return;        
     }
     
     adapter.config.interval = parseInt(adapter.config.interval, 10);
