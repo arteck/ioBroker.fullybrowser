@@ -432,22 +432,29 @@ function getHost(hosts) {
 }
 
 function main() {
-    host = adapter.host;
-    adapter.log.debug('Host = ' + host);
+    
+    try {
+        host = adapter.host;
+        adapter.log.debug('Host = ' + host);
 
-    if (!adapter.config.devices.length) {
-        adapter.log.info('No one IP configured');
-        stop();
-        return;
+        if (!adapter.config.devices.length) {
+            adapter.log.info('No one IP configured');
+            stop();
+            return;
+        }
+    } catch(err) {
+      adapter.log.info('No one IP configured');
+            stop();
+            return;        
     }
-
+    
     adapter.config.interval = parseInt(adapter.config.interval, 10);
 
 // polling min 5 sec.
     if (adapter.config.interval < 5000) {
         adapter.config.interval = 5000;
     }
-
+   
     syncConfig(function () {
         getHost();
     });
