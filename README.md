@@ -4,7 +4,7 @@
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
-[![Tests](https://travis-ci.org/ioBroker/ioBroker.fullybrowser.svg?branch=master)](https://travis-ci.org/ioBroker/ioBroker.fullybrowser)
+[![Tests](https://travis-ci.org/ioBroker/ioBroker.fullybrowser.svg?branch=master)](https://travis-ci.org/arteck/iobroker.fullybrowser)
 
 
 
