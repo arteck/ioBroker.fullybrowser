@@ -30,6 +30,7 @@ a small excerpt of the possibilities
 
 
 ## Changelog
+### 0.0.12 (2019-01-04)
 
 ### 0.0.11 (2019-01-01)
 * (arteck) exception handling
