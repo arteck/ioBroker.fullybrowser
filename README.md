@@ -7,6 +7,7 @@
 [![Tests](https://travis-ci.org/arteck/iobroker.fullybrowser.svg?branch=master)](https://travis-ci.org/arteck/iobroker.fullybrowser)
 
 
+[![NPM](https://nodei.co/npm/iobroker.fullybrowser.png?downloads=true)](https://nodei.co/npm/iobroker.fullybrowser/)
 
 
 fullyBrowser Adapter for ioBroker
