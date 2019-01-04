@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "materialize": true,
     "news": {
       "0.0.11": {
@@ -64,7 +64,7 @@
         "icon":                     "fully.png",
         "materialize":              true,
         "extIcon":                  "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
-        "type":                     "hardware",
+        "type":                     "utility",
         "singletonHost":            true
     },
     "native": {
