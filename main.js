@@ -130,6 +130,8 @@ function fullySendCommand(ip, strCommand) {
         url: 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
     };
 
+    adapter.log.debug('Send to ' + ip);
+    
     request(options, function (error, response, body) {
         if (error && response.statusCode == 200) {
           adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
@@ -154,6 +156,8 @@ function updateDevice(ip,port,psw) {
         maxRedirects: 0
     };
 
+    adapter.log.debug('Update Device ' + ip);
+    
     request(thisOptions, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var fullyInfoObject = JSON.parse(body);
@@ -186,6 +190,8 @@ function createState(oneHost, callback) {
     var id = ip.replace(/[.\s]+/g, '_');
     var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
 
+    adapter.log.debug('Create State for Device ' + ip);
+    
     adapter.createState('', id, 'lastInfoUpdate', {'name':'Date/Time of last information update from Fully Browser', 'type':'number', 'read':true, 'write':false, 'role':'value.time'}, {ip: ip}, callback);
     adapter.createState('', id, 'isFullyAlive', {'name':'Is Fully Browser Alive?', 'type':'boolean', 'read':true, 'write':false, 'role':'info'}, {ip: ip}, callback);
 
