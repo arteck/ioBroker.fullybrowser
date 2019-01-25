@@ -133,8 +133,13 @@ function fullySendCommand(ip, strCommand) {
     adapter.log.debug('Send to ' + ip);
     
     request(options, function (error, response, body) {
-        if (error && response.statusCode == 200) {
-          adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
+        try {
+            if (error && response.statusCode == 200) {
+              adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
+            }
+        }
+        catch(err) {
+            adapter.log.error('ERROR : ' + err );
         }
     });
 }
