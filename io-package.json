@@ -1,9 +1,14 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "materialize": true,
     "news": {
+      "0.0.13": {
+        "en": "support for compact-mode added",
+        "de": "compact-mode hinzugefügt",
+        "ru": "добавлена ​​поддержка компактного режима"
+      },    
       "0.0.11": {
         "en": "exception handling",
         "de": "exception handling",

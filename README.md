@@ -20,12 +20,10 @@ A small excerpt just of the command options:
 
 <b>NodeJs >> 6.x.x </b>
 
-## Requirements to use this adapter
-* You need to have a Plus License of the Fully Kiosk Browser
-* You need to change the Fully Kiosk Browser settings: Navigate to settings, menu item "Remote Administration (PLUS)". Enable "Enable Remote Administration" and set a password in "Remote Admin Password". Also, activate "Remote Admin from Local Network". It also shows the IP address which you need to enter in the adapter settings.
-
-
 ## Changelog
+### 0.0.13 (2019-02-09)
+* (arteck) support for compact-mode added
+
 ### 0.0.12 (2019-01-04)
 
 ### 0.0.11 (2019-01-01)

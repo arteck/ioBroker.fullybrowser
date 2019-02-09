@@ -11,27 +11,63 @@
 'use strict';
 const utils   = require(__dirname + '/lib/utils'); // Get common adapter utils
 const request = require('request');
+const commandsStr = 'Commands';
+const setStr = 'setStringSetting';
 
 var result;
 var err;
 
-var timer     = null;
-var stopTimer = null;
-var isStopping = false;
-var infoStr = 'Info';
-var commandsStr = 'Commands';
-var setStr = 'setStringSetting';
+let adapter;
+let timer     = null;
+let stopTimer = null;
+let isStopping = false;
+let infoStr = 'Info';
+
 var host  = ''; // Name of the PC
 var allHosts       = [];
 
 
+/***
 var adapter = new utils.Adapter({
     name: 'fullybrowser',
     ready: function () {
         main();
     }
 });
+***/
 
+
+function startAdapter(options) {
+    options = options || {};
+    Object.assign(options, {
+         name: 'fullybrowser',
+         
+         stateChange: function (id, state) {
+            setFullyState(id, state); 
+         },
+         
+         ready: function () {
+            main();
+         },
+         
+         unload: function (callback) {
+           if (timer) {
+              clearInterval(timer);
+              timer = 0;
+           }
+           isStopping = true;
+         },
+          
+         objectChange: function (id, obj) {
+           adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
+         }
+    });
+    adapter = new utils.Adapter(options);
+    
+    return adapter;
+};
+
+/***
 adapter.on('unload', function () {
     if (timer) {
         clearInterval(timer);
@@ -39,6 +75,12 @@ adapter.on('unload', function () {
     }
     isStopping = true;
 });
+
+adapter.on('objectChange', function (id, obj) {
+    adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
+});
+
+**/
 
 function stop() {
     if (stopTimer) clearTimeout(stopTimer);
@@ -54,11 +96,8 @@ function stop() {
     }
 }
 
-adapter.on('objectChange', function (id, obj) {
-    adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
-});
-
-adapter.on('stateChange', function (id, state) {
+//adapter.on('stateChange', function (id, state) {
+function setFullyState(id, state) { 
     var comm;
     var dp;
     var ip;
@@ -118,7 +157,7 @@ adapter.on('stateChange', function (id, state) {
             }
         }
     }
-});
+};
 
 function fullySendCommand(ip, strCommand) {
     var getHost = getHostForSet(ip);
@@ -133,8 +172,13 @@ function fullySendCommand(ip, strCommand) {
     adapter.log.debug('Send to ' + ip);
     
     request(options, function (error, response, body) {
-        if (error && response.statusCode == 200) {
-          adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
+        try {
+            if (error && response.statusCode == 200) {
+              adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
+            }
+        }
+        catch(err) {
+            adapter.log.error('ERROR : ' + err );
         }
     });
 }
@@ -437,6 +481,14 @@ function getHost(hosts) {
 
 }
 
+// If started as allInOne/compact mode => return function to create instance
+if (module && module.parent) {
+    module.exports = startAdapter;
+} else {
+    // or start the instance directly
+    startAdapter();
+} 
+
 function main() {
     
     try {
@@ -467,3 +519,4 @@ function main() {
 
     adapter.subscribeStates('*');
 }
+
