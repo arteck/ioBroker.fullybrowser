@@ -4,6 +4,11 @@
     "version": "0.0.13",
     "materialize": true,
     "news": {
+      "0.0.15": {
+        "en": "fix send url",
+        "de": "fix send url",
+        "ru": "fix send url"
+      },    	    
       "0.0.13": {
         "en": "support for compact-mode added",
         "de": "compact-mode hinzugefügt",
