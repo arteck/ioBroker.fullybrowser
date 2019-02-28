@@ -135,7 +135,7 @@ function setFullyState(id, state) {
                 case 'loadURL':
                     var strUrl = state.val;
                     strUrl = strUrl.replace(/ /g, ""); // Remove Spaces
-                    if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
+            //        if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
 
                     if (strUrl.length > 10) {
                         fullySendCommand(ip, dp + '&url=' + strUrl);
