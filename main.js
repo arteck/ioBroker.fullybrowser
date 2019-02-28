@@ -133,8 +133,10 @@ function setFullyState(id, state) {
                     }
                     break;
                 case 'loadURL':
-                    var strUrl = state.val;
+                    let strUrl = state.val;
                     strUrl = strUrl.replace(/ /g, ""); // Remove Spaces
+
+                    let encodeUrl = encodeURIComponent(strUrl);
             //        if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
 
                     if (strUrl.length > 10) {
