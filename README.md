@@ -21,7 +21,7 @@ A small excerpt just of the command options:
 <b>NodeJs >> 6.x.x </b>
 
 ## Changelog
-### 0.0.15 (2019-02-28)
+### 0.0.16 (2019-02-28)
 * (arteck) fix url send
 
 ### 0.0.13 (2019-02-09)
