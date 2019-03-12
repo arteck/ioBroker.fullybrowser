@@ -56,6 +56,7 @@ function startAdapter(options) {
               timer = 0;
            }
            isStopping = true;
+           callback && callback();
          },
           
          objectChange: function (id, obj) {
