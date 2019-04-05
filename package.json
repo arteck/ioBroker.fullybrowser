@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/arteck/ioBroker.fullybrowser#readme",
   "dependencies": {
+    "queue": "*",
     "loglevel": "^1.5.1",
     "request": "^2.85.0"
   },
