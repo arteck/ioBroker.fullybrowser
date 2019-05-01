@@ -4,6 +4,11 @@
     "version": "0.0.16",
     "materialize": true,
     "news": {
+      "0.0.17": {
+        "en": "add queue",
+        "de": "add queue",
+        "ru": "add queue"
+      },    	    
       "0.0.16": {
         "en": "fix send url",
         "de": "fix send url",
