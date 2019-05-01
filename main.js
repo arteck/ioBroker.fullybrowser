@@ -13,29 +13,20 @@ const utils = require('@iobroker/adapter-core'); // Get common adapter utils
 const request = require('request');
 const commandsStr = 'Commands';
 const setStr = 'setStringSetting';
+const Queue = require('queue');
 
-var result;
-var err;
+let result;
+let err;
 
 let adapter;
 let timer     = null;
-let stopTimer = null;
 let isStopping = false;
 let infoStr = 'Info';
 
 var host  = ''; // Name of the PC
 var allHosts       = [];
 
-
-/***
-var adapter = new utils.Adapter({
-    name: 'fullybrowser',
-    ready: function () {
-        main();
-    }
-});
-***/
-
+let queue;
 
 function startAdapter(options) {
     options = options || {};
@@ -68,33 +59,9 @@ function startAdapter(options) {
     return adapter;
 };
 
-/***
-adapter.on('unload', function () {
-    if (timer) {
-        clearInterval(timer);
-        timer = 0;
-    }
-    isStopping = true;
-});
-
-adapter.on('objectChange', function (id, obj) {
-    adapter.log.info('objectChange ' + id + ' ' + JSON.stringify(obj));
-});
-
-**/
-
 function stop() {
-    if (stopTimer) clearTimeout(stopTimer);
-
-    // Stop only if schedule mode
-    if (adapter.common && adapter.common.mode == 'schedule') {
-        stopTimer = setTimeout(function () {
-            stopTimer = null;
-            if (timer) clearInterval(timer);
-            isStopping = true;
-            adapter.stop();
-        }, 30000);
-    }
+  isStopping = true;
+  queue.stop();
 }
 
 //adapter.on('stateChange', function (id, state) {
@@ -173,16 +140,18 @@ function fullySendCommand(ip, strCommand) {
     };
 
     adapter.log.debug('Send to ' + ip);
-    
-    request(options, function (error, response, body) {
-        try {
+
+    queue.push((queueCallback) => { 
+        request(options, function (error, response, body) {
             if (error && response.statusCode == 200) {
               adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
             }
-        }
-        catch(err) {
-            adapter.log.error('ERROR : ' + err );
-        }
+        });
+              
+        const callback_ = (error, resp) => {
+           if (callback) callback(error, resp);
+           queueCallback();
+        };
     });
 }
 
@@ -205,27 +174,37 @@ function updateDevice(ip,port,psw) {
 
     adapter.log.debug('Update Device ' + ip);
     
-    request(thisOptions, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var fullyInfoObject = JSON.parse(body);
-            for (let lpEntry in fullyInfoObject) {
-                let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
-            
-                vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
-                if (fullyInfoObject[lpEntry] !== undefined 
-                &&  fullyInfoObject[lpEntry] !== null) {
-                  adapter.setState(vari, fullyInfoObject[lpEntry], true);
-                  adapter.log.debug(vari + ' ' + fullyInfoObject[lpEntry]);
-                }
-            }
-            vari = adapter.namespace + '.' + id + '.isFullyAlive';
-            adapter.setState(vari, true, true);
-        } else {
-            vari = adapter.namespace + '.' + id + '.isFullyAlive';
-            adapter.setState(vari, false, true);
-        }
-        vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
-        adapter.setForeignState(vari, Date.now(), true);
+    queue.push((queueCallback) => {
+        request(thisOptions, function(error, response, body) {
+         
+          if (!error && response.statusCode == 200) {
+              let fullyInfoObject = JSON.parse(body);
+              for (let lpEntry in fullyInfoObject) {
+                  let lpType = typeof fullyInfoObject[lpEntry]; // get Type of letiable as String, like string/number/boolean
+              
+                  leti = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
+                  if (fullyInfoObject[lpEntry] !== undefined 
+                  &&  fullyInfoObject[lpEntry] !== null) {
+                    adapter.setState(leti, fullyInfoObject[lpEntry], true);
+                    adapter.log.debug(leti + ' ' + fullyInfoObject[lpEntry]);
+                  }
+              }
+              leti = adapter.namespace + '.' + id + '.isFullyAlive';
+              adapter.setState(leti, true, true);
+          } else {
+              leti = adapter.namespace + '.' + id + '.isFullyAlive';
+              adapter.setState(leti, false, true);
+          }
+          
+          leti = adapter.namespace + '.' + id + '.lastInfoUpdate';
+          adapter.setForeignState(leti, Date.now(), true);
+        
+        });
+        
+        const callback_ = (error, resp) => {
+            if (callback) callback(error, resp);
+            queueCallback();
+        }; 
     });
 }
 
@@ -493,6 +472,10 @@ if (module && module.parent) {
 } 
 
 function main() {
+    
+    queue = new Queue();
+    queue.concurrency = 1;
+    queue.autostart = true;    
     
     try {
         host = adapter.host;
