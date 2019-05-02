@@ -147,10 +147,13 @@ function fullySendCommand(ip, strCommand) {
            queueCallback();
         };
     
+        adapter.log.debug('Queue for fullySendCommand ' + ip);
+    
         request(options, function (error, response, body) {
             if (error && response.statusCode == 200) {
               adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
             }
+            queueCallback();
         });
     });
 }
@@ -180,6 +183,8 @@ function updateDevice(ip,port,psw) {
             queueCallback();
         }; 
     
+        adapter.log.debug('Queue for updateDevice ' + ip);
+    
         request(thisOptions, function(error, response, body) {       
           if (!error && response.statusCode == 200) {
               let fullyInfoObject = JSON.parse(body);
@@ -203,6 +208,7 @@ function updateDevice(ip,port,psw) {
           leti = adapter.namespace + '.' + id + '.lastInfoUpdate';
           adapter.setForeignState(leti, Date.now(), true);
         
+          queueCallback();
         });    
     });
 }
