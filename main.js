@@ -142,16 +142,16 @@ function fullySendCommand(ip, strCommand) {
     adapter.log.debug('Send to ' + ip);
 
     queue.push((queueCallback) => { 
+        const callback_ = (error, resp) => {
+           if (callback) callback(error, resp);
+           queueCallback();
+        };
+    
         request(options, function (error, response, body) {
             if (error && response.statusCode == 200) {
               adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
             }
         });
-              
-        const callback_ = (error, resp) => {
-           if (callback) callback(error, resp);
-           queueCallback();
-        };
     });
 }
 
@@ -175,8 +175,12 @@ function updateDevice(ip,port,psw) {
     adapter.log.debug('Update Device ' + ip);
     
     queue.push((queueCallback) => {
-        request(thisOptions, function(error, response, body) {
-         
+        const callback_ = (error, resp) => {
+            if (callback) callback(error, resp);
+            queueCallback();
+        }; 
+    
+        request(thisOptions, function(error, response, body) {       
           if (!error && response.statusCode == 200) {
               let fullyInfoObject = JSON.parse(body);
               for (let lpEntry in fullyInfoObject) {
@@ -199,12 +203,7 @@ function updateDevice(ip,port,psw) {
           leti = adapter.namespace + '.' + id + '.lastInfoUpdate';
           adapter.setForeignState(leti, Date.now(), true);
         
-        });
-        
-        const callback_ = (error, resp) => {
-            if (callback) callback(error, resp);
-            queueCallback();
-        }; 
+        });    
     });
 }
 
