@@ -433,9 +433,7 @@ function getHostForSet(ip) {
 
 function getHost(hosts) {
     var oneHost;
-    
-    if (stopTimer) clearTimeout(stopTimer);
-
+ 
     if (!hosts) {
         hosts = [];
         
