@@ -184,29 +184,28 @@ function updateDevice(ip,port,psw) {
         }; 
     
         adapter.log.debug('Queue for updateDevice ' + ip);
-    
         request(thisOptions, function(error, response, body) {       
           if (!error && response.statusCode == 200) {
               let fullyInfoObject = JSON.parse(body);
               for (let lpEntry in fullyInfoObject) {
-                  let lpType = typeof fullyInfoObject[lpEntry]; // get Type of letiable as String, like string/number/boolean
+                  let lpType = typeof fullyInfoObject[lpEntry]; // get Type of variable as String, like string/number/boolean
               
-                  leti = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
+                  vari = adapter.namespace + '.' + id + '.' + infoStr + '.' + lpEntry;
                   if (fullyInfoObject[lpEntry] !== undefined 
                   &&  fullyInfoObject[lpEntry] !== null) {
-                    adapter.setState(leti, fullyInfoObject[lpEntry], true);
-                    adapter.log.debug(leti + ' ' + fullyInfoObject[lpEntry]);
+                    adapter.setState(vari, fullyInfoObject[lpEntry], true);
+                    adapter.log.debug(vari + ' ' + fullyInfoObject[lpEntry]);
                   }
               }
-              leti = adapter.namespace + '.' + id + '.isFullyAlive';
-              adapter.setState(leti, true, true);
+              vari = adapter.namespace + '.' + id + '.isFullyAlive';
+              adapter.setState(vari, true, true);
           } else {
-              leti = adapter.namespace + '.' + id + '.isFullyAlive';
-              adapter.setState(leti, false, true);
+              vari = adapter.namespace + '.' + id + '.isFullyAlive';
+              adapter.setState(vari, false, true);
           }
           
-          leti = adapter.namespace + '.' + id + '.lastInfoUpdate';
-          adapter.setForeignState(leti, Date.now(), true);
+          vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
+          adapter.setForeignState(vari, Date.now(), true);
         
           queueCallback();
         });    
