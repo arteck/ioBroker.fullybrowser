@@ -150,8 +150,9 @@ function fullySendCommand(ip, strCommand) {
         adapter.log.debug('Queue for fullySendCommand ' + ip);
     
         request(options, function (error, response, body) {
-            if (error && response.statusCode == 200) {
-              adapter.log.error('Error SendCommand : ' + error + ' body : ' + JSON.parse(body));
+//            if (error && response.statusCode == 200) {
+            if (error) {
+              adapter.log.error('Error SendCommand : ' + error);
             }
             queueCallback();
         });
