@@ -105,13 +105,10 @@ function setFullyState(id, state) {
                     strUrl = strUrl.replace(/ /g, ""); // Remove Spaces
 
                     let encodeUrl = encodeURIComponent(strUrl);
-                                      
-                    adapter.log.debug('encodeUrl ' + encodeUrl);
-                    adapter.log.debug('strUrl ' + strUrl);
-            //        if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
+          //        if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
                     
                     if (strUrl.length > 10) {
-                        fullySendCommand(ip, dp + '&url=' + strUrl);
+                        fullySendCommand(ip, dp + '&url=' + encodeUrl);
                     }          
                     break;
 
