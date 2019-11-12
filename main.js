@@ -171,7 +171,7 @@ function updateDevice(ip,port,psw) {
     var thisOptions = {
         uri: statusURL,
         method: "GET",
-        timeout: 2000,
+        timeout: adapter.config.Timeout,
         followRedirect: false,
         maxRedirects: 0
     };
@@ -231,7 +231,7 @@ function createState(oneHost, callback) {
     var thisOptions = {
         uri: statusURL,
         method: "GET",
-        timeout: 2000,
+        timeout: adapter.config.Timeout,
         followRedirect: false,
         maxRedirects: 0
     };
