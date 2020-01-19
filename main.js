@@ -94,8 +94,8 @@ function setFullyState(id, state) {
                     break;
                 case 'textToSpeech':
                     var txtSp = state.val;
-                    txtSp = txtSp.replace(/[^a-zA-Z0-9ß-ü]/g,'');  // Just keep letters, numbers, and umlauts
-                    txtSp = txtSp.replace(/ +/g, ' '); // Remove multiple spaces
+               //        txtSp = txtSp.replace(/[^a-zA-Z0-9ß]/g,'');  // Just keep letters, numbers, and umlauts
+                    txtSp = encodeURIComponent(txtSp.replace(/ +/g, ' ')); // Remove multiple spaces
                     if (txtSp.length > 1) {
                         fullySendCommand(ip, dp +'&text=' + txtSp);
                     }
@@ -139,7 +139,7 @@ function fullySendCommand(ip, strCommand) {
         url: 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
     };
 
-    adapter.log.debug('Send to ' + ip);
+    adapter.log.debug('Send to ' + ip + ' command : ' + strCommand);
 
     queue.push((queueCallback) => { 
         const callback_ = (error, resp) => {
