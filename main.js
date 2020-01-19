@@ -94,7 +94,7 @@ function setFullyState(id, state) {
                     break;
                 case 'textToSpeech':
                     var txtSp = state.val;
-               //        txtSp = txtSp.replace(/[^a-zA-Z0-9ß]/g,'');  // Just keep letters, numbers, and umlauts
+            //        txtSp = txtSp.replace(/[^a-zA-Z0-9ß]/g,'');  // Just keep letters, numbers, and umlauts
                     txtSp = encodeURIComponent(txtSp.replace(/ +/g, ' ')); // Remove multiple spaces
                     if (txtSp.length > 1) {
                         fullySendCommand(ip, dp +'&text=' + txtSp);
@@ -171,7 +171,7 @@ function updateDevice(ip,port,psw) {
     var thisOptions = {
         uri: statusURL,
         method: "GET",
-        timeout: adapter.config.Timeout,
+        timeout: 2000,
         followRedirect: false,
         maxRedirects: 0
     };
@@ -231,7 +231,7 @@ function createState(oneHost, callback) {
     var thisOptions = {
         uri: statusURL,
         method: "GET",
-        timeout: adapter.config.Timeout,
+        timeout: 2000,
         followRedirect: false,
         maxRedirects: 0
     };

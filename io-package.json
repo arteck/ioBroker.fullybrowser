@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "materialize": true,
     "news": {
 	"1.0.1": {
@@ -88,8 +88,7 @@
         "singletonHost":            true
     },
     "native": {
-        "interval": 120000,
-        "Timeout": 2000
+        "interval": 120000
     },
     "objects": []
 }
