@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "materialize": true,
     "news": {
 	"1.0.1": {
@@ -71,10 +71,11 @@
         "authors": [
             "arteck <arteck@outlook.com>"
         ],
+        "compact":                  true,
         "license":                  "MIT",
         "platform":                 "Javascript/Node.js",
         "mode":                     "daemon",
-	"enabled":                  false,
+	      "enabled":                  false,
         "readme":                   "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
         "loglevel":                 "info",
         "restartAdapters":          [

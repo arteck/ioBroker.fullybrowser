@@ -21,6 +21,10 @@ A small excerpt just of the command options:
 <b>NodeJs >> 8.x.x </b>
 
 ## Changelog
+### 1.0.3 (2020-02-16)
+* (arteck) support compact mode
+
+
 ### 1.0.1 (2019-06-20)
 * (arteck) encodeURL
 
