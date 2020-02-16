@@ -9,7 +9,7 @@
 
 [![NPM](https://nodei.co/npm/iobroker.fullybrowser.png?downloads=true)](https://nodei.co/npm/iobroker.fullybrowser/)
 
-
+ 
 fullyBrowser Adapter for ioBroker
 ------------------------------------------------------------------------------
 
