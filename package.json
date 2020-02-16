@@ -2,13 +2,7 @@
   "name": "iobroker.fullybrowser",
   "version": "1.0.3",
   "description": "Manage yours Fully Browser",
-  "main": "main.js",
-  "scripts": {
-    "test": "npm run test:package && npm run test:unit",
-    "test:package": "mocha test/package --exit",
-    "test:unit": "mocha test/unit --exit",
-    "test:integration": "mocha test/integration --exit"
-  },
+  "main": "main.js", 
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arteck/ioBroker.fullybrowser.git"
@@ -18,12 +12,19 @@
     "Fully Browser",
     "iobroker"
   ],
-  "author": "arteck",
+  "author": {
+    "name": "Arthur Rupp",
+    "email": "arteck@outlook.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/arteck/ioBroker.fullybrowser/issues"
   },
   "homepage": "https://github.com/arteck/ioBroker.fullybrowser#readme",
+  "engines": {
+    "node": ">=8"
+  },
+  "readmeFilename": "README.md",
   "dependencies": {
     "queue": "*",
     "loglevel": "^1.5.1",
@@ -35,5 +36,11 @@
     "mocha": "^4.1.0",
     "chai": "^4.1.2",
     "@iobroker/testing": "^1.1.10"
+  },
+  "scripts": {
+    "test": "npm run test:package && npm run test:unit",
+    "test:package": "mocha test/package --exit",
+    "test:unit": "mocha test/unit --exit",
+    "test:integration": "mocha test/integration --exit"
   }
 }
