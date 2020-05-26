@@ -11,10 +11,13 @@ before_script:
   - export NPMVERSION=$(echo "$($(which npm) -v)"|cut -c1)
   - 'if [[ $NPMVERSION == 5 ]]; then npm install -g npm@5; fi'
   - npm -v
-  - npm install winston@3.2.1
-  - 'npm install https://github.com/arteck/ioBroker.fullybrowser/tarball/master --production'
+  - npm install winston@3.2.1  
 env:
   - CXX=g++-6
+script:
+  - 'if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo node_modules/mocha/bin/mocha --exit; fi'
+  - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then node_modules/mocha/bin/mocha --exit; fi'
+  - 'if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then node_modules/mocha/bin/mocha --exit; fi'
 addons:
   apt:
     sources:
