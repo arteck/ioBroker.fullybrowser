@@ -3,6 +3,11 @@
     "name": "fullybrowser",
     "version": "1.0.3",
      "news": {
+	"1.0.3": {
+        "en": "compact mode",
+        "de": "compact mode",
+        "ru": "compact mode"
+      },    	   	     
 	"1.0.1": {
         "en": "encodeURL",
         "de": "encodeURL",
