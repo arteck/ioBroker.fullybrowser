@@ -102,7 +102,7 @@ function setFullyState(id, state) {
                     break;
                 case 'setAudioVolume':
                     var vol = state.val;
-                    fullySendCommand(ip, dp +'&level=' + vol);
+                    fullySendCommand(ip, dp +'&level=' + vol + '&stream=3');
                     break;
                 case 'loadURL':
                     let strUrl = state.val;
