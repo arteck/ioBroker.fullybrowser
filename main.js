@@ -100,6 +100,10 @@ function setFullyState(id, state) {
                         fullySendCommand(ip, dp +'&text=' + txtSp);
                     }
                     break;
+                case 'setAudioVolume':
+                    var vol = state.val;
+                    fullySendCommand(ip, dp +'&level=' + vol);
+                    break;
                 case 'loadURL':
                     let strUrl = state.val;
                     strUrl = strUrl.replace(/ /g, ""); // Remove Spaces
@@ -283,6 +287,7 @@ function createState(oneHost, callback) {
     adapter.createState(id, commandsStr, 'disableLockedMode', {'name':'disableLockedMode', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'startApplication', {'name':'startApplication', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'loadURL', {'name':'loadURL', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
+    adapter.createState(id, commandsStr, 'setAudioVolume', {'name':'setAudioVolume', 'type':'number', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
   
     adapter.createState(id, commandsStr, 'textToSpeech', {'name':'textToSpeech', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'setStringSetting', {'name':'setStringSetting', 'type':'string', 'read':true, 'write':true, 'role':'text'}, {ip: ip}, callback);
