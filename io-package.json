@@ -1,13 +1,18 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "1.0.3",
+    "version": "1.0.4",
      "news": {
-	"1.0.3": {
+	"1.0.4": {
+        "en": "setAudiovolume",
+        "de": "setAudiovolume",
+        "ru": "setAudiovolume"
+      },    
+        "1.0.3": {
         "en": "compact mode",
         "de": "compact mode",
         "ru": "compact mode"
-      },    	   	     
+      },    	        
 	"1.0.1": {
         "en": "encodeURL",
         "de": "encodeURL",
