@@ -7,13 +7,12 @@
         "en": "refactoring",
         "de": "refactoring",
         "ru": "refactoring"
-       },         
-	"1.0.4": {
-        "en": "setAudiovolume",
+      },    
+        "1.0.4": {
+       "en": "setAudiovolume",
         "de": "setAudiovolume",
         "ru": "setAudiovolume"
-      }    
-    },
+      },    	        
     "title": "fullyBrowser",
         "titleLang": {
           "en": "fullyBrowser",
