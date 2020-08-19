@@ -1,64 +1,65 @@
 {
-  "common": {
-    "name": "fullybrowser",
-    "version": "2.0.0",
-     "news": {
-	"2.0.0": {
-        "en": "refactoring",
-        "de": "refactoring",
-        "ru": "refactoring"
-      },    
-        "1.0.4": {
-       "en": "setAudiovolume",
-        "de": "setAudiovolume",
-        "ru": "setAudiovolume"
-      },    	        
-    "title": "fullyBrowser",
-        "titleLang": {
-          "en": "fullyBrowser",
-          "de": "fullyBrowser",
-          "ru": "fullyBrowser",
-          "pt": "fullyBrowser",
-          "nl": "fullyBrowser",
-          "fr": "fullyBrowser",
-          "it": "fullyBrowser ",
-          "es": "fullyBrowser",
-          "pl": "fullyBrowser"
+    "common": {
+        "name": "fullybrowser",
+        "version": "2.0.0",
+        "news": {
+            "2.0.0": {
+                "en": "refactoring",
+                "de": "refactoring",
+                "ru": "refactoring"
+            },
+            "1.0.4": {
+                "en": "setAudiovolume",
+                "de": "setAudiovolume",
+                "ru": "setAudiovolume"
+            },
+            "title": "fullyBrowser",
+            "titleLang": {
+                "en": "fullyBrowser",
+                "de": "fullyBrowser",
+                "ru": "fullyBrowser",
+                "pt": "fullyBrowser",
+                "nl": "fullyBrowser",
+                "fr": "fullyBrowser",
+                "it": "fullyBrowser ",
+                "es": "fullyBrowser",
+                "pl": "fullyBrowser"
+            },
+            "desc": {
+                "en": "Manage yours Fully Browser",
+                "de": "verwalte deinen Fully Browser mit ioBroker",
+                "ru": "подключает устройства Fully Browser к ioBroker",
+                "pt": "liga dispositivos Fully Browser a ioBroker",
+                "nl": "verbindt Fully Browser met ioBroker",
+                "fr": "connecte les Fully Browser à ioBroker",
+                "it": "collega Fully Browser a ioBroker",
+                "es": "conecta Fully Browser a ioBroker",
+                "pl": "łączy Fully Browser z ioBroker"
+            },
+            "authors": [
+                "arteck <arteck@outlook.com>"
+            ],
+            "materialize": true,
+            "compact": true,
+            "license": "MIT",
+            "platform": "Javascript/Node.js",
+            "mode": "daemon",
+            "enabled": false,
+            "readme": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
+            "loglevel": "info",
+            "restartAdapters": [
+                "fullyBrowser"
+            ],
+            "keywords": ["fullyBrowser", "Fully Browser", "Fully Kiosk Browser"],
+            "icon": "fully.png",
+            "materialize": true,
+            "extIcon": "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
+            "type": "utility",
+            "singletonHost": true
         },
-        "desc": {
-          "en": "Manage yours Fully Browser",
-          "de": "verwalte deinen Fully Browser mit ioBroker",
-          "ru": "подключает устройства Fully Browser к ioBroker",
-          "pt": "liga dispositivos Fully Browser a ioBroker",
-          "nl": "verbindt Fully Browser met ioBroker",
-          "fr": "connecte les Fully Browser à ioBroker",
-          "it": "collega Fully Browser a ioBroker",
-          "es": "conecta Fully Browser a ioBroker",
-          "pl": "łączy Fully Browser z ioBroker"
+        "native": {
+            "interval": 60
         },
-        "authors": [
-            "arteck <arteck@outlook.com>"
-        ],
-	"materialize": true,  
-        "compact":                  true,
-        "license":                  "MIT",
-        "platform":                 "Javascript/Node.js",
-        "mode":                     "daemon",
-	"enabled":                  false,
-        "readme":                   "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
-        "loglevel":                 "info",
-        "restartAdapters":          [
-          "fullyBrowser"
-        ],        
-        "keywords":                 ["fullyBrowser", "Fully Browser", "Fully Kiosk Browser"],
-        "icon":                     "fully.png",
-        "materialize":              true,
-        "extIcon":                  "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
-        "type":                     "utility",
-        "singletonHost":            true
-    },
-    "native": {
-        "interval": 60
-    },
-    "objects": []
+        "objects": []
+    }
 }
