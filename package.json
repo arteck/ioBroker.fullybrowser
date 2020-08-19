@@ -1,6 +1,6 @@
 {
   "name": "iobroker.fullybrowser",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "Manage yours Fully Browser",
   "main": "main.js", 
   "repository": {
@@ -26,10 +26,9 @@
   },
   "readmeFilename": "README.md",
   "dependencies": {
-    "queue": "*",
+    "@iobroker/adapter-core": "^2.4.0",
     "loglevel": "^1.5.1",
-    "request": "^2.85.0",
-    "@iobroker/adapter-core": "^1.0.3"
+    "axios": "*"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

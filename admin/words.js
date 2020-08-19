@@ -25,15 +25,15 @@ systemDictionary = {
         "pl": "addresses to monitoring"
     },
     "interval": {
-        "en": "Polling interval[ms]",
-        "de": "Abfrage Intervall[ms]",
-        "ru": "Интервал опроса в миллисекундах:",
-        "pt": "Polling interval[ms]",
-        "nl": "Polling interval[ms]",
-        "fr": "Polling interval[ms]",
-        "it": "Polling interval[ms]",
-        "es": "Polling interval[ms]",
-        "pl": "Polling interval[ms]"
+        "en": "Polling interval[sec]",
+        "de": "Abfrage Intervall[sec]",
+        "ru": "Интервал опроса в секундах:",
+        "pt": "Polling interval[sec]",
+        "nl": "Polling interval[sec]",
+        "fr": "Polling interval[sec]",
+        "it": "Polling interval[sec]",
+        "es": "Polling interval[sec]",
+        "pl": "Polling interval[sec]"
     },
     "Timeout": {
         "en": "Timeout [ms]",

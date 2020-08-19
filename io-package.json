@@ -1,58 +1,18 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "1.0.4",
+    "version": "2.0.0",
      "news": {
-	"1.0.4": {
+	     "2.0.0": {
+        "en": "refactoring",
+        "de": "refactoring",
+        "ru": "refactoring"
+       }         
+	     "1.0.4": {
         "en": "setAudiovolume",
         "de": "setAudiovolume",
         "ru": "setAudiovolume"
-      },    
-        "1.0.3": {
-        "en": "compact mode",
-        "de": "compact mode",
-        "ru": "compact mode"
-      },    	        
-	"1.0.1": {
-        "en": "encodeURL",
-        "de": "encodeURL",
-        "ru": "encodeURL"
-      },    	   
-      "0.0.17": {
-        "en": "add queue",
-        "de": "add queue",
-        "ru": "add queue"
-      },    	     
-      "0.0.16": {
-        "en": "fix send url",
-        "de": "fix send url",
-        "ru": "fix send url"
-      },    	    
-      "0.0.13": {
-        "en": "support for compact-mode added",
-        "de": "compact-mode hinzugefügt",
-        "ru": "добавлена ​​поддержка компактного режима"
-      },    
-      "0.0.11": {
-        "en": "exception handling",
-        "de": "exception handling",
-        "ru": "exception handling"
-      },
-      "0.0.8": {
-        "en": "psw field crypted, clear added",
-        "de": "psw-Feld verschlüsselt, clear added",
-        "ru": "PSW поле зашифровано, clear added"
-      },
-      "0.0.7": {
-        "en": "corr 'no config' bug",
-        "de": "korrektur 'no config' bug",
-        "ru": "corr 'no config' bug"
-      },
-      "0.0.6": {
-        "en": "beta",
-        "de": "beta",
-        "ru": "beta"
-      }      
+      }    
     },
     "title": "fullyBrowser",
         "titleLang": {
@@ -99,7 +59,7 @@
         "singletonHost":            true
     },
     "native": {
-        "interval": 120000
+        "interval": 60
     },
     "objects": []
 }
