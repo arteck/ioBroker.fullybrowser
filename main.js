@@ -10,7 +10,7 @@
 
 'use strict';
 const utils = require('@iobroker/adapter-core'); // Get common adapter utils
-const request = require('request');
+const axios = require('axios');
 const commandsStr = 'Commands';
 const setStr = 'setStringSetting';
 const Queue = require('queue');
@@ -139,9 +139,7 @@ function fullySendCommand(ip, strCommand) {
     var port    = getHost[1];
     var psw     = getHost[2];
 
-    var options = {
-        url: 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
-    };
+    let statusURL = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
 
     adapter.log.debug('Send to ' + ip + ' command : ' + strCommand);
 
@@ -152,14 +150,15 @@ function fullySendCommand(ip, strCommand) {
         };
     
         adapter.log.debug('Queue for fullySendCommand ' + ip);
-    
-        request(options, function (error, response, body) {
-//            if (error && response.statusCode == 200) {
-            if (error) {
-              adapter.log.debug('Error SendCommand : ' + error);
-            }
-            queueCallback();
-        });
+        axios.get(statusURL)
+            .then(function (response) {
+                // handle success
+                queueCallback();
+            })
+            .catch(function (error) {
+        // handle error
+                adapter.log.debug('Error SendCommand : ' + error);
+            });
     });
 }
 
@@ -172,14 +171,6 @@ function updateDevice(ip,port,psw) {
     var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
     var vari = '';
 
-    var thisOptions = {
-        uri: statusURL,
-        method: "GET",
-        timeout: 2000,
-        followRedirect: false,
-        maxRedirects: 0
-    };
-
     adapter.log.debug('Update Device ' + ip);
     
     queue.push((queueCallback) => {
@@ -189,9 +180,12 @@ function updateDevice(ip,port,psw) {
         }; 
     
         adapter.log.debug('Queue for updateDevice ' + ip);
-        request(thisOptions, function(error, response, body) {       
-          if (!error && response.statusCode == 200) {
-              let fullyInfoObject = JSON.parse(body);
+
+        axios.get(statusURL)
+        .then(function (response) {
+
+          // handle success
+              let fullyInfoObject = response.data;
               for (let lpEntry in fullyInfoObject) {
                   let lpType = typeof fullyInfoObject[lpEntry]; // get Type of variable as String, like string/number/boolean
               
@@ -204,16 +198,18 @@ function updateDevice(ip,port,psw) {
               }
               vari = adapter.namespace + '.' + id + '.isFullyAlive';
               adapter.setState(vari, true, true);
-          } else {
-              vari = adapter.namespace + '.' + id + '.isFullyAlive';
-              adapter.setState(vari, false, true);
-          }
-          
+        })
+        .catch(function (error) {
+          // handle error
+            vari = adapter.namespace + '.' + id + '.isFullyAlive';
+            adapter.setState(vari, false, true);
+        })
+        .then(function () {
           vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
           adapter.setForeignState(vari, Date.now(), true);
         
-          queueCallback();
-        });    
+          queueCallback();          
+        });   
     });
 }
 
@@ -232,17 +228,9 @@ function createState(oneHost, callback) {
 
     adapter.createChannel(id, infoStr, infoStr, {"name": "Info","type": "string", "role": "Group"}, {ip: ip}, callback);
 
-    var thisOptions = {
-        uri: statusURL,
-        method: "GET",
-        timeout: 2000,
-        followRedirect: false,
-        maxRedirects: 0
-    };
-
-    request(thisOptions, function(error, response, body) {
-        if (!error && response.statusCode == 200) {
-            var fullyInfoObject = JSON.parse(body);
+    axios.get(statusURL)
+        .then(function (response) {
+            let fullyInfoObject = response.data;
             for (let lpEntry in fullyInfoObject) {
                 let lpType = typeof fullyInfoObject[lpEntry]; // get Type of Variable as String, like string/number/boolean
                 adapter.createState(id, infoStr, lpEntry, {
@@ -257,14 +245,17 @@ function createState(oneHost, callback) {
             }
             vari = adapter.namespace + '.' + id + '.isFullyAlive';
             adapter.setState(vari, true, true);
-        } else {
+        })
+        .catch(function (error) {
             vari = adapter.namespace + '.' + id + '.isFullyAlive';
             adapter.setState(vari, false, true);
-        }
+        })
+        .then(function () {
         
-        vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
-        adapter.setState(vari, Date.now(), true)
-    });
+            vari = adapter.namespace + '.' + id + '.lastInfoUpdate';
+            adapter.setState(vari, Date.now(), true)
+        });
+    
 
     adapter.createChannel(id, commandsStr, commandsStr, {"name": "Buttons","type": "string", "role": "Group"}, {ip: ip}, callback);
     adapter.createState(id, commandsStr, 'loadStartURL', {'name':'loadStartURL', 'type':'boolean', 'read':false, 'write':true, 'role':'button'}, {ip: ip}, callback);
