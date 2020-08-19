@@ -7,7 +7,6 @@
  *      MIT License
  *
  */
-
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
@@ -26,9 +25,9 @@ class fullybrowserControll extends utils.Adapter {
      */
     constructor(options) {
         super({
-                ...options,
+            ...options,
             name: 'fullybrowser',
-    });
+        });
         this.on('ready', this.onReady.bind(this));
         this.on('objectChange', this.onObjectChange.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
@@ -91,7 +90,7 @@ class fullybrowserControll extends utils.Adapter {
 
             // The state was changed
             let tmp = id.split('.');
-            let command  = tmp.pop();
+            let command = tmp.pop();
             let idx = tmp.pop();
             let ip = tmp.pop();
 
@@ -111,7 +110,7 @@ class fullybrowserControll extends utils.Adapter {
             if (state.ack != null) {
                 if (state && !state.ack) {
 
-                    switch(command) {
+                    switch (command) {
                         case 'setStringSetting':
                             var txtKey = state.val;
                             if (txtKey.length > 1) {
@@ -123,12 +122,12 @@ class fullybrowserControll extends utils.Adapter {
                             //        txtSp = txtSp.replace(/[^a-zA-Z0-9ß]/g,'');  // Just keep letters, numbers, and umlauts
                             txtSp = encodeURIComponent(txtSp.replace(/ +/g, ' ')); // Remove multiple spaces
                             if (txtSp.length > 1) {
-                                await this.fullySendCommand(ip, command +'&text=' + txtSp);
+                                await this.fullySendCommand(ip, command + '&text=' + txtSp);
                             }
                             break;
                         case 'setAudioVolume':
                             var vol = state.val;
-                            await this.fullySendCommand(ip, command +'&level=' + vol + '&stream=3');
+                            await this.fullySendCommand(ip, command + '&level=' + vol + '&stream=3');
                             break;
                         case 'loadURL':
                             let strUrl = state.val;
@@ -166,9 +165,9 @@ class fullybrowserControll extends utils.Adapter {
 
     async fullySendCommand(ip, strCommand) {
         let getHost = await this.getHostForSet(ip);
-        var ip      = getHost[0];
-        var port    = getHost[1];
-        var psw     = getHost[2];
+        var ip = getHost[0];
+        var port = getHost[1];
+        var psw = getHost[2];
 
         let statusURL = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
 
@@ -179,22 +178,22 @@ class fullybrowserControll extends utils.Adapter {
     }
 
     async getHostForSet(ip) {
-    var hostSet = [];
-    for (var i = 0; i < this.config.devices.length; i++) {
-        if (this.config.devices[i].ip.length > 5) {
-            if (this.config.devices[i].active) {
-                if (this.config.devices[i].ip === ip) {
-                    hostSet.push(this.config.devices[i].ip, this.config.devices[i].port, this.config.devices[i].psw);
-                    break;
+        var hostSet = [];
+        for (var i = 0; i < this.config.devices.length; i++) {
+            if (this.config.devices[i].ip.length > 5) {
+                if (this.config.devices[i].active) {
+                    if (this.config.devices[i].ip === ip) {
+                        hostSet.push(this.config.devices[i].ip, this.config.devices[i].port, this.config.devices[i].psw);
+                        break;
+                    }
                 }
             }
         }
+
+        return hostSet;
     }
 
-    return hostSet;
-}
-
-    async updateDevice(ip,port,psw) {
+    async updateDevice(ip, port, psw) {
         var id = ip.replace(/[.\s]+/g, '_');
         var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
 
@@ -204,7 +203,7 @@ class fullybrowserControll extends utils.Adapter {
 
         try {
             for (let lpEntry in fullyInfoObject.data) {
-                if (fullyInfoObject.data[lpEntry] !== undefined &&  fullyInfoObject.data[lpEntry] !== null) {
+                if (fullyInfoObject.data[lpEntry] !== undefined && fullyInfoObject.data[lpEntry] !== null) {
                     this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
                 }
             }
@@ -225,7 +224,7 @@ class fullybrowserControll extends utils.Adapter {
             for (const k in devices) {
 
                 if (devices[k].active) {
-                    this.log.info ('Start with IP : ' + devices[k].ip );
+                    this.log.info('Start with IP : ' + devices[k].ip);
                     await this.cre_info(devices[k].ip, devices[k].port, devices[k].psw);
                     await this.cre_command(devices[k].ip);
 
@@ -244,7 +243,7 @@ class fullybrowserControll extends utils.Adapter {
         var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
 
         this.extendObjectAsync(`${id}.lastInfoUpdate`, {
-        type: 'state',
+            type: 'state',
             common: {
                 name: 'Date/Time of last information update from Fully Browser',
                 type: 'number',
@@ -296,7 +295,8 @@ class fullybrowserControll extends utils.Adapter {
     async cre_command(ip) {
 
         const commArButton = ['loadStartURL', 'clearCache', 'clearWebstorage', 'clearCookies', 'restartApp', 'exitApp', 'screenOn', 'screenOff', 'forceSleep', 'triggerMotion', 'startScreensaver',
-            'stopScreensaver', 'startDaydream', 'stopDaydream', 'toForeground', 'popFragment', 'enableLockedMode', 'disableLockedMode'];
+            'stopScreensaver', 'startDaydream', 'stopDaydream', 'toForeground', 'popFragment', 'enableLockedMode', 'disableLockedMode'
+        ];
 
         const commArText = ['startApplication', 'loadURL', 'setAudioVolume', 'textToSpeech', 'setStringSetting'];
 
@@ -338,21 +338,21 @@ class fullybrowserControll extends utils.Adapter {
     }
 
     async initialization() {
-    try {
-        if (this.config.devices === undefined ) {
-            this.log.debug(`initialization undefined`);
-            callback();
-        }
+        try {
+            if (this.config.devices === undefined) {
+                this.log.debug(`initialization undefined`);
+                callback();
+            }
 
-        interval = parseInt(this.config.interval * 1000, 10);
-        if (interval < 5000) {
-            interval = 5000;
-        }
+            interval = parseInt(this.config.interval * 1000, 10);
+            if (interval < 5000) {
+                interval = 5000;
+            }
 
-    } catch (error) {
-        this.log.error('No one IP configured');
+        } catch (error) {
+            this.log.error('No one IP configured');
+        }
     }
-}
 
     async getInfos() {
         this.log.debug(`get Information`);
@@ -367,9 +367,9 @@ class fullybrowserControll extends utils.Adapter {
             }
         }
         requestTimeout = setTimeout(async () => {
-                this.getInfos();
+            this.getInfos();
         }, interval);
-}
+    }
 
 }
 // @ts-ignore parent is a valid property on module
