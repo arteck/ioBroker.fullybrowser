@@ -27,10 +27,10 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "@iobroker/adapter-core": "^2.4.0",
-    "loglevel": "^1.5.1",
-    "axios": "*"
+    "loglevel": "^1.5.1"   
   },
   "devDependencies": {
+    "axios": "^0.20.0-0",
     "gulp": "^3.9.1",
     "mocha": "^4.1.0",
     "chai": "^4.1.2",
