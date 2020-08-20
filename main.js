@@ -268,24 +268,28 @@ class fullybrowserControll extends utils.Adapter {
 
 
         // cre Info
-        let fullyInfoObject = await axios.get(statusURL);
+        try {
+            let fullyInfoObject = await axios.get(statusURL);
 
-        for (let lpEntry in fullyInfoObject.data) {
-            let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
+            for (let lpEntry in fullyInfoObject.data) {
+                let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
 
-            this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
-                type: 'state',
-                common: {
-                    name: lpEntry,
-                    type: lpType,
-                    read: true,
-                    write: false,
-                    role: 'value',
-                },
-                native: {},
-            });
+                this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
+                    type: 'state',
+                    common: {
+                        name: lpEntry,
+                        type: lpType,
+                        read: true,
+                        write: false,
+                        role: 'value',
+                    },
+                    native: {},
+                });
 
-            this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+                this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+            } catch (err) {
+                 this.log.error('Generate State problem');
+            }
         }
     }
 
