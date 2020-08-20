@@ -285,12 +285,12 @@ class fullybrowserControll extends utils.Adapter {
                     },
                     native: {},
                 });
-
+            
                 this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
-            } catch (err) {
-                 this.log.error('Generate State problem');
             }
-        }
+        } catch (err) {
+             this.log.error('Generate State problem');
+        }       
     }
 
     async cre_command(ip) {
