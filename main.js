@@ -106,60 +106,54 @@ class fullybrowserControll extends utils.Adapter {
     async setFullyState(ip, idx, command, state) {
         var ip = ip.replace(/[_\s]+/g, '.');
 
-        try {
-            if (state.ack != null) {
-                if (state && !state.ack) {
+        if (state.ack != null) {
+            if (state && !state.ack) {
 
-                    switch (command) {
-                        case 'setStringSetting':
-                            var txtKey = state.val;
-                            if (txtKey.length > 1) {
-                                await this.fullySendCommand(ip, command + txtKey);
-                            }
-                            break;
-                        case 'textToSpeech':
-                            var txtSp = state.val;
-                            //        txtSp = txtSp.replace(/[^a-zA-Z0-9ß]/g,'');  // Just keep letters, numbers, and umlauts
-                            txtSp = encodeURIComponent(txtSp.replace(/ +/g, ' ')); // Remove multiple spaces
-                            if (txtSp.length > 1) {
-                                await this.fullySendCommand(ip, command + '&text=' + txtSp);
-                            }
-                            break;
-                        case 'setAudioVolume':
-                            var vol = state.val;
-                            await this.fullySendCommand(ip, command + '&level=' + vol + '&stream=3');
-                            break;
-                        case 'loadURL':
-                            let strUrl = state.val;
-                            strUrl = strUrl.replace(/ /g, ""); // Remove Spaces
+                switch (command) {
+                    case 'setStringSetting':
+                        var txtKey = state.val;
+                        if (txtKey.length > 1) {
+                            await this.fullySendCommand(ip, command + txtKey);
+                        }
+                        break;
+                    case 'textToSpeech':
+                        var txtSp = state.val;
+                        //        txtSp = txtSp.replace(/[^a-zA-Z0-9ß]/g,'');  // Just keep letters, numbers, and umlauts
+                        txtSp = encodeURIComponent(txtSp.replace(/ +/g, ' ')); // Remove multiple spaces
+                        if (txtSp.length > 1) {
+                            await this.fullySendCommand(ip, command + '&text=' + txtSp);
+                        }
+                        break;
+                    case 'setAudioVolume':
+                        var vol = state.val;
+                        await this.fullySendCommand(ip, command + '&level=' + vol + '&stream=3');
+                        break;
+                    case 'loadURL':
+                        let strUrl = state.val;
+                        strUrl = strUrl.replace(/ /g, ""); // Remove Spaces
 
-                            let encodeUrl = encodeURIComponent(strUrl);
-                            //        if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
+                        let encodeUrl = encodeURIComponent(strUrl);
+                        //        if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
 
-                            if (strUrl.length > 10) {
-                                await this.fullySendCommand(ip, command + '&url=' + encodeUrl);
-                            }
-                            break;
+                        if (strUrl.length > 10) {
+                            await this.fullySendCommand(ip, command + '&url=' + encodeUrl);
+                        }
+                        break;
 
-                        case 'startApplication':
-                            var strApp = state.val;
-                            strApp = strApp.replace(/ /g, ""); // Remove Spaces
+                    case 'startApplication':
+                        var strApp = state.val;
+                        strApp = strApp.replace(/ /g, ""); // Remove Spaces
 
-                            if (strApp.length > 2) {
-                                await this.fullySendCommand(ip, command + '&package=' + strApp);
-                            }
-                            break;
-                        default:
-                            if (idx === commandsStr) {
-                                await this.fullySendCommand(ip, command);
-                            }
-                    }
+                        if (strApp.length > 2) {
+                            await this.fullySendCommand(ip, command + '&package=' + strApp);
+                        }
+                        break;
+                    default:
+                        if (idx === commandsStr) {
+                            await this.fullySendCommand(ip, command);
+                        }
                 }
             }
-
-        } catch (error) {
-            this.log.warn(`Info Message setDevice: ${error.stack}`);
-
         }
     }
 
@@ -172,8 +166,12 @@ class fullybrowserControll extends utils.Adapter {
         let statusURL = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
 
         this.log.debug('Send ' + statusURL);
-
-        await axios.get(statusURL);
+        
+        try {
+            await axios.get(statusURL);
+        } catch (err) {
+            this.log.debug('Send error' + statusURL);
+        }
 
     }
 
@@ -199,9 +197,8 @@ class fullybrowserControll extends utils.Adapter {
 
 
         // cre Info
-        let fullyInfoObject = await axios.get(statusURL);
-
         try {
+            let fullyInfoObject = await axios.get(statusURL);
             for (let lpEntry in fullyInfoObject.data) {
                 if (fullyInfoObject.data[lpEntry] !== undefined && fullyInfoObject.data[lpEntry] !== null) {
                     this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
@@ -227,12 +224,12 @@ class fullybrowserControll extends utils.Adapter {
                     this.log.info('Start with IP : ' + devices[k].ip);
                     await this.cre_info(devices[k].ip, devices[k].port, devices[k].psw);
                     await this.cre_command(devices[k].ip);
-
                 }
             }
 
             this.setState('info.connection', true, true);
         } catch (err) {
+            this.setState('info.connection', false, true);
             this.log.debug(`create state problem`);
         }
     }
