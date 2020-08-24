@@ -213,7 +213,7 @@ class fullybrowserControll extends utils.Adapter {
 
     }
 
-    async create_state() {
+   async create_state() {
         this.log.debug(`create state`);
 
         let devices = this.config.devices;
@@ -226,11 +226,9 @@ class fullybrowserControll extends utils.Adapter {
                     await this.cre_command(devices[k].ip);
                 }
             }
-
             this.setState('info.connection', true, true);
         } catch (err) {
-            this.setState('info.connection', false, true);
-            this.log.debug(`create state problem`);
+            this.log.warn(`create state problem`);
         }
     }
 
