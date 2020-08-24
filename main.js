@@ -289,7 +289,7 @@ class fullybrowserControll extends utils.Adapter {
                 this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
             }
         } catch (err) {
-             this.log.error('Generate State problem');
+             this.log.warn('Generate State problem ' + id + '     ' + JSON.stringify(err));
         }       
     }
 
@@ -357,19 +357,24 @@ class fullybrowserControll extends utils.Adapter {
 
     async getInfos() {
         this.log.debug(`get Information`);
-
-        if (requestTimeout) clearTimeout(requestTimeout);
-
-        let devices = this.config.devices;
-
-        for (const k in devices) {
-            if (devices[k].active) {
-                await this.updateDevice(devices[k].ip, devices[k].port, devices[k].psw);
-            }
+        
+        try {
+          if (requestTimeout) clearTimeout(requestTimeout);
+  
+          let devices = this.config.devices;
+  
+          for (const k in devices) {
+              if (devices[k].active) {
+                  await this.updateDevice(devices[k].ip, devices[k].port, devices[k].psw);
+              }
+          }
+          requestTimeout = setTimeout(async () => {
+              this.getInfos();
+          }, interval);
+        } catch (err) {
+          this.log.debug('getInfos ' + id + '     ' + JSON.stringify(err));
+          this.log.warn('getInfos ' + id + 'connection Problem');
         }
-        requestTimeout = setTimeout(async () => {
-            this.getInfos();
-        }, interval);
     }
 
 }
