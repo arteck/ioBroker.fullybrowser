@@ -1,46 +1,45 @@
 {
-    "name": "iobroker.fullybrowser",
-    "version": "1.0.4",
-    "description": "Manage yours Fully Browser",
-    "main": "main.js",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/arteck/ioBroker.fullybrowser.git"
-    },
-    "keywords": [
-        "fullyBrowser",
-        "Fully Browser",
-        "iobroker"
-    ],
-    "author": {
-        "name": "Arthur Rupp",
-        "email": "arteck@outlook.com"
-    },
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/arteck/ioBroker.fullybrowser/issues"
-    },
-    "homepage": "https://github.com/arteck/ioBroker.fullybrowser#readme",
-    "engines": {
-        "node": ">=8"
-    },
-    "readmeFilename": "README.md",
-    "dependencies": {
-        "queue": "*",
-        "loglevel": "^1.5.1",
-        "request": "^2.85.0",
-        "@iobroker/adapter-core": "^1.0.3"
-    },
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "mocha": "^4.1.0",
-        "chai": "^4.1.2",
-        "@iobroker/testing": "^1.1.10"
-    },
-    "scripts": {
-        "test": "npm run test:package && npm run test:unit",
-        "test:package": "mocha test/package --exit",
-        "test:unit": "mocha test/unit --exit",
-        "test:integration": "mocha test/integration --exit"
-    }
+  "name": "iobroker.fullybrowser",
+  "version": "2.0.0",
+  "description": "Manage yours Fully Browser",
+  "main": "main.js", 
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arteck/ioBroker.fullybrowser.git"
+  },
+  "keywords": [
+    "fullyBrowser",
+    "Fully Browser",
+    "iobroker"
+  ], 
+  "author": {
+    "name": "Arthur Rupp",
+    "email": "arteck@outlook.com"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arteck/ioBroker.fullybrowser/issues"
+  },
+  "homepage": "https://github.com/arteck/ioBroker.fullybrowser#readme",
+  "engines": {
+    "node": ">=8"
+  },
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "@iobroker/adapter-core": "^2.4.0",
+    "loglevel": "^1.5.1"   
+  },
+  "devDependencies": {
+    "axios": "^0.20.0-0",
+    "gulp": "^3.9.1",
+    "mocha": "^4.1.0",
+    "chai": "^4.1.2",
+    "@iobroker/testing": "^1.1.10"
+  },
+  "scripts": {
+    "test": "npm run test:package && npm run test:unit",
+    "test:package": "mocha test/package --exit",
+    "test:unit": "mocha test/unit --exit",
+    "test:integration": "mocha test/integration --exit"
+  }
 }
