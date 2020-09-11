@@ -12,7 +12,8 @@
                 "en": "setAudiovolume",
                 "de": "setAudiovolume",
                 "ru": "setAudiovolume"
-            },
+            }
+        },
             "title": "fullyBrowser",
             "titleLang": {
                 "en": "fullyBrowser",
