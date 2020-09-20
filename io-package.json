@@ -99,7 +99,8 @@
         "singletonHost":            true
     },
     "native": {
-        "interval": 60
+        "interval": 60,
+	"Timeout": 10
     },
     "objects": []
 }
