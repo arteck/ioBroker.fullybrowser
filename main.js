@@ -356,11 +356,6 @@ class fullybrowserControll extends utils.Adapter {
         this.log.debug(`get Information`);
         
         try {
-          if (requestTimeout) {
-            clearTimeout(requestTimeout);
-            requestTimeout = null;
-		  };
-  
           let devices = this.config.devices;
   
           for (const k in devices) {
