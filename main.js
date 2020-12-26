@@ -356,7 +356,10 @@ class fullybrowserControll extends utils.Adapter {
         this.log.debug(`get Information`);
         
         try {
-          if (requestTimeout) clearTimeout(requestTimeout);
+          if (requestTimeout) {
+            clearTimeout(requestTimeout);
+            requestTimeout = null;
+		  };
   
           let devices = this.config.devices;
   
@@ -365,6 +368,7 @@ class fullybrowserControll extends utils.Adapter {
                   await this.updateDevice(devices[k].ip, devices[k].port, devices[k].psw);
               }
           }
+            
           requestTimeout = setTimeout(async () => {
               this.getInfos();
           }, interval);
