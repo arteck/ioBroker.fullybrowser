@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.1",
+    "version": "2.0.2",
      "news": {
-        "2.0.1": {
+        "2.0.2": {
 	"en": "refactoring",
 	"de": "refactoring",
 	"ru": "refactoring"
