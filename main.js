@@ -17,6 +17,7 @@ const infoStr = 'Info';
 
 let interval = 0;
 let requestTimeout = null;
+let devices = [];
 
 class fullybrowserControll extends utils.Adapter {
 
@@ -340,6 +341,8 @@ class fullybrowserControll extends utils.Adapter {
             if (this.config.devices === undefined) {
                 this.log.debug(`initialization undefined`);
                 callback();
+            } else {
+              devices = this.config.devices;
             }
 
             interval = parseInt(this.config.interval * 1000, 10);
@@ -356,20 +359,17 @@ class fullybrowserControll extends utils.Adapter {
         this.log.debug(`get Information`);
         
         try {
-          let devices = this.config.devices;
-  
           for (const k in devices) {
               if (devices[k].active) {
                   await this.updateDevice(devices[k].ip, devices[k].port, devices[k].psw);
               }
           }
-            
-          requestTimeout = setTimeout(async () => {
-              this.getInfos();
+          
+          requestTimeout = setTimeout(() => {          
+               this.getInfos();
           }, interval);
         } catch (err) {
           this.log.debug('getInfos ' + id + '     ' + JSON.stringify(err));
-          this.log.warn('getInfos ' + id + 'connection Problem');
         }
     }
 
