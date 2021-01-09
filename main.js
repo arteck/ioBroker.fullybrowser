@@ -44,7 +44,7 @@ class fullybrowserControll extends utils.Adapter {
 
         await this.initialization();
         await this.create_state();
-        await this.getInfos();
+        this.getInfos();
     }
 
     /**
