@@ -3,6 +3,11 @@
     "name": "fullybrowser",
     "version": "2.0.4",
      "news": {
+	"2.0.4": {
+	"en": "jc-controller upd",
+	"de": "jc-controller upd",
+	"ru": "jc-controller upd"
+      },
         "2.0.2": {
 	"en": "refactoring",
 	"de": "refactoring",
