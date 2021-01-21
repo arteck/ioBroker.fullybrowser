@@ -205,8 +205,10 @@ class fullybrowserControll extends utils.Adapter {
                         this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
                     }
                 }
-            }
-            this.setState(`${id}.isFullyAlive`, true, true);
+                this.setState(`${id}.isFullyAlive`, true, true);
+            } else {
+                this.setState(`${id}.isFullyAlive`, false, true);
+            }            
         } catch (err) {
             this.setState(`${id}.isFullyAlive`, false, true);
         }
