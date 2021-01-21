@@ -101,7 +101,14 @@
         "materialize":              true,
         "extIcon":                  "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
         "type":                     "utility",
-        "singletonHost":            true
+        "singletonHost":            true,
+	"connectionType": "local",
+        "dataSource": "push",
+	"dependencies": [
+	      {
+		"js-controller": ">=3.0.0"
+	      }
+	    ]
     },
     "native": {
         "interval": 60,
