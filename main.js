@@ -199,9 +199,11 @@ class fullybrowserControll extends utils.Adapter {
         // cre Info
         try {
             let fullyInfoObject = await axios.get(statusURL);
-            for (let lpEntry in fullyInfoObject.data) {
-                if (fullyInfoObject.data[lpEntry] !== undefined && fullyInfoObject.data[lpEntry] !== null) {
-                    this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+            if (fullyInfoObject.status !== '200') {
+                for (let lpEntry in fullyInfoObject.data) {
+                    if (fullyInfoObject.data[lpEntry] !== undefined && fullyInfoObject.data[lpEntry] !== null) {
+                        this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+                    }
                 }
             }
             this.setState(`${id}.isFullyAlive`, true, true);
