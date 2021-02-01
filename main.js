@@ -208,8 +208,9 @@ class fullybrowserControll extends utils.Adapter {
                 this.setState(`${id}.isFullyAlive`, true, true);
             } else {
                 this.setState(`${id}.isFullyAlive`, false, true);
-            }            
+            }
         } catch (err) {
+            this.log.error('updateDeviceERROR ' + ip);
             this.setState(`${id}.isFullyAlive`, false, true);
         }
 
@@ -373,7 +374,7 @@ class fullybrowserControll extends utils.Adapter {
                this.getInfos();
           }, interval);
         } catch (err) {
-          this.log.debug('getInfos ' + id + '     ' + JSON.stringify(err));
+          this.log.error('getInfosError ' + id + '     ' + JSON.stringify(err));
         }
     }
 
