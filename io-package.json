@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.4",
+    "version": "2.0.5",
      "news": {
+	"2.0.5": {
+	"en": "add error",
+	"de": "add error",
+	"ru": "add error"
+      },
 	"2.0.4": {
 	"en": "jc-controller upd",
 	"de": "jc-controller upd",
