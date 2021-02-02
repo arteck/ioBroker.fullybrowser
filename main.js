@@ -374,7 +374,7 @@ class fullybrowserControll extends utils.Adapter {
                this.getInfos();
           }, interval);
         } catch (err) {
-          this.log.error('getInfosError ' + id + '     ' + JSON.stringify(err));
+          this.log.error('getInfosError '  + JSON.stringify(err));
         }
     }
 
