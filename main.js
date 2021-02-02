@@ -210,7 +210,7 @@ class fullybrowserControll extends utils.Adapter {
                 this.setState(`${id}.isFullyAlive`, false, true);
             }
         } catch (err) {
-            this.log.error('updateDeviceERROR ' + ip);
+            this.log.warn('updateDeviceERROR ' + ip);
             this.setState(`${id}.isFullyAlive`, false, true);
         }
 
