@@ -19,6 +19,8 @@ let interval = 0;
 let requestTimeout = null;
 let devices = [];
 
+axios.defaults.timeout = 5000;   // timeout 5 sec
+
 class fullybrowserControll extends utils.Adapter {
 
     /**
