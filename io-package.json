@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.5",
+    "version": "2.0.6",
      "news": {
+     "2.0.6": {
+	"en": "add timeout",
+	"de": "add timeout",
+	"ru": "add timeout"
+      },
 	"2.0.5": {
 	"en": "add error",
 	"de": "add error",

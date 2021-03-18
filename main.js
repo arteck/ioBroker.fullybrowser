@@ -16,10 +16,11 @@ const commandsStr = 'Commands';
 const infoStr = 'Info';
 
 let interval = 0;
+let timeoutAx = 5000;
 let requestTimeout = null;
 let devices = [];
 
-axios.defaults.timeout = 5000;   // timeout 5 sec
+
 
 class fullybrowserControll extends utils.Adapter {
 
@@ -357,6 +358,14 @@ class fullybrowserControll extends utils.Adapter {
                 interval = 5000;
             }
 
+            timeoutAx = parseInt(this.config.Timeout, 10);
+
+            if (isNaN(timeoutAx)) {
+                axios.defaults.timeout = 5000;   // timeout 5 sec
+            } else {
+                axios.defaults.timeout = timeoutAx;
+            }
+            
         } catch (error) {
             this.log.error('No one IP configured');
         }
