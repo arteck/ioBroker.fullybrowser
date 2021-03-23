@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.6",
+    "version": "2.0.7",
      "news": {
+     "2.0.7": {
+	"en": "jc-controller upd",
+	"de": "jc-controller upd",
+	"ru": "jc-controller upd"
+      },
      "2.0.6": {
 	"en": "add timeout",
 	"de": "add timeout",
