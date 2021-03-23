@@ -245,7 +245,7 @@ class fullybrowserControll extends utils.Adapter {
         var id = ip.replace(/[.\s]+/g, '_');
         var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
 
-        this.extendObjectAsync(`${id}.lastInfoUpdate`, {
+        await this.extendObjectAsync(`${id}.lastInfoUpdate`, {
             type: 'state',
             common: {
                 name: 'Date/Time of last information update from Fully Browser',
@@ -258,7 +258,7 @@ class fullybrowserControll extends utils.Adapter {
                 ip: `${ip}`
             },
         });
-        this.extendObjectAsync(`${id}.isFullyAlive`, {
+        await this.extendObjectAsync(`${id}.isFullyAlive`, {
             type: 'state',
             common: {
                 name: 'Is Fully Browser Alive?',
@@ -280,7 +280,7 @@ class fullybrowserControll extends utils.Adapter {
             for (let lpEntry in fullyInfoObject.data) {
                 let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
 
-                this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
+                await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
                     type: 'state',
                     common: {
                         name: lpEntry,
