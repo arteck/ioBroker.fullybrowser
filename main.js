@@ -205,19 +205,19 @@ class fullybrowserControll extends utils.Adapter {
             if (fullyInfoObject.status !== '200') {
                 for (let lpEntry in fullyInfoObject.data) {
                     if (fullyInfoObject.data[lpEntry] !== undefined && fullyInfoObject.data[lpEntry] !== null) {
-                        this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+                        await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
                     }
                 }
-                this.setState(`${id}.isFullyAlive`, true, true);
+                await this.setState(`${id}.isFullyAlive`, true, true);
             } else {
-                this.setState(`${id}.isFullyAlive`, false, true);
+                await this.setState(`${id}.isFullyAlive`, false, true);
             }
         } catch (err) {
             this.log.warn('updateDeviceERROR ' + ip);
-            this.setState(`${id}.isFullyAlive`, false, true);
+            await this.setState(`${id}.isFullyAlive`, false, true);
         }
 
-        this.setState(`${id}.lastInfoUpdate`, Date.now(), true);
+        await this.setState(`${id}.lastInfoUpdate`, Date.now(), true);
 
     }
 
@@ -292,7 +292,7 @@ class fullybrowserControll extends utils.Adapter {
                     native: {},
                 });
             
-                this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+                await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
             }
         } catch (err) {
              this.log.warn('Generate State problem ' + id + '     ' + JSON.stringify(err));
