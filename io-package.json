@@ -127,7 +127,7 @@
     },
     "native": {
         "interval": 60,
-	"Timeout": 10
+	"Timeout": 2000
     },
     "instanceObjects": [
         {
