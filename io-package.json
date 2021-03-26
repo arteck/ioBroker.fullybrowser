@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.7",
+    "version": "2.0.8",
      "news": {
+     "2.0.8": {
+	"en": "def settings for timeout",
+	"de": "def settings for timeout",
+	"ru": "def settings for timeout"
+      },	     
      "2.0.7": {
 	"en": "jc-controller upd",
 	"de": "jc-controller upd",
