@@ -363,6 +363,13 @@ class fullybrowserControll extends utils.Adapter {
             if (isNaN(timeoutAx)) {
                 axios.defaults.timeout = 5000;   // timeout 5 sec
             } else {
+                if (timeoutAx < 1000) {
+                    timeoutAx = 2000;   
+                }
+                if (timeoutAx > 10000) {
+                    timeoutAx = 5000;   
+                }
+                
                 axios.defaults.timeout = timeoutAx;
             }
             
