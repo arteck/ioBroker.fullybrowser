@@ -217,7 +217,7 @@ class fullybrowserControll extends utils.Adapter {
             await this.setState(`${id}.isFullyAlive`, false, true);
         }
 
-        await this.setState(`${id}.lastInfoUpdate`, Date.now(), true);
+        await this.setState(`${id}.lastInfoUpdate`, Date.now().toString(), true);
 
     }
 
