@@ -249,7 +249,7 @@ class fullybrowserControll extends utils.Adapter {
             type: 'state',
             common: {
                 name: 'Date/Time of last information update from Fully Browser',
-                type: 'number',
+                type: 'string',
                 role: 'value.time',
                 read: true,
                 write: false
