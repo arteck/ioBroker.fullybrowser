@@ -217,7 +217,7 @@ class fullybrowserControll extends utils.Adapter {
             await this.setState(`${id}.isFullyAlive`, false, true);
         }
 
-        await this.setState(`${id}.lastInfoUpdate`, Date.now().toString(), true);
+        await this.setState(`${id}.lastInfoUpdate`, Number(Date.now()), true);
 
     }
 
@@ -249,7 +249,7 @@ class fullybrowserControll extends utils.Adapter {
             type: 'state',
             common: {
                 name: 'Date/Time of last information update from Fully Browser',
-                type: 'string',
+                type: 'number',
                 role: 'value.time',
                 read: true,
                 write: false
