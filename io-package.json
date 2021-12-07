@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.9",
+    "version": "2.0.10",
      "news": {
+      "2.0.10": {
+	"en": "psw patch",
+	"de": "psw patch",
+	"ru": "psw patch"
+      },	    
       "2.0.9": {
 	"en": "js-controller",
 	"de": "js-controller",
