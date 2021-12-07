@@ -184,7 +184,7 @@ class fullybrowserControll extends utils.Adapter {
             if (this.config.devices[i].ip.length > 5) {
                 if (this.config.devices[i].active) {
                     if (this.config.devices[i].ip === ip) {
-                        hostSet.push(this.config.devices[i].ip, this.config.devices[i].port, this.config.devices[i].psw);
+                        hostSet.push(this.config.devices[i].ip, this.config.devices[i].port, encodeURIComponent(this.config.devices[i].psw));
                         break;
                     }
                 }
@@ -384,7 +384,7 @@ class fullybrowserControll extends utils.Adapter {
         try {
           for (const k in devices) {
               if (devices[k].active) {
-                  await this.updateDevice(devices[k].ip, devices[k].port, devices[k].psw);
+                  await this.updateDevice(devices[k].ip, devices[k].port, encodeURIComponent(devices[k].psw));
               }
           }
           
