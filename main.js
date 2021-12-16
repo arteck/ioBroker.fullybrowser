@@ -292,6 +292,8 @@ class fullybrowserControll extends utils.Adapter {
                     native: {},
                 });
             
+                this.log.debug('ObjectInfo: ' + lpEntry + ' ' + lpType);
+                
                 await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
             }
         } catch (err) {
