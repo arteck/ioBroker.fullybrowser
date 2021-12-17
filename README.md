@@ -34,7 +34,8 @@ A small excerpt just of the command options:
 
 
 ## Changelog
-
+### 2.0.11 (2021-12-17)
+* (arteck)   Problem with data object for Sony Tabs
 
 ### 2.0.10 (2021-12-07)
 * (xXBJXx)  Problem with special characters in psw
