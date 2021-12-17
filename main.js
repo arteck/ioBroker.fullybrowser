@@ -282,6 +282,7 @@ class fullybrowserControll extends utils.Adapter {
 
                 if (lpType == 'object') {
                     lpType = 'string';
+                    lpEntry = JSON.stringify(lpEntry);
                 }
                 
                 await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
