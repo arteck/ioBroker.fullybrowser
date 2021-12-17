@@ -201,11 +201,17 @@ class fullybrowserControll extends utils.Adapter {
 
         // cre Info
         try {
-            let fullyInfoObject = await axios.get(statusURL);
+            let fullyInfoObject = await axios.get(statusURL);    
+            
             if (fullyInfoObject.status !== '200') {
                 for (let lpEntry in fullyInfoObject.data) {
-                    if (fullyInfoObject.data[lpEntry] !== undefined && fullyInfoObject.data[lpEntry] !== null) {
-                        await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+                    if (fullyInfoObject.data[lpEntry] != undefined && fullyInfoObject.data[lpEntry] != null) {
+                        let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
+                        if (lpType == 'object') {
+                           await this.setState(`${id}.${infoStr}.${lpEntry}`, JSON.stringify(dpArray[0]), true);
+                        } else {
+                           await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+                        } 
                     }
                 }
                 await this.setState(`${id}.isFullyAlive`, true, true);
@@ -278,13 +284,8 @@ class fullybrowserControll extends utils.Adapter {
             let fullyInfoObject = await axios.get(statusURL);
 
             for (let lpEntry in fullyInfoObject.data) {
-                let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean 
-                let dpArray = fullyInfoObject.data[lpEntry];
-                
-                if (lpType == 'object') {
-                    lpType = 'string';                    
-                } 
-                
+                let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean   
+    
                 await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
                     type: 'state',
                     common: {
@@ -295,13 +296,7 @@ class fullybrowserControll extends utils.Adapter {
                         role: 'value',
                     },
                     native: {},
-                });
-                
-                if (lpType == 'object') {                       
-                    await this.setState(`${id}.${infoStr}.${lpEntry}`, dpArray.values[0], true);
-                } else {                               
-                    await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
-                }
+                });                              
             }
         } catch (err) {
              this.log.warn('Generate State problem ' + id + '     ' + JSON.stringify(err));
