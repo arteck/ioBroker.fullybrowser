@@ -280,9 +280,9 @@ class fullybrowserControll extends utils.Adapter {
             for (let lpEntry in fullyInfoObject.data) {
                 let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean 
                 
-      //          if (lpType == 'object') {
-      //              lpType = 'string';                    
-      //          } 
+                if (lpType == 'object') {
+                    lpType = 'string';                    
+                } 
                 
                 await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
                     type: 'state',
@@ -297,7 +297,7 @@ class fullybrowserControll extends utils.Adapter {
                 });
                 
                 if (lpType == 'object') {                       
-                    await this.setState(`${id}.${infoStr}.${lpEntry}`, Object(fullyInfoObject.data[lpEntry]), true);
+                    await this.setState(`${id}.${infoStr}.${lpEntry}`, JSON.stringify(fullyInfoObject.data[lpEntry]), true);
                 } else {                               
                     await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
                 }
