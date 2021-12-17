@@ -280,6 +280,10 @@ class fullybrowserControll extends utils.Adapter {
             for (let lpEntry in fullyInfoObject.data) {
                 let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
 
+                if (lpType == 'object') {
+                    lpType = 'string';
+                }
+                
                 await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
                     type: 'state',
                     common: {
@@ -291,8 +295,6 @@ class fullybrowserControll extends utils.Adapter {
                     },
                     native: {},
                 });
-            
-                this.log.debug('ObjectInfo: ' + lpEntry + ' ' + lpType);
                 
                 await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
             }
@@ -399,6 +401,7 @@ class fullybrowserControll extends utils.Adapter {
     }
 
 }
+
 // @ts-ignore parent is a valid property on module
 if (module.parent) {
     // Export the constructor in compact mode
