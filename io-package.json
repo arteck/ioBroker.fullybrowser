@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.10",
+    "version": "2.0.11",
      "news": {
+     "2.0.11": {
+	"en": "data object corr",
+	"de": "data object corr",
+	"ru": "data object corr"
+      },	 
       "2.0.10": {
 	"en": "psw patch",
 	"de": "psw patch",
