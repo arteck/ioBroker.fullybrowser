@@ -297,7 +297,7 @@ class fullybrowserControll extends utils.Adapter {
                 });
                 
                 if (lpType == 'object') {                       
-                    await this.setState(`${id}.${infoStr}.${lpEntry}`, JSON.parse(fullyInfoObject.data[lpEntry]), true);
+                    await this.setState(`${id}.${infoStr}.${lpEntry}`, Object(fullyInfoObject.data[lpEntry]), true);
                 } else {                               
                     await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
                 }
