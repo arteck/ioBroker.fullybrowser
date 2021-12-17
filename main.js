@@ -279,11 +279,14 @@ class fullybrowserControll extends utils.Adapter {
 
             for (let lpEntry in fullyInfoObject.data) {
                 let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
-
+                
+                let lpEntry_tmp;
+                
                 if (lpType == 'object') {
-                    lpType = 'string';
-                    let lpEntry_tmp = JSON.stringify(lpEntry);
-                    lpEntry = lpEntry_tmp;
+                    lpType = 'string';    
+                    lpEntry_tmp =  JSON.stringify(lpEntry);                    
+                } else {
+                    lpEntry_tmp = lpEntry;
                 }
                 
                 await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
@@ -297,8 +300,8 @@ class fullybrowserControll extends utils.Adapter {
                     },
                     native: {},
                 });
-                
-                await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+                                       
+                await this.setState(`${id}.${infoStr}.${lpEntry}`, lpEntry_tmp, true);
             }
         } catch (err) {
              this.log.warn('Generate State problem ' + id + '     ' + JSON.stringify(err));
