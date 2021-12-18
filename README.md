@@ -34,6 +34,9 @@ A small excerpt just of the command options:
 
 
 ## Changelog
+### 2.0.12 (2021-12-18)
+* (arteck) screenBrightness direct command
+
 ### 2.0.11 (2021-12-17)
 * (arteck)   Problem with data object for Sony Tabs
 
