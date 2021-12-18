@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.11",
+    "version": "2.0.12",
      "news": {
+     "2.0.12": {
+	"en": "data object screenBrightness",
+	"de": "data object screenBrightness",
+	"ru": "data object screenBrightness"
+      },	
      "2.0.11": {
 	"en": "data object corr",
 	"de": "data object corr",
