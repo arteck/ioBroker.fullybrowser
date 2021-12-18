@@ -113,6 +113,10 @@ class fullybrowserControll extends utils.Adapter {
             if (state && !state.ack) {
 
                 switch (command) {
+                    case 'screenBrightness':
+                        var strBrightness = state.val;
+                        await this.fullySendCommand(ip, 'setStringSetting&key=screenBrightness&value=' + strBrightness);
+                        break;
                     case 'setStringSetting':
                         var txtKey = state.val;
                         if (txtKey.length > 1) {
@@ -169,7 +173,7 @@ class fullybrowserControll extends utils.Adapter {
         let statusURL = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
 
         this.log.debug('Send ' + statusURL);
-        
+
         try {
             await axios.get(statusURL);
         } catch (err) {
@@ -201,17 +205,17 @@ class fullybrowserControll extends utils.Adapter {
 
         // cre Info
         try {
-            let fullyInfoObject = await axios.get(statusURL);    
-            
+            let fullyInfoObject = await axios.get(statusURL);
+
             if (fullyInfoObject.status !== '200') {
                 for (let lpEntry in fullyInfoObject.data) {
                     if (fullyInfoObject.data[lpEntry] != undefined && fullyInfoObject.data[lpEntry] != null) {
                         let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
                         if (lpType == 'object') {
-                           await this.setState(`${id}.${infoStr}.${lpEntry}`, JSON.stringify(dpArray[0]), true);
+                            await this.setState(`${id}.${infoStr}.${lpEntry}`, JSON.stringify(dpArray[0]), true);
                         } else {
-                           await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
-                        } 
+                            await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
+                        }
                     }
                 }
                 await this.setState(`${id}.isFullyAlive`, true, true);
@@ -227,7 +231,7 @@ class fullybrowserControll extends utils.Adapter {
 
     }
 
-   async create_state() {
+    async create_state() {
         this.log.debug(`create state`);
 
         let devices = this.config.devices;
@@ -284,8 +288,8 @@ class fullybrowserControll extends utils.Adapter {
             let fullyInfoObject = await axios.get(statusURL);
 
             for (let lpEntry in fullyInfoObject.data) {
-                let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean   
-    
+                let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
+
                 await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
                     type: 'state',
                     common: {
@@ -296,11 +300,11 @@ class fullybrowserControll extends utils.Adapter {
                         role: 'value',
                     },
                     native: {},
-                });                              
+                });
             }
         } catch (err) {
-             this.log.warn('Generate State problem ' + id + '     ' + JSON.stringify(err));
-        }       
+            this.log.warn('Generate State problem ' + id + '     ' + JSON.stringify(err));
+        }
     }
 
     async cre_command(ip) {
@@ -310,6 +314,8 @@ class fullybrowserControll extends utils.Adapter {
         ];
 
         const commArText = ['startApplication', 'loadURL', 'setAudioVolume', 'textToSpeech', 'setStringSetting'];
+
+        const commArNumber = ['screenBrightness'];
 
         var id = ip.replace(/[.\s]+/g, '_');
 
@@ -326,7 +332,6 @@ class fullybrowserControll extends utils.Adapter {
                 },
                 native: {},
             });
-
             this.subscribeStates(`${id}.${commandsStr}.${commArButton[i]}`);
         }
 
@@ -343,8 +348,23 @@ class fullybrowserControll extends utils.Adapter {
                 },
                 native: {},
             });
-
             this.subscribeStates(`${id}.${commandsStr}.${commArText[i]}`);
+        }
+        for (const i in commArNumber) {
+            await this.extendObjectAsync(`${id}.${commandsStr}.${commArNumber[i]}`, {
+                type: 'state',
+                common: {
+                    name: `${commArNumber[i]}`,
+                    type: 'number',
+                    role: 'value',
+                    def: '100',
+                    read: true,
+                    write: true
+                },
+                native: {},
+            });
+
+            this.subscribeStates(`${id}.${commandsStr}.${commArNumber[i]}`);
         }
     }
 
@@ -354,7 +374,7 @@ class fullybrowserControll extends utils.Adapter {
                 this.log.debug(`initialization undefined`);
                 callback();
             } else {
-              devices = this.config.devices;
+                devices = this.config.devices;
             }
 
             interval = parseInt(this.config.interval * 1000, 10);
@@ -368,15 +388,15 @@ class fullybrowserControll extends utils.Adapter {
                 axios.defaults.timeout = 5000;   // timeout 5 sec
             } else {
                 if (timeoutAx < 1000) {
-                    timeoutAx = 2000;   
+                    timeoutAx = 2000;
                 }
                 if (timeoutAx > 10000) {
-                    timeoutAx = 5000;   
+                    timeoutAx = 5000;
                 }
-                
+
                 axios.defaults.timeout = timeoutAx;
             }
-            
+
         } catch (error) {
             this.log.error('No one IP configured');
         }
@@ -384,19 +404,19 @@ class fullybrowserControll extends utils.Adapter {
 
     async getInfos() {
         this.log.debug(`get Information`);
-        
+
         try {
-          for (const k in devices) {
-              if (devices[k].active) {
-                  await this.updateDevice(devices[k].ip, devices[k].port, encodeURIComponent(devices[k].psw));
-              }
-          }
-          
-          requestTimeout = setTimeout(() => {          
-               this.getInfos();
-          }, interval);
+            for (const k in devices) {
+                if (devices[k].active) {
+                    await this.updateDevice(devices[k].ip, devices[k].port, encodeURIComponent(devices[k].psw));
+                }
+            }
+
+            requestTimeout = setTimeout(() => {
+                this.getInfos();
+            }, interval);
         } catch (err) {
-          this.log.error('getInfosError '  + JSON.stringify(err));
+            this.log.error('getInfosError '  + JSON.stringify(err));
         }
     }
 
