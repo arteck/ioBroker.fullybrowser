@@ -212,7 +212,7 @@ class fullybrowserControll extends utils.Adapter {
                     if (fullyInfoObject.data[lpEntry] != undefined && fullyInfoObject.data[lpEntry] != null) {
                         let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
                         if (lpType == 'object') {
-                            await this.setState(`${id}.${infoStr}.${lpEntry}`, JSON.stringify(dpArray[0]), true);
+                            await this.setState(`${id}.${infoStr}.${lpEntry}`, JSON.stringify(fullyInfoObject.data[lpEntry]), true);
                         } else {
                             await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
                         }
