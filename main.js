@@ -198,7 +198,7 @@ class fullybrowserControll extends utils.Adapter {
         return hostSet;
     }
 
-    async updateDevice(id, port, psw) {       
+    async updateDevice(id, ip, port, psw) {       
         var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
 
         // cre Info
@@ -407,7 +407,7 @@ class fullybrowserControll extends utils.Adapter {
             for (const k in devices) {
                 var id = devices[k].ip.replace(/[.\s]+/g, '_');
                 if (devices[k].active) {                    
-                    await this.updateDevice(id, devices[k].port, encodeURIComponent(devices[k].psw));
+                    await this.updateDevice(id, devices[k].ip, devices[k].port, encodeURIComponent(devices[k].psw));
                 } else {
                     await this.setState(`${id}.isFullyAlive`, false, true);
                 }

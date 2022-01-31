@@ -1,22 +1,27 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.12",
+    "version": "2.0.14",
      "news": {
+     "2.0.14": {
+      	"en": "dept update",
+      	"de": "dept update",
+      	"ru": "data object corr"
+      },	 
      "2.0.12": {
-	"en": "data object screenBrightness",
-	"de": "data object screenBrightness",
-	"ru": "data object screenBrightness"
+      	"en": "data object screenBrightness",
+      	"de": "data object screenBrightness",
+      	"ru": "data object screenBrightness"
       },	
      "2.0.11": {
-	"en": "data object corr",
-	"de": "data object corr",
-	"ru": "data object corr"
+      	"en": "data object corr",
+      	"de": "data object corr",
+      	"ru": "data object corr"
       },	 
       "2.0.10": {
-	"en": "psw patch",
-	"de": "psw patch",
-	"ru": "psw patch"
+      	"en": "psw patch",
+      	"de": "psw patch",
+      	"ru": "psw patch"
       },	    
       "2.0.9": {
 	"en": "js-controller",
