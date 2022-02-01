@@ -34,8 +34,7 @@
     "@alcalzone/release-script": "^2.2.1",
     "@iobroker/testing": "^2.4.2",
     "chai": "^4.3.4",
-    "gulp": "^4.0.2",
-    "mocha": "^8.3.2"
+    "gulp": "^4.0.2"
   },
   "scripts": {
     "test": "npm run test:package && npm run test:unit",
