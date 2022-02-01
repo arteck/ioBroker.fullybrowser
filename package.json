@@ -10,6 +10,7 @@
   "keywords": [
     "fullyBrowser",
     "Fully Browser",
+    "Android",
     "iobroker"
   ],
   "author": {
@@ -22,18 +23,18 @@
   },
   "homepage": "https://github.com/arteck/ioBroker.fullybrowser#readme",
   "engines": {
-    "node": ">=8"
+    "node": ">=12"
   },
   "readmeFilename": "README.md",
   "dependencies": {
     "@iobroker/adapter-core": "^2.4.0",
     "loglevel": "^1.5.1",
-    "axios": "^0.23.0"
+    "axios": "^0.25.0"
   },
   "devDependencies": {
-    "@alcalzone/release-script": "~3.4.2",
+    "@alcalzone/release-script": "3.5.0",
     "@iobroker/testing": "^2.5.1",
-    "chai": "^4.3.4",
+    "chai": "^4.3.5",
     "chai-as-promised": "^7.1.1",
     "gulp": "^4.0.2",
     "gulp-jsdoc3": "^3.0.0",
