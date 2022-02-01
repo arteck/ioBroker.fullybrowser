@@ -41,12 +41,18 @@
     "gulp-replace": "^1.1.3",
     "mocha": "^9.1.3"
   },
+  "main": "main.js",
   "scripts": {
-    "test": "npm run test:package && npm run test:unit",
+    "test:js": "mocha \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
     "test:package": "mocha test/package --exit",
     "test:unit": "mocha test/unit --exit",
     "test:integration": "mocha test/integration --exit",
-    "lint:js": "eslint",
+    "test": "npm run test:js && npm run test:package",
+    "lint": "eslint",
     "release": "release-script"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/arteck/ioBroker.fullybrowser/issues"
+  },
+  "readmeFilename": "README.md"
 }
