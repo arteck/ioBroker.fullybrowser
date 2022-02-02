@@ -394,6 +394,8 @@ class fullybrowserControll extends utils.Adapter {
 
                 axios.defaults.timeout = timeoutAx;
             }
+            
+            this.log.info('timeout is '  + timeoutAx);
 
         } catch (error) {
             this.log.error('No one IP configured');
