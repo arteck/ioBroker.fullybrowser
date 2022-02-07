@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.0.14",
+    "version": "2.1.1",
      "news": {
+      "2.1.1": {
+      	"en": "js-controller 4.x",
+      	"de": "js-controller 4.x",
+      	"ru": "js-controller 4.x"
+      },	 
      "2.0.14": {
       	"en": "dept update",
       	"de": "dept update",

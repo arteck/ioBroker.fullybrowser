@@ -34,6 +34,10 @@ A small excerpt just of the command options:
 
 
 ## Changelog
+### 2.1.1 (2022-02-07)
+* (arteck) js-controller 4.x
+*
+
 ### 2.1.0 (2022-02-07)
 * (arteck) js-controller 4
 
