@@ -355,7 +355,7 @@ class fullybrowserControll extends utils.Adapter {
                     name: `${commArNumber[i]}`,
                     type: 'number',
                     role: 'value',
-                    def: '100',
+                    def: 100,
                     read: true,
                     write: true
                 },
