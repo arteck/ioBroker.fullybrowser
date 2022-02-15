@@ -1,7 +1,7 @@
 .git
 .idea
 *.code-workspace
-node_modules
+/node_modules
 nbproject
 
 # npm package files
