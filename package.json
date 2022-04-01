@@ -32,7 +32,7 @@
     "axios": "^0.26.0"
   },
   "devDependencies": {
-    "@alcalzone/release-script": "^3.5.2",
+    "@alcalzone/release-script": "^3.5.6",
     "@iobroker/testing": "^2.5.4",
     "chai": "^4.3.5",
     "chai-as-promised": "^7.1.1",
