@@ -38,7 +38,7 @@
     "chai-as-promised": "^7.1.1",
     "eslint": "^8.12.0",
     "gulp": "^4.0.2",
-    "mocha": "^9.2.1"
+    "mocha": "^9.2.2"
   },
   "scripts": {
     "test:js": "mocha \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
