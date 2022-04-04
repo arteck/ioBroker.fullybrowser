@@ -412,9 +412,7 @@ class fullybrowserControll extends utils.Adapter {
                 var id = devices[k].ip.replace(/[.\s]+/g, '_');
                 if (devices[k].active) {                    
                     await this.updateDevice(id, devices[k].ip, devices[k].port, encodeURIComponent(devices[k].psw));
-                } else {
-                    await this.setState(`${id}.isFullyAlive`, false, true);
-                }
+                } 
             }
 
             requestTimeout = setTimeout(() => {
