@@ -249,6 +249,8 @@ class fullybrowserControll extends utils.Adapter {
     }
 
     async cre_info(ip, port, psw) {
+        this.log.debug(`create info`);
+        
         var vari = '';
         var id = ip.replace(/[.\s]+/g, '_');
         var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
