@@ -17,8 +17,13 @@ A small excerpt just of the command options:
 
 ![möglichkeiten](https://github.com/arteck/iobroker.fullyBrowser/blob/master/doku/auszug1.png)
 
-<b>NodeJs >> 8.x.x </b>
+```
+=================
 
+Password notification : the password must not contain special characters (#ä+'Ä* and also not + -.
+
+=================
+```
 
 <!--
     Placeholder for the next version (at the beginning of the line):
