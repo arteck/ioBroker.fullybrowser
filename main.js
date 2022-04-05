@@ -170,8 +170,10 @@ class fullybrowserControll extends utils.Adapter {
         var port = getHost[1];
         var psw = getHost[2];
 
-        let statusURL = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
+        let encodeUrl = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
 
+        let statusURL = encodeURIComponent(encodeUrl);
+        
         this.log.debug('Send ' + statusURL);
 
         try {
@@ -199,8 +201,10 @@ class fullybrowserControll extends utils.Adapter {
     }
 
     async updateDevice(id, ip, port, psw) {       
-        var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
+        let encodeUrl = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
 
+        let statusURL = encodeURIComponent(encodeUrl);
+        
         // cre Info
         try {
             let fullyInfoObject = await axios.get(statusURL);
@@ -251,10 +255,12 @@ class fullybrowserControll extends utils.Adapter {
     async cre_info(ip, port, psw) {
         this.log.debug(`create info`);
         
-        var vari = '';
-        var id = ip.replace(/[.\s]+/g, '_');
-        var statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
+        let vari = '';
+        let id = ip.replace(/[.\s]+/g, '_');
+        let encodeUrl = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
 
+        let statusURL = encodeURIComponent(encodeUrl);
+        
         await this.extendObjectAsync(`${id}.lastInfoUpdate`, {
             type: 'state',
             common: {
