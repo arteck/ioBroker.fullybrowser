@@ -32,7 +32,7 @@ A small excerpt just of the command options:
 
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.1.2 (2022-04-05)
 * (arteck) encodeUri in psw
 
 ### 2.1.1 (2022-02-07)
@@ -48,7 +48,6 @@ A small excerpt just of the command options:
 ...
 ...
 ...
-
 
 ### 1.0.1 (2019-06-20)
 * (arteck) encodeURL
