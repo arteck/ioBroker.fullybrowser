@@ -170,9 +170,7 @@ class fullybrowserControll extends utils.Adapter {
         var port = getHost[1];
         var psw = getHost[2];
 
-        let encodeUrl = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw;
-
-        let statusURL = encodeURIComponent(encodeUrl);
+        let statusURL = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + encodeURIComponent(psw).replace(/[!'()]/g, escape).replace(/\*/g, "%2A");
         
         this.log.debug('Send ' + statusURL);
 
@@ -190,7 +188,7 @@ class fullybrowserControll extends utils.Adapter {
             if (this.config.devices[i].ip.length > 5) {
                 if (this.config.devices[i].active) {
                     if (this.config.devices[i].ip === ip) {
-                        hostSet.push(this.config.devices[i].ip, this.config.devices[i].port, encodeURIComponent(this.config.devices[i].psw));
+                        hostSet.push(this.config.devices[i].ip, this.config.devices[i].port, encodeURIComponent(this.config.devices[i].psw).replace(/[!'()]/g, escape).replace(/\*/g, "%2A"); 
                         break;
                     }
                 }
@@ -201,9 +199,7 @@ class fullybrowserControll extends utils.Adapter {
     }
 
     async updateDevice(id, ip, port, psw) {       
-        let encodeUrl = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
-
-        let statusURL = encodeURIComponent(encodeUrl);
+        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodeURIComponent(psw).replace(/[!'()]/g, escape).replace(/\*/g, "%2A");   
         
         // cre Info
         try {
@@ -257,10 +253,8 @@ class fullybrowserControll extends utils.Adapter {
         
         let vari = '';
         let id = ip.replace(/[.\s]+/g, '_');
-        let encodeUrl = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + psw;
+        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodeURIComponent(psw).replace(/[!'()]/g, escape).replace(/\*/g, "%2A");   
 
-        let statusURL = encodeURIComponent(encodeUrl);
-        
         await this.extendObjectAsync(`${id}.lastInfoUpdate`, {
             type: 'state',
             common: {
@@ -417,7 +411,7 @@ class fullybrowserControll extends utils.Adapter {
             for (const k in devices) {
                 var id = devices[k].ip.replace(/[.\s]+/g, '_');
                 if (devices[k].active) {                    
-                    await this.updateDevice(id, devices[k].ip, devices[k].port, encodeURIComponent(devices[k].psw));
+                    await this.updateDevice(id, devices[k].ip, devices[k].port,  encodeURIComponent(devices[k].psw)).replace(/[!'()]/g, escape).replace(/\*/g, "%2A");   
                 } 
             }
 
