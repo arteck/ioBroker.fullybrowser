@@ -188,7 +188,7 @@ class fullybrowserControll extends utils.Adapter {
             if (this.config.devices[i].ip.length > 5) {
                 if (this.config.devices[i].active) {
                     if (this.config.devices[i].ip === ip) {
-                        hostSet.push(this.config.devices[i].ip, this.config.devices[i].port, encodeURIComponent(this.config.devices[i].psw).replace(/[!'()]/g, escape().replace(/\*/g, "%2A")));
+                        hostSet.push(this.config.devices[i].ip, this.config.devices[i].port, this.config.devices[i].psw);
                         break;
                     }
                 }
