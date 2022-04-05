@@ -170,7 +170,7 @@ class fullybrowserControll extends utils.Adapter {
         var port = getHost[1];
         var psw = getHost[2];
 
-        let encodeUrl = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw
+        let encodeUrl = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + psw;
 
         let statusURL = encodeURIComponent(encodeUrl);
         
