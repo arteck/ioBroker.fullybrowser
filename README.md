@@ -50,9 +50,12 @@ Password notification : the password must not contain special characters (#Ã¤+'Ã
 
 ### 2.0.14 (2022-01-31)
 * (arteck) life tick error
+
+
 ...
 ...
 ...
+
 
 ### 1.0.1 (2019-06-20)
 * (arteck) encodeURL
