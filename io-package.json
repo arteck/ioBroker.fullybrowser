@@ -3,6 +3,11 @@
     "name": "fullybrowser",
     "version": "2.1.2",
      "news": {
+     "2.1.2": {
+      	"en": "encodeuri for psw",
+      	"de": "encodeuri for psw",
+      	"ru": "encodeuri for psw"
+      },	 
       "2.1.1": {
       	"en": "js-controller 4.x",
       	"de": "js-controller 4.x",
