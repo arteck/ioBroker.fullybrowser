@@ -32,11 +32,11 @@ A small excerpt just of the command options:
 
 
 ## Changelog
-### 2.1.2 (2022-04-04)
+### **WORK IN PROGRESS**
+* (arteck) encodeUri in psw
 
 ### 2.1.1 (2022-02-07)
 * (arteck) js-controller 4.x
-*
 
 ### 2.1.0 (2022-02-07)
 * (arteck) js-controller 4
