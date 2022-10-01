@@ -36,7 +36,7 @@
     "@iobroker/testing": "^3.0.2",
     "chai": "^4.3.5",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^8.18.0",
+    "eslint": "^8.24.0",
     "gulp": "^4.0.2",
     "mocha": "^10.0.0"
   },
