@@ -165,12 +165,13 @@ class fullybrowserControll extends utils.Adapter {
     }
 
     async fullySendCommand(ip, strCommand) {
-        let getHost = await this.getHostForSet(ip);
-        var ip = getHost[0];
-        var port = getHost[1];
-        var psw = getHost[2];
+        const getHost = await this.getHostForSet(ip);
+        const ip = getHost[0];
+        const port = getHost[1];
 
-        let statusURL = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + encodeURIComponent(psw).replace(/[!'()]/g, escape().replace(/\*/g, "%2A"));
+        const encodePSW = fixedEncodeURIComponent(getHost[2]);
+        
+        let statusURL = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + encodePSW;
         
         this.log.debug('Send ' + statusURL);
 
@@ -204,8 +205,9 @@ class fullybrowserControll extends utils.Adapter {
         const tabname = device.tabname;
         const port    = device.port;
         const psw     = device.psw;
+        const encodePSW = fixedEncodeURIComponent(psw);
 
-        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodeURIComponent(psw).replace(/[!'()]/g, escape().replace(/\*/g, "%2A"));
+        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodePSW;
         
         // cre Info
         try {
@@ -258,8 +260,9 @@ class fullybrowserControll extends utils.Adapter {
         this.log.debug(`create info`);
         
         let vari = '';
-        let id = ip.replace(/[.\s]+/g, '_');
-        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodeURIComponent(psw).replace(/[!'()]/g, escape().replace(/\*/g, "%2A"));
+        const id = ip.replace(/[.\s]+/g, '_');
+        const encodePSW = this.fixedEncodeURIComponent(psw);
+        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodePSW;
 
         await this.extendObjectAsync(`${id}`, {
             type: 'device',
@@ -435,6 +438,13 @@ class fullybrowserControll extends utils.Adapter {
         } catch (err) {
             this.log.error('getInfosError '  + JSON.stringify(err));
         }
+    }
+    
+    fixedEncodeURIComponent(str) {
+        return encodeURIComponent(str).replace(
+            /[!'()*]/g,
+            (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`
+        );
     }
 
 }
