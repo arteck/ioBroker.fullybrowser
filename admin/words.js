@@ -58,6 +58,19 @@ systemDictionary = {
         "es": "IP Address",
         "pl": "IP Address"
     },
+    "tabname":   {
+        "en": "Tabled",
+        "de": "Tabled",
+        "ru": "Столовые",
+        "pt": "Quadro",
+        "nl": "Tabled",
+        "fr": "Tabled",
+        "it": "Tabella",
+        "es": "Cuadros",
+        "pl": "Tabled",
+        "uk": "Наклейка",
+        "zh-cn": "表"
+     },
     "port": {
         "en": "Port",
         "de": "Port",
