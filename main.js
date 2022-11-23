@@ -166,12 +166,12 @@ class fullybrowserControll extends utils.Adapter {
 
     async fullySendCommand(ip, strCommand) {
         const getHost = await this.getHostForSet(ip);
-        const ip = getHost[0];
+        const l_ip = getHost[0];
         const port = getHost[1];
 
         const encodePSW = fixedEncodeURIComponent(getHost[2]);
         
-        let statusURL = 'http://' + ip + ':' + port + '/?cmd=' + strCommand + '&password=' + encodePSW;
+        let statusURL = 'http://' + l_ip + ':' + port + '/?cmd=' + strCommand + '&password=' + encodePSW;
         
         this.log.debug('Send ' + statusURL);
 
