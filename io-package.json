@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.1.4",
+    "version": "2.1.5",
      "news": {
-     "2.1.4": {
+     "2.1.5": {
       	"en": "add name of devie to admin",
         "de": "Tabname hinzugefügt",
         "ru": "добавить имя devie в админ"
