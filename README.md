@@ -32,7 +32,7 @@ A small excerpt just of the command options:
 
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 2.1.5 (2022-11-23)
 * (arteck) add name of device to admin
 * (arteck) corr status when login fail
 * (arteck) corr psw typo
