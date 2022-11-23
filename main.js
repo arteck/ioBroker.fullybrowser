@@ -169,7 +169,7 @@ class fullybrowserControll extends utils.Adapter {
         const l_ip = getHost[0];
         const port = getHost[1];
 
-        const encodePSW = fixedEncodeURIComponent(getHost[2]);
+        const encodePSW = this.fixedEncodeURIComponent(getHost[2]);
         
         let statusURL = 'http://' + l_ip + ':' + port + '/?cmd=' + strCommand + '&password=' + encodePSW;
         
