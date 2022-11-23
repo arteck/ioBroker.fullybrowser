@@ -3,7 +3,7 @@
     "name": "fullybrowser",
     "version": "2.1.5",
      "news": {
-     "2.1.5": {
+     "2.1.6": {
       	"en": "add name of devie to admin",
         "de": "Tabname hinzugefügt",
         "ru": "добавить имя devie в админ"
