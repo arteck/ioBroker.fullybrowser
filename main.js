@@ -256,10 +256,7 @@ class fullybrowserControll extends utils.Adapter {
         }
     }
 
-    async cre_info(ip, tabname, port, psw) {
-        this.log.debug(`create info`);
-        
-        let vari = '';
+    async cre_info_for_status(ip, tabname, port, psw) {
         const id = ip.replace(/[.\s]+/g, '_');
         const encodePSW = this.fixedEncodeURIComponent(psw);
         let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodePSW;
@@ -298,6 +295,12 @@ class fullybrowserControll extends utils.Adapter {
                 ip: `${ip}`
             },
         });
+    }
+
+    async cre_info(ip, tabname, port, psw) {
+        this.log.debug(`create info`);
+        
+        await this.cre_info_for_status(ip, tabname, port, psw);
 
 
         // cre Info
@@ -306,7 +309,12 @@ class fullybrowserControll extends utils.Adapter {
 
             for (let lpEntry in fullyInfoObject.data) {
                 let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
-
+                
+                if (lpEntry == 'status') {
+                    await this.deleteDeviceAsync(`${id}`);
+                    await this.cre_info_for_status(ip, tabname, port, psw);
+                }
+                
                 await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
                     type: 'state',
                     common: {
