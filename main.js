@@ -299,7 +299,7 @@ class fullybrowserControll extends utils.Adapter {
 
     async cre_info(ip, tabname, port, psw) {
         this.log.debug(`create info`);
-        
+        const id = ip.replace(/[.\s]+/g, '_');
         await this.cre_info_for_status(ip, tabname, port, psw);
 
 
