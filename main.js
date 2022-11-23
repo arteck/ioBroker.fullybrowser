@@ -256,10 +256,9 @@ class fullybrowserControll extends utils.Adapter {
         }
     }
 
-    async cre_info_for_status(ip, tabname, port, psw) {
+    async cre_info_for_status(ip, tabname) {
         const id = ip.replace(/[.\s]+/g, '_');
-        const encodePSW = this.fixedEncodeURIComponent(psw);
-        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodePSW;
+       
 
         await this.extendObjectAsync(`${id}`, {
             type: 'device',
@@ -300,7 +299,10 @@ class fullybrowserControll extends utils.Adapter {
     async cre_info(ip, tabname, port, psw) {
         this.log.debug(`create info`);
         const id = ip.replace(/[.\s]+/g, '_');
-        await this.cre_info_for_status(ip, tabname, port, psw);
+        const encodePSW = this.fixedEncodeURIComponent(psw);
+        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodePSW;
+        
+        await this.cre_info_for_status(ip, tabname);
 
 
         // cre Info
@@ -312,7 +314,7 @@ class fullybrowserControll extends utils.Adapter {
                 
                 if (lpEntry == 'status') {
                     await this.deleteDeviceAsync(`${id}`);
-                    await this.cre_info_for_status(ip, tabname, port, psw);
+                    await this.cre_info_for_status(ip, tabname);
                 }
                 
                 await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
