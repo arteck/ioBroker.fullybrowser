@@ -213,7 +213,7 @@ class fullybrowserControll extends utils.Adapter {
         try {
             let fullyInfoObject = await axios.get(statusURL);
 
-            if (fullyInfoObject.status !== '200') {
+            if (fullyInfoObject.status == 200) {
                 for (let lpEntry in fullyInfoObject.data) {
                     if (fullyInfoObject.data[lpEntry] != undefined && fullyInfoObject.data[lpEntry] != null) {
                         let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
