@@ -204,8 +204,8 @@ class fullybrowserControll extends utils.Adapter {
         const ip      = device.ip;
         const tabname = device.tabname;
         const port    = device.port;
-        const psw     = device.psw;
-        const encodePSW = fixedEncodeURIComponent(psw);
+   
+        const encodePSW = this.fixedEncodeURIComponent(device.psw);
 
         let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodePSW;
         
