@@ -1,8 +1,13 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.1.2",
+    "version": "2.1.3",
      "news": {
+     "2.1.3": {
+      	"en": "add name of devie to admin",
+        "de": "Tabname hinzugefügt",
+        "ru": "добавить имя devie в админ"
+      },	      
      "2.1.2": {
       	"en": "encodeuri for psw",
       	"de": "encodeuri for psw",

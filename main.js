@@ -198,7 +198,13 @@ class fullybrowserControll extends utils.Adapter {
         return hostSet;
     }
 
-    async updateDevice(id, ip, port, psw) {       
+    async updateDevice(id, device) {
+
+        const ip      = device.ip;
+        const tabname = device.tabname;
+        const port    = device.port;
+        const psw     = device.psw;
+
         let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodeURIComponent(psw).replace(/[!'()]/g, escape().replace(/\*/g, "%2A"));
         
         // cre Info
@@ -238,7 +244,7 @@ class fullybrowserControll extends utils.Adapter {
 
                 if (devices[k].active) {
                     this.log.info('Start with IP : ' + devices[k].ip);
-                    await this.cre_info(devices[k].ip, devices[k].port, devices[k].psw);
+                    await this.cre_info(devices[k].ip, devices[k].tabname, devices[k].port, devices[k].psw);
                     await this.cre_command(devices[k].ip);
                 }
             }
@@ -248,12 +254,20 @@ class fullybrowserControll extends utils.Adapter {
         }
     }
 
-    async cre_info(ip, port, psw) {
+    async cre_info(ip, tabname, port, psw) {
         this.log.debug(`create info`);
         
         let vari = '';
         let id = ip.replace(/[.\s]+/g, '_');
         let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodeURIComponent(psw).replace(/[!'()]/g, escape().replace(/\*/g, "%2A"));
+
+        await this.extendObjectAsync(`${id}`, {
+            type: 'device',
+            common: {
+                name: tabname || ip,
+            },
+            native: {},
+        });
 
         await this.extendObjectAsync(`${id}.lastInfoUpdate`, {
             type: 'state',
@@ -411,7 +425,7 @@ class fullybrowserControll extends utils.Adapter {
             for (const k in devices) {
                 var id = devices[k].ip.replace(/[.\s]+/g, '_');
                 if (devices[k].active) {                    
-                    await this.updateDevice(id, devices[k].ip, devices[k].port,  devices[k].psw);
+                    await this.updateDevice(id, devices[k]);
                 } 
             }
 

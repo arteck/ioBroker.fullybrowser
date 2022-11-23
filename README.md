@@ -32,6 +32,9 @@ A small excerpt just of the command options:
 
 
 ## Changelog
+### **WORK IN PROGRESS** 
+* (arteck) add name of device to admin
+
 ### 2.1.2 (2022-04-05)
 * (arteck) encodeUri in psw
 
