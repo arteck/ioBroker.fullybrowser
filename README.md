@@ -32,7 +32,7 @@ A small excerpt just of the command options:
 
 
 ## Changelog
-### **WORK IN PROGRESS** 
+### 2.1.3 (2022-11-23) 
 * (arteck) add name of device to admin
 
 ### 2.1.2 (2022-04-05)
