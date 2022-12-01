@@ -28,7 +28,7 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.7",
-    "loglevel": "^1.5.1",
+    "loglevel": "^1.8.1",
     "axios": "^0.27.2"
   },
   "devDependencies": {
