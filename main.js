@@ -106,6 +106,8 @@ class fullybrowserControll extends utils.Adapter {
     }
 
 
+    
+    
     async setFullyState(ip, idx, command, state) {
         var ip = ip.replace(/[_\s]+/g, '.');
 
