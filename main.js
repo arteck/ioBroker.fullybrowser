@@ -226,7 +226,7 @@ class fullybrowserControll extends utils.Adapter {
                             if (lpEntry == 'Mac') {
                                 let stats = await this.getStateAsync(`${id}.${infoStr}.status`);
                                 
-                                if (stats !== null && stats !== undefined) {
+                                if (stats == undefined) {
                                     await this.extendObjectAsync(`${id}.${infoStr}.status`, {
                                         type: 'state',
                                         common: {
@@ -249,11 +249,12 @@ class fullybrowserControll extends utils.Adapter {
                                         },
                                         native: {},
                                     });
-                                    if (stats !== 'OK') {
-                                        await this.setState(`${id}.${infoStr}.status`, 'OK', true);
-                                        await this.setState(`${id}.${infoStr}.statustext`, 'OK', true);
-                                    }
                                 }
+                                if (stats !== 'OK') {
+                                    await this.setState(`${id}.${infoStr}.status`, 'OK', true);
+                                    await this.setState(`${id}.${infoStr}.statustext`, 'OK', true);
+                                }
+                          
                             }
                         }
                     }
