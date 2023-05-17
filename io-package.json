@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.1.5",
+    "version": "2.1.6",
      "news": {
      "2.1.6": {
       	"en": "add name of devie to admin",
