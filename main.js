@@ -372,7 +372,7 @@ class fullybrowserControll extends utils.Adapter {
     async cre_command(ip) {
 
         const commArButton = ['loadStartURL', 'clearCache', 'clearWebstorage', 'clearCookies', 'restartApp', 'exitApp', 'screenOn', 'screenOff', 'forceSleep', 'triggerMotion', 'startScreensaver',
-            'stopScreensaver', 'startDaydream', 'stopDaydream', 'toForeground', 'popFragment', 'enableLockedMode', 'disableLockedMode', 'enableMovementDetection', 'disableMovementDetection'
+            'stopScreensaver', 'startDaydream', 'stopDaydream', 'toForeground', 'popFragment', 'enableLockedMode', 'disableLockedMode'
         ];
 
         const commArText = ['startApplication', 'loadURL', 'setAudioVolume', 'textToSpeech', 'setStringSetting'];
