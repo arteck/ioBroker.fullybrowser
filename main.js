@@ -249,8 +249,10 @@ class fullybrowserControll extends utils.Adapter {
                                         },
                                         native: {},
                                     });
-                                    await this.setState(`${id}.${infoStr}.status`, 'OK', true);
-                                    await this.setState(`${id}.${infoStr}.statustext`, 'OK', true);
+                                    if (stats !== 'OK') {
+                                        await this.setState(`${id}.${infoStr}.status`, 'OK', true);
+                                        await this.setState(`${id}.${infoStr}.statustext`, 'OK', true);
+                                    }
                                 }
                             }
                         }
