@@ -250,7 +250,7 @@ class fullybrowserControll extends utils.Adapter {
                                         native: {},
                                     });
                                 }
-                                if (stats !== 'OK') {
+                                if (stats.val !== 'OK') {
                                     await this.setState(`${id}.${infoStr}.status`, 'OK', true);
                                     await this.setState(`${id}.${infoStr}.statustext`, 'OK', true);
                                 }
