@@ -265,6 +265,7 @@ class fullybrowserControll extends utils.Adapter {
             }
         } catch (err) {
             this.log.warn('updateDeviceERROR ' + ip);
+            this.log.debug('Message  ' + JSON.stringify(err));
             await this.setState(`${id}.isFullyAlive`, false, true);
         }
 
