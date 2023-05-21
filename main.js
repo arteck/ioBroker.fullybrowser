@@ -235,6 +235,7 @@ class fullybrowserControll extends utils.Adapter {
                                             read: true,
                                             write: false,
                                             role: 'value',
+                                            def: 'OK',
                                         },
                                         native: {},
                                     });
@@ -246,6 +247,7 @@ class fullybrowserControll extends utils.Adapter {
                                             read: true,
                                             write: false,
                                             role: 'value',
+                                            def: 'OK',
                                         },
                                         native: {},
                                     });
