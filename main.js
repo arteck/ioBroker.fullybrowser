@@ -17,7 +17,7 @@ const infoStr = 'Info';
 
 let interval = 0;
 let timeoutAx = 5000;
-let requestTimeout = null;
+let _requestInterval = null;
 let devices = [];
 
 
@@ -56,7 +56,7 @@ class fullybrowserControll extends utils.Adapter {
      */
     onUnload(callback) {
         try {
-            if (requestTimeout) clearTimeout(requestTimeout);
+            if (_requestInterval) clearInterval(_requestInterval);
 
             this.log.info('cleaned everything up...');
             this.setState('info.connection', false, true);
@@ -479,9 +479,11 @@ class fullybrowserControll extends utils.Adapter {
                 } 
             }
 
-            requestTimeout = setTimeout(() => {
-                this.getInfos();
-            }, interval);
+            if (!_requestInterval) {
+                 _requestInterval = setInterval(async () => {
+                   await this.getInfos();
+                }, interval);
+            }
         } catch (err) {
             this.log.error('getInfosError '  + JSON.stringify(err));
         }
