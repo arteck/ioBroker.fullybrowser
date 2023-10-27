@@ -1,106 +1,121 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.1.6",
-     "news": {
-     "2.1.6": {
-      	"en": "add name of devie to admin",
+    "version": "2.2.0",
+    "news": {
+      "2.2.0": {
+        "en": "intrvall corr",
+        "de": "intrvall corr",
+        "ru": "intrvall корр",
+        "pt": "intrvall corr",
+        "nl": "indrvel corrvall",
+        "fr": "intrvall corr",
+        "it": "intrvall cor",
+        "es": "intrvall corr",
+        "pl": "intrvallocor",
+        "uk": "інтрвелл корр",
+        "zh-cn": "侵入"
+      },
+      "2.1.6": {
+        "en": "add name of devie to admin",
         "de": "Tabname hinzugefügt",
         "ru": "добавить имя devie в админ"
-      },	      
-     "2.1.2": {
-      	"en": "encodeuri for psw",
-      	"de": "encodeuri for psw",
-      	"ru": "encodeuri for psw"
-      },	 
+      },
+      "2.1.2": {
+        "en": "encodeuri for psw",
+        "de": "encodeuri for psw",
+        "ru": "encodeuri for psw"
+      },
       "2.1.1": {
-      	"en": "js-controller 4.x",
-      	"de": "js-controller 4.x",
-      	"ru": "js-controller 4.x"
-      },	 
-    
+        "en": "js-controller 4.x",
+        "de": "js-controller 4.x",
+        "ru": "js-controller 4.x"
+      },
       "0.0.6": {
         "en": "beta",
         "de": "beta",
         "ru": "beta"
-      }      
+      }
     },
     "title": "fullyBrowser",
-        "titleLang": {
-          "en": "fullyBrowser",
-          "de": "fullyBrowser",
-          "ru": "fullyBrowser",
-          "pt": "fullyBrowser",
-          "nl": "fullyBrowser",
-          "fr": "fullyBrowser",
-          "it": "fullyBrowser ",
-          "es": "fullyBrowser",
-          "pl": "fullyBrowser"
-        },
-        "desc": {
-          "en": "Manage yours Fully Browser",
-          "de": "verwalte deinen Fully Browser mit ioBroker",
-          "ru": "подключает устройства Fully Browser к ioBroker",
-          "pt": "liga dispositivos Fully Browser a ioBroker",
-          "nl": "verbindt Fully Browser met ioBroker",
-          "fr": "connecte les Fully Browser à ioBroker",
-          "it": "collega Fully Browser a ioBroker",
-          "es": "conecta Fully Browser a ioBroker",
-          "pl": "łączy Fully Browser z ioBroker"
-        },
-        "authors": [
-            "arteck <arteck@outlook.com>"
-        ],
-	"materialize": true,  
-        "compact":                  true,
-        "license":                  "MIT",
-        "platform":                 "Javascript/Node.js",
-        "mode":                     "daemon",
-	"enabled":                  false,
-        "readme":                   "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
-        "loglevel":                 "info",
-        "restartAdapters":          [
-          "fullyBrowser"
-        ],        
-        "keywords":                 ["fullyBrowser", "Fully Browser", "Fully Kiosk Browser"],
-        "icon":                     "fully.png",
-        "materialize":              true,
-        "extIcon":                  "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
-        "type":                     "utility",
-        "singletonHost":            true,
-	"connectionType": "local",
-        "dataSource": "push",
-	"dependencies": [
-	      {
-		"js-controller": ">=3.0.0"
-	      }
-	    ]
+    "titleLang": {
+      "en": "fullyBrowser",
+      "de": "fullyBrowser",
+      "ru": "fullyBrowser",
+      "pt": "fullyBrowser",
+      "nl": "fullyBrowser",
+      "fr": "fullyBrowser",
+      "it": "fullyBrowser ",
+      "es": "fullyBrowser",
+      "pl": "fullyBrowser"
     },
-    "native": {
-        "interval": 60,
-	"Timeout": 2000
+    "desc": {
+      "en": "Manage yours Fully Browser",
+      "de": "verwalte deinen Fully Browser mit ioBroker",
+      "ru": "подключает устройства Fully Browser к ioBroker",
+      "pt": "liga dispositivos Fully Browser a ioBroker",
+      "nl": "verbindt Fully Browser met ioBroker",
+      "fr": "connecte les Fully Browser à ioBroker",
+      "it": "collega Fully Browser a ioBroker",
+      "es": "conecta Fully Browser a ioBroker",
+      "pl": "łączy Fully Browser z ioBroker"
     },
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "If connected",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
+    "authors": [
+      "arteck <arteck@outlook.com>"
+    ],
+    "materialize": true,
+    "compact": true,
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "enabled": false,
+    "readme": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
+    "loglevel": "info",
+    "restartAdapters": [
+      "fullyBrowser"
+    ],
+    "keywords": [
+      "fullyBrowser",
+      "Fully Browser",
+      "Fully Kiosk Browser"
+    ],
+    "icon": "fully.png",
+    "extIcon": "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
+    "type": "utility",
+    "singletonHost": true,
+    "connectionType": "local",
+    "dataSource": "push",
+    "dependencies": [
+      {
+        "js-controller": ">=3.0.0"
+      }
     ]
+  },
+  "native": {
+    "interval": 60,
+    "Timeout": 2000
+  },
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "If connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
 }
