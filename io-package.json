@@ -37,7 +37,7 @@
         "ru": "beta"
       }
     },
-   
+    "title": "fullyBrowser",
     "titleLang": {
       "en": "fullyBrowser",
       "de": "fullyBrowser",
@@ -61,7 +61,7 @@
       "pl": "łączy Fully Browser z ioBroker"
     },
     "authors": [
-      "arteck <arteck@outlook.com>"
+      "arteck <arteck@outlook.com>", "Acgua <no@mail.com>"
     ],
     "materialize": true,
     "compact": true,
@@ -84,17 +84,51 @@
     "type": "utility",
     "singletonHost": true,
     "connectionType": "local",
-    "dataSource": "push",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "json"
+    },
+    "docs": {
+      "en": [
+        "docs/en/README.md"
+      ],
+      "de": [
+        "docs/de/README.md"
+      ]
+    },
+    "globalDependencies": [
+      {
+        "admin": ">=6.0.0"
+      }
+    ],
     "dependencies": [
       {
         "js-controller": ">=3.0.0"
       }
-    ]
+    ],
+    "installedFrom": "arteck/ioBroker.fullybrowser#8e0605d153fb36817cedb92ed8adffea323fecb0"
   },
   "native": {
-    "interval": 60,
-    "Timeout": 2000
+    "tableDevices": [],
+    "restUseHttps": false,
+    "restTimeout": 2000,
+    "restCommandLogAsDebug": false,
+    "mqttUser": "",
+    "mqttPassword": "",
+    "mqttPort": 3000,
+    "mqttPublishedInfoDelay": 30,
+    "mqttDoNotVerifyUserPw": true,
+    "mqttUpdateUnchangedObjects": false,
+    "mqttConnErrorsAsInfo": true,
+    "mqttCreateDefaultEventObjects": true
   },
+  "encryptedNative": [
+    "mqttPassword"
+  ],
+  "protectedNative": [
+    "mqttPassword"
+  ],
+  "objects": [],
   "instanceObjects": [
     {
       "_id": "info",

@@ -1,0 +1,258 @@
+{
+    "i18n": true,
+    "type": "tabs",
+    "items": {
+        "_tab_Start": {
+            "type": "panel",
+            "label": "Main Settings",
+            "items": {
+                "header_Start": {
+                    "type": "header",
+                    "text": "Welcome to Fully adapter",
+                    "size": 2
+                },
+                "_textStart": {
+                    "type": "staticText",
+                    "text": "A detailed documentation with explanations and all further information can be found on this GitHub page:",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "style": {
+                        "fontSize": 16,
+                        "marginTop": 0
+                    }
+                },
+                "_documentationLinkGerman": {
+                    "type": "staticLink",
+                    "label": "🇩🇪 Deutsche Dokumentation",
+                    "button": true,
+                    "href": "https://github.com/arteck/ioBroker.fullybrowser/blob/main/docs/de/README.md",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 2,
+                    "style": {
+                        "fontSize": 16,
+                        "marginTop": 0
+                    }
+                },
+                "_documentationLinkEnglish": {
+                    "type": "staticLink",
+                    "label": "🇬🇧 English Documentation",
+                    "button": true,
+                    "href": "https://github.com/arteck/ioBroker.fullybrowser/blob/main/docs/en/README.md",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 2,
+                    "style": {
+                        "fontSize": 16,
+                        "marginTop": 0
+                    }
+                },
+                "header_Devices": {
+                    "newLine": "true",
+                    "type": "header",
+                    "text": "Fully Browser Devices",
+                    "size": 2,
+                    "style": {
+                        "marginTop": 20
+                    }
+                },
+                "text_DevicesInfo": {
+                    "type": "staticText",
+                    "label": "Add new devices by clicking the plus (+) symbol...",
+                    "newLine": "true",
+                    "style": {
+                        "fontSize": 16
+                    }
+                },
+                "tableDevices": {
+                    "type": "table",
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "items": [
+                        {
+                            "type": "checkbox",
+                            "attr": "enabled",
+                            "width": "30px",
+                            "title": "",
+                            "default": true
+                        },
+                        {
+                            "type": "text",
+                            "title": "Device Name",
+                            "attr": "name",
+                            "maxLength": 50,
+                            "trim": false,
+                            "width": "55%",
+                            "filter": true,
+                            "sort": true,
+                            "validator": "data.name.length > 2",
+                            "validatorNoSaveOnError": true
+                        },
+                        {
+                            "type": "select",
+                            "title": "Protocol",
+                            "attr": "restProtocol",
+                            "default": "http",
+                            "width": "5%",
+                            "validator": "data.restProtocol.length > 3",
+                            "validatorNoSaveOnError": true,
+                            "options": [
+                                {
+                                    "label": "http",
+                                    "value": "http"
+                                },
+                                {
+                                    "label": "https",
+                                    "value": "https"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "title": "IP Address",
+                            "attr": "ip",
+                            "maxLength": 15,
+                            "trim": true,
+                            "width": "15%",
+                            "validator": "data.ip != null && data.ip != undefined && data.ip.length > 5",
+                            "validatorNoSaveOnError": true
+                        },
+                        {
+                            "type": "number",
+                            "title": "Port",
+                            "attr": "restPort",
+                            "min": 1,
+                            "max": 65535,
+                            "default": 2323,
+                            "width": "10%"
+                        },
+                        {
+                            "type": "password",
+                            "title": "Remote Admin Password",
+                            "attr": "restPassword",
+                            "width": "15%",
+                            "validator": "data.restPassword.length > 0",
+                            "validatorNoSaveOnError": true
+                        }
+                    ]
+                },
+                "header_MQTT": {
+                    "newLine": "true",
+                    "type": "header",
+                    "text": "MQTT Configuration",
+                    "size": 2
+                },
+                "text_MQTT-info": {
+                    "type": "staticText",
+                    "label": "Port is always required, but you can leave user name and password empty. Fully Browser App: Settings -> Other Settings -> MQTT Integration (PLUS)",
+                    "style": {
+                        "fontSize": 16
+                    }
+                },
+                "mqttPort": {
+                    "newLine": "true",
+                    "type": "number",
+                    "label": "Port",
+                    "min": 1,
+                    "max": 65535,
+                    "default": 3000,
+                    "help": "MQTT Port (1-65535)"
+                },
+                "mqttDoNotVerifyUserPw": {
+                    "type": "checkbox",
+                    "label": "Do not verify user and password",
+                    "help": "This disables the username and password verification",
+                    "default": true
+                },
+                "mqttUser": {
+                    "type": "text",
+                    "label": "User name",
+                    "help": "MQTT User name",
+                    "hidden": "data.mqttDoNotVerifyUserPw"
+                },
+                "mqttPassword": {
+                    "type": "password",
+                    "label": "Password",
+                    "help": "MQTT Password",
+                    "hidden": "data.mqttDoNotVerifyUserPw"
+                }
+            }
+        },
+        "_tab_Expert Settings": {
+            "type": "panel",
+            "label": "Expert Settings",
+            "items": {
+                "header_MQTT": {
+                    "type": "header",
+                    "text": "MQTT",
+                    "size": 2
+                },
+                "mqttPublishedInfoDelay": {
+                    "type": "number",
+                    "min": 2,
+                    "max": 120,
+                    "label": "Do not process published info more than every x seconds",
+                    "help": "in seconds (2-120, default: 30)",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3
+                },
+                "mqttUpdateUnchangedObjects": {
+                    "type": "checkbox",
+                    "label": "Always update info states",
+                    "help": "Always update info objects, even if value did not change",
+                    "default": false,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3
+                },
+                "mqttConnErrorsAsInfo": {
+                    "type": "checkbox",
+                    "label": "Client and Connection errors as info in log",
+                    "help": "Logs client and connection errors as 'info' and not as 'error'",
+                    "default": true,
+                    "sm": 12,
+                    "md": 7,
+                    "lg": 5
+                },
+                "mqttCreateDefaultEventObjects": {
+                    "type": "checkbox",
+                    "label": "Create default event objects at adapter start",
+                    "help": "Create default event objects (facesDetected, hideKeyboard, etc.) at the first adapter startup",
+                    "default": true,
+                    "sm": 12,
+                    "md": 7,
+                    "lg": 5
+                },
+                "header_RESTAPI": {
+                    "newLine": "true",
+                    "type": "header",
+                    "text": "Remote Admin (REST API)",
+                    "size": 2
+                },
+                "restTimeout": {
+                    "type": "number",
+                    "min": 500,
+                    "max": 15000,
+                    "default": 6000,
+                    "label": "Request Timeout",
+                    "help": "in milliseconds (500-15000, default: 6000)",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3
+                },
+                "restCommandLogAsDebug": {
+                    "type": "checkbox",
+                    "label": "Successful commands as debug in log",
+                    "help": "Log '... Command xxx successfully set to x' as 'debug' and not 'info'",
+                    "default": false,
+                    "sm": 12,
+                    "md": 7,
+                    "lg": 5
+                }
+            }
+        }
+    }
+}

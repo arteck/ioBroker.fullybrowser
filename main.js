@@ -1,511 +1,663 @@
-/**
- *
- *      ioBroker fullyBrowser Adapter
- *
- *      (c) 2014-2018 arteck <arteck@outlook.com>
- *
- *      MIT License
- *
- */
-'use strict';
-
 const utils = require('@iobroker/adapter-core');
-const axios = require('axios');
-const setStr = 'setStringSetting';
-const commandsStr = 'Commands';
-const infoStr = 'Info';
 
-let interval = 0;
-let timeoutAx = 5000;
-let _requestInterval = null;
-let devices = [];
+const cmds = require("./lib/constants").cmds;
+const cmdsSwitches = require("./lib/constants").cmdsSwitches;
+const mqttEvents = require("./lib/constants").mqttEvents;
+const _methods = require("./lib/methods");
+const MqttServer = require("./lib/mqtt-server");
+const AxiosCommand = require("./lib/axiosCommand");
+const RestApiFully = require("./lib/restApi");
+/**
+ * -------------------------------------------------------------------
+ * ioBroker Fully Browser MQTT Adapter
+ * -------------------------------------------------------------------
+ */
+class fullybrowserControll  extends utils.Adapter {
+  constructor(options = {}) {
+    super({
+      ...options,
+      name: "fullybrowser"
+    });
+    this.err2Str = _methods.err2Str.bind(this);
+    this.isEmpty = _methods.isEmpty.bind(this);
+    this.wait = _methods.wait.bind(this);
+    this.cleanDeviceName = _methods.cleanDeviceName.bind(this);
+    this.getConfigValuePerKey = _methods.getConfigValuePerKey.bind(this);
+    this.isIpAddressValid = _methods.isIpAddressValid.bind(this);
 
+    this.restApi_inst = new RestApiFully(this);
 
+    this.fullysEnbl = {};
+    this.fullysDisbl = {};
+    this.fullysAll = {};
+    this.onMqttAlive_EverBeenCalledBefore = false;
 
-class fullybrowserControll extends utils.Adapter {
+    this.on("ready", this.onReady.bind(this));
+    this.on("stateChange", this.onStateChange.bind(this));
+    this.on("unload", this.onUnload.bind(this));
+  }
 
-    /**
-     * @param {Partial<utils.AdapterOptions>} [options={}]
-     */
-    constructor(options) {
-        super({
-            ...options,
-            name: 'fullybrowser',
+  async onReady() {
+    try {
+      this.setState("info.connection", {
+        val: false,
+        ack: true
+      });
+      if (await this.initConfig()) {
+        this.log.debug(`Adapter settings successfully verified and initialized.`);
+      } else {
+        this.log.error(`Adapter settings initialization failed.  ---> Please check your adapter instance settings!`);
+        return;
+      }
+      for (const ip in this.fullysEnbl) {
+        const res = await this.createFullyDeviceObjects(this.fullysEnbl[ip]);
+        if (res)
+          await this.subscribeStatesAsync(this.fullysEnbl[ip].id + ".Commands.*");
+        this.setState(this.fullysEnbl[ip].id + ".enabled", {
+          val: true,
+          ack: true
         });
-        this.on('ready', this.onReady.bind(this));
-        this.on('objectChange', this.onObjectChange.bind(this));
-        this.on('stateChange', this.onStateChange.bind(this));
-        //  this.on('message', this.onMessage.bind(this));
-        this.on('unload', this.onUnload.bind(this));
-    }
-
-    /**
-     * Is called when databases are connected and adapter received configuration.
-     */
-    async onReady() {
-        this.setState('info.connection', false, true);
-
-        await this.initialization();
-        await this.create_state();
-        this.getInfos();
-    }
-
-    /**
-     * Is called when adapter shuts down - callback has to be called under any circumstances!
-     * @param {() => void} callback
-     */
-    onUnload(callback) {
-        try {
-            if (_requestInterval) clearInterval(_requestInterval);
-
-            this.log.info('cleaned everything up...');
-            this.setState('info.connection', false, true);
-            callback();
-        } catch (e) {
-            callback();
+        this.setState(this.fullysEnbl[ip].id + ".alive", {
+          val: false,
+          ack: true
+        });
+      }
+      for (const ip in this.fullysDisbl) {
+        if (await this.getObjectAsync(this.fullysAll[ip].id)) {
+          this.setState(this.fullysDisbl[ip].id + ".enabled", {
+            val: false,
+            ack: true
+          });
+          this.setState(this.fullysDisbl[ip].id + ".alive", {
+            val: null,
+            ack: true
+          });
         }
-    }
+      }
 
-    /**
-     * Is called if a subscribed object changes
-     * @param {string} id
-     * @param {ioBroker.Object | null | undefined} obj
-     */
-    onObjectChange(id, obj) {
-        if (obj) {
-            // The object was changed
-            this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+      this.mqtt_Server = new MqttServer(this);
+      this.mqtt_Server.start();
+
+      this.axiosCommand = new AxiosCommand(this);
+      this.axiosCommand.start();
+
+
+      this.deleteRemovedDeviceObjects();
+    } catch (e) {
+      this.log.error(this.err2Str(e));
+      return;
+    }
+  }
+
+
+  async onMqttAlive(ip, isAlive, msg) {
+    try {
+      const prevIsAlive = this.fullysEnbl[ip].isAlive;
+      this.fullysEnbl[ip].isAlive = isAlive;
+      const calledBefore = this.onMqttAlive_EverBeenCalledBefore;
+      this.onMqttAlive_EverBeenCalledBefore = true;
+      if (!calledBefore && isAlive === true || prevIsAlive !== isAlive) {
+        this.setState(this.fullysEnbl[ip].id + ".alive", {
+          val: isAlive,
+          ack: true
+        });
+        if (isAlive) {
+          this.log.info(`${this.fullysEnbl[ip].name} is alive (MQTT: ${msg})`);
         } else {
-            // The object was deleted
-            this.log.info(`object ${id} deleted`);
+          this.log.warn(`${this.fullysEnbl[ip].name} is not alive! (MQTT: ${msg})`);
         }
+      } else {
+      }
+      let countAll = 0;
+      let countAlive = 0;
+      for (const lpIpAddr in this.fullysEnbl) {
+        countAll++;
+        if (this.fullysEnbl[lpIpAddr].isAlive) {
+          countAlive++;
+        }
+      }
+      let areAllAlive = false;
+      if (countAll > 0 && countAll === countAlive)
+        areAllAlive = true;
+      this.setStateChanged("info.connection", {
+        val: areAllAlive,
+        ack: true
+      });
+    } catch (e) {
+      this.log.error(this.err2Str(e));
+      return;
     }
+  }
 
-    /**
-     * Is called if a subscribed state changes
-     * @param {string} id
-     * @param {ioBroker.State | null | undefined} state
-     */
-    onStateChange(id, state) {
+  async onMqttInfo(obj) {
+    try {
+      this.log.debug(`[MQTT] ${this.fullysEnbl[obj.ip].name} published info, topic: ${obj.topic}`);
+      const formerInfoKeysLength = this.fullysEnbl[obj.ip].mqttInfoKeys.length;
+      const newInfoKeysAdded = [];
+      for (const key in obj.infoObj) {
+        const val = obj.infoObj[key];
+        const valType = typeof val;
+        if (valType !== "string" && valType !== "boolean" && valType !== "object" && valType !== "number") {
+          this.log.warn(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Unknown type ${valType} of key '${key}' in info object`);
+          continue;
+        }
 
-        if (state) {
-            this.log.debug(`stateID ${id} changed: ${state.val} (ack = ${state.ack})`);
+        if (!this.fullysEnbl[obj.ip].mqttInfoKeys.includes(key)) {
+          this.fullysEnbl[obj.ip].mqttInfoKeys.push(key);
+          newInfoKeysAdded.push(key);
+          await this.setObjectNotExistsAsync(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, {
+            type: "state",
+            common: {
+              name: "Info: " + key,
+              type: valType,
+              role: "value",
+              read: true,
+              write: false
+            },
+            native: {}
+          });
+        }
+      }
+      if (formerInfoKeysLength === 0)
+        this.log.debug(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Initially create states for ${newInfoKeysAdded.length} info items (if not yet existing)`);
+      if (formerInfoKeysLength > 0 && newInfoKeysAdded.length > 0)
+        this.log.info(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Created new info object(s) as not seen before (if object(s) did not exist): ${newInfoKeysAdded.join(", ")}`);
 
-            // The state was changed
-            let tmp = id.split('.');
-            let command = tmp.pop();
-            let idx = tmp.pop();
-            let ip = tmp.pop();
-
-            this.setFullyState(ip, idx, command, state);
-
+      for (const key in obj.infoObj) {
+        const newVal = typeof obj.infoObj[key] === "object" ? JSON.stringify(obj.infoObj[key]) : obj.infoObj[key];
+        if (this.config.mqttUpdateUnchangedObjects) {
+          this.setState(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, {
+            val: newVal,
+            ack: true
+          });
         } else {
-            // The state was deleted
-            this.log.info(`state ${id} deleted`);
+          this.setStateChanged(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, {
+            val: newVal,
+            ack: true
+          });
         }
+      }
+
+      this.setState(this.fullysEnbl[obj.ip].id + ".lastInfoUpdate", {
+        val: Date.now(),
+        ack: true
+      });
+
+      this.setState(this.fullysEnbl[obj.ip].id + ".alive", {
+        val: true,
+        ack: true
+      });
+
+    } catch (e) {
+      this.log.error(this.err2Str(e));
+      return;
     }
+  }
 
-
-    
-    
-    async setFullyState(ip, idx, command, state) {
-        var ip = ip.replace(/[_\s]+/g, '.');
-
-        if (state.ack != null) {
-            if (state && !state.ack) {
-
-                switch (command) {
-                    case 'screenBrightness':
-                        var strBrightness = state.val;
-                        await this.fullySendCommand(ip, 'setStringSetting&key=screenBrightness&value=' + strBrightness);
-                        break;
-                    case 'setStringSetting':
-                        var txtKey = state.val;
-                        if (txtKey.length > 1) {
-                            await this.fullySendCommand(ip, command + txtKey);
-                        }
-                        break;
-                    case 'textToSpeech':
-                        var txtSp = state.val;
-                        //        txtSp = txtSp.replace(/[^a-zA-Z0-9ß]/g,'');  // Just keep letters, numbers, and umlauts
-                        txtSp = encodeURIComponent(txtSp.replace(/ +/g, ' ')); // Remove multiple spaces
-                        if (txtSp.length > 1) {
-                            await this.fullySendCommand(ip, command + '&text=' + txtSp);
-                        }
-                        break;
-                    case 'setAudioVolume':
-                        var vol = state.val;
-                        await this.fullySendCommand(ip, command + '&level=' + vol + '&stream=3');
-                        break;
-                    case 'loadURL':
-                        let strUrl = state.val;
-                        strUrl = strUrl.replace(/ /g, ""); // Remove Spaces
-
-                        let encodeUrl = encodeURIComponent(strUrl);
-                        //        if (!strUrl.match(/^https?:\/\//)) strUrl = 'http://' + strUrl; // add http if URL is not starting with "http://" or "https://"
-
-                        if (strUrl.length > 10) {
-                            await this.fullySendCommand(ip, command + '&url=' + encodeUrl);
-                        }
-                        break;
-
-                    case 'startApplication':
-                        var strApp = state.val;
-                        strApp = strApp.replace(/ /g, ""); // Remove Spaces
-
-                        if (strApp.length > 2) {
-                            await this.fullySendCommand(ip, command + '&package=' + strApp);
-                        }
-                        break;
-                    default:
-                        if (idx === commandsStr) {
-                            await this.fullySendCommand(ip, command);
-                        }
-                }
-            }
-        }
-    }
-
-    async fullySendCommand(ip, strCommand) {
-        const getHost = await this.getHostForSet(ip);
-        const l_ip = getHost[0];
-        const port = getHost[1];
-
-        const encodePSW = this.fixedEncodeURIComponent(getHost[2]);
-        
-        let statusURL = 'http://' + l_ip + ':' + port + '/?cmd=' + strCommand + '&password=' + encodePSW;
-        
-        this.log.debug('Send ' + statusURL);
-
-        try {
-            await axios.get(statusURL);
-        } catch (err) {
-            this.log.debug('Send error' + statusURL);
-        }
-
-    }
-
-    async getHostForSet(ip) {
-        var hostSet = [];
-        for (var i = 0; i < this.config.devices.length; i++) {
-            if (this.config.devices[i].ip.length > 5) {
-                if (this.config.devices[i].active) {
-                    if (this.config.devices[i].ip === ip) {
-                        hostSet.push(this.config.devices[i].ip, this.config.devices[i].port, this.config.devices[i].psw);
-                        break;
-                    }
-                }
-            }
-        }
-
-        return hostSet;
-    }
-
-    async updateDevice(id, device) {
-
-        const ip      = device.ip;
-        const tabname = device.tabname;
-        const port    = device.port;
-   
-        const encodePSW = this.fixedEncodeURIComponent(device.psw);
-
-        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodePSW;
-        
-        // cre Info
-        try {
-            let fullyInfoObject = await axios.get(statusURL);
-
-            if (fullyInfoObject.status == 200) {
-                for (let lpEntry in fullyInfoObject.data) {
-                    if (fullyInfoObject.data[lpEntry] != undefined && fullyInfoObject.data[lpEntry] != null) {
-                        let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
-                        if (lpType == 'object') {
-                            await this.setState(`${id}.${infoStr}.${lpEntry}`, JSON.stringify(fullyInfoObject.data[lpEntry]), true);
-                        } else {
-                            await this.setState(`${id}.${infoStr}.${lpEntry}`, fullyInfoObject.data[lpEntry], true);
-                            if (lpEntry == 'Mac') {
-                                let stats = await this.getStateAsync(`${id}.${infoStr}.status`);
-                                
-                                if (stats == undefined || stats == null) {
-                                    await this.extendObjectAsync(`${id}.${infoStr}.status`, {
-                                        type: 'state',
-                                        common: {
-                                            name: 'status',
-                                            type: 'string',
-                                            read: true,
-                                            write: false,
-                                            role: 'value',
-                                            def: 'OK',
-                                        },
-                                        native: {},
-                                    });
-                                    await this.extendObjectAsync(`${id}.${infoStr}.statustext`, {
-                                        type: 'state',
-                                        common: {
-                                            name: 'statustext',
-                                            type: 'string',
-                                            read: true,
-                                            write: false,
-                                            role: 'value',
-                                            def: 'OK',
-                                        },
-                                        native: {},
-                                    });
-                                }
-                                if (stats.val != 'OK') {
-                                    await this.setState(`${id}.${infoStr}.status`, 'OK', true);
-                                    await this.setState(`${id}.${infoStr}.statustext`, 'OK', true);
-                                }
-                            }
-                        }
-                    }
-                }
-                await this.setState(`${id}.isFullyAlive`, true, true);
-            } else {
-                await this.setState(`${id}.isFullyAlive`, false, true);
-            }
-        } catch (err) {
-            this.log.warn('updateDeviceERROR ' + ip + ' ' + tabname);
-            this.log.debug('Message  ' + JSON.stringify(err));
-            await this.setState(`${id}.isFullyAlive`, false, true);
-        }
-
-        await this.setState(`${id}.lastInfoUpdate`, Number(Date.now()), true);
-
-    }
-
-    async create_state() {
-        this.log.debug(`create state`);
-
-        let devices = this.config.devices;
-        try {
-            for (const k in devices) {
-
-                if (devices[k].active) {
-                    this.log.info('Start with IP : ' + devices[k].ip);
-                    await this.cre_info(devices[k].ip, devices[k].tabname, devices[k].port, devices[k].psw);
-                    await this.cre_command(devices[k].ip);
-                }
-            }
-            this.setState('info.connection', true, true);
-        } catch (err) {
-            this.log.warn(`create state problem`);
-        }
-    }
-
-    async cre_info_for_status(ip, tabname) {
-        const id = ip.replace(/[.\s]+/g, '_');
-       
-
-        await this.extendObjectAsync(`${id}`, {
-            type: 'device',
-            common: {
-                name: tabname || ip,
-            },
-            native: {},
+  async onMqttEvent(obj) {
+    try {
+      this.log.debug(`[MQTT] \u{1F4E1} ${this.fullysEnbl[obj.ip].name} published event, topic: ${obj.topic}, cmd: ${obj.cmd}`);
+      const pthEvent = `${this.fullysEnbl[obj.ip].id}.Events.${obj.cmd}`;
+      if (!await this.getObjectAsync(pthEvent)) {
+        this.log.debug(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Event ${obj.cmd} received but state ${pthEvent} does not exist, so we create it first`);
+        await this.setObjectNotExistsAsync(pthEvent, {
+          type: "state",
+          common: {
+            name: "Event: " + obj.cmd,
+            type: "boolean",
+            role: "switch",
+            read: true,
+            write: false
+          },
+          native: {}
         });
-
-        await this.extendObjectAsync(`${id}.lastInfoUpdate`, {
-            type: 'state',
-            common: {
-                name: 'Date/Time of last information update from Fully Browser',
-                type: 'number',
-                role: 'value.time',
-                read: true,
-                write: false
-            },
-            native: {
-                ip: `${ip}`
-            },
+      }
+      this.setState(pthEvent, {
+        val: true,
+        ack: true
+      });
+      const pthCmd = this.fullysEnbl[obj.ip].id + ".Commands";
+      const idx = this.getIndexFromConf(cmdsSwitches, ["mqttOn", "mqttOff"], obj.cmd);
+      if (idx !== -1) {
+        const conf = cmdsSwitches[idx];
+        const onOrOffCmd = obj.cmd === conf.mqttOn ? true : false;
+        await this.setStateAsync(`${pthCmd}.${conf.id}`, {
+          val: onOrOffCmd,
+          ack: true
         });
-        await this.extendObjectAsync(`${id}.isFullyAlive`, {
-            type: 'state',
-            common: {
-                name: 'Is Fully Browser Alive?',
-                type: 'boolean',
-                read: true,
-                write: false,
-                role: 'info'
-            },
-            native: {
-                ip: `${ip}`
-            },
+        await this.setStateAsync(`${pthCmd}.${conf.cmdOn}`, {
+          val: onOrOffCmd,
+          ack: true
         });
+        await this.setStateAsync(`${pthCmd}.${conf.cmdOff}`, {
+          val: !onOrOffCmd,
+          ack: true
+        });
+      } else {
+        const idx2 = this.getIndexFromConf(cmds, ["id"], obj.cmd);
+        if (idx2 !== -1 && cmds[idx2].type === "boolean") {
+          await this.setStateAsync(`${pthCmd}.${obj.cmd}`, {
+            val: true,
+            ack: true
+          });
+        } else {
+          this.log.silly(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Event cmd ${obj.cmd} - no REST API command is existing, so skip confirmation with with ack:true`);
+        }
+      }
+    } catch (e) {
+      this.log.error(this.err2Str(e));
+      return;
     }
+  }
 
-    async cre_info(ip, tabname, port, psw) {
-        this.log.debug(`create info`);
-        const id = ip.replace(/[.\s]+/g, '_');
-        const encodePSW = this.fixedEncodeURIComponent(psw);
-        let statusURL = 'http://' + ip + ':' + port + '/?cmd=deviceInfo&type=json&password=' + encodePSW;
-        
-        await this.cre_info_for_status(ip, tabname);
-
-
-        // cre Info
-        try {
-            let fullyInfoObject = await axios.get(statusURL);
-
-            for (let lpEntry in fullyInfoObject.data) {
-                let lpType = typeof fullyInfoObject.data[lpEntry]; // get Type of Variable as String, like string/number/boolean
-                
-                if (lpEntry == 'status') {
-                    await this.deleteDeviceAsync(`${id}`);
-                    await this.cre_info_for_status(ip, tabname);
+  async onStateChange(stateId, stateObj) {
+    try {
+      if (!stateObj)
+        return;
+      if (stateObj.ack)
+        return;
+      const idSplit = stateId.split(".");
+      const deviceId = idSplit[2];
+      const channel = idSplit[3];
+      const cmd = idSplit[4];
+      const pth = deviceId + "." + channel;
+      if (channel === "Commands") {
+        this.log.debug(`state ${stateId} changed: ${stateObj.val} (ack = ${stateObj.ack})`);
+        const fully = this.getFullyByKey("id", deviceId);
+        if (!fully)
+          throw `Fully object for deviceId '${deviceId}' not found!`;
+        let cmdToSend = cmd;
+        let switchConf = void 0;
+        const idxSw = this.getIndexFromConf(cmdsSwitches, ["id"], cmd);
+        if (idxSw !== -1) {
+          switchConf = cmdsSwitches[idxSw];
+          cmdToSend = stateObj.val ? switchConf.cmdOn : switchConf.cmdOff;
+        } else {
+          if (!stateObj.val)
+            return;
+        }
+        if (!cmdToSend)
+          throw `onStateChange() - ${stateId}: fullyCmd could not be determined!`;
+        const sendCommand = await this.restApi_inst.sendCmd(fully, cmdToSend, stateObj.val);
+        if (sendCommand) {
+          if (this.config.restCommandLogAsDebug) {
+            this.log.debug(`\u{1F5F8} ${fully.name}: Command ${cmd} successfully set to ${stateObj.val}`);
+          } else {
+            this.log.info(`\u{1F5F8} ${fully.name}: Command ${cmd} successfully set to ${stateObj.val}`);
+          }
+          if (switchConf !== void 0) {
+            const onOrOffCmdVal = cmd === switchConf.cmdOn ? true : false;
+            await this.setStateAsync(`${pth}.${switchConf.id}`, {
+              val: onOrOffCmdVal,
+              ack: true
+            });
+            await this.setStateAsync(`${pth}.${switchConf.cmdOn}`, {
+              val: onOrOffCmdVal,
+              ack: true
+            });
+            await this.setStateAsync(`${pth}.${switchConf.cmdOff}`, {
+              val: !onOrOffCmdVal,
+              ack: true
+            });
+          } else {
+            if (typeof stateObj.val === "boolean") {
+              const idx = this.getIndexFromConf(cmds, ["id"], cmd);
+              if (idx !== -1) {
+                if (cmds[idx].type === "boolean") {
+                  await this.setStateAsync(stateId, {
+                    val: true,
+                    ack: true
+                  });
+                } else {
+                  this.log.warn(`${fully.name}: ${stateId} - val: ${stateObj.val} is boolean, but cmd ${cmd} is not defined in CONF`);
+                  await this.setStateAsync(stateId, {
+                    val: stateObj.val,
+                    ack: true
+                  });
                 }
-                
-                await this.extendObjectAsync(`${id}.${infoStr}.${lpEntry}`, {
-                    type: 'state',
-                    common: {
-                        name: lpEntry,
-                        type: lpType,
-                        read: true,
-                        write: false,
-                        role: 'value',
-                    },
-                    native: {},
-                });
-            }
-        } catch (err) {
-            this.log.warn('Generate State problem ' + id + '     ' + JSON.stringify(err));
-        }
-    }
-
-    async cre_command(ip) {
-
-        const commArButton = ['loadStartURL', 'clearCache', 'clearWebstorage', 'clearCookies', 'restartApp', 'exitApp', 'screenOn', 'screenOff', 'forceSleep', 'triggerMotion', 'startScreensaver',
-            'stopScreensaver', 'startDaydream', 'stopDaydream', 'toForeground', 'popFragment', 'enableLockedMode', 'disableLockedMode'
-        ];
-
-        const commArText = ['startApplication', 'loadURL', 'setAudioVolume', 'textToSpeech', 'setStringSetting'];
-
-        const commArNumber = ['screenBrightness'];
-
-        var id = ip.replace(/[.\s]+/g, '_');
-
-        for (const i in commArButton) {
-            await this.extendObjectAsync(`${id}.${commandsStr}.${commArButton[i]}`, {
-                type: 'state',
-                common: {
-                    name: `${commArButton[i]}`,
-                    type: 'boolean',
-                    role: 'button',
-                    def: true,
-                    read: true,
-                    write: true
-                },
-                native: {},
-            });
-            this.subscribeStates(`${id}.${commandsStr}.${commArButton[i]}`);
-        }
-
-        for (const i in commArText) {
-            await this.extendObjectAsync(`${id}.${commandsStr}.${commArText[i]}`, {
-                type: 'state',
-                common: {
-                    name: `${commArText[i]}`,
-                    type: 'string',
-                    role: 'text',
-                    def: '',
-                    read: true,
-                    write: true
-                },
-                native: {},
-            });
-            this.subscribeStates(`${id}.${commandsStr}.${commArText[i]}`);
-        }
-        for (const i in commArNumber) {
-            await this.extendObjectAsync(`${id}.${commandsStr}.${commArNumber[i]}`, {
-                type: 'state',
-                common: {
-                    name: `${commArNumber[i]}`,
-                    type: 'number',
-                    role: 'value',
-                    def: 100,
-                    read: true,
-                    write: true
-                },
-                native: {},
-            });
-
-            this.subscribeStates(`${id}.${commandsStr}.${commArNumber[i]}`);
-        }
-    }
-
-    async initialization() {
-        try {
-            if (this.config.devices === undefined) {
-                this.log.debug(`initialization undefined`);
-                callback();
+              } else {
+                this.log.warn(`${fully.name}: ${stateId} - val: ${stateObj.val}, cmd ${cmd} is not defined in CONF`);
+              }
             } else {
-                devices = this.config.devices;
+              await this.setStateAsync(stateId, {
+                val: stateObj.val,
+                ack: true
+              });
             }
-
-            interval = parseInt(this.config.interval * 1000, 10);
-            if (interval < 5000) {
-                interval = 5000;
-            }
-
-            timeoutAx = parseInt(this.config.Timeout, 10);
-
-            if (isNaN(timeoutAx)) {
-                axios.defaults.timeout = 5000;   // timeout 5 sec
-            } else {
-                if (timeoutAx < 1000) {
-                    timeoutAx = 2000;
-                }
-                if (timeoutAx > 10000) {
-                    timeoutAx = 5000;
-                }
-
-                axios.defaults.timeout = timeoutAx;
-            }
-            
-            this.log.info('timeout is '  + timeoutAx);
-
-        } catch (error) {
-            this.log.error('No one IP configured');
+          }
+        } else {
+          this.log.debug(`${fully.name}: restApiSendCmd() was not successful (${stateId})`);
         }
+      }
+    } catch (e) {
+      this.log.error(this.err2Str(e));
+      return;
     }
+  }
 
-    async getInfos() {
-        this.log.debug(`get Information`);
-
-        try {
-            for (const k in devices) {
-                var id = devices[k].ip.replace(/[.\s]+/g, '_');
-                if (devices[k].active) {                    
-                    await this.updateDevice(id, devices[k]);
-                } 
-            }
-
-            if (!_requestInterval) {
-                 _requestInterval = setInterval(async () => {
-                   await this.getInfos();
-                }, interval);
-            }
-        } catch (err) {
-            this.log.error('getInfosError '  + JSON.stringify(err));
+  getFullyByKey(keyId, value) {
+    for (const ip in this.fullysEnbl) {
+      if (keyId in this.fullysEnbl[ip]) {
+        const lpKeyId = keyId;
+        const lpVal = this.fullysEnbl[ip][lpKeyId];
+        if (lpVal === value) {
+          return this.fullysEnbl[ip];
         }
+      }
     }
-    
-    fixedEncodeURIComponent(str) {
-        return encodeURIComponent(str).replace(
-            /[!'()*]/g,
-            (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`
-        );
-    }
+    return false;
+  }
 
+  getIndexFromConf(config, keys, cmd) {
+    try {
+      let index = -1;
+      for (const key of keys) {
+        index = config.findIndex((x) => x[key] === cmd);
+        if (index !== -1)
+          break;
+      }
+      return index;
+    } catch (e) {
+      this.log.error(this.err2Str(e));
+      return -1;
+    }
+  }
+
+  async onUnload(callback) {
+    try {
+      if (this.fullysAll) {
+        for (const ip in this.fullysAll) {
+          if (await this.getObjectAsync(this.fullysAll[ip].id)) {
+            this.setState(this.fullysAll[ip].id + ".alive", {
+              val: null,
+              ack: true
+            });
+          }
+        }
+      }
+      if (this.mqtt_Server) {
+        for (const clientId in this.mqtt_Server.devices) {
+          if (this.mqtt_Server.devices[clientId].timeoutNoUpdate)
+            this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
+        }
+      }
+      if (this.mqtt_Server) {
+        this.mqtt_Server.terminate();
+      }
+      callback();
+    } catch (e) {
+      callback();
+    }
+  }
+
+  async initConfig() {
+    try {
+      if (this.isEmpty(this.config.mqttPort) || this.config.mqttPort < 1 || this.config.mqttPort > 65535) {
+        this.log.warn(`Adapter instance settings: MQTT Port ${this.config.mqttPort} is not allowed, set to default of 1886`);
+        this.config.mqttPort = 1886;
+      }
+      if (this.isEmpty(this.config.mqttPublishedInfoDelay) || this.config.mqttPublishedInfoDelay < 2 || this.config.mqttPublishedInfoDelay > 120) {
+        this.log.warn(`Adapter instance settings: MQTT Publish Info Delay of ${this.config.mqttPublishedInfoDelay}s is not allowed, set to default of 30s`);
+        this.config.mqttPublishedInfoDelay = 30;
+      }
+      if (this.isEmpty(this.config.restTimeout) || this.config.restTimeout < 500 || this.config.restTimeout > 15e3) {
+        this.log.warn(`Adapter instance settings: REST API timeout of ${this.config.restTimeout} ms is not allowed, set to default of 6000ms`);
+        this.config.restTimeout = 6e3;
+      }
+      if (this.isEmpty(this.config.tableDevices)) {
+        this.log.error(`No Fully devices defined in adapter instance settings!`);
+        return false;
+      }
+      const deviceIds = [];
+      const deviceIPs = [];
+
+      for (let i = 0; i < this.config.tableDevices.length; i++) {
+        const lpDevice = this.config.tableDevices[i];
+        const finalDevice = {
+          name: "",
+          id: "",
+          ip: "",
+          enabled: false,
+          mqttInfoObjectsCreated: false,
+          mqttInfoKeys: [],
+          restProtocol: "http",
+          restPort: 0,
+          restPassword: "",
+          lastSeen: 0,
+          isAlive: false
+        };
+        if (!this.isIpAddressValid(lpDevice.ip)) {
+          this.log.error(`${finalDevice.name}: Provided IP address "${lpDevice.ip}" is not valid!`);
+          return false;
+        }
+        if (this.isEmpty(lpDevice.name)) {
+          this.log.error(`Provided device name "${lpDevice.name}" is empty!`);
+          return false;
+        }
+        finalDevice.name = lpDevice.ip.trim();
+        finalDevice.id = this.cleanDeviceName(lpDevice.name);
+
+        if (finalDevice.id.length < 1) {
+          this.log.error(`Provided device name "${lpDevice.name}" is too short and/or has invalid characters!`);
+          return false;
+        }
+        if (deviceIds.includes(finalDevice.id)) {
+          this.log.error(`Device "${finalDevice.name}" -> id:"${finalDevice.id}" is used for more than once device.`);
+          return false;
+        } else {
+          deviceIds.push(finalDevice.id);
+        }
+        if (lpDevice.restProtocol !== "http" && lpDevice.restProtocol !== "https") {
+          this.log.warn(`${finalDevice.name}: REST API Protocol is empty, set to http as default.`);
+          finalDevice.restProtocol = "http";
+        } else {
+          finalDevice.restProtocol = lpDevice.restProtocol;
+        }
+        if (!this.isIpAddressValid(lpDevice.ip)) {
+          this.log.error(`${finalDevice.name}: Provided IP address "${lpDevice.ip}" is not valid!`);
+          return false;
+        }
+        if (deviceIPs.includes(lpDevice.ip)) {
+          this.log.error(`Device "${finalDevice.name}" -> IP:"${lpDevice.ip}" is used for more than once device.`);
+          return false;
+        } else {
+          deviceIPs.push(lpDevice.ip);
+          finalDevice.ip = lpDevice.ip;
+        }
+        if (isNaN(lpDevice.restPort) || lpDevice.restPort < 0 || lpDevice.restPort > 65535) {
+          this.log.error(`Adapter config Fully port number ${lpDevice.restPort} is not valid, should be >= 0 and < 65536.`);
+          return false;
+        } else {
+          finalDevice.restPort = Math.round(lpDevice.restPort);
+        }
+        if ((0, _methods.isEmpty)(lpDevice.restPassword)) {
+          this.log.error(`Remote Admin (REST API) Password must not be empty!`);
+          return false;
+        } else {
+          finalDevice.restPassword = lpDevice.restPassword;
+        }
+        finalDevice.enabled = lpDevice.enabled ? true : false;
+        const logConfig = {
+          ...finalDevice
+        };
+        logConfig.restPassword = "(hidden)";
+        this.log.debug(`Final Config: ${JSON.stringify(logConfig)}`);
+        this.fullysAll[finalDevice.ip] = finalDevice;
+        if (lpDevice.enabled) {
+          this.fullysEnbl[finalDevice.ip] = finalDevice;
+          this.log.info(`\u{1F5F8} ${finalDevice.name} (${finalDevice.ip}): Config successfully verified.`);
+        } else {
+          this.fullysDisbl[finalDevice.ip] = finalDevice;
+          this.log.info(`${finalDevice.name} (${finalDevice.ip}) is not enabled in settings, so it will not be used by adapter.`);
+        }
+      }
+      if (Object.keys(this.fullysEnbl).length === 0) {
+        this.log.error(`No active devices with correct configuration found.`);
+        return false;
+      }
+      return true;
+    } catch (e) {
+      this.log.error(this.err2Str(e));
+      return false;
+    }
+  }
+
+  async createFullyDeviceObjects(device) {
+    try {
+      await this.setObjectNotExistsAsync(device.id, {
+        type: "device",
+        common: {
+          name: device.name,
+          statusStates: {
+            onlineId: `${this.namespace}.${device.id}.alive`
+          }
+        },
+        native: {}
+      });
+      await this.setObjectNotExistsAsync(device.id + ".Info", {
+        type: "channel",
+        common: {
+          name: "Device Information"
+        },
+        native: {}
+      });
+      await this.setObjectNotExistsAsync(device.id + ".alive", {
+        type: "state",
+        common: {
+          name: "Is Fully alive?",
+          desc: "If Fully Browser is alive or not",
+          type: "boolean",
+          role: "indicator.reachable",
+          read: true,
+          write: false
+        },
+        native: {}
+      });
+      await this.setObjectNotExistsAsync(device.id + ".lastInfoUpdate", {
+        type: "state",
+        common: {
+          name: "Last information update",
+          desc: "Date/time of last information update from Fully Browser",
+          type: "number",
+          role: "value.time",
+          read: true,
+          write: false
+        },
+        native: {}
+      });
+      await this.setObjectNotExistsAsync(device.id + ".enabled", {
+        type: "state",
+        common: {
+          name: "Is device enabled in adapter settings?",
+          desc: "If this device is enabled in the adapter settings",
+          type: "boolean",
+          role: "indicator",
+          read: true,
+          write: false
+        },
+        native: {}
+      });
+      await this.setObjectNotExistsAsync(device.id + ".Commands", {
+        type: "channel",
+        common: {
+          name: "Commands"
+        },
+        native: {}
+      });
+
+      const allCommands = cmds.concat(cmdsSwitches);
+
+      for (const cmdObj of allCommands) {
+        let lpRole = "";
+        if (cmdObj.type === "boolean")
+          lpRole = "button";
+        if (cmdObj.type === "string")
+          lpRole = "text";
+        if (cmdObj.type === "number")
+          lpRole = "value";
+        if (cmdObj.cmdOn && cmdObj.cmdOff)
+          lpRole = "switch";
+        await this.setObjectNotExistsAsync(device.id + ".Commands." + cmdObj.id, {
+          type: "state",
+          common: {
+            name: "Command: " + cmdObj.name,
+            type: cmdObj.type,
+            role: lpRole,
+            read: true,
+            write: true
+          },
+          native: {}
+        });
+      }
+      await this.setObjectNotExistsAsync(device.id + ".Events", {
+        type: "channel",
+        common: {
+          name: "MQTT Events"
+        },
+        native: {}
+      });
+      if (this.config.mqttCreateDefaultEventObjects) {
+        for (const event of mqttEvents) {
+          await this.setObjectNotExistsAsync(device.id + ".Events." + event, {
+            type: "state",
+            common: {
+              name: "Event: " + event,
+              type: "boolean",
+              role: "switch",
+              read: true,
+              write: false
+            },
+            native: {}
+          });
+        }
+      }
+      return true;
+    } catch (e) {
+      this.log.error(this.err2Str(e));
+      return false;
+    }
+  }
+
+  async deleteRemovedDeviceObjects() {
+    try {
+      const adapterObjectsIds = Object.keys(await this.getAdapterObjectsAsync());
+      const allObjectDeviceIds = [];
+      for (const objectId of adapterObjectsIds) {
+        const deviceId = objectId.split(".")[2];
+        if (["info"].includes(deviceId)) {
+          this.log.silly(`Cleanup: Ignore non device related state ${objectId}.`);
+        } else {
+          if (!allObjectDeviceIds.includes(deviceId))
+            allObjectDeviceIds.push(deviceId);
+        }
+      }
+      const allConfigDeviceIds = [];
+      for (const ip in this.fullysAll) {
+        allConfigDeviceIds.push(this.fullysAll[ip].id);
+      }
+      for (const id of allObjectDeviceIds) {
+        if (!allConfigDeviceIds.includes(id)) {
+          await this.delObjectAsync(id, {
+            recursive: true
+          });
+          this.log.info(`Cleanup: Deleted no longer defined device objects of '${id}'.`);
+        }
+      }
+    } catch (e) {
+      this.log.error(this.err2Str(e));
+      return;
+    }
+  }
 }
 
 // @ts-ignore parent is a valid property on module
 if (module.parent) {
-    // Export the constructor in compact mode
-    /**
-     * @param {Partial<utils.AdapterOptions>} [options={}]
-     */
-    module.exports = (options) => new fullybrowserControll(options);
+  // Export the constructor in compact mode
+  /**
+   * @param {Partial<utils.AdapterOptions>} [options={}]
+   */
+  module.exports = (options) => new fullybrowserControll(options);
 } else {
-    // otherwise start the instance directly
-    new fullybrowserControll();
+  // otherwise start the instance directly
+  new fullybrowserControll();
 }
