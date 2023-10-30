@@ -1,8 +1,11 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "2.2.0",
+    "version": "3.0.0-beta.0",
     "news": {
+       "3.0.0-beta.0": {
+        "en": "new fully"       
+      },
       "2.2.0": {
         "en": "intrvall corr",
         "de": "intrvall corr",
