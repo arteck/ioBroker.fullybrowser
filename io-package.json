@@ -3,8 +3,8 @@
     "name": "fullybrowser",
     "version": "3.0.0-beta.0",
     "news": {
-       "3.0.0-beta.0": {
-        "en": "new fully"       
+      "3.0.0-beta.0": {
+        "en": "new fully"
       },
       "2.2.0": {
         "en": "intrvall corr",
@@ -64,7 +64,8 @@
       "pl": "łączy Fully Browser z ioBroker"
     },
     "authors": [
-      "arteck <arteck@outlook.com>", "Acgua <no@mail.com>"
+      "arteck <arteck@outlook.com>",
+      "Acgua <no@mail.com>"
     ],
     "materialize": true,
     "compact": true,
@@ -106,12 +107,10 @@
     ],
     "dependencies": [
       {
-        "js-controller": ">=3.0.0"
+        "js-controller": ">=5.0.0"
       }
     ],
-    "installedFrom": "arteck/ioBroker.fullybrowser#8e0605d153fb36817cedb92ed8adffea323fecb0"
-  },
-   "messages": [
+    "messages": [
       {
         "condition": {
           "operand": "and",
@@ -133,17 +132,17 @@
           "zh-cn": "重要通知!"
         },
         "text": {
-            "en": "This new version has been completely revised.\nIt uses the MQTT connection. If this cannot be established the normal request is used.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts",
-            "de": "Diese neue Version wurde komplett überarbeitet.\nEs verwendet die MQTT-Verbindung. Kann dies nicht festgestellt werden, wird die normale Anfrage verwendet.\nDer Name in der Baumstruktur ist nicht mehr die IP-Adresse.\nBitte anpassen Sie Ihre Skripte",
-            "ru": "Эта новая версия была полностью пересмотрена.\nОн использует соединение MQTT. Если это нельзя установить нормальный запрос используется.\nНазвание в структуре дерева больше не является IP-адресом.\nПожалуйста, приспособьте ваши скрипты",
-            "pt": "Esta nova versão foi completamente revisada.\nEle usa a conexão MQTT. Se isso não puder ser estabelecido o pedido normal é usado.\nO nome na estrutura da árvore não é mais o endereço IP.\nPor favor, adapte seus scripts",
-            "nl": "Deze nieuwe versie is volledig herzien.\nHet gebruikt de MQT-connectie. Als dit niet kan worden vastgesteld dat het normale verzoek wordt gebruikt.\nDe naam in de boomstructuur is niet langer het IP-adres.\nGelieve je scripts aan te passen",
-            "fr": "Cette nouvelle version a été entièrement révisée.\nIl utilise la connexion MQTT. Si cela ne peut être établi, la demande normale est utilisée.\nLe nom de la structure de l'arbre n'est plus l'adresse IP.\nVeuillez adapter vos scripts",
-            "it": "Questa nuova versione è stata completamente revisionata.\nUsa la connessione MQTT. Se questo non può essere stabilito, viene utilizzata la richiesta normale.\nIl nome nella struttura dell'albero non è più l'indirizzo IP.\nPer favore, adatta i tuoi script",
-            "es": "Esta nueva versión ha sido completamente revisada.\nUtiliza la conexión MQTT. Si esto no puede ser establecido se utiliza la solicitud normal.\nEl nombre en la estructura del árbol ya no es la dirección IP.\nPor favor, adapte sus scripts",
-            "pl": "Nowa wersja została całkowicie zmieniona.\nUżywa połączenia MQTT. Jeśli nie może być ona ustalona normalna prośba.\nNazwa w strukturze drzewa nie jest już adresem IP.\nZastosuj swój scenariusz",
-            "uk": "Ця нова версія була повністю оновлена.\nВін використовує підключення MQTT. Якщо це не може бути встановленим нормальним запитом.\nНазва в структурі дерева не більше IP-адреси.\nБудь ласка, адаптуйте сценарії",
-            "zh-cn": "这一新版本已经完全修订。.\n它利用技合中心。 如果不能确定正常请求。.\n树木结构中的名称不再是IP地址。.\n请修改你的文字"
+          "en": "This new version has been completely revised.\nIt uses the MQTT connection. If this cannot be established the normal request is used.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts",
+          "de": "Diese neue Version wurde komplett überarbeitet.\nEs verwendet die MQTT-Verbindung. Kann dies nicht festgestellt werden, wird die normale Anfrage verwendet.\nDer Name in der Baumstruktur ist nicht mehr die IP-Adresse.\nBitte anpassen Sie Ihre Skripte",
+          "ru": "Эта новая версия была полностью пересмотрена.\nОн использует соединение MQTT. Если это нельзя установить нормальный запрос используется.\nНазвание в структуре дерева больше не является IP-адресом.\nПожалуйста, приспособьте ваши скрипты",
+          "pt": "Esta nova versão foi completamente revisada.\nEle usa a conexão MQTT. Se isso não puder ser estabelecido o pedido normal é usado.\nO nome na estrutura da árvore não é mais o endereço IP.\nPor favor, adapte seus scripts",
+          "nl": "Deze nieuwe versie is volledig herzien.\nHet gebruikt de MQT-connectie. Als dit niet kan worden vastgesteld dat het normale verzoek wordt gebruikt.\nDe naam in de boomstructuur is niet langer het IP-adres.\nGelieve je scripts aan te passen",
+          "fr": "Cette nouvelle version a été entièrement révisée.\nIl utilise la connexion MQTT. Si cela ne peut être établi, la demande normale est utilisée.\nLe nom de la structure de l'arbre n'est plus l'adresse IP.\nVeuillez adapter vos scripts",
+          "it": "Questa nuova versione è stata completamente revisionata.\nUsa la connessione MQTT. Se questo non può essere stabilito, viene utilizzata la richiesta normale.\nIl nome nella struttura dell'albero non è più l'indirizzo IP.\nPer favore, adatta i tuoi script",
+          "es": "Esta nueva versión ha sido completamente revisada.\nUtiliza la conexión MQTT. Si esto no puede ser establecido se utiliza la solicitud normal.\nEl nombre en la estructura del árbol ya no es la dirección IP.\nPor favor, adapte sus scripts",
+          "pl": "Nowa wersja została całkowicie zmieniona.\nUżywa połączenia MQTT. Jeśli nie może być ona ustalona normalna prośba.\nNazwa w strukturze drzewa nie jest już adresem IP.\nZastosuj swój scenariusz",
+          "uk": "Ця нова версія була повністю оновлена.\nВін використовує підключення MQTT. Якщо це не може бути встановленим нормальним запитом.\nНазва в структурі дерева не більше IP-адреси.\nБудь ласка, адаптуйте сценарії",
+          "zh-cn": "这一新版本已经完全修订。.\n它利用技合中心。 如果不能确定正常请求。.\n树木结构中的名称不再是IP地址。.\n请修改你的文字"
         },
         "link": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
         "level": "warn",
