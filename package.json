@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/arteck/ioBroker.fullybrowser#readme",
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   },
   "readmeFilename": "README.md",
   "dependencies": {
