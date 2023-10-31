@@ -49,9 +49,9 @@
                     }
                 },
                 "header_Devices": {
-                    "newLine": "true",
                     "type": "header",
                     "text": "Fully Browser Devices",
+                    "newLine": true,
                     "size": 2,
                     "style": {
                         "marginTop": 20
@@ -60,7 +60,7 @@
                 "text_DevicesInfo": {
                     "type": "staticText",
                     "label": "Add new devices by clicking the plus (+) symbol...",
-                    "newLine": "true",
+                    "newLine": true,
                     "style": {
                         "fontSize": 16
                     }
@@ -75,7 +75,7 @@
                             "type": "checkbox",
                             "attr": "enabled",
                             "width": "30px",
-                            "title": "",
+                            "title": "Active",
                             "default": true
                         },
                         {
@@ -158,7 +158,7 @@
                     ]
                 },
                 "header_MQTT": {
-                    "newLine": "true",
+                    "newLine": true,
                     "type": "header",
                     "text": "MQTT Configuration",
                     "size": 2
@@ -171,7 +171,7 @@
                     }
                 },
                 "mqttPort": {
-                    "newLine": "true",
+                    "newLine": true,
                     "type": "number",
                     "label": "Port",
                     "min": 1,
@@ -246,7 +246,7 @@
                     "lg": 5
                 },
                 "header_RESTAPI": {
-                    "newLine": "true",
+                    "newLine": true,
                     "type": "header",
                     "text": "Remote Admin (REST API)",
                     "size": 2
