@@ -110,12 +110,14 @@
         "js-controller": ">=5.0.0"
       }
     ],
+    "messagebox": true,
+    "subscribe": "messagebox",
     "messages": [
       {
         "condition": {
           "operand": "and",
           "rules": [
-            "oldVersion<=2.0.0",
+            "oldVersion<=2.2.0",
             "newVersion>=3.0.0"
           ]
         },
