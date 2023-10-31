@@ -1,5 +1,4 @@
 const utils = require('@iobroker/adapter-core');
-
 const cmds = require('./lib/constants').cmds;
 const cmdsSwitches = require('./lib/constants').cmdsSwitches;
 const mqttEvents = require('./lib/constants').mqttEvents;
