@@ -6,7 +6,7 @@
 
 ![Number of Installations](http://iobroker.live/badges/fullybrowser-installed.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)![GitHub last commit](https://img.shields.io/github/last-commit/arteck/ioBroker.fullybrowser)
-![GitHub issues](https://img.shields.io/github/issues/arteck/ioBroker.fullybrowser)
+![GitHub issues](https://img.shields.io/github/issues/arteck/ioBroker.fullybrowser)[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/arteck/ioBroker.fullybrowser/blob/master/LICENSE)
 
 </br>
 **Version:** </br>
