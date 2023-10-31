@@ -22,6 +22,11 @@ A small excerpt just of the command options:
 -   [🇬🇧 English Documentation](./docs/en/README.md)
 -   [🇩🇪 Deutsche Dokumentation](./docs/de/README.md)
 
+
+## Credits
+
+Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https://github.com/Acgua/ioBroker.fully-mqtt). 
+
 <!--
     Placeholder for the next version (at the beginning of the line):
     
