@@ -134,17 +134,17 @@
           "zh-cn": "重要通知!"
         },
         "text": {
-          "en": "This new version has been completely revised.\nIt uses the MQTT connection. If this cannot be established the normal request is used.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts",
-          "de": "Diese neue Version wurde komplett überarbeitet.\nEs verwendet die MQTT-Verbindung. Kann dies nicht festgestellt werden, wird die normale Anfrage verwendet.\nDer Name in der Baumstruktur ist nicht mehr die IP-Adresse.\nBitte anpassen Sie Ihre Skripte",
-          "ru": "Эта новая версия была полностью пересмотрена.\nОн использует соединение MQTT. Если это нельзя установить нормальный запрос используется.\nНазвание в структуре дерева больше не является IP-адресом.\nПожалуйста, приспособьте ваши скрипты",
-          "pt": "Esta nova versão foi completamente revisada.\nEle usa a conexão MQTT. Se isso não puder ser estabelecido o pedido normal é usado.\nO nome na estrutura da árvore não é mais o endereço IP.\nPor favor, adapte seus scripts",
-          "nl": "Deze nieuwe versie is volledig herzien.\nHet gebruikt de MQT-connectie. Als dit niet kan worden vastgesteld dat het normale verzoek wordt gebruikt.\nDe naam in de boomstructuur is niet langer het IP-adres.\nGelieve je scripts aan te passen",
-          "fr": "Cette nouvelle version a été entièrement révisée.\nIl utilise la connexion MQTT. Si cela ne peut être établi, la demande normale est utilisée.\nLe nom de la structure de l'arbre n'est plus l'adresse IP.\nVeuillez adapter vos scripts",
-          "it": "Questa nuova versione è stata completamente revisionata.\nUsa la connessione MQTT. Se questo non può essere stabilito, viene utilizzata la richiesta normale.\nIl nome nella struttura dell'albero non è più l'indirizzo IP.\nPer favore, adatta i tuoi script",
-          "es": "Esta nueva versión ha sido completamente revisada.\nUtiliza la conexión MQTT. Si esto no puede ser establecido se utiliza la solicitud normal.\nEl nombre en la estructura del árbol ya no es la dirección IP.\nPor favor, adapte sus scripts",
-          "pl": "Nowa wersja została całkowicie zmieniona.\nUżywa połączenia MQTT. Jeśli nie może być ona ustalona normalna prośba.\nNazwa w strukturze drzewa nie jest już adresem IP.\nZastosuj swój scenariusz",
-          "uk": "Ця нова версія була повністю оновлена.\nВін використовує підключення MQTT. Якщо це не може бути встановленим нормальним запитом.\nНазва в структурі дерева не більше IP-адреси.\nБудь ласка, адаптуйте сценарії",
-          "zh-cn": "这一新版本已经完全修订。.\n它利用技合中心。 如果不能确定正常请求。.\n树木结构中的名称不再是IP地址。.\n请修改你的文字"
+          "en": "This new version has been completely revised.\nIt uses the MQTT connection or restAPI(request). it's configurable in Adapter settings.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts. \nAll settings from the old Adapter are deleted, save yours FullyBrowser list from old Adapter settings (screenshot)",
+          "de": "Diese neue Version wurde komplett überarbeitet.\nEs verwendet die MQTT-Verbindung oder restAPI (Request.) es ist in Adapter-Einstellungen konfigurierbar.\nDer Name in der Baumstruktur ist nicht mehr die IP-Adresse.\nBitte passen Sie Ihre Skripte an.\nAlle Einstellungen aus dem alten Adapter werden gelöscht, speichern Sie Ihre FullyBrowser-Liste aus alten Adaptereinstellungen (screenshot)",
+          "ru": "Эта новая версия была полностью пересмотрена.\nОн использует соединение MQTT или restAPI (запрос.) он настраивается в настройках адаптера.\nНазвание в структуре дерева больше не является IP-адресом.\nПожалуйста, приспособьте свои скрипты.\nВсе настройки от старого адаптера удаляются, сохраните список FullyBrowser из старых настроек адаптера (скриншот)",
+          "pt": "Esta nova versão foi completamente revisada.\nEle usa a conexão MQTT ou restAPI (pedido.) é configurável em configurações do adaptador.\nO nome na estrutura da árvore não é mais o endereço IP.\nPor favor, adapte seus scripts.\nTodas as configurações do velho adaptador são excluídas, salve sua lista FullyBrowser de configurações antigas do adaptador (screenshot)",
+          "nl": "Deze nieuwe versie is volledig herzien.\nHet gebruikt de MQT-connectie of restaPI (request) Het is vertrouwelijk in adapter settings.\nDe naam in de boomstructuur is niet langer het IP-adres.\nAlsjeblieft, pas je script aan.\nAlle instellingen van de oude Adapter zijn verwijderd, bewaar de FullyBrowser lijst van oude Adapter settings (screenshot)",
+          "fr": "Cette nouvelle version a été entièrement révisée.\nIl utilise la connexion MQTT ou restAPI(demande.) elle est configurable dans les réglages d'adaptateur.\nLe nom de la structure de l'arbre n'est plus l'adresse IP.\nVeuillez adapter vos scripts.\nTous les réglages de l'ancien Adaptateur sont supprimés, enregistrez votre liste FullyBrowser depuis les anciens réglages de l'adaptateur (écran)",
+          "it": "Questa nuova versione è stata completamente revisionata.\nUtilizza la connessione MQTT o il restoAPI (richiesta.) è configurabile nelle impostazioni dell'adattatore.\nIl nome nella struttura dell'albero non è più l'indirizzo IP.\nPer favore, adatta i tuoi script.\nTutte le impostazioni dal vecchio adattatore vengono eliminati, salvare il vostro elenco FullyBrowser dalle vecchie impostazioni dell'adattatore (screenshot)",
+          "es": "Esta nueva versión ha sido completamente revisada.\nUtiliza la conexión MQTT o restAPI(request.) es configurable en la configuración de Adaptador.\nEl nombre en la estructura del árbol ya no es la dirección IP.\nPor favor, adapte tus scripts.\nTodas las configuraciones del viejo Adaptador se eliminan, guardar la lista FullyBrowser de la configuración antigua del Adaptador (imagen)",
+          "pl": "Nowa wersja została całkowicie zmieniona.\nUżywa połączenia MQTT lub restAPI(request.) jest konfigurowalny w ustawieniach Adaptera.\nNazwa w strukturze drzewa nie jest już adresem IP.\nZastosował swoje scenariusze.\nWszystkie ustawienia ze starego Adaptera zostały usunięte, zapisywane są z listy FullyBrowser ze starych ustawień Adaptera",
+          "uk": "Ця нова версія була повністю оновлена.\nВін використовує підключення MQTT або переадресацію (request.) він налаштований в налаштуваннях адаптера.\nНазва в структурі дерева не більше IP-адреси.\nБудь ласка, адаптуйте сценарії.\nВсі налаштування від старого адаптера видаляються, заощаджуйте свій список FullyBrowser від застарілих налаштувань адаптера (екранний)",
+          "zh-cn": "这一新版本已经完全修订。.\n它利用技转中心联系或包商协会(寻求)在阿达佩特环境中被掩盖。.\n树木结构中的名称不再是IP地址。.\n请修改你的文字。.\n删除旧阿道道道的所有环境,使你从旧的阿普斯特环境(增加enshot)中全部列入名单。"
         },
         "link": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
         "level": "warn",
@@ -166,7 +166,7 @@
         ]
       }
     ],
-    "installedFrom": "arteck/ioBroker.fullybrowser#newFully"
+    "installedFrom": "arteck/ioBroker.fullybrowser#newFully2"
   },
   "native": {
     "tableDevices": [],
