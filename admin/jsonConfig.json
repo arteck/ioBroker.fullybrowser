@@ -80,7 +80,7 @@
                         },
                         {
                             "type": "select",
-                            "title": "ApiType",
+                            "title": "Api-Type",
                             "attr": "apiType",
                             "default": "mqtt",
                             "width": "6%",
