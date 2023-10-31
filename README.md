@@ -17,6 +17,10 @@ A small excerpt just of the command options:
 
 ![möglichkeiten](https://github.com/arteck/iobroker.fullyBrowser/blob/master/doku/auszug1.png)
 
+## Documentation
+
+-   [🇬🇧 English Documentation](./docs/en/README.md)
+-   [🇩🇪 Deutsche Dokumentation](./docs/de/README.md)
 
 <!--
     Placeholder for the next version (at the beginning of the line):
@@ -32,8 +36,14 @@ A small excerpt just of the command options:
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (arteck) breaking change - new structure from fully-mqtt Adapter from Acgua
+* here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt
+
+#----------------------------------------------------------------------
 ### 2.2.0 (2023-10-27)
-* (arteck) intrvall corr
+* (arteck) intervall corr
 
 ### 2.1.6 (2022-11-23)
 * (arteck) add name of device to admin
