@@ -108,7 +108,7 @@ class fullybrowserControll  extends utils.Adapter {
         }
     }
 
-    async onMqttAlive(ip, isAlive) {
+    async onMqttAlive(ip, isAlive, msg) {
         try {
             const prevIsAlive = this.fullysEnbl[ip].isAlive;
             this.fullysEnbl[ip].isAlive = isAlive;
@@ -121,6 +121,12 @@ class fullybrowserControll  extends utils.Adapter {
             if ((!calledBefore && isAlive === true) || prevIsAlive !== isAlive) {
                 // Set Device isAlive Status - we could also use setStateChanged()...
                 this.setState(this.fullysEnbl[ip].id + '.alive', { val: isAlive, ack: true });
+                
+                if (isAlive) {
+                    this.log.info(`${this.fullysEnbl[ip].name} is alive (MQTT: ${msg})`);
+                } else {
+                    this.log.warn(`${this.fullysEnbl[ip].name} is not alive! (MQTT: ${msg})`);
+                }
             }
 
             this.setStateChanged('info.connection', { val: true, ack: true });
