@@ -29,6 +29,7 @@ class fullybrowserControll  extends utils.Adapter {
     this.fullysEnbl = {};
     this.fullysMQTT = {};
     this.fullysRESTApi = {};
+    this.startMQTTServer = false;
 
     this.fullysDisbl = {};
     this.fullysAll = {};
@@ -43,10 +44,8 @@ class fullybrowserControll  extends utils.Adapter {
 
   async onReady() {
     try {
-      this.setState("info.connection", {
-        val: false,
-        ack: true
-      });
+      this.setState("info.connection", {val: false, ack: true});
+
       if (await this.initConfig()) {
         this.log.debug(`Adapter settings successfully verified and initialized.`);
       } else {
@@ -59,6 +58,9 @@ class fullybrowserControll  extends utils.Adapter {
         const res = await this.createFullyDeviceObjects(this.fullysEnbl[ip]);
         if (res) {
           await this.subscribeStatesAsync(this.fullysEnbl[ip].id + ".Commands.*");
+        }
+        if (this.fullysEnbl[ip].apiType == 'mqtt') {
+          this.startMQTTServer = true;
         }
         this.setState(this.fullysEnbl[ip].id + ".enabled", {
           val: true,
@@ -92,8 +94,10 @@ class fullybrowserControll  extends utils.Adapter {
         }
       }
 
-      this.mqtt_Server = new MqttServer(this);
-      this.mqtt_Server.start();
+      if (this.startMQTTServer) {
+        this.mqtt_Server = new MqttServer(this);
+        this.mqtt_Server.start();
+      }
 
       this.restApi.startIntervall();
 
@@ -104,40 +108,22 @@ class fullybrowserControll  extends utils.Adapter {
     }
   }
 
-
   async onMqttAlive(ip, isAlive, msg) {
     try {
-      const prevIsAlive = this.fullysMQTT[ip].isAlive;
-      this.fullysMQTT[ip].isAlive = isAlive;
-      const calledBefore = this.onMqttAlive_EverBeenCalledBefore;
-      this.onMqttAlive_EverBeenCalledBefore = true;
-      if (!calledBefore && isAlive === true || prevIsAlive !== isAlive) {
-        this.setState(this.fullysMQTT[ip].id + ".alive", {
-          val: isAlive,
-          ack: true
-        });
-        if (isAlive) {
-          this.log.info(`${this.fullysMQTT[ip].name} is alive (MQTT: ${msg})`);
-        } else {
-          this.log.warn(`${this.fullysMQTT[ip].name} is not alive! (MQTT: ${msg})`);
-        }
-      } else {
+      const prevIsAlive = this.fullysEnbl[ip].isAlive;
+      this.fullysEnbl[ip].isAlive = isAlive;
+
+      // Has this function ever been called before? If adapter is restarted, we ensure log, etc.
+      const calledBefore = this.onMqttAlive_EverBeenCalledBefore; // Keep old value
+      this.onMqttAlive_EverBeenCalledBefore = true; // Now it was called
+
+      // if alive status changed
+      if ((!calledBefore && isAlive === true) || prevIsAlive !== isAlive) {
+        // Set Device isAlive Status - we could also use setStateChanged()...
+        this.setState(this.fullysEnbl[ip].id + '.alive', { val: isAlive, ack: true });
       }
-      let countAll = 0;
-      let countAlive = 0;
-      for (const lpIpAddr in this.fullysMQTT) {
-        countAll++;
-        if (this.fullysMQTT[lpIpAddr].isAlive) {
-          countAlive++;
-        }
-      }
-      let areAllAlive = false;
-      if (countAll > 0 && countAll === countAlive)
-        areAllAlive = true;
-      this.setStateChanged("info.connection", {
-        val: areAllAlive,
-        ack: true
-      });
+
+      this.setStateChanged('info.connection', { val: true, ack: true });
     } catch (e) {
       this.log.error(this.err2Str(e));
       return;
@@ -193,13 +179,17 @@ class fullybrowserControll  extends utils.Adapter {
         }
       }
 
-      this.setState(this.fullysEnbl[obj.ip].id + '.lastInfoUpdate', { val: Date.now(), ack: true });
-      this.setState(this.fullysEnbl[obj.ip].id + '.alive', { val: true, ack: true });
+      this.aliveUpdate(this.fullysEnbl[obj.ip].id,true);
 
     } catch (e) {
       this.log.error(this.err2Str(e));
       return;
     }
+  }
+
+  async aliveUpdate(dev,val) {
+    this.setState(dev + '.lastInfoUpdate', { val: Date.now(), ack: true });
+    this.setState(dev + '.alive', { val: val, ack: true });
   }
 
   async onMqttEvent(obj) {
