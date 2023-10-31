@@ -2,12 +2,15 @@
 # ioBroker.fullybrowser
 =================
 
+[![NPM](https://nodei.co/npm/iobroker.fullybrowser.png?downloads=true)](https://nodei.co/npm/iobroker.fullybrowser/)
+
 ![Number of Installations](http://iobroker.live/badges/fullybrowser-installed.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)![GitHub last commit](https://img.shields.io/github/last-commit/arteck/ioBroker.fullybrowser)
-[![NPM](https://nodei.co/npm/iobroker.fullybrowser.png?downloads=true)](https://nodei.co/npm/iobroker.fullybrowser/)![GitHub issues](https://img.shields.io/github/issues/arterck/ioBroker.fullybrowser)
+![GitHub issues](https://img.shields.io/github/issues/arteck/ioBroker.fullybrowser)
 
 </br>
 **Version:** </br>
+
 ![Number of Installations](http://iobroker.live/badges/fullybrowser-stable.svg) 
 ![Stable](https://iobroker.live/badges/fullybrowser-stable.svg)
 
