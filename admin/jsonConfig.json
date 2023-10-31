@@ -253,11 +253,11 @@
                 },
                 "restTimeout": {
                     "type": "number",
-                    "min": 500,
+                    "min": 1000,
                     "max": 15000,
-                    "default": 6000,
+                    "default": 2000,
                     "label": "Request Timeout",
-                    "help": "in milliseconds (500-15000, default: 6000)",
+                    "help": "in milliseconds (500-15000, default: 2000)",
                     "sm": 12,
                     "md": 6,
                     "lg": 3
@@ -266,7 +266,7 @@
                     "type": "number",
                     "min": 10000,
                     "max": 99999999,
-                    "default": 6000,
+                    "default": 60000,
                     "label": "Request Intervall",
                     "help": "in milliseconds (10000-99999999, default: 60000 = 1 Min.)",
                     "sm": 12,

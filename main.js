@@ -303,6 +303,7 @@ class fullybrowserControll  extends utils.Adapter {
           } else {
             this.log.info(`\u{1F5F8} ${fully.name}: Command ${cmd} successfully set to ${stateObj.val}`);
           }
+          
           if (switchConf !== void 0) {
             const onOrOffCmdVal = cmd === switchConf.cmdOn ? true : false;
             await this.setStateAsync(`${pth}.${switchConf.id}`, {
@@ -384,6 +385,7 @@ class fullybrowserControll  extends utils.Adapter {
   async onUnload(callback) {
     try {
       if (this._requestInterval) clearInterval(this._requestInterval);
+
       if (this.fullysAll) {
         for (const ip in this.fullysAll) {
           if (await this.getObjectAsync(this.fullysAll[ip].id)) {
@@ -419,9 +421,13 @@ class fullybrowserControll  extends utils.Adapter {
         this.log.warn(`Adapter instance settings: MQTT Publish Info Delay of ${this.config.mqttPublishedInfoDelay}s is not allowed, set to default of 30s`);
         this.config.mqttPublishedInfoDelay = 30;
       }
-      if (this.isEmpty(this.config.restTimeout) || this.config.restTimeout < 500 || this.config.restTimeout > 15e3) {
+      if (this.isEmpty(this.config.restTimeout) || this.config.restTimeout < 500 || this.config.restTimeout > 15000) {
         this.log.warn(`Adapter instance settings: REST API timeout of ${this.config.restTimeout} ms is not allowed, set to default of 6000ms`);
-        this.config.restTimeout = 6e3;
+        this.config.restTimeout = 6000;
+      }
+      if (this.isEmpty(this.config.restIntervall) || this.config.restIntervall < 10000 || this.config.restIntervall > 99999999) {
+        this.log.warn(`Adapter instance settings: REST API timeout of ${this.config.restIntervall} ms is not allowed, set to default of 10000ms`);
+        this.config.restIntervall = 10000;
       }
       if (this.isEmpty(this.config.tableDevices)) {
         this.log.error(`No Fully devices defined in adapter instance settings!`);
