@@ -5,7 +5,6 @@ const cmdsSwitches = require("./lib/constants").cmdsSwitches;
 const mqttEvents = require("./lib/constants").mqttEvents;
 const _methods = require("./lib/methods");
 const MqttServer = require("./lib/mqtt-server");
-const AxiosCommand = require("./lib/axiosCommand");
 const RestApiFully = require("./lib/restApi");
 /**
  * -------------------------------------------------------------------
@@ -25,12 +24,17 @@ class fullybrowserControll  extends utils.Adapter {
     this.getConfigValuePerKey = _methods.getConfigValuePerKey.bind(this);
     this.isIpAddressValid = _methods.isIpAddressValid.bind(this);
 
-    this.restApi_inst = new RestApiFully(this);
+    this.restApi = new RestApiFully(this);
 
     this.fullysEnbl = {};
+    this.fullysMQTT = {};
+    this.fullysRESTApi = {};
+
     this.fullysDisbl = {};
     this.fullysAll = {};
+
     this.onMqttAlive_EverBeenCalledBefore = false;
+    this._requestInterval = 0;
 
     this.on("ready", this.onReady.bind(this));
     this.on("stateChange", this.onStateChange.bind(this));
@@ -49,12 +53,19 @@ class fullybrowserControll  extends utils.Adapter {
         this.log.error(`Adapter settings initialization failed.  ---> Please check your adapter instance settings!`);
         return;
       }
+
+      // all enabled
       for (const ip in this.fullysEnbl) {
         const res = await this.createFullyDeviceObjects(this.fullysEnbl[ip]);
-        if (res)
+        if (res) {
           await this.subscribeStatesAsync(this.fullysEnbl[ip].id + ".Commands.*");
+        }
         this.setState(this.fullysEnbl[ip].id + ".enabled", {
           val: true,
+          ack: true
+        });
+        this.setState(this.fullysEnbl[ip].id + ".apiType", {
+          val: this.fullysEnbl[ip].apiType,
           ack: true
         });
         this.setState(this.fullysEnbl[ip].id + ".alive", {
@@ -62,10 +73,16 @@ class fullybrowserControll  extends utils.Adapter {
           ack: true
         });
       }
+
+      // all disabled
       for (const ip in this.fullysDisbl) {
         if (await this.getObjectAsync(this.fullysAll[ip].id)) {
           this.setState(this.fullysDisbl[ip].id + ".enabled", {
             val: false,
+            ack: true
+          });
+          this.setState(this.fullysDisbl[ip].id + ".apiType", {
+            val: this.fullysDisbl[ip].apiType,
             ack: true
           });
           this.setState(this.fullysDisbl[ip].id + ".alive", {
@@ -78,9 +95,7 @@ class fullybrowserControll  extends utils.Adapter {
       this.mqtt_Server = new MqttServer(this);
       this.mqtt_Server.start();
 
-      this.axiosCommand = new AxiosCommand(this);
-      this.axiosCommand.start();
-
+      this.restApi.startIntervall();
 
       this.deleteRemovedDeviceObjects();
     } catch (e) {
@@ -92,27 +107,27 @@ class fullybrowserControll  extends utils.Adapter {
 
   async onMqttAlive(ip, isAlive, msg) {
     try {
-      const prevIsAlive = this.fullysEnbl[ip].isAlive;
-      this.fullysEnbl[ip].isAlive = isAlive;
+      const prevIsAlive = this.fullysMQTT[ip].isAlive;
+      this.fullysMQTT[ip].isAlive = isAlive;
       const calledBefore = this.onMqttAlive_EverBeenCalledBefore;
       this.onMqttAlive_EverBeenCalledBefore = true;
       if (!calledBefore && isAlive === true || prevIsAlive !== isAlive) {
-        this.setState(this.fullysEnbl[ip].id + ".alive", {
+        this.setState(this.fullysMQTT[ip].id + ".alive", {
           val: isAlive,
           ack: true
         });
         if (isAlive) {
-          this.log.info(`${this.fullysEnbl[ip].name} is alive (MQTT: ${msg})`);
+          this.log.info(`${this.fullysMQTT[ip].name} is alive (MQTT: ${msg})`);
         } else {
-          this.log.warn(`${this.fullysEnbl[ip].name} is not alive! (MQTT: ${msg})`);
+          this.log.warn(`${this.fullysMQTT[ip].name} is not alive! (MQTT: ${msg})`);
         }
       } else {
       }
       let countAll = 0;
       let countAlive = 0;
-      for (const lpIpAddr in this.fullysEnbl) {
+      for (const lpIpAddr in this.fullysMQTT) {
         countAll++;
-        if (this.fullysEnbl[lpIpAddr].isAlive) {
+        if (this.fullysMQTT[lpIpAddr].isAlive) {
           countAlive++;
         }
       }
@@ -131,9 +146,8 @@ class fullybrowserControll  extends utils.Adapter {
 
   async onMqttInfo(obj) {
     try {
-      this.log.debug(`[MQTT] ${this.fullysEnbl[obj.ip].name} published info, topic: ${obj.topic}`);
-      const formerInfoKeysLength = this.fullysEnbl[obj.ip].mqttInfoKeys.length;
       const newInfoKeysAdded = [];
+
       for (const key in obj.infoObj) {
         const val = obj.infoObj[key];
         const valType = typeof val;
@@ -144,7 +158,9 @@ class fullybrowserControll  extends utils.Adapter {
 
         if (!this.fullysEnbl[obj.ip].mqttInfoKeys.includes(key)) {
           this.fullysEnbl[obj.ip].mqttInfoKeys.push(key);
+
           newInfoKeysAdded.push(key);
+
           await this.setObjectNotExistsAsync(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, {
             type: "state",
             common: {
@@ -158,10 +174,6 @@ class fullybrowserControll  extends utils.Adapter {
           });
         }
       }
-      if (formerInfoKeysLength === 0)
-        this.log.debug(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Initially create states for ${newInfoKeysAdded.length} info items (if not yet existing)`);
-      if (formerInfoKeysLength > 0 && newInfoKeysAdded.length > 0)
-        this.log.info(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Created new info object(s) as not seen before (if object(s) did not exist): ${newInfoKeysAdded.join(", ")}`);
 
       for (const key in obj.infoObj) {
         const newVal = typeof obj.infoObj[key] === "object" ? JSON.stringify(obj.infoObj[key]) : obj.infoObj[key];
@@ -196,10 +208,10 @@ class fullybrowserControll  extends utils.Adapter {
 
   async onMqttEvent(obj) {
     try {
-      this.log.debug(`[MQTT] \u{1F4E1} ${this.fullysEnbl[obj.ip].name} published event, topic: ${obj.topic}, cmd: ${obj.cmd}`);
-      const pthEvent = `${this.fullysEnbl[obj.ip].id}.Events.${obj.cmd}`;
+      this.log.debug(`[MQTT] \u{1F4E1} ${this.fullysMQTT[obj.ip].name} published event, topic: ${obj.topic}, cmd: ${obj.cmd}`);
+      const pthEvent = `${this.fullysMQTT[obj.ip].id}.Events.${obj.cmd}`;
       if (!await this.getObjectAsync(pthEvent)) {
-        this.log.debug(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Event ${obj.cmd} received but state ${pthEvent} does not exist, so we create it first`);
+        this.log.debug(`[MQTT] ${this.fullysMQTT[obj.ip].name}: Event ${obj.cmd} received but state ${pthEvent} does not exist, so we create it first`);
         await this.setObjectNotExistsAsync(pthEvent, {
           type: "state",
           common: {
@@ -216,7 +228,7 @@ class fullybrowserControll  extends utils.Adapter {
         val: true,
         ack: true
       });
-      const pthCmd = this.fullysEnbl[obj.ip].id + ".Commands";
+      const pthCmd = this.fullysMQTT[obj.ip].id + ".Commands";
       const idx = this.getIndexFromConf(cmdsSwitches, ["mqttOn", "mqttOff"], obj.cmd);
       if (idx !== -1) {
         const conf = cmdsSwitches[idx];
@@ -241,7 +253,7 @@ class fullybrowserControll  extends utils.Adapter {
             ack: true
           });
         } else {
-          this.log.silly(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Event cmd ${obj.cmd} - no REST API command is existing, so skip confirmation with with ack:true`);
+          this.log.silly(`[MQTT] ${this.fullysMQTT[obj.ip].name}: Event cmd ${obj.cmd} - no REST API command is existing, so skip confirmation with with ack:true`);
         }
       }
     } catch (e) {
@@ -261,11 +273,14 @@ class fullybrowserControll  extends utils.Adapter {
       const channel = idSplit[3];
       const cmd = idSplit[4];
       const pth = deviceId + "." + channel;
+
       if (channel === "Commands") {
         this.log.debug(`state ${stateId} changed: ${stateObj.val} (ack = ${stateObj.ack})`);
         const fully = this.getFullyByKey("id", deviceId);
+
         if (!fully)
           throw `Fully object for deviceId '${deviceId}' not found!`;
+
         let cmdToSend = cmd;
         let switchConf = void 0;
         const idxSw = this.getIndexFromConf(cmdsSwitches, ["id"], cmd);
@@ -276,9 +291,12 @@ class fullybrowserControll  extends utils.Adapter {
           if (!stateObj.val)
             return;
         }
+
         if (!cmdToSend)
           throw `onStateChange() - ${stateId}: fullyCmd could not be determined!`;
-        const sendCommand = await this.restApi_inst.sendCmd(fully, cmdToSend, stateObj.val);
+
+        const sendCommand = await this.restApi.sendCmd(fully, cmdToSend, stateObj.val);
+
         if (sendCommand) {
           if (this.config.restCommandLogAsDebug) {
             this.log.debug(`\u{1F5F8} ${fully.name}: Command ${cmd} successfully set to ${stateObj.val}`);
@@ -365,6 +383,7 @@ class fullybrowserControll  extends utils.Adapter {
 
   async onUnload(callback) {
     try {
+      if (this._requestInterval) clearInterval(this._requestInterval);
       if (this.fullysAll) {
         for (const ip in this.fullysAll) {
           if (await this.getObjectAsync(this.fullysAll[ip].id)) {
@@ -424,7 +443,8 @@ class fullybrowserControll  extends utils.Adapter {
           restPort: 0,
           restPassword: "",
           lastSeen: 0,
-          isAlive: false
+          isAlive: false,
+          apiType: ""
         };
         if (!this.isIpAddressValid(lpDevice.ip)) {
           this.log.error(`${finalDevice.name}: Provided IP address "${lpDevice.ip}" is not valid!`);
@@ -434,6 +454,7 @@ class fullybrowserControll  extends utils.Adapter {
           this.log.error(`Provided device name "${lpDevice.name}" is empty!`);
           return false;
         }
+
         finalDevice.name = lpDevice.ip.trim();
         finalDevice.id = this.cleanDeviceName(lpDevice.name);
 
@@ -441,12 +462,21 @@ class fullybrowserControll  extends utils.Adapter {
           this.log.error(`Provided device name "${lpDevice.name}" is too short and/or has invalid characters!`);
           return false;
         }
+
+        if (lpDevice.apiType !== "mqtt" && lpDevice.apiType !== "restapi") {
+          this.log.warn(`${finalDevice.name}: apiType is empty, set to mqtt as default.`);
+          finalDevice.restProtocol = "mqtt";
+        } else {
+          finalDevice.apiType = lpDevice.apiType;
+        }
+
         if (deviceIds.includes(finalDevice.id)) {
           this.log.error(`Device "${finalDevice.name}" -> id:"${finalDevice.id}" is used for more than once device.`);
           return false;
         } else {
           deviceIds.push(finalDevice.id);
         }
+
         if (lpDevice.restProtocol !== "http" && lpDevice.restProtocol !== "https") {
           this.log.warn(`${finalDevice.name}: REST API Protocol is empty, set to http as default.`);
           finalDevice.restProtocol = "http";
@@ -476,20 +506,33 @@ class fullybrowserControll  extends utils.Adapter {
         } else {
           finalDevice.restPassword = lpDevice.restPassword;
         }
+
         finalDevice.enabled = lpDevice.enabled ? true : false;
+
         const logConfig = {
           ...finalDevice
         };
+
         logConfig.restPassword = "(hidden)";
         this.log.debug(`Final Config: ${JSON.stringify(logConfig)}`);
         this.fullysAll[finalDevice.ip] = finalDevice;
+
         if (lpDevice.enabled) {
           this.fullysEnbl[finalDevice.ip] = finalDevice;
+
+          if (finalDevice.apiType == 'mqtt') {
+            this.fullysMQTT[finalDevice.ip] = finalDevice;
+          } else {
+            this.fullysRESTApi[finalDevice.ip] = finalDevice;
+          }
+
           this.log.info(`\u{1F5F8} ${finalDevice.name} (${finalDevice.ip}): Config successfully verified.`);
         } else {
           this.fullysDisbl[finalDevice.ip] = finalDevice;
           this.log.info(`${finalDevice.name} (${finalDevice.ip}) is not enabled in settings, so it will not be used by adapter.`);
         }
+
+
       }
       if (Object.keys(this.fullysEnbl).length === 0) {
         this.log.error(`No active devices with correct configuration found.`);
@@ -557,6 +600,17 @@ class fullybrowserControll  extends utils.Adapter {
         },
         native: {}
       });
+      await this.setObjectNotExistsAsync(device.id + ".apiType", {
+        type: "state",
+        common: {
+          name: "Which ApiType is selected for request?",
+          type: "string",
+          role: "value",
+          read: true,
+          write: false
+        },
+        native: {}
+      });
       await this.setObjectNotExistsAsync(device.id + ".Commands", {
         type: "channel",
         common: {
@@ -589,28 +643,34 @@ class fullybrowserControll  extends utils.Adapter {
           native: {}
         });
       }
-      await this.setObjectNotExistsAsync(device.id + ".Events", {
-        type: "channel",
-        common: {
-          name: "MQTT Events"
-        },
-        native: {}
-      });
-      if (this.config.mqttCreateDefaultEventObjects) {
-        for (const event of mqttEvents) {
-          await this.setObjectNotExistsAsync(device.id + ".Events." + event, {
-            type: "state",
-            common: {
-              name: "Event: " + event,
-              type: "boolean",
-              role: "switch",
-              read: true,
-              write: false
-            },
-            native: {}
-          });
+
+      if (device.apiType == 'mqtt') {
+
+        await this.setObjectNotExistsAsync(device.id + ".Events", {
+          type: "channel",
+          common: {
+            name: "MQTT Events"
+          },
+          native: {}
+        });
+
+        if (this.config.mqttCreateDefaultEventObjects) {
+          for (const event of mqttEvents) {
+            await this.setObjectNotExistsAsync(device.id + ".Events." + event, {
+              type: "state",
+              common: {
+                name: "Event: " + event,
+                type: "boolean",
+                role: "switch",
+                read: true,
+                write: false
+              },
+              native: {}
+            });
+          }
         }
       }
+
       return true;
     } catch (e) {
       this.log.error(this.err2Str(e));

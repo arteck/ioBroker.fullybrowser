@@ -79,6 +79,25 @@
                             "default": true
                         },
                         {
+                            "type": "select",
+                            "title": "ApiType",
+                            "attr": "apiType",
+                            "default": "mqtt",
+                            "width": "6%",
+                            "validator": "data.apiType.length > 3",
+                            "validatorNoSaveOnError": true,
+                            "options": [
+                                {
+                                    "label": "MQTT",
+                                    "value": "mqtt"
+                                },
+                                {
+                                    "label": "RestApi",
+                                    "value": "restapi"
+                                }
+                            ]
+                        },
+                        {
                             "type": "text",
                             "title": "Device Name",
                             "attr": "name",
@@ -243,13 +262,24 @@
                     "md": 6,
                     "lg": 3
                 },
+                "restIntervall": {
+                    "type": "number",
+                    "min": 10000,
+                    "max": 99999999,
+                    "default": 6000,
+                    "label": "Request Intervall",
+                    "help": "in milliseconds (10000-99999999, default: 60000 = 1 Min.)",
+                    "sm": 12,
+                    "md": 7,
+                    "lg": 3
+                },
                 "restCommandLogAsDebug": {
                     "type": "checkbox",
                     "label": "Successful commands as debug in log",
                     "help": "Log '... Command xxx successfully set to x' as 'debug' and not 'info'",
                     "default": false,
                     "sm": 12,
-                    "md": 7,
+                    "md": 8,
                     "lg": 5
                 }
             }
