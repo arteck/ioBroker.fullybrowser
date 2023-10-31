@@ -147,13 +147,21 @@ class fullybrowserControll  extends utils.Adapter {
   async onMqttInfo(obj) {
     try {
       const newInfoKeysAdded = [];
+      let valValue = 'value';
+      let valType = '';
 
       for (const key in obj.infoObj) {
         const val = obj.infoObj[key];
-        const valType = typeof val;
-        if (valType !== "string" && valType !== "boolean" && valType !== "object" && valType !== "number") {
-          this.log.warn(`[MQTT] ${this.fullysEnbl[obj.ip].name}: Unknown type ${valType} of key '${key}' in info object`);
+        valType = typeof val;
+        valValue = 'value';
+
+        if (valType !== 'string' && valType !== 'boolean' && valType !== 'object' && valType !== 'number') {
+          this.log.warn(`[INFO] ${this.fullysEnbl[obj.ip].name}: Unknown type ${valType} of key '${key}' in info object`);
           continue;
+        }
+
+        if (key == 'timestamp') {
+          valValue = 'value.time';
         }
 
         if (!this.fullysEnbl[obj.ip].mqttInfoKeys.includes(key)) {
@@ -166,7 +174,7 @@ class fullybrowserControll  extends utils.Adapter {
             common: {
               name: "Info: " + key,
               type: valType,
-              role: "value",
+              role: valValue,
               read: true,
               write: false
             },
@@ -177,28 +185,16 @@ class fullybrowserControll  extends utils.Adapter {
 
       for (const key in obj.infoObj) {
         const newVal = typeof obj.infoObj[key] === "object" ? JSON.stringify(obj.infoObj[key]) : obj.infoObj[key];
+
         if (this.config.mqttUpdateUnchangedObjects) {
-          this.setState(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, {
-            val: newVal,
-            ack: true
-          });
+          this.setState(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, { val: newVal, ack: true });
         } else {
-          this.setStateChanged(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, {
-            val: newVal,
-            ack: true
-          });
+          this.setStateChanged(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, { val: newVal, ack: true });
         }
       }
 
-      this.setState(this.fullysEnbl[obj.ip].id + ".lastInfoUpdate", {
-        val: Date.now(),
-        ack: true
-      });
-
-      this.setState(this.fullysEnbl[obj.ip].id + ".alive", {
-        val: true,
-        ack: true
-      });
+      this.setState(this.fullysEnbl[obj.ip].id + '.lastInfoUpdate', { val: Date.now(), ack: true });
+      this.setState(this.fullysEnbl[obj.ip].id + '.alive', { val: true, ack: true });
 
     } catch (e) {
       this.log.error(this.err2Str(e));
@@ -651,7 +647,6 @@ class fullybrowserControll  extends utils.Adapter {
       }
 
       if (device.apiType == 'mqtt') {
-
         await this.setObjectNotExistsAsync(device.id + ".Events", {
           type: "channel",
           common: {
