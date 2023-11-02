@@ -1,276 +1,276 @@
 {
-    "common": {
-        "name": "fullybrowser",
-        "version": "3.0.0",
-        "news": {
-            "3.0.0": {
-                "en": "* breaking change - new structure from fully-mqtt Adapter from Acgua\n* here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
-                "de": "* Brechwechsel - neue Struktur aus Vollmqt Adapter von Acgua\n* hier ist der Orginal https://github.com/Acgua/ioBroker.ful-mqtt\n\n#----------------------------------------------------------------------",
-                "ru": "* сломать изменение - новая структура от полностью мкт адаптер от Acgua\n* вот Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
-                "pt": "* mudança de ruptura - nova estrutura do adaptador totalmente mqtt de Acgua\n* aqui está o Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
-                "nl": "♪ breaking change - new structure from volledig-mqt Adapter from Acgua\nQuality over Quantity (QoQ) Releases Vertaling:\n\n#----------------------------------------------------------------------",
-                "fr": "* changement de rupture - nouvelle structure de l'adaptateur entièrement mqt de Acgua\n* here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
-                "it": "* cambiamento di rottura - nuova struttura da adattatore completamente mqtt da Acgua\n* ecco l'Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
-                "es": "* cambio de ruptura - nueva estructura del adaptador de mqtt de Acgua\n* aquí está el Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
-                "pl": "Zmiana - nowa struktura z w pełni mqtt Adapter z Acgua\n* here is the Orginal https:/github.com/Acgua/ioBroker.ful-mqttps\n\n#----------------------------------------------------------------------",
-                "uk": "* зміна розриву - нова структура з повністю-mqtt адаптера з Acgua\n* тут Ординал https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
-                "zh-cn": "* 打破变化——从Acgua完全撤出的新结构\n* 现为原文:http://github.com/Acgua/ioBroker。\n\n#----------------------------------------------------------------------"
-            },
-            "3.0.0-beta.1": {
-                "en": "new fully",
-                "de": "komplett neu",
-                "ru": "новый полностью",
-                "pt": "novo totalmente",
-                "nl": "nieuw volledig",
-                "fr": "nouveau entièrement",
-                "it": "nuovo completamente",
-                "es": "nuevo completamente",
-                "pl": "nowy w całości",
-                "uk": "новий повністю",
-                "zh-cn": "新的完全"
-            },
-            "2.2.0": {
-                "en": "intrvall corr",
-                "de": "intrvall corr",
-                "ru": "intrvall корр",
-                "pt": "intrvall corr",
-                "nl": "indrvel corrvall",
-                "fr": "intrvall corr",
-                "it": "intrvall cor",
-                "es": "intrvall corr",
-                "pl": "intrvallocor",
-                "uk": "інтрвелл корр",
-                "zh-cn": "侵入"
-            },
-            "2.1.6": {
-                "en": "add name of devie to admin",
-                "de": "Tabname hinzugefügt",
-                "ru": "добавить имя devie в админ",
-                "pt": "adicione o nome de devie ao administrador",
-                "nl": "voeg de naam van het apparaat toe aan de beheerder",
-                "fr": "ajouter le nom du périphérique à l'administrateur",
-                "it": "aggiungi il nome del dispositivo all'amministratore",
-                "es": "agregar el nombre del dispositivo al administrador",
-                "pl": "dodaj nazwę urządzenia do administratora",
-                "uk": "додати назву пристрою до адміністратора",
-                "zh-cn": "将设备名称添加到管理员中"
-            },
-            "2.1.2": {
-                "en": "encodeuri for psw",
-                "de": "encodeuri for psw",
-                "ru": "encodeuri for psw",
-                "pt": "codificador para psw",
-                "nl": "encodeuri voor psw",
-                "fr": "encodeur pour PSW",
-                "it": "codificatori per psw",
-                "es": "codificador para psw",
-                "pl": "encodeuri dla psw",
-                "uk": "encodeuri для psw",
-                "zh-cn": "PSW 的编码器"
-            },
-            "2.1.1": {
-                "en": "js-controller 4.x",
-                "de": "js-controller 4.x",
-                "ru": "js-controller 4.x",
-                "pt": "controlador js 4.x",
-                "nl": "js-controller 4.x",
-                "fr": "js-contrôleur 4.x",
-                "it": "js-controller 4.x",
-                "es": "controlador js 4.x",
-                "pl": "kontroler js 4.x",
-                "uk": "js-контролер 4.x",
-                "zh-cn": "js 控制器 4.x"
-            },
-            "0.0.6": {
-                "en": "beta",
-                "de": "beta",
-                "ru": "beta",
-                "pt": "beta",
-                "nl": "bèta",
-                "fr": "bêta",
-                "it": "beta",
-                "es": "beta",
-                "pl": "beta",
-                "uk": "бета-версія",
-                "zh-cn": "贝塔"
-            }
-        },
-        "title": "fullyBrowser",
-        "titleLang": {
-            "en": "fullyBrowser",
-            "de": "fullyBrowser",
-            "ru": "fullyBrowser",
-            "pt": "fullyBrowser",
-            "nl": "fullyBrowser",
-            "fr": "fullyBrowser",
-            "it": "fullyBrowser ",
-            "es": "fullyBrowser",
-            "pl": "fullyBrowser",
-            "uk": "fullyBrowser",
-            "zh-cn": "完全浏览器"
-        },
-        "desc": {
-            "en": "Manage yours Fully Browser",
-            "de": "verwalte deinen Fully Browser mit ioBroker",
-            "ru": "подключает устройства Fully Browser к ioBroker",
-            "pt": "liga dispositivos Fully Browser a ioBroker",
-            "nl": "verbindt Fully Browser met ioBroker",
-            "fr": "connecte les Fully Browser à ioBroker",
-            "it": "collega Fully Browser a ioBroker",
-            "es": "conecta Fully Browser a ioBroker",
-            "pl": "łączy Fully Browser z ioBroker",
-            "uk": "Керуйте своїм повним браузером",
-            "zh-cn": "管理您的完全浏览器"
-        },
-        "authors": [
-            "arteck <arteck@outlook.com>",
-            "Acgua <no@mail.com>"
-        ],
-        "materialize": true,
-        "compact": true,
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "enabled": false,
-        "readme": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
-        "loglevel": "info",
-        "restartAdapters": [
-            "fullyBrowser"
-        ],
-        "keywords": [
-            "fullyBrowser",
-            "Fully Browser",
-            "Fully Kiosk Browser"
-        ],
-        "icon": "fully.png",
-        "extIcon": "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
-        "type": "utility",
-        "singletonHost": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "adminUI": {
-            "config": "json"
-        },
-        "docs": {
-            "en": [
-                "docs/en/README.md"
-            ],
-            "de": [
-                "docs/de/README.md"
-            ]
-        },
-        "globalDependencies": [
-            {
-                "admin": ">=6.0.0"
-            }
-        ],
-        "dependencies": [
-            {
-                "js-controller": ">=5.0.0"
-            }
-        ],
-        "messagebox": true,
-        "subscribe": "messagebox",
-        "messages": [
-            {
-                "condition": {
-                    "operand": "and",
-                    "rules": [
-                        "oldVersion<=2.2.0",
-                        "newVersion>=3.0.0"
-                    ]
-                },
-                "title": {
-                    "en": "Important notice!",
-                    "de": "Wichtiger Hinweis!",
-                    "ru": "Важное замечание!",
-                    "pt": "Notícia importante!",
-                    "nl": "Belangrijke mededeling!",
-                    "fr": "Avis important!",
-                    "it": "Avviso IMPORTANTE!",
-                    "es": "Noticia importante!",
-                    "pl": "Ważna uwaga!",
-                    "zh-cn": "重要通知!",
-                    "uk": "Важливе повідомлення!"
-                },
-                "text": {
-                    "en": "This new version has been completely revised.\nIt uses the MQTT connection or restAPI(request). it's configurable in Adapter settings.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts. \nAll settings from the old Adapter are deleted, save yours FullyBrowser list from old Adapter settings (screenshot)",
-                    "de": "Diese neue Version wurde komplett überarbeitet.\nEs verwendet die MQTT-Verbindung oder restAPI (Request.) es ist in Adapter-Einstellungen konfigurierbar.\nDer Name in der Baumstruktur ist nicht mehr die IP-Adresse.\nBitte passen Sie Ihre Skripte an.\nAlle Einstellungen aus dem alten Adapter werden gelöscht, speichern Sie Ihre FullyBrowser-Liste aus alten Adaptereinstellungen (screenshot)",
-                    "ru": "Эта новая версия была полностью пересмотрена.\nОн использует соединение MQTT или restAPI (запрос.) он настраивается в настройках адаптера.\nНазвание в структуре дерева больше не является IP-адресом.\nПожалуйста, приспособьте свои скрипты.\nВсе настройки от старого адаптера удаляются, сохраните список FullyBrowser из старых настроек адаптера (скриншот)",
-                    "pt": "Esta nova versão foi completamente revisada.\nEle usa a conexão MQTT ou restAPI (pedido.) é configurável em configurações do adaptador.\nO nome na estrutura da árvore não é mais o endereço IP.\nPor favor, adapte seus scripts.\nTodas as configurações do velho adaptador são excluídas, salve sua lista FullyBrowser de configurações antigas do adaptador (screenshot)",
-                    "nl": "Deze nieuwe versie is volledig herzien.\nHet gebruikt de MQT-connectie of restaPI (request) Het is vertrouwelijk in adapter settings.\nDe naam in de boomstructuur is niet langer het IP-adres.\nAlsjeblieft, pas je script aan.\nAlle instellingen van de oude Adapter zijn verwijderd, bewaar de FullyBrowser lijst van oude Adapter settings (screenshot)",
-                    "fr": "Cette nouvelle version a été entièrement révisée.\nIl utilise la connexion MQTT ou restAPI(demande.) elle est configurable dans les réglages d'adaptateur.\nLe nom de la structure de l'arbre n'est plus l'adresse IP.\nVeuillez adapter vos scripts.\nTous les réglages de l'ancien Adaptateur sont supprimés, enregistrez votre liste FullyBrowser depuis les anciens réglages de l'adaptateur (écran)",
-                    "it": "Questa nuova versione è stata completamente revisionata.\nUtilizza la connessione MQTT o il restoAPI (richiesta.) è configurabile nelle impostazioni dell'adattatore.\nIl nome nella struttura dell'albero non è più l'indirizzo IP.\nPer favore, adatta i tuoi script.\nTutte le impostazioni dal vecchio adattatore vengono eliminati, salvare il vostro elenco FullyBrowser dalle vecchie impostazioni dell'adattatore (screenshot)",
-                    "es": "Esta nueva versión ha sido completamente revisada.\nUtiliza la conexión MQTT o restAPI(request.) es configurable en la configuración de Adaptador.\nEl nombre en la estructura del árbol ya no es la dirección IP.\nPor favor, adapte tus scripts.\nTodas las configuraciones del viejo Adaptador se eliminan, guardar la lista FullyBrowser de la configuración antigua del Adaptador (imagen)",
-                    "pl": "Nowa wersja została całkowicie zmieniona.\nUżywa połączenia MQTT lub restAPI(request.) jest konfigurowalny w ustawieniach Adaptera.\nNazwa w strukturze drzewa nie jest już adresem IP.\nZastosował swoje scenariusze.\nWszystkie ustawienia ze starego Adaptera zostały usunięte, zapisywane są z listy FullyBrowser ze starych ustawień Adaptera",
-                    "uk": "Ця нова версія була повністю оновлена.\nВін використовує підключення MQTT або переадресацію (request.) він налаштований в налаштуваннях адаптера.\nНазва в структурі дерева не більше IP-адреси.\nБудь ласка, адаптуйте сценарії.\nВсі налаштування від старого адаптера видаляються, заощаджуйте свій список FullyBrowser від застарілих налаштувань адаптера (екранний)",
-                    "zh-cn": "这一新版本已经完全修订。.\n它利用技转中心联系或包商协会(寻求)在阿达佩特环境中被掩盖。.\n树木结构中的名称不再是IP地址。.\n请修改你的文字。.\n删除旧阿道道道的所有环境,使你从旧的阿普斯特环境(增加enshot)中全部列入名单。"
-                },
-                "link": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
-                "level": "warn",
-                "linkText": {
-                    "en": "Readme",
-                    "de": "Liesmich",
-                    "ru": "Прочти меня",
-                    "pt": "Leia-me",
-                    "nl": "Leesmij",
-                    "fr": "Lisez-moi",
-                    "it": "Leggimi",
-                    "es": "Léame",
-                    "pl": "Readme",
-                    "zh-cn": "自述文件",
-                    "uk": "Readme"
-                },
-                "buttons": [
-                    "agree",
-                    "cancel"
-                ]
-            }
-        ],
-        "installedFrom": "arteck/ioBroker.fullybrowser#newFully2"
+  "common": {
+    "name": "fullybrowser",
+    "version": "3.0.2",
+    "news": {
+      "3.0.2": {
+        "en": "add motionDetection\nfor Rooted Devices add rebootDevice",
+        "de": "bewegung hinzufügenDetektion\nfür Rooted Devices Neustart hinzufügen",
+        "ru": "добавить motionDetection\nдля Rooted Devices добавить rebootDevice",
+        "pt": "adicionar definição de movimento\npara dispositivos enraizados adicionar rebootDevice",
+        "nl": "vertaling:\nvoor Rooted Devices voegt reboot Device toe",
+        "fr": "add motionDetection\npour Rooted Devices ajouter rebootDevice",
+        "it": "aggiungere il movimento\nper Dispositivi Radicati aggiungere rebootDevice",
+        "es": "añadir movimientoDetección\npara dispositivos rotos añadir reinicioDispositivo",
+        "pl": "dodać wniosek\nrooted Device dodaje rebootDevice",
+        "uk": "додати рухуВиявлення\nдля кореневих пристроїв додайте перезавантаження",
+        "zh-cn": "增 编\n扶轮社"
+      },
+      "3.0.1": {
+        "en": "add motionDetection\nfor Rooted Devices add rebootDevice",
+        "de": "bewegung hinzufügenDetektion\nfür Rooted Devices Neustart hinzufügen",
+        "ru": "добавить motionDetection\nдля Rooted Devices добавить rebootDevice",
+        "pt": "adicionar definição de movimento\npara dispositivos enraizados adicionar rebootDevice",
+        "nl": "vertaling:\nvoor Rooted Devices voegt reboot Device toe",
+        "fr": "add motionDetection\npour Rooted Devices ajouter rebootDevice",
+        "it": "aggiungere il movimento\nper Dispositivi Radicati aggiungere rebootDevice",
+        "es": "añadir movimientoDetección\npara dispositivos rotos añadir reinicioDispositivo",
+        "pl": "dodać wniosek\nrooted Device dodaje rebootDevice",
+        "uk": "додати рухуВиявлення\nдля кореневих пристроїв додайте перезавантаження",
+        "zh-cn": "增 编\n扶轮社"
+      },
+      "3.0.0": {
+        "en": "* breaking change - new structure from fully-mqtt Adapter from Acgua\n* here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "de": "* Brechwechsel - neue Struktur aus Vollmqt Adapter von Acgua\n* hier ist der Orginal https://github.com/Acgua/ioBroker.ful-mqtt\n\n#----------------------------------------------------------------------",
+        "ru": "* сломать изменение - новая структура от полностью мкт адаптер от Acgua\n* вот Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "pt": "* mudança de ruptura - nova estrutura do adaptador totalmente mqtt de Acgua\n* aqui está o Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "nl": "♪ breaking change - new structure from volledig-mqt Adapter from Acgua\nQuality over Quantity (QoQ) Releases Vertaling:\n\n#----------------------------------------------------------------------",
+        "fr": "* changement de rupture - nouvelle structure de l'adaptateur entièrement mqt de Acgua\n* here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "it": "* cambiamento di rottura - nuova struttura da adattatore completamente mqtt da Acgua\n* ecco l'Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "es": "* cambio de ruptura - nueva estructura del adaptador de mqtt de Acgua\n* aquí está el Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "pl": "Zmiana - nowa struktura z w pełni mqtt Adapter z Acgua\n* here is the Orginal https:/github.com/Acgua/ioBroker.ful-mqttps\n\n#----------------------------------------------------------------------",
+        "uk": "* зміна розриву - нова структура з повністю-mqtt адаптера з Acgua\n* тут Ординал https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "zh-cn": "* 打破变化——从Acgua完全撤出的新结构\n* 现为原文:http://github.com/Acgua/ioBroker。\n\n#----------------------------------------------------------------------"
+      },
+      "3.0.0-beta.1": {
+        "en": "new fully",
+        "de": "komplett neu",
+        "ru": "новый полностью",
+        "pt": "novo totalmente",
+        "nl": "nieuw volledig",
+        "fr": "nouveau entièrement",
+        "it": "nuovo completamente",
+        "es": "nuevo completamente",
+        "pl": "nowy w całości",
+        "uk": "новий повністю",
+        "zh-cn": "新的完全"
+      },
+      "2.2.0": {
+        "en": "intrvall corr",
+        "de": "intrvall corr",
+        "ru": "intrvall корр",
+        "pt": "intrvall corr",
+        "nl": "indrvel corrvall",
+        "fr": "intrvall corr",
+        "it": "intrvall cor",
+        "es": "intrvall corr",
+        "pl": "intrvallocor",
+        "uk": "інтрвелл корр",
+        "zh-cn": "侵入"
+      },
+      "2.1.6": {
+        "en": "add name of devie to admin",
+        "de": "Tabname hinzugefügt",
+        "ru": "добавить имя devie в админ",
+        "pt": "adicione o nome de devie ao administrador",
+        "nl": "voeg de naam van het apparaat toe aan de beheerder",
+        "fr": "ajouter le nom du périphérique à l'administrateur",
+        "it": "aggiungi il nome del dispositivo all'amministratore",
+        "es": "agregar el nombre del dispositivo al administrador",
+        "pl": "dodaj nazwę urządzenia do administratora",
+        "uk": "додати назву пристрою до адміністратора",
+        "zh-cn": "将设备名称添加到管理员中"
+      },
+      "2.1.2": {
+        "en": "encodeuri for psw",
+        "de": "encodeuri for psw",
+        "ru": "encodeuri for psw",
+        "pt": "codificador para psw",
+        "nl": "encodeuri voor psw",
+        "fr": "encodeur pour PSW",
+        "it": "codificatori per psw",
+        "es": "codificador para psw",
+        "pl": "encodeuri dla psw",
+        "uk": "encodeuri для psw",
+        "zh-cn": "PSW 的编码器"
+      }
     },
-    "native": {
-        "tableDevices": [],
-        "restUseHttps": false,
-        "restTimeout": 2000,
-        "restCommandLogAsDebug": false,
-        "mqttUser": "",
-        "mqttPassword": "",
-        "mqttPort": 3000,
-        "mqttPublishedInfoDelay": 30,
-        "mqttDoNotVerifyUserPw": true,
-        "mqttUpdateUnchangedObjects": false,
-        "mqttConnErrorsAsInfo": true,
-        "mqttCreateDefaultEventObjects": true
+    "title": "fullyBrowser",
+    "titleLang": {
+      "en": "fullyBrowser",
+      "de": "fullyBrowser",
+      "ru": "fullyBrowser",
+      "pt": "fullyBrowser",
+      "nl": "fullyBrowser",
+      "fr": "fullyBrowser",
+      "it": "fullyBrowser ",
+      "es": "fullyBrowser",
+      "pl": "fullyBrowser",
+      "uk": "fullyBrowser",
+      "zh-cn": "完全浏览器"
     },
-    "encryptedNative": [
-        "mqttPassword"
+    "desc": {
+      "en": "Manage yours Fully Browser",
+      "de": "verwalte deinen Fully Browser mit ioBroker",
+      "ru": "подключает устройства Fully Browser к ioBroker",
+      "pt": "liga dispositivos Fully Browser a ioBroker",
+      "nl": "verbindt Fully Browser met ioBroker",
+      "fr": "connecte les Fully Browser à ioBroker",
+      "it": "collega Fully Browser a ioBroker",
+      "es": "conecta Fully Browser a ioBroker",
+      "pl": "łączy Fully Browser z ioBroker",
+      "uk": "Керуйте своїм повним браузером",
+      "zh-cn": "管理您的完全浏览器"
+    },
+    "authors": [
+      "arteck <arteck@outlook.com>",
+      "Acgua <no@mail.com>"
     ],
-    "protectedNative": [
-        "mqttPassword"
+    "materialize": true,
+    "compact": true,
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "enabled": false,
+    "readme": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
+    "loglevel": "info",
+    "restartAdapters": [
+      "fullyBrowser"
     ],
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
+    "keywords": [
+      "fullyBrowser",
+      "Fully Browser",
+      "Fully Kiosk Browser"
+    ],
+    "icon": "fully.png",
+    "extIcon": "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
+    "type": "utility",
+    "singletonHost": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "json"
+    },
+    "docs": {
+      "en": [
+        "docs/en/README.md"
+      ],
+      "de": [
+        "docs/de/README.md"
+      ]
+    },
+    "globalDependencies": [
+      {
+        "admin": ">=6.0.0"
+      }
+    ],
+    "dependencies": [
+      {
+        "js-controller": ">=5.0.0"
+      }
+    ],
+    "messagebox": true,
+    "subscribe": "messagebox",
+    "messages": [
+      {
+        "condition": {
+          "operand": "and",
+          "rules": [
+            "oldVersion<=2.2.0",
+            "newVersion>=3.0.0"
+          ]
         },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "If connected",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
-    ]
+        "title": {
+          "en": "Important notice!",
+          "de": "Wichtiger Hinweis!",
+          "ru": "Важное замечание!",
+          "pt": "Notícia importante!",
+          "nl": "Belangrijke mededeling!",
+          "fr": "Avis important!",
+          "it": "Avviso IMPORTANTE!",
+          "es": "Noticia importante!",
+          "pl": "Ważna uwaga!",
+          "zh-cn": "重要通知!",
+          "uk": "Важливе повідомлення!"
+        },
+        "text": {
+          "en": "This new version has been completely revised.\nIt uses the MQTT connection or restAPI(request). it's configurable in Adapter settings.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts. \nAll settings from the old Adapter are deleted, save yours FullyBrowser list from old Adapter settings (screenshot)",
+          "de": "Diese neue Version wurde komplett überarbeitet.\nEs verwendet die MQTT-Verbindung oder restAPI (Request.) es ist in Adapter-Einstellungen konfigurierbar.\nDer Name in der Baumstruktur ist nicht mehr die IP-Adresse.\nBitte passen Sie Ihre Skripte an.\nAlle Einstellungen aus dem alten Adapter werden gelöscht, speichern Sie Ihre FullyBrowser-Liste aus alten Adaptereinstellungen (screenshot)",
+          "ru": "Эта новая версия была полностью пересмотрена.\nОн использует соединение MQTT или restAPI (запрос.) он настраивается в настройках адаптера.\nНазвание в структуре дерева больше не является IP-адресом.\nПожалуйста, приспособьте свои скрипты.\nВсе настройки от старого адаптера удаляются, сохраните список FullyBrowser из старых настроек адаптера (скриншот)",
+          "pt": "Esta nova versão foi completamente revisada.\nEle usa a conexão MQTT ou restAPI (pedido.) é configurável em configurações do adaptador.\nO nome na estrutura da árvore não é mais o endereço IP.\nPor favor, adapte seus scripts.\nTodas as configurações do velho adaptador são excluídas, salve sua lista FullyBrowser de configurações antigas do adaptador (screenshot)",
+          "nl": "Deze nieuwe versie is volledig herzien.\nHet gebruikt de MQT-connectie of restaPI (request) Het is vertrouwelijk in adapter settings.\nDe naam in de boomstructuur is niet langer het IP-adres.\nAlsjeblieft, pas je script aan.\nAlle instellingen van de oude Adapter zijn verwijderd, bewaar de FullyBrowser lijst van oude Adapter settings (screenshot)",
+          "fr": "Cette nouvelle version a été entièrement révisée.\nIl utilise la connexion MQTT ou restAPI(demande.) elle est configurable dans les réglages d'adaptateur.\nLe nom de la structure de l'arbre n'est plus l'adresse IP.\nVeuillez adapter vos scripts.\nTous les réglages de l'ancien Adaptateur sont supprimés, enregistrez votre liste FullyBrowser depuis les anciens réglages de l'adaptateur (écran)",
+          "it": "Questa nuova versione è stata completamente revisionata.\nUtilizza la connessione MQTT o il restoAPI (richiesta.) è configurabile nelle impostazioni dell'adattatore.\nIl nome nella struttura dell'albero non è più l'indirizzo IP.\nPer favore, adatta i tuoi script.\nTutte le impostazioni dal vecchio adattatore vengono eliminati, salvare il vostro elenco FullyBrowser dalle vecchie impostazioni dell'adattatore (screenshot)",
+          "es": "Esta nueva versión ha sido completamente revisada.\nUtiliza la conexión MQTT o restAPI(request.) es configurable en la configuración de Adaptador.\nEl nombre en la estructura del árbol ya no es la dirección IP.\nPor favor, adapte tus scripts.\nTodas las configuraciones del viejo Adaptador se eliminan, guardar la lista FullyBrowser de la configuración antigua del Adaptador (imagen)",
+          "pl": "Nowa wersja została całkowicie zmieniona.\nUżywa połączenia MQTT lub restAPI(request.) jest konfigurowalny w ustawieniach Adaptera.\nNazwa w strukturze drzewa nie jest już adresem IP.\nZastosował swoje scenariusze.\nWszystkie ustawienia ze starego Adaptera zostały usunięte, zapisywane są z listy FullyBrowser ze starych ustawień Adaptera",
+          "uk": "Ця нова версія була повністю оновлена.\nВін використовує підключення MQTT або переадресацію (request.) він налаштований в налаштуваннях адаптера.\nНазва в структурі дерева не більше IP-адреси.\nБудь ласка, адаптуйте сценарії.\nВсі налаштування від старого адаптера видаляються, заощаджуйте свій список FullyBrowser від застарілих налаштувань адаптера (екранний)",
+          "zh-cn": "这一新版本已经完全修订。.\n它利用技转中心联系或包商协会(寻求)在阿达佩特环境中被掩盖。.\n树木结构中的名称不再是IP地址。.\n请修改你的文字。.\n删除旧阿道道道的所有环境,使你从旧的阿普斯特环境(增加enshot)中全部列入名单。"
+        },
+        "link": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
+        "level": "warn",
+        "linkText": {
+          "en": "Readme",
+          "de": "Liesmich",
+          "ru": "Прочти меня",
+          "pt": "Leia-me",
+          "nl": "Leesmij",
+          "fr": "Lisez-moi",
+          "it": "Leggimi",
+          "es": "Léame",
+          "pl": "Readme",
+          "zh-cn": "自述文件",
+          "uk": "Readme"
+        },
+        "buttons": [
+          "agree",
+          "cancel"
+        ]
+      }
+    ],
+    "installedFrom": "arteck/ioBroker.fullybrowser#newFully2"
+  },
+  "native": {
+    "tableDevices": [],
+    "restUseHttps": false,
+    "restTimeout": 2000,
+    "restCommandLogAsDebug": false,
+    "mqttUser": "",
+    "mqttPassword": "",
+    "mqttPort": 3000,
+    "mqttPublishedInfoDelay": 30,
+    "mqttDoNotVerifyUserPw": true,
+    "mqttUpdateUnchangedObjects": false,
+    "mqttConnErrorsAsInfo": true,
+    "mqttCreateDefaultEventObjects": true
+  },
+  "encryptedNative": [
+    "mqttPassword"
+  ],
+  "protectedNative": [
+    "mqttPassword"
+  ],
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "If connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
 }

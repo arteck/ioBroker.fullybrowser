@@ -263,8 +263,13 @@ class fullybrowserControll  extends utils.Adapter {
                     throw `Fully object for deviceId '${deviceId}' not found!`;
 
                 let cmdToSend = cmd;
-                let switchConf = void 0;
+                let switchConf;
+
+                /****************
+                 * Check if it is a switch state cmd, like 'screenSwitch'
+                 ****************/
                 const idxSw = this.getIndexFromConf(cmdsSwitches, ['id'], cmd);
+
                 if (idxSw !== -1) {
                     switchConf = cmdsSwitches[idxSw];
                     cmdToSend = stateObj.val ? switchConf.cmdOn : switchConf.cmdOff;
@@ -285,44 +290,27 @@ class fullybrowserControll  extends utils.Adapter {
                         this.log.info(`\u{1F5F8} ${fully.name}: Command ${cmd} successfully set to ${stateObj.val}`);
                     }
 
-                    if (switchConf !== void 0) {
+                    if (switchConf !== undefined) {
                         const onOrOffCmdVal = cmd === switchConf.cmdOn ? true : false;
-                        await this.setStateAsync(`${pth}.${switchConf.id}`, {
-                            val: onOrOffCmdVal,
-                            ack: true
-                        });
-                        await this.setStateAsync(`${pth}.${switchConf.cmdOn}`, {
-                            val: onOrOffCmdVal,
-                            ack: true
-                        });
-                        await this.setStateAsync(`${pth}.${switchConf.cmdOff}`, {
-                            val: !onOrOffCmdVal,
-                            ack: true
-                        });
+                        await this.setStateAsync(`${pth}.${switchConf.id}`, { val: onOrOffCmdVal, ack: true });
+                        await this.setStateAsync(`${pth}.${switchConf.cmdOn}`, {val: onOrOffCmdVal, ack: true});
+                        await this.setStateAsync(`${pth}.${switchConf.cmdOff}`, { val: !onOrOffCmdVal, ack: true });
+
                     } else {
                         if (typeof stateObj.val === 'boolean') {
                             const idx = this.getIndexFromConf(cmds, ['id'], cmd);
                             if (idx !== -1) {
                                 if (cmds[idx].type === 'boolean') {
-                                    await this.setStateAsync(stateId, {
-                                        val: true,
-                                        ack: true
-                                    });
+                                    await this.setStateAsync(stateId, {val: true, ack: true});
                                 } else {
                                     this.log.warn(`${fully.name}: ${stateId} - val: ${stateObj.val} is boolean, but cmd ${cmd} is not defined in CONF`);
-                                    await this.setStateAsync(stateId, {
-                                        val: stateObj.val,
-                                        ack: true
-                                    });
+                                    await this.setStateAsync(stateId, {val: stateObj.val, ack: true});
                                 }
                             } else {
                                 this.log.warn(`${fully.name}: ${stateId} - val: ${stateObj.val}, cmd ${cmd} is not defined in CONF`);
                             }
                         } else {
-                            await this.setStateAsync(stateId, {
-                                val: stateObj.val,
-                                ack: true
-                            });
+                            await this.setStateAsync(stateId, {val: stateObj.val, ack: true});
                         }
                     }
                 } else {
@@ -608,19 +596,34 @@ class fullybrowserControll  extends utils.Adapter {
             });
 
             const allCommands = cmds.concat(cmdsSwitches);
+            let defa = '';
 
             for (const cmdObj of allCommands) {
                 let lpRole = '';
-                if (cmdObj.type === 'boolean')
-                    lpRole = 'button';
-                if (cmdObj.type === 'string')
-                    lpRole = 'text';
-                if (cmdObj.type === 'number')
-                    lpRole = 'value';
-                if (cmdObj.cmdOn && cmdObj.cmdOff)
-                    lpRole = 'switch';
-
                 let comm = '';
+
+                switch (cmdObj.type) {
+                    case 'boolean':
+                        lpRole = 'button';
+                        defa = false;
+                        if (cmdObj.cmdOn) {
+                            if (cmdObj.cmdOn.length > 0 && cmdObj.cmdOff.length > 0) {
+                                lpRole = 'switch';
+                            }
+                        }
+                        break;
+                    case 'string':
+                        lpRole = 'text';
+                        defa = '';
+                        break;
+                    case 'number':
+                        lpRole = 'value';
+                        defa = 0;
+                        break;
+                    default:
+                        lpRole = 'value';
+                }
+
 
                 if (cmdObj.name.includes('rooted')) {
                     comm = 'Root Device : ';
@@ -633,7 +636,8 @@ class fullybrowserControll  extends utils.Adapter {
                         type: cmdObj.type,
                         role: lpRole,
                         read: true,
-                        write: true
+                        write: true,
+                        def: defa
                     },
                     native: {}
                 });
