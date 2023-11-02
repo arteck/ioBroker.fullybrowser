@@ -2,11 +2,17 @@
 # ioBroker.fullybrowser
 =================
 
-![Number of Installations](http://iobroker.live/badges/fullybrowser-installed.svg) ![Number of Installations](http://iobroker.live/badges/fullybrowser-stable.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
-
-
 [![NPM](https://nodei.co/npm/iobroker.fullybrowser.png?downloads=true)](https://nodei.co/npm/iobroker.fullybrowser/)
+
+![Number of Installations](http://iobroker.live/badges/fullybrowser-installed.svg) [![NPM version](http://img.shields.io/npm/v/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.fullybrowser.svg)](https://www.npmjs.com/package/iobroker.fullybrowser)![GitHub last commit](https://img.shields.io/github/last-commit/arteck/ioBroker.fullybrowser)
+![GitHub issues](https://img.shields.io/github/issues/arteck/ioBroker.fullybrowser)[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/arteck/ioBroker.fullybrowser/blob/master/LICENSE)
+
+</br>
+**Version:** </br>
+
+![Number of Installations](http://iobroker.live/badges/fullybrowser-stable.svg) 
+![Stable](https://iobroker.live/badges/fullybrowser-stable.svg)
 
  
 fullyBrowser Adapter for ioBroker
@@ -17,6 +23,15 @@ A small excerpt just of the command options:
 
 ![möglichkeiten](https://github.com/arteck/iobroker.fullyBrowser/blob/master/doku/auszug1.png)
 
+## Documentation
+
+-   [🇬🇧 English Documentation](./docs/en/README.md)
+-   [🇩🇪 Deutsche Dokumentation](./docs/de/README.md)
+
+
+## Credits
+
+Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https://github.com/Acgua/ioBroker.fully-mqtt). 
 
 <!--
     Placeholder for the next version (at the beginning of the line):
@@ -32,8 +47,14 @@ A small excerpt just of the command options:
 
 
 ## Changelog
+### 3.0.0 (2023-11-02)
+* (arteck) breaking change - new structure from fully-mqtt Adapter from Acgua
+* here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt
+
+#----------------------------------------------------------------------
+
 ### 2.2.0 (2023-10-27)
-* (arteck) intrvall corr
+* (arteck) intervall corr
 
 ### 2.1.6 (2022-11-23)
 * (arteck) add name of device to admin

@@ -1,7 +1,7 @@
 .git
 .idea
 *.code-workspace
-/node_modules
+node_modules
 nbproject
 
 # npm package files
@@ -12,3 +12,6 @@ Thumbs.db
 # i18n intermediate files
 admin/i18n/flat.txt
 admin/i18n/*/flat.txt
+
+# ioBroker dev-server
+.dev-server/

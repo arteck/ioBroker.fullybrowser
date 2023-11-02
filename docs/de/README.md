@@ -56,6 +56,6 @@ Fully-Browser-Gerät(e), also die Tablets, auf denen der Fully-Browser läuft, e
 
  ## Links
 
-* [ioBroker-Forum: Adapter Fully Browser mit MQTT](https://forum.iobroker.net/topic/63705/)
+* [ioBroker-Forum: Adapter Fully Browser mit MQTT](https://forum.iobroker.net/topic/69729/)
 * [fully-kiosk.com REST API](https://www.fully-kiosk.com/en/#rest)
 * [fully-kiosk.com MQTT Integration](https://www.fully-kiosk.com/en/#mqtt)
