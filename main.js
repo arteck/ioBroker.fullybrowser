@@ -217,34 +217,22 @@ class fullybrowserControll  extends utils.Adapter {
                     native: {}
                 });
             }
-            this.setState(pthEvent, {
-                val: true,
-                ack: true
-            });
+            await this.setStateAsync(pthEvent, {val: true, ack: true});
+            this.setState(pthEvent, {val: false, ack: true});   // und zurück auf false
+
             const pthCmd = this.fullysMQTT[obj.ip].id + '.Commands';
             const idx = this.getIndexFromConf(cmdsSwitches, ['mqttOn', 'mqttOff'], obj.cmd);
             if (idx !== -1) {
                 const conf = cmdsSwitches[idx];
                 const onOrOffCmd = obj.cmd === conf.mqttOn ? true : false;
-                await this.setStateAsync(`${pthCmd}.${conf.id}`, {
-                    val: onOrOffCmd,
-                    ack: true
-                });
-                await this.setStateAsync(`${pthCmd}.${conf.cmdOn}`, {
-                    val: onOrOffCmd,
-                    ack: true
-                });
-                await this.setStateAsync(`${pthCmd}.${conf.cmdOff}`, {
-                    val: !onOrOffCmd,
-                    ack: true
-                });
+                await this.setStateAsync(`${pthCmd}.${conf.id}`, {val: onOrOffCmd, ack: true});
+                await this.setStateAsync(`${pthCmd}.${conf.cmdOn}`, {val: onOrOffCmd, ack: true});
+                await this.setStateAsync(`${pthCmd}.${conf.cmdOff}`, {val: !onOrOffCmd, ack: true});
             } else {
                 const idx2 = this.getIndexFromConf(cmds, ['id'], obj.cmd);
                 if (idx2 !== -1 && cmds[idx2].type === 'boolean') {
-                    await this.setStateAsync(`${pthCmd}.${obj.cmd}`, {
-                        val: true,
-                        ack: true
-                    });
+                    await this.setStateAsync(`${pthCmd}.${obj.cmd}`, {val: true, ack: true});
+
                 } else {
                     this.log.silly(`[MQTT] ${this.fullysMQTT[obj.ip].name}: Event cmd ${obj.cmd} - no REST API command is existing, so skip confirmation with with ack:true`);
                 }
