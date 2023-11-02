@@ -123,7 +123,7 @@ class fullybrowserControll  extends utils.Adapter {
 
                 if (this.config.messageMQTTAlive) {
                     if (isAlive) {
-                        this.log.info(`${this.fullysEnbl[ip].name} is connected (MQTT: ${msg})`);
+                        this.log.warn(`${this.fullysEnbl[ip].name} is connected (MQTT: ${msg})`);
                     } else {
                         this.log.warn(`${this.fullysEnbl[ip].name} is not alive! (MQTT: ${msg})`);
                     }
