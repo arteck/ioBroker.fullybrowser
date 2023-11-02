@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.0.0-beta.1",
+    "version": "3.0.0",
     "news": {
+      "3.0.0": {
+        "en": "* breaking change - new structure from fully-mqtt Adapter from Acgua\n* here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "de": "* Brechwechsel - neue Struktur aus Vollmqt Adapter von Acgua\n* hier ist der Orginal https://github.com/Acgua/ioBroker.ful-mqtt\n\n#----------------------------------------------------------------------",
+        "ru": "* сломать изменение - новая структура от полностью мкт адаптер от Acgua\n* вот Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "pt": "* mudança de ruptura - nova estrutura do adaptador totalmente mqtt de Acgua\n* aqui está o Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "nl": "♪ breaking change - new structure from volledig-mqt Adapter from Acgua\nQuality over Quantity (QoQ) Releases Vertaling:\n\n#----------------------------------------------------------------------",
+        "fr": "* changement de rupture - nouvelle structure de l'adaptateur entièrement mqt de Acgua\n* here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "it": "* cambiamento di rottura - nuova struttura da adattatore completamente mqtt da Acgua\n* ecco l'Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "es": "* cambio de ruptura - nueva estructura del adaptador de mqtt de Acgua\n* aquí está el Orginal https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "pl": "Zmiana - nowa struktura z w pełni mqtt Adapter z Acgua\n* here is the Orginal https:/github.com/Acgua/ioBroker.ful-mqttps\n\n#----------------------------------------------------------------------",
+        "uk": "* зміна розриву - нова структура з повністю-mqtt адаптера з Acgua\n* тут Ординал https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
+        "zh-cn": "* 打破变化——从Acgua完全撤出的新结构\n* 现为原文:http://github.com/Acgua/ioBroker。\n\n#----------------------------------------------------------------------"
+      },
       "3.0.0-beta.1": {
         "en": "new fully"
       },

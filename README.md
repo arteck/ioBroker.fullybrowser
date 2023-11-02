@@ -47,12 +47,12 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 3.0.0 (2023-11-02)
 * (arteck) breaking change - new structure from fully-mqtt Adapter from Acgua
 * here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt
 
 #----------------------------------------------------------------------
+
 ### 2.2.0 (2023-10-27)
 * (arteck) intervall corr
 
