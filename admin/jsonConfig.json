@@ -252,8 +252,8 @@
                 },
                 "messageMQTTAlive": {
                     "type": "checkbox",
-                    "label": "INFO Show MQTT all connection Message",
-                    "help": "Show lost/connected/alive as warning or info",
+                    "label": "Show MQTT all connection Messages",
+                    "help": "Show lost/connected/alive as warning",
                     "default": true,
                     "hidden": "!data.mqttConnErrorsAsInfo",
                     "sm": 12,
