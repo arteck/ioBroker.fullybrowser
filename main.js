@@ -217,7 +217,7 @@ class fullybrowserControll  extends utils.Adapter {
                     native: {}
                 });
             }
-            await this.setStateAsync(pthEvent, {val: true, ack: true});
+            this.setState(pthEvent, {val: true, ack: true});
             this.setState(pthEvent, {val: false, ack: true});   // und zurück auf false
 
             const pthCmd = this.fullysMQTT[obj.ip].id + '.Commands';
