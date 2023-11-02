@@ -20,6 +20,8 @@ fullyBrowser Adapter for ioBroker
 ------------------------------------------------------------------------------
 
 This adapter manages your [Fully Kiosk Browser](https://www.fully-kiosk.com) (a Plus License is required). It provides you with a bunch of possibilites to control your tablet through ioBroker, like turning the display on/off, launch any tablet app, launch the screensaver etc. Also, it provides various information in states, like battery level of your tablet, etc. which you can use e.g. for Visualization.
+It can use MQTT or RestAPI connection for public the states.
+
 A small excerpt just of the command options:
 
 ![tree](https://github.com/arteck/iobroker.fullyBrowser/blob/master/docs/auszug2.png)
