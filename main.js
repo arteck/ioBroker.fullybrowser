@@ -121,10 +121,12 @@ class fullybrowserControll  extends utils.Adapter {
                 // Set Device isAlive Status - we could also use setStateChanged()...
                 this.setState(this.fullysEnbl[ip].id + '.alive', { val: isAlive, ack: true });
 
-                if (isAlive) {
-                    this.log.info(`${this.fullysEnbl[ip].name} is alive (MQTT: ${msg})`);
-                } else {
-                    this.log.warn(`${this.fullysEnbl[ip].name} is not alive! (MQTT: ${msg})`);
+                if (this.config.messageMQTTAlive) {
+                    if (isAlive) {
+                        this.log.info(`${this.fullysEnbl[ip].name} is connected (MQTT: ${msg})`);
+                    } else {
+                        this.log.warn(`${this.fullysEnbl[ip].name} is not alive! (MQTT: ${msg})`);
+                    }
                 }
             }
 
