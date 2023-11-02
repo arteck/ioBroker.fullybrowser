@@ -47,6 +47,11 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 
 
 ## Changelog
+
+### 3.0.1 (2023-11-02)
+* (arteck) add motionDetection
+* (arteck) for Rooted Devices add rebootDevice
+
 ### 3.0.0 (2023-11-02)
 * (arteck) breaking change - new structure from fully-mqtt Adapter from Acgua
 * here is the Orginal https://github.com/Acgua/ioBroker.fully-mqtt

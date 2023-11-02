@@ -598,6 +598,7 @@ class fullybrowserControll  extends utils.Adapter {
                 },
                 native: {}
             });
+
             await this.setObjectNotExistsAsync(device.id + '.Commands', {
                 type: 'channel',
                 common: {
@@ -618,10 +619,17 @@ class fullybrowserControll  extends utils.Adapter {
                     lpRole = 'value';
                 if (cmdObj.cmdOn && cmdObj.cmdOff)
                     lpRole = 'switch';
+
+                let comm = '';
+
+                if (cmdObj.name.includes('rooted')) {
+                    comm = 'Root Device : ';
+                }
+
                 await this.setObjectNotExistsAsync(device.id + '.Commands.' + cmdObj.id, {
                     type: 'state',
                     common: {
-                        name: 'Command: ' + cmdObj.name,
+                        name: comm + cmdObj.name,
                         type: cmdObj.type,
                         role: lpRole,
                         read: true,
