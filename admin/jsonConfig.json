@@ -106,7 +106,7 @@
                             "width": "55%",
                             "filter": true,
                             "sort": true,
-                            "validator": "data.name.length > 2",
+                            "validator": "data.name.length > 1",
                             "validatorNoSaveOnError": true
                         },
                         {
