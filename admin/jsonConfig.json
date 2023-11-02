@@ -227,7 +227,21 @@
                     "md": 6,
                     "lg": 3
                 },
-                "mqttConnErrorsAsInfo": {
+                "mqttCreateDefaultEventObjects": {
+                    "type": "checkbox",
+                    "label": "Create default event objects at adapter start",
+                    "help": "Create default event objects (facesDetected, hideKeyboard, etc.) at the first adapter startup",
+                    "default": true,
+                    "sm": 12,
+                    "md": 7,
+                    "lg": 5
+                },
+                "header_LOG_MQTT": {
+                    "newLine": true,
+                    "type": "header",
+                    "text": "Log MQTT ",
+                    "size": 2
+                },"mqttConnErrorsAsInfo": {
                     "type": "checkbox",
                     "label": "Client and Connection errors as info in log",
                     "help": "Logs client and connection errors as 'info' and not as 'error'",
@@ -236,11 +250,12 @@
                     "md": 7,
                     "lg": 5
                 },
-                "mqttCreateDefaultEventObjects": {
+                "messageMQTTAlive": {
                     "type": "checkbox",
-                    "label": "Create default event objects at adapter start",
-                    "help": "Create default event objects (facesDetected, hideKeyboard, etc.) at the first adapter startup",
+                    "label": "INFO Show MQTT all connection Message",
+                    "help": "Show lost/connected/alive as warning or info",
                     "default": true,
+                    "hidden": "!data.mqttConnErrorsAsInfo",
                     "sm": 12,
                     "md": 7,
                     "lg": 5
