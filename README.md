@@ -51,6 +51,9 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 
 
 ## Changelog
+### 3.0.4 (2023-11-06)
+* (arteck) set to zero corr
+
 ### 3.0.3 (2023-11-04)
  * (arteck) setStringSettings corr
 

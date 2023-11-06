@@ -273,9 +273,6 @@ class fullybrowserControll  extends utils.Adapter {
                 if (idxSw !== -1) {
                     switchConf = cmdsSwitches[idxSw];
                     cmdToSend = stateObj.val ? switchConf.cmdOn : switchConf.cmdOff;
-                } else {
-                    if (!stateObj.val)
-                        return;
                 }
 
                 if (!cmdToSend)

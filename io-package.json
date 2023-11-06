@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.0.3",
+    "version": "3.0.4",
     "news": {
+      "3.0.4": {
+        "en": "set to zero corr",
+        "de": "auf null korr gesetzt",
+        "ru": "установленный к нулю корр",
+        "pt": "set to zero corr",
+        "nl": "op zero corr",
+        "fr": "set to zero corr",
+        "it": "set to zero corr",
+        "es": "fijado a cero corr",
+        "pl": "ustalono, że zera kor",
+        "uk": "встановити на нульовий корр",
+        "zh-cn": "零件"
+      },
       "3.0.3": {
         "en": "setStringSettings corr",
         "de": "setStringSettings Korr",
@@ -80,19 +93,6 @@
         "pl": "intrvallocor",
         "uk": "інтрвелл корр",
         "zh-cn": "侵入"
-      },
-      "2.1.6": {
-        "en": "add name of devie to admin",
-        "de": "Tabname hinzugefügt",
-        "ru": "добавить имя devie в админ",
-        "pt": "adicione o nome de devie ao administrador",
-        "nl": "voeg de naam van het apparaat toe aan de beheerder",
-        "fr": "ajouter le nom du périphérique à l'administrateur",
-        "it": "aggiungi il nome del dispositivo all'amministratore",
-        "es": "agregar el nombre del dispositivo al administrador",
-        "pl": "dodaj nazwę urządzenia do administratora",
-        "uk": "додати назву пристрою до адміністратора",
-        "zh-cn": "将设备名称添加到管理员中"
       }
     },
     "title": "fullyBrowser",
