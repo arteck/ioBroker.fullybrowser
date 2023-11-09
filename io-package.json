@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "news": {
+      "3.0.5": {
+        "en": "add setRAW DP, this allows you to send a fullbrowser command directly",
+        "de": "setRAW DP hinzufügen, so können Sie direkt einen Fullbrowser Befehl senden",
+        "ru": "добавить setRAW DP, это позволяет отправлять команду fullbrowser напрямую",
+        "pt": "adicionar setRAW DP, isso permite que você envie um comando fullbrowser diretamente",
+        "nl": "plaats de centrale DP toe, dit laat je een volledige commando sturen",
+        "fr": "ajouter setRAW DP, cela vous permet d'envoyer une commande Fullbrowser directement",
+        "it": "aggiungere setRAW DP, questo consente di inviare un comando fullbrowser direttamente",
+        "es": "añadir setRAW DP, esto le permite enviar un comando fullbrowser directamente",
+        "pl": "dodanie DP RRAW pozwala to na wysłanie pełnego browseru bezpośrednio do środka",
+        "uk": "add setRAW DP, це дозволяє надсилати повнометражну команду безпосередньо",
+        "zh-cn": "增加联谊会,这使你能够直接派遣一支全员指挥。"
+      },
       "3.0.4": {
         "en": "set to zero corr",
         "de": "auf null korr gesetzt",
@@ -80,19 +93,6 @@
         "pl": "nowy w całości",
         "uk": "новий повністю",
         "zh-cn": "新的完全"
-      },
-      "2.2.0": {
-        "en": "intrvall corr",
-        "de": "intrvall corr",
-        "ru": "intrvall корр",
-        "pt": "intrvall corr",
-        "nl": "indrvel corrvall",
-        "fr": "intrvall corr",
-        "it": "intrvall cor",
-        "es": "intrvall corr",
-        "pl": "intrvallocor",
-        "uk": "інтрвелл корр",
-        "zh-cn": "侵入"
       }
     },
     "title": "fullyBrowser",
