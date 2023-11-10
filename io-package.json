@@ -233,6 +233,7 @@
     "tableDevices": [],
     "restUseHttps": false,
     "restTimeout": 2000,
+    "mqttTimeout": 70,
     "restCommandLogAsDebug": false,
     "mqttUser": "",
     "mqttPassword": "",
