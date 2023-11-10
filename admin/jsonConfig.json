@@ -217,6 +217,17 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 3
+                }, 
+                "mqttTimeout": {
+                    "type": "number",
+                    "min": 1,
+                    "max": 360,
+                    "label": "MQTT Timeout",
+                    "help": "in seconds (2-120, default: 70)",
+                    "default": 70,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 3
                 },
                 "mqttUpdateUnchangedObjects": {
                     "type": "checkbox",
