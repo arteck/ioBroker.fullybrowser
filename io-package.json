@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.0.5",
+    "version": "3.0.6",
     "news": {
+      "3.0.6": {
+        "en": "add mqttTimeout in settings",
+        "de": "mqtTimeout in Einstellungen hinzufügen",
+        "ru": "добавить mqttTimeout в настройках",
+        "pt": "adicionar mqttTimeout em configurações",
+        "nl": "voeg mqtTimeout toe in setting",
+        "fr": "ajouter mqttTimeout dans les paramètres",
+        "it": "aggiungere mqttTimeout nelle impostazioni",
+        "es": "añadir mqttTimeout en la configuración",
+        "pl": "dodaje mqttTimeout w ustawieniach",
+        "uk": "додати mqttTimeout в налаштуваннях",
+        "zh-cn": "增加环境的系统"
+      },
       "3.0.5": {
         "en": "add setRAW DP, this allows you to send a fullbrowser command directly",
         "de": "setRAW DP hinzufügen, so können Sie direkt einen Fullbrowser Befehl senden",
@@ -80,19 +93,6 @@
         "pl": "Zmiana - nowa struktura z w pełni mqtt Adapter z Acgua\n* here is the Orginal https:/github.com/Acgua/ioBroker.ful-mqttps\n\n#----------------------------------------------------------------------",
         "uk": "* зміна розриву - нова структура з повністю-mqtt адаптера з Acgua\n* тут Ординал https://github.com/Acgua/ioBroker.fully-mqtt\n\n#----------------------------------------------------------------------",
         "zh-cn": "* 打破变化——从Acgua完全撤出的新结构\n* 现为原文:http://github.com/Acgua/ioBroker。\n\n#----------------------------------------------------------------------"
-      },
-      "3.0.0-beta.1": {
-        "en": "new fully",
-        "de": "komplett neu",
-        "ru": "новый полностью",
-        "pt": "novo totalmente",
-        "nl": "nieuw volledig",
-        "fr": "nouveau entièrement",
-        "it": "nuovo completamente",
-        "es": "nuevo completamente",
-        "pl": "nowy w całości",
-        "uk": "новий повністю",
-        "zh-cn": "新的完全"
       }
     },
     "title": "fullyBrowser",

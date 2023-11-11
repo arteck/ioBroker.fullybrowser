@@ -51,6 +51,9 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 
 
 ## Changelog
+### 3.0.6 (2023-11-11)
+* (arteck) add mqttTimeout in settings
+
 ### 3.0.5 (2023-11-09)
 * (arteck) add setRAW DP, this allows you to send a fullbrowser command directly
 

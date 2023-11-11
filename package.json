@@ -1,6 +1,6 @@
 {
   "name": "iobroker.fullybrowser",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Manage yours Fully Browser",
   "main": "main.js",
   "repository": {
