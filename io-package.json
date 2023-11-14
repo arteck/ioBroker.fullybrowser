@@ -226,8 +226,7 @@
           "cancel"
         ]
       }
-    ],
-    "installedFrom": "arteck/ioBroker.fullybrowser#newFully2"
+    ]
   },
   "native": {
     "tableDevices": [],
