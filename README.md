@@ -51,6 +51,9 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 
 
 ## Changelog
+### 3.0.7 (2023-11-20)
+* (arteck) check credentials
+
 ### 3.0.6 (2023-11-11)
 * (arteck) add mqttTimeout in settings
 
