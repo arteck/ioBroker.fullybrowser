@@ -82,7 +82,7 @@
                             "type": "select",
                             "title": "Api-Type",
                             "attr": "apiType",
-                            "default": "mqtt",
+                            "default": "restapi",
                             "width": "6%",
                             "validator": "data.apiType.length > 3",
                             "validatorNoSaveOnError": true,
