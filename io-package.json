@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.0.8",
+    "version": "3.0.9",
     "news": {
+      "3.0.9": {
+        "en": "corr error message",
+        "de": "korr fehlermeldung",
+        "ru": "сообщение об ошибке",
+        "pt": "mensagem de erro corr",
+        "nl": "vertaling:",
+        "fr": "corr error message",
+        "it": "messaggio di errore corr",
+        "es": "mensaje de error de corr",
+        "pl": "kor error message",
+        "uk": "корр повідомлення про помилку",
+        "zh-cn": "错误信息"
+      },
       "3.0.8": {
         "en": "toForeground corr\n",
         "de": "toForeground corr\n",
@@ -80,19 +93,6 @@
         "pl": "stworzenie korekty",
         "uk": "setStringSettings корр",
         "zh-cn": "导 言"
-      },
-      "3.0.2": {
-        "en": "add motionDetection\nfor Rooted Devices add rebootDevice",
-        "de": "bewegung hinzufügenDetektion\nfür Rooted Devices Neustart hinzufügen",
-        "ru": "добавить motionDetection\nдля Rooted Devices добавить rebootDevice",
-        "pt": "adicionar definição de movimento\npara dispositivos enraizados adicionar rebootDevice",
-        "nl": "vertaling:\nvoor Rooted Devices voegt reboot Device toe",
-        "fr": "add motionDetection\npour Rooted Devices ajouter rebootDevice",
-        "it": "aggiungere il movimento\nper Dispositivi Radicati aggiungere rebootDevice",
-        "es": "añadir movimientoDetección\npara dispositivos rotos añadir reinicioDispositivo",
-        "pl": "dodać wniosek\nrooted Device dodaje rebootDevice",
-        "uk": "додати рухуВиявлення\nдля кореневих пристроїв додайте перезавантаження",
-        "zh-cn": "增 编\n扶轮社"
       }
     },
     "title": "fullyBrowser",
