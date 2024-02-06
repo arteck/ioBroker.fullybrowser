@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.0.9",
+    "version": "3.0.10",
     "news": {
+      "3.0.10": {
+        "en": "set batteryLevel to 0 when device is offline",
+        "de": "set Batterie Ebene auf 0, wenn das Gerät offline ist",
+        "ru": "аккумулятор Уровень до 0, когда устройство отключено",
+        "pt": "bateria de conjunto Nível a 0 quando o dispositivo está offline",
+        "nl": "set batterij Niveau tot 0 wanneer het apparaat offline is",
+        "fr": "batterie de réglage Niveau à 0 lorsque l'appareil est hors ligne",
+        "it": "set batteria Livello a 0 quando il dispositivo è offline",
+        "es": "batería set Nivel a 0 cuando el dispositivo está fuera de línea",
+        "pl": "zestaw baterii Poziom do 0, gdy urządzenie jest wyłączone",
+        "uk": "акумулятор Рівень до 0 при вимкненні пристрою",
+        "zh-cn": "设置电池 设备下线时等级为 0"
+      },
       "3.0.9": {
         "en": "corr error message",
         "de": "korr fehlermeldung",
@@ -80,19 +93,6 @@
         "pl": "ustalono, że zera kor",
         "uk": "встановити на нульовий корр",
         "zh-cn": "零件"
-      },
-      "3.0.3": {
-        "en": "setStringSettings corr",
-        "de": "setStringSettings Korr",
-        "ru": "setStringНастройки corr",
-        "pt": "setStringSettings corr",
-        "nl": "vertaling:",
-        "fr": "setStringSettings corr",
-        "it": "setStringSettings corr",
-        "es": "setStringSettings corr",
-        "pl": "stworzenie korekty",
-        "uk": "setStringSettings корр",
-        "zh-cn": "导 言"
       }
     },
     "title": "fullyBrowser",

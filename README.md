@@ -52,6 +52,9 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 
 
 ## Changelog
+### 3.0.10 (2024-02-06)
+* (arteck) set batteryLevel to 0 when device is offline
+
 ### 3.0.9 (2023-12-07)
 * (arteck) corr error message
 

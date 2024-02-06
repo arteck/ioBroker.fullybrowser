@@ -197,6 +197,9 @@ class fullybrowserControll  extends utils.Adapter {
     async aliveUpdate(dev,val) {
         this.setState(dev + '.lastInfoUpdate', { val: Date.now(), ack: true });
         this.setState(dev + '.alive', { val: val, ack: true });
+        if (!val) {
+            this.setState(dev + '.Info.batteryLevel', { val: 0, ack: true });
+        }
     }
 
     async onMqttEvent(obj) {
