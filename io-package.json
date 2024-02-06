@@ -148,12 +148,9 @@
     "connectionType": "local",
     "dataSource": "poll",
     "adminUI": {
-      "config": "json"
-    },
-    "adminUI": {
-      "config": "materialize",
+      "config": "json",
       "tab": "materialize"
-    },
+    },    
     "docs": {
       "en": [
         "docs/en/README.md"
