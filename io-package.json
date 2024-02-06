@@ -125,8 +125,7 @@
     "authors": [
       "arteck <arteck@outlook.com>",
       "Acgua <no@mail.com>"
-    ],
-    "materialize": true,
+    ],    
     "compact": true,
     "license": "MIT",
     "platform": "Javascript/Node.js",
@@ -150,6 +149,10 @@
     "dataSource": "poll",
     "adminUI": {
       "config": "json"
+    },
+    "adminUI": {
+      "config": "materialize",
+      "tab": "materialize"
     },
     "docs": {
       "en": [
