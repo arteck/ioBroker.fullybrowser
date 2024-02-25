@@ -29,5 +29,6 @@
     "Welcome to Fully MQTT adapter": "Добро пожаловать в адаптер Fully MQTT",
     "in milliseconds (500-15000, default: 6000)": "в миллисекундах (500-15000, по умолчанию: 6000)",
     "in seconds (2-120, default: 30)": "в секундах (2-120, по умолчанию: 30)",
-    "in seconds (min: 5, default: 60); ignored if MQTT is used": "в секундах (мин.: 5, по умолчанию: 60); игнорируется, если используется MQTT"
+    "in seconds (min: 5, default: 60); ignored if MQTT is used": "в секундах (мин.: 5, по умолчанию: 60); игнорируется, если используется MQTT",
+    "Api-Type": "Тип запроса"
 }

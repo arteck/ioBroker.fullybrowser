@@ -29,5 +29,6 @@
     "Welcome to Fully MQTT adapter": "Welkom bij de volledig MQTT-adapter",
     "in milliseconds (500-15000, default: 6000)": "in milliseconden (500-15000, standaard: 6000)",
     "in seconds (2-120, default: 30)": "in seconden (2-120, standaard: 30)",
-    "in seconds (min: 5, default: 60); ignored if MQTT is used": "in seconden (min: 5, standaard: 60); genegeerd als MQTT wordt gebruikt"
+    "in seconds (min: 5, default: 60); ignored if MQTT is used": "in seconden (min: 5, standaard: 60); genegeerd als MQTT wordt gebruikt",
+    "Api-Type": "Soort verzoek"
 }

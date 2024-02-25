@@ -29,5 +29,6 @@
     "Welcome to Fully MQTT adapter": "Bienvenue dans l'adaptateur entièrement MQTT",
     "in milliseconds (500-15000, default: 6000)": "en millisecondes (500-15000, par défaut : 6000)",
     "in seconds (2-120, default: 30)": "en secondes (2-120, par défaut : 30)",
-    "in seconds (min: 5, default: 60); ignored if MQTT is used": "en secondes (min : 5, par défaut : 60) ; ignoré si MQTT est utilisé"
+    "in seconds (min: 5, default: 60); ignored if MQTT is used": "en secondes (min : 5, par défaut : 60) ; ignoré si MQTT est utilisé",
+    "Api-Type": "Type de demande"
 }
