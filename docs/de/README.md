@@ -42,6 +42,8 @@ Fully-Browser-Gerät(e), also die Tablets, auf denen der Fully-Browser läuft, e
 
 ### MQTT-Konfiguration
  * **Port**: Dieselbe Portnummer wie oben in den Fullybrowser MQTT-Einstellungen verwenden (z.B. `3000`).
+![Logo](../_img/mqtt_adapter.pngg)
+   
  * **Benutzername und Passwort nicht verifizieren**: Damit kann die Überprüfung von Benutzernamen und Passwort deaktiviert werden.
  * **Benutzername**: Optional
  * **Passwort**: Optional
