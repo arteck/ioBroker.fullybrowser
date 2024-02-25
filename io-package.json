@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.0.10",
+    "version": "3.0.11",
     "news": {
+      "3.0.11": {
+        "en": "translate api-type",
+        "de": "übersetzen api-typ",
+        "ru": "перевод api-type",
+        "pt": "traduzir api-tipo",
+        "nl": "api-type vertalen",
+        "fr": "traduire le type api",
+        "it": "tradurre api-tipo",
+        "es": "traducir tipo api",
+        "pl": "przetłumacz typ api-",
+        "uk": "переклад api-типу",
+        "zh-cn": "翻译 api 类型"
+      },
       "3.0.10": {
         "en": "set batteryLevel to 0 when device is offline",
         "de": "set Batterie Ebene auf 0, wenn das Gerät offline ist",
@@ -80,19 +93,6 @@
         "pl": "dodanie DP RRAW pozwala to na wysłanie pełnego browseru bezpośrednio do środka",
         "uk": "add setRAW DP, це дозволяє надсилати повнометражну команду безпосередньо",
         "zh-cn": "增加联谊会,这使你能够直接派遣一支全员指挥。"
-      },
-      "3.0.4": {
-        "en": "set to zero corr",
-        "de": "auf null korr gesetzt",
-        "ru": "установленный к нулю корр",
-        "pt": "set to zero corr",
-        "nl": "op zero corr",
-        "fr": "set to zero corr",
-        "it": "set to zero corr",
-        "es": "fijado a cero corr",
-        "pl": "ustalono, że zera kor",
-        "uk": "встановити на нульовий корр",
-        "zh-cn": "零件"
       }
     },
     "title": "fullyBrowser",
@@ -125,7 +125,7 @@
     "authors": [
       "arteck <arteck@outlook.com>",
       "Acgua <no@mail.com>"
-    ],    
+    ],
     "compact": true,
     "license": "MIT",
     "platform": "Javascript/Node.js",
@@ -150,7 +150,7 @@
     "adminUI": {
       "config": "json",
       "tab": "materialize"
-    },    
+    },
     "docs": {
       "en": [
         "docs/en/README.md"
