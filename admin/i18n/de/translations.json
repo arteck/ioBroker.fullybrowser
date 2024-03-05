@@ -25,7 +25,7 @@
     "Port is always required, but you can leave user name and password empty. Fully Browser App: Settings -> Other Settings -> MQTT Integration (PLUS)": "Die Angabe der Port-Nummer ist immer erforderlich, aber Benutzername und Passwort kann leer gelassen werden. Fully Browser App: Settings -> Other Settings -> MQTT Integration (PLUS)",
     "Protocol": "Protokoll",
     "Remote Admin Password": "Remote Admin Passwort",
-    "Set battery to zero if Tablet is offline": "Batterie auf Null setzen, wenn Tablet offline ist",
+    "Set battery to zero if Tablet is offline": "Batterie auf 0 setzen, wenn Tablet offline ist",
     "Successful commands as debug in log": "Erfolgreich gesendete Kommandos als Debug im Log",
     "This disables the username and password verification": "Die Überprüfung von Benutzername und Passwort wird damit deaktiviert",
     "User name": "Benutzername",

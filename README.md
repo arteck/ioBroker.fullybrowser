@@ -52,6 +52,9 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 
 
 ## Changelog
+### 3.0.12 (2024-03-05)
+* (arteck) set batteryLevel to 0 if tablet is offline is configurable
+
 ### 3.0.11 (2024-02-25)
 * (arteck) translate api-type
 

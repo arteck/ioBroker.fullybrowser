@@ -1,276 +1,276 @@
 {
-    "common": {
-        "name": "fullybrowser",
-        "version": "3.0.11",
-        "news": {
-            "3.0.11": {
-                "en": "translate api-type",
-                "de": "übersetzen api-typ",
-                "ru": "перевод api-type",
-                "pt": "traduzir api-tipo",
-                "nl": "api-type vertalen",
-                "fr": "traduire le type api",
-                "it": "tradurre api-tipo",
-                "es": "traducir tipo api",
-                "pl": "przetłumacz typ api-",
-                "uk": "переклад api-типу",
-                "zh-cn": "翻译 api 类型"
-            },
-            "3.0.10": {
-                "en": "set batteryLevel to 0 when device is offline",
-                "de": "set Batterie Ebene auf 0, wenn das Gerät offline ist",
-                "ru": "аккумулятор Уровень до 0, когда устройство отключено",
-                "pt": "bateria de conjunto Nível a 0 quando o dispositivo está offline",
-                "nl": "set batterij Niveau tot 0 wanneer het apparaat offline is",
-                "fr": "batterie de réglage Niveau à 0 lorsque l'appareil est hors ligne",
-                "it": "set batteria Livello a 0 quando il dispositivo è offline",
-                "es": "batería set Nivel a 0 cuando el dispositivo está fuera de línea",
-                "pl": "zestaw baterii Poziom do 0, gdy urządzenie jest wyłączone",
-                "uk": "акумулятор Рівень до 0 при вимкненні пристрою",
-                "zh-cn": "设置电池 设备下线时等级为 0"
-            },
-            "3.0.9": {
-                "en": "corr error message",
-                "de": "korr fehlermeldung",
-                "ru": "сообщение об ошибке",
-                "pt": "mensagem de erro corr",
-                "nl": "vertaling:",
-                "fr": "corr error message",
-                "it": "messaggio di errore corr",
-                "es": "mensaje de error de corr",
-                "pl": "kor error message",
-                "uk": "корр повідомлення про помилку",
-                "zh-cn": "错误信息"
-            },
-            "3.0.8": {
-                "en": "toForeground corr\n",
-                "de": "toForeground corr\n",
-                "ru": "toForeground корр\n",
-                "pt": "toForeground corr\n",
-                "nl": "*Foreground corr\n",
-                "fr": "toForeground corr\n",
-                "it": "aCorretto anteriore\n",
-                "es": "toForeground corr\n",
-                "pl": "toForeground (ang.)\n",
-                "uk": "toForeground кор\n",
-                "zh-cn": "地面政变\n"
-            },
-            "3.0.7": {
-                "en": "check credentials",
-                "de": "anmeldeinformationen überprüfen",
-                "ru": "проверить учетные данные",
-                "pt": "verificar as credenciais",
-                "nl": "controleer de referenties",
-                "fr": "vérification des pouvoirs",
-                "it": "controllare le credenziali",
-                "es": "verificación de credenciales",
-                "pl": "credential",
-                "uk": "перевірка облікових даних",
-                "zh-cn": "检查"
-            },
-            "3.0.6": {
-                "en": "add mqttTimeout in settings",
-                "de": "mqtTimeout in Einstellungen hinzufügen",
-                "ru": "добавить mqttTimeout в настройках",
-                "pt": "adicionar mqttTimeout em configurações",
-                "nl": "voeg mqtTimeout toe in setting",
-                "fr": "ajouter mqttTimeout dans les paramètres",
-                "it": "aggiungere mqttTimeout nelle impostazioni",
-                "es": "añadir mqttTimeout en la configuración",
-                "pl": "dodaje mqttTimeout w ustawieniach",
-                "uk": "додати mqttTimeout в налаштуваннях",
-                "zh-cn": "增加环境的系统"
-            },
-            "3.0.5": {
-                "en": "add setRAW DP, this allows you to send a fullbrowser command directly",
-                "de": "setRAW DP hinzufügen, so können Sie direkt einen Fullbrowser Befehl senden",
-                "ru": "добавить setRAW DP, это позволяет отправлять команду fullbrowser напрямую",
-                "pt": "adicionar setRAW DP, isso permite que você envie um comando fullbrowser diretamente",
-                "nl": "plaats de centrale DP toe, dit laat je een volledige commando sturen",
-                "fr": "ajouter setRAW DP, cela vous permet d'envoyer une commande Fullbrowser directement",
-                "it": "aggiungere setRAW DP, questo consente di inviare un comando fullbrowser direttamente",
-                "es": "añadir setRAW DP, esto le permite enviar un comando fullbrowser directamente",
-                "pl": "dodanie DP RRAW pozwala to na wysłanie pełnego browseru bezpośrednio do środka",
-                "uk": "add setRAW DP, це дозволяє надсилати повнометражну команду безпосередньо",
-                "zh-cn": "增加联谊会,这使你能够直接派遣一支全员指挥。"
-            }
+  "common": {
+    "name": "fullybrowser",
+    "version": "3.0.12",
+    "news": {
+      "3.0.12": {
+        "en": "set batteryLevel to 0 if tablet is offline is configurable",
+        "de": "set Batterie Ebene auf 0 wenn Tablet offline konfigurierbar ist",
+        "ru": "аккумулятор Уровень до 0, если планшет офлайн настраивается",
+        "pt": "bateria de conjunto Nível a 0 se o tablet estiver offline é configurável",
+        "nl": "set batterij Niveau naar 0 als de tablet offline is, is configureerbaar",
+        "fr": "batterie de réglage Niveau à 0 si la tablette est hors ligne est configurable",
+        "it": "set batteria Livello a 0 se il tablet è offline è configurabile",
+        "es": "batería set Nivel a 0 si la tableta está fuera de línea es configurable",
+        "pl": "zestaw baterii Poziom do 0, jeśli tabletka jest offline jest konfigurowalna",
+        "uk": "акумулятор Рівень до 0, якщо планшет вимкнено",
+        "zh-cn": "设置电池 平板电脑离线时为 0级"
+      },
+      "3.0.11": {
+        "en": "translate api-type",
+        "de": "übersetzen api-typ",
+        "ru": "перевод api-type",
+        "pt": "traduzir api-tipo",
+        "nl": "api-type vertalen",
+        "fr": "traduire le type api",
+        "it": "tradurre api-tipo",
+        "es": "traducir tipo api",
+        "pl": "przetłumacz typ api-",
+        "uk": "переклад api-типу",
+        "zh-cn": "翻译 api 类型"
+      },
+      "3.0.10": {
+        "en": "set batteryLevel to 0 when device is offline",
+        "de": "set Batterie Ebene auf 0, wenn das Gerät offline ist",
+        "ru": "аккумулятор Уровень до 0, когда устройство отключено",
+        "pt": "bateria de conjunto Nível a 0 quando o dispositivo está offline",
+        "nl": "set batterij Niveau tot 0 wanneer het apparaat offline is",
+        "fr": "batterie de réglage Niveau à 0 lorsque l'appareil est hors ligne",
+        "it": "set batteria Livello a 0 quando il dispositivo è offline",
+        "es": "batería set Nivel a 0 cuando el dispositivo está fuera de línea",
+        "pl": "zestaw baterii Poziom do 0, gdy urządzenie jest wyłączone",
+        "uk": "акумулятор Рівень до 0 при вимкненні пристрою",
+        "zh-cn": "设置电池 设备下线时等级为 0"
+      },
+      "3.0.9": {
+        "en": "corr error message",
+        "de": "korr fehlermeldung",
+        "ru": "сообщение об ошибке",
+        "pt": "mensagem de erro corr",
+        "nl": "vertaling:",
+        "fr": "corr error message",
+        "it": "messaggio di errore corr",
+        "es": "mensaje de error de corr",
+        "pl": "kor error message",
+        "uk": "корр повідомлення про помилку",
+        "zh-cn": "错误信息"
+      },
+      "3.0.8": {
+        "en": "toForeground corr\n",
+        "de": "toForeground corr\n",
+        "ru": "toForeground корр\n",
+        "pt": "toForeground corr\n",
+        "nl": "*Foreground corr\n",
+        "fr": "toForeground corr\n",
+        "it": "aCorretto anteriore\n",
+        "es": "toForeground corr\n",
+        "pl": "toForeground (ang.)\n",
+        "uk": "toForeground кор\n",
+        "zh-cn": "地面政变\n"
+      },
+      "3.0.7": {
+        "en": "check credentials",
+        "de": "anmeldeinformationen überprüfen",
+        "ru": "проверить учетные данные",
+        "pt": "verificar as credenciais",
+        "nl": "controleer de referenties",
+        "fr": "vérification des pouvoirs",
+        "it": "controllare le credenziali",
+        "es": "verificación de credenciales",
+        "pl": "credential",
+        "uk": "перевірка облікових даних",
+        "zh-cn": "检查"
+      },
+      "3.0.6": {
+        "en": "add mqttTimeout in settings",
+        "de": "mqtTimeout in Einstellungen hinzufügen",
+        "ru": "добавить mqttTimeout в настройках",
+        "pt": "adicionar mqttTimeout em configurações",
+        "nl": "voeg mqtTimeout toe in setting",
+        "fr": "ajouter mqttTimeout dans les paramètres",
+        "it": "aggiungere mqttTimeout nelle impostazioni",
+        "es": "añadir mqttTimeout en la configuración",
+        "pl": "dodaje mqttTimeout w ustawieniach",
+        "uk": "додати mqttTimeout в налаштуваннях",
+        "zh-cn": "增加环境的系统"
+      }
+    },
+    "titleLang": {
+      "en": "fullyBrowser",
+      "de": "fullyBrowser",
+      "ru": "fullyBrowser",
+      "pt": "fullyBrowser",
+      "nl": "fullyBrowser",
+      "fr": "fullyBrowser",
+      "it": "fullyBrowser ",
+      "es": "fullyBrowser",
+      "pl": "fullyBrowser",
+      "uk": "fullyBrowser",
+      "zh-cn": "完全浏览器"
+    },
+    "desc": {
+      "en": "Manage yours Fully Browser",
+      "de": "verwalte deinen Fully Browser mit ioBroker",
+      "ru": "подключает устройства Fully Browser к ioBroker",
+      "pt": "liga dispositivos Fully Browser a ioBroker",
+      "nl": "verbindt Fully Browser met ioBroker",
+      "fr": "connecte les Fully Browser à ioBroker",
+      "it": "collega Fully Browser a ioBroker",
+      "es": "conecta Fully Browser a ioBroker",
+      "pl": "łączy Fully Browser z ioBroker",
+      "uk": "Керуйте своїм повним браузером",
+      "zh-cn": "管理您的完全浏览器"
+    },
+    "authors": [
+      "arteck <arteck@outlook.com>",
+      "Acgua <no@mail.com>"
+    ],
+    "compact": true,
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "mode": "daemon",
+    "enabled": false,
+    "readme": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
+    "loglevel": "info",
+    "restartAdapters": [
+      "fullyBrowser"
+    ],
+    "keywords": [
+      "fullyBrowser",
+      "Fully Browser",
+      "Fully Kiosk Browser"
+    ],
+    "icon": "fully.png",
+    "extIcon": "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
+    "type": "utility",
+    "singletonHost": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "json",
+      "tab": "materialize"
+    },
+    "docs": {
+      "en": [
+        "docs/en/README.md"
+      ],
+      "de": [
+        "docs/de/README.md"
+      ]
+    },
+    "globalDependencies": [
+      {
+        "admin": ">=6.0.0"
+      }
+    ],
+    "dependencies": [
+      {
+        "js-controller": ">=5.0.0"
+      }
+    ],
+    "messagebox": true,
+    "subscribe": "messagebox",
+    "messages": [
+      {
+        "condition": {
+          "operand": "and",
+          "rules": [
+            "oldVersion<=2.2.0",
+            "newVersion>=3.0.0"
+          ]
         },
-        "titleLang": {
-            "en": "fullyBrowser",
-            "de": "fullyBrowser",
-            "ru": "fullyBrowser",
-            "pt": "fullyBrowser",
-            "nl": "fullyBrowser",
-            "fr": "fullyBrowser",
-            "it": "fullyBrowser ",
-            "es": "fullyBrowser",
-            "pl": "fullyBrowser",
-            "uk": "fullyBrowser",
-            "zh-cn": "完全浏览器"
+        "title": {
+          "en": "Important notice!",
+          "de": "Wichtiger Hinweis!",
+          "ru": "Важное замечание!",
+          "pt": "Notícia importante!",
+          "nl": "Belangrijke mededeling!",
+          "fr": "Avis important!",
+          "it": "Avviso IMPORTANTE!",
+          "es": "Noticia importante!",
+          "pl": "Ważna uwaga!",
+          "zh-cn": "重要通知!",
+          "uk": "Важливе повідомлення!"
         },
-        "desc": {
-            "en": "Manage yours Fully Browser",
-            "de": "verwalte deinen Fully Browser mit ioBroker",
-            "ru": "подключает устройства Fully Browser к ioBroker",
-            "pt": "liga dispositivos Fully Browser a ioBroker",
-            "nl": "verbindt Fully Browser met ioBroker",
-            "fr": "connecte les Fully Browser à ioBroker",
-            "it": "collega Fully Browser a ioBroker",
-            "es": "conecta Fully Browser a ioBroker",
-            "pl": "łączy Fully Browser z ioBroker",
-            "uk": "Керуйте своїм повним браузером",
-            "zh-cn": "管理您的完全浏览器"
+        "text": {
+          "en": "This new version has been completely revised.\nIt uses the MQTT connection or restAPI(request). it's configurable in Adapter settings.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts. \nAll settings from the old Adapter are deleted, save yours FullyBrowser list from old Adapter settings (screenshot)",
+          "de": "Diese neue Version wurde komplett überarbeitet.\nEs verwendet die MQTT-Verbindung oder restAPI (Request.) es ist in Adapter-Einstellungen konfigurierbar.\nDer Name in der Baumstruktur ist nicht mehr die IP-Adresse.\nBitte passen Sie Ihre Skripte an.\nAlle Einstellungen aus dem alten Adapter werden gelöscht, speichern Sie Ihre FullyBrowser-Liste aus alten Adaptereinstellungen (screenshot)",
+          "ru": "Эта новая версия была полностью пересмотрена.\nОн использует соединение MQTT или restAPI (запрос.) он настраивается в настройках адаптера.\nНазвание в структуре дерева больше не является IP-адресом.\nПожалуйста, приспособьте свои скрипты.\nВсе настройки от старого адаптера удаляются, сохраните список FullyBrowser из старых настроек адаптера (скриншот)",
+          "pt": "Esta nova versão foi completamente revisada.\nEle usa a conexão MQTT ou restAPI (pedido.) é configurável em configurações do adaptador.\nO nome na estrutura da árvore não é mais o endereço IP.\nPor favor, adapte seus scripts.\nTodas as configurações do velho adaptador são excluídas, salve sua lista FullyBrowser de configurações antigas do adaptador (screenshot)",
+          "nl": "Deze nieuwe versie is volledig herzien.\nHet gebruikt de MQT-connectie of restaPI (request) Het is vertrouwelijk in adapter settings.\nDe naam in de boomstructuur is niet langer het IP-adres.\nAlsjeblieft, pas je script aan.\nAlle instellingen van de oude Adapter zijn verwijderd, bewaar de FullyBrowser lijst van oude Adapter settings (screenshot)",
+          "fr": "Cette nouvelle version a été entièrement révisée.\nIl utilise la connexion MQTT ou restAPI(demande.) elle est configurable dans les réglages d'adaptateur.\nLe nom de la structure de l'arbre n'est plus l'adresse IP.\nVeuillez adapter vos scripts.\nTous les réglages de l'ancien Adaptateur sont supprimés, enregistrez votre liste FullyBrowser depuis les anciens réglages de l'adaptateur (écran)",
+          "it": "Questa nuova versione è stata completamente revisionata.\nUtilizza la connessione MQTT o il restoAPI (richiesta.) è configurabile nelle impostazioni dell'adattatore.\nIl nome nella struttura dell'albero non è più l'indirizzo IP.\nPer favore, adatta i tuoi script.\nTutte le impostazioni dal vecchio adattatore vengono eliminati, salvare il vostro elenco FullyBrowser dalle vecchie impostazioni dell'adattatore (screenshot)",
+          "es": "Esta nueva versión ha sido completamente revisada.\nUtiliza la conexión MQTT o restAPI(request.) es configurable en la configuración de Adaptador.\nEl nombre en la estructura del árbol ya no es la dirección IP.\nPor favor, adapte tus scripts.\nTodas las configuraciones del viejo Adaptador se eliminan, guardar la lista FullyBrowser de la configuración antigua del Adaptador (imagen)",
+          "pl": "Nowa wersja została całkowicie zmieniona.\nUżywa połączenia MQTT lub restAPI(request.) jest konfigurowalny w ustawieniach Adaptera.\nNazwa w strukturze drzewa nie jest już adresem IP.\nZastosował swoje scenariusze.\nWszystkie ustawienia ze starego Adaptera zostały usunięte, zapisywane są z listy FullyBrowser ze starych ustawień Adaptera",
+          "uk": "Ця нова версія була повністю оновлена.\nВін використовує підключення MQTT або переадресацію (request.) він налаштований в налаштуваннях адаптера.\nНазва в структурі дерева не більше IP-адреси.\nБудь ласка, адаптуйте сценарії.\nВсі налаштування від старого адаптера видаляються, заощаджуйте свій список FullyBrowser від застарілих налаштувань адаптера (екранний)",
+          "zh-cn": "这一新版本已经完全修订。.\n它利用技转中心联系或包商协会(寻求)在阿达佩特环境中被掩盖。.\n树木结构中的名称不再是IP地址。.\n请修改你的文字。.\n删除旧阿道道道的所有环境,使你从旧的阿普斯特环境(增加enshot)中全部列入名单。"
         },
-        "authors": [
-            "arteck <arteck@outlook.com>",
-            "Acgua <no@mail.com>"
-        ],
-        "compact": true,
-        "license": "MIT",
-        "platform": "Javascript/Node.js",
-        "mode": "daemon",
-        "enabled": false,
-        "readme": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
-        "loglevel": "info",
-        "restartAdapters": [
-            "fullyBrowser"
-        ],
-        "keywords": [
-            "fullyBrowser",
-            "Fully Browser",
-            "Fully Kiosk Browser"
-        ],
-        "icon": "fully.png",
-        "extIcon": "https://raw.githubusercontent.com/arteck/ioBroker.fullybrowser/master/admin/fully.png",
-        "type": "utility",
-        "singletonHost": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "adminUI": {
-            "config": "json",
-            "tab": "materialize"
+        "link": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
+        "level": "warn",
+        "linkText": {
+          "en": "Readme",
+          "de": "Liesmich",
+          "ru": "Прочти меня",
+          "pt": "Leia-me",
+          "nl": "Leesmij",
+          "fr": "Lisez-moi",
+          "it": "Leggimi",
+          "es": "Léame",
+          "pl": "Readme",
+          "zh-cn": "自述文件",
+          "uk": "Readme"
         },
-        "docs": {
-            "en": [
-                "docs/en/README.md"
-            ],
-            "de": [
-                "docs/de/README.md"
-            ]
-        },
-        "globalDependencies": [
-            {
-                "admin": ">=6.0.0"
-            }
-        ],
-        "dependencies": [
-            {
-                "js-controller": ">=5.0.0"
-            }
-        ],
-        "messagebox": true,
-        "subscribe": "messagebox",
-        "messages": [
-            {
-                "condition": {
-                    "operand": "and",
-                    "rules": [
-                        "oldVersion<=2.2.0",
-                        "newVersion>=3.0.0"
-                    ]
-                },
-                "title": {
-                    "en": "Important notice!",
-                    "de": "Wichtiger Hinweis!",
-                    "ru": "Важное замечание!",
-                    "pt": "Notícia importante!",
-                    "nl": "Belangrijke mededeling!",
-                    "fr": "Avis important!",
-                    "it": "Avviso IMPORTANTE!",
-                    "es": "Noticia importante!",
-                    "pl": "Ważna uwaga!",
-                    "zh-cn": "重要通知!",
-                    "uk": "Важливе повідомлення!"
-                },
-                "text": {
-                    "en": "This new version has been completely revised.\nIt uses the MQTT connection or restAPI(request). it's configurable in Adapter settings.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts. \nAll settings from the old Adapter are deleted, save yours FullyBrowser list from old Adapter settings (screenshot)",
-                    "de": "Diese neue Version wurde komplett überarbeitet.\nEs verwendet die MQTT-Verbindung oder restAPI (Request.) es ist in Adapter-Einstellungen konfigurierbar.\nDer Name in der Baumstruktur ist nicht mehr die IP-Adresse.\nBitte passen Sie Ihre Skripte an.\nAlle Einstellungen aus dem alten Adapter werden gelöscht, speichern Sie Ihre FullyBrowser-Liste aus alten Adaptereinstellungen (screenshot)",
-                    "ru": "Эта новая версия была полностью пересмотрена.\nОн использует соединение MQTT или restAPI (запрос.) он настраивается в настройках адаптера.\nНазвание в структуре дерева больше не является IP-адресом.\nПожалуйста, приспособьте свои скрипты.\nВсе настройки от старого адаптера удаляются, сохраните список FullyBrowser из старых настроек адаптера (скриншот)",
-                    "pt": "Esta nova versão foi completamente revisada.\nEle usa a conexão MQTT ou restAPI (pedido.) é configurável em configurações do adaptador.\nO nome na estrutura da árvore não é mais o endereço IP.\nPor favor, adapte seus scripts.\nTodas as configurações do velho adaptador são excluídas, salve sua lista FullyBrowser de configurações antigas do adaptador (screenshot)",
-                    "nl": "Deze nieuwe versie is volledig herzien.\nHet gebruikt de MQT-connectie of restaPI (request) Het is vertrouwelijk in adapter settings.\nDe naam in de boomstructuur is niet langer het IP-adres.\nAlsjeblieft, pas je script aan.\nAlle instellingen van de oude Adapter zijn verwijderd, bewaar de FullyBrowser lijst van oude Adapter settings (screenshot)",
-                    "fr": "Cette nouvelle version a été entièrement révisée.\nIl utilise la connexion MQTT ou restAPI(demande.) elle est configurable dans les réglages d'adaptateur.\nLe nom de la structure de l'arbre n'est plus l'adresse IP.\nVeuillez adapter vos scripts.\nTous les réglages de l'ancien Adaptateur sont supprimés, enregistrez votre liste FullyBrowser depuis les anciens réglages de l'adaptateur (écran)",
-                    "it": "Questa nuova versione è stata completamente revisionata.\nUtilizza la connessione MQTT o il restoAPI (richiesta.) è configurabile nelle impostazioni dell'adattatore.\nIl nome nella struttura dell'albero non è più l'indirizzo IP.\nPer favore, adatta i tuoi script.\nTutte le impostazioni dal vecchio adattatore vengono eliminati, salvare il vostro elenco FullyBrowser dalle vecchie impostazioni dell'adattatore (screenshot)",
-                    "es": "Esta nueva versión ha sido completamente revisada.\nUtiliza la conexión MQTT o restAPI(request.) es configurable en la configuración de Adaptador.\nEl nombre en la estructura del árbol ya no es la dirección IP.\nPor favor, adapte tus scripts.\nTodas las configuraciones del viejo Adaptador se eliminan, guardar la lista FullyBrowser de la configuración antigua del Adaptador (imagen)",
-                    "pl": "Nowa wersja została całkowicie zmieniona.\nUżywa połączenia MQTT lub restAPI(request.) jest konfigurowalny w ustawieniach Adaptera.\nNazwa w strukturze drzewa nie jest już adresem IP.\nZastosował swoje scenariusze.\nWszystkie ustawienia ze starego Adaptera zostały usunięte, zapisywane są z listy FullyBrowser ze starych ustawień Adaptera",
-                    "uk": "Ця нова версія була повністю оновлена.\nВін використовує підключення MQTT або переадресацію (request.) він налаштований в налаштуваннях адаптера.\nНазва в структурі дерева не більше IP-адреси.\nБудь ласка, адаптуйте сценарії.\nВсі налаштування від старого адаптера видаляються, заощаджуйте свій список FullyBrowser від застарілих налаштувань адаптера (екранний)",
-                    "zh-cn": "这一新版本已经完全修订。.\n它利用技转中心联系或包商协会(寻求)在阿达佩特环境中被掩盖。.\n树木结构中的名称不再是IP地址。.\n请修改你的文字。.\n删除旧阿道道道的所有环境,使你从旧的阿普斯特环境(增加enshot)中全部列入名单。"
-                },
-                "link": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/README.md",
-                "level": "warn",
-                "linkText": {
-                    "en": "Readme",
-                    "de": "Liesmich",
-                    "ru": "Прочти меня",
-                    "pt": "Leia-me",
-                    "nl": "Leesmij",
-                    "fr": "Lisez-moi",
-                    "it": "Leggimi",
-                    "es": "Léame",
-                    "pl": "Readme",
-                    "zh-cn": "自述文件",
-                    "uk": "Readme"
-                },
-                "buttons": [
-                    "agree",
-                    "cancel"
-                ]
-            }
+        "buttons": [
+          "agree",
+          "cancel"
         ]
-    },
-    "native": {
-        "tableDevices": [],
-        "restUseHttps": false,
-        "restTimeout": 2000,
-        "mqttTimeout": 70,
-        "restCommandLogAsDebug": false,
-        "mqttUser": "",
-        "mqttPassword": "",
-        "mqttPort": 3000,
-        "mqttPublishedInfoDelay": 30,
-        "mqttDoNotVerifyUserPw": true,
-        "mqttUpdateUnchangedObjects": false,
-        "mqttConnErrorsAsInfo": true,
-        "mqttCreateDefaultEventObjects": true,
-        "zeroBattery": false
-    },
-    "encryptedNative": [
-        "mqttPassword"
-    ],
-    "protectedNative": [
-        "mqttPassword"
-    ],
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "If connected",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
+      }
     ]
+  },
+  "native": {
+    "tableDevices": [],
+    "restUseHttps": false,
+    "restTimeout": 2000,
+    "mqttTimeout": 70,
+    "restCommandLogAsDebug": false,
+    "mqttUser": "",
+    "mqttPassword": "",
+    "mqttPort": 3000,
+    "mqttPublishedInfoDelay": 30,
+    "mqttDoNotVerifyUserPw": true,
+    "mqttUpdateUnchangedObjects": false,
+    "mqttConnErrorsAsInfo": true,
+    "mqttCreateDefaultEventObjects": true,
+    "zeroBattery": false
+  },
+  "encryptedNative": [
+    "mqttPassword"
+  ],
+  "protectedNative": [
+    "mqttPassword"
+  ],
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "If connected",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
 }
