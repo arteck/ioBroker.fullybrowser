@@ -3,6 +3,7 @@
     "Add new devices by clicking the plus (+) symbol...": "Додайте нові пристрої, натиснувши символ плюс (+)...",
     "Always update info objects, even if value did not change": "Завжди оновлюйте інформаційні об’єкти, навіть якщо значення не змінилося",
     "Always update info states": "Завжди оновлюйте статуси інформації",
+    "Api-Type": "Тип запиту",
     "Client and Connection errors as info in log": "Помилки клієнта та підключення як інформація в журналі",
     "Create default event objects (facesDetected, hideKeyboard, etc.) at the first adapter startup": "Створення об’єктів подій за замовчуванням (facesDetected, hideKeyboard тощо) під час першого запуску адаптера",
     "Create default event objects at adapter start": "Створюйте об’єкти подій за замовчуванням під час запуску адаптера",
@@ -19,16 +20,17 @@
     "MQTT Configuration": "Конфігурація MQTT",
     "MQTT Password": "Пароль MQTT",
     "Main Settings": "Основні налаштування",
+    "Other Settings": "Інші налаштування",
     "Password": "Пароль",
     "Port is always required, but you can leave user name and password empty. Fully Browser App: Settings -> Other Settings -> MQTT Integration (PLUS)": "Порт завжди потрібен, але ви можете залишити ім’я користувача та пароль пустими. Повністю браузерна програма: Налаштування -> Інші налаштування -> Інтеграція MQTT (PLUS)",
     "Protocol": "протокол",
     "Remote Admin Password": "Пароль віддаленого адміністратора",
+    "Set battery to zero if Tablet is offline": "Встановити акумулятор до нуля, якщо планшет вимкнено",
     "Successful commands as debug in log": "Успішні команди як налагодження в журналі",
     "This disables the username and password verification": "Це вимикає перевірку імені користувача та пароля",
     "User name": "Ім'я користувача",
     "Welcome to Fully MQTT adapter": "Ласкаво просимо до адаптера Fully MQTT",
     "in milliseconds (500-15000, default: 6000)": "у мілісекундах (500-15000, за замовчуванням: 6000)",
     "in seconds (2-120, default: 30)": "за секунди (2-120, за замовчуванням: 30)",
-    "in seconds (min: 5, default: 60); ignored if MQTT is used": "у секундах (хв.: 5, за замовчуванням: 60); ігнорується, якщо використовується MQTT",
-    "Api-Type": "Тип запиту"
+    "in seconds (min: 5, default: 60); ignored if MQTT is used": "у секундах (хв.: 5, за замовчуванням: 60); ігнорується, якщо використовується MQTT"
 }

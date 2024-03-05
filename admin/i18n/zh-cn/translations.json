@@ -3,6 +3,7 @@
     "Add new devices by clicking the plus (+) symbol...": "通过单击加号 (+) 符号添加新设备...",
     "Always update info objects, even if value did not change": "始终更新信息对象，即使值没有改变",
     "Always update info states": "始终更新信息状态",
+    "Api-Type": "请求类型",
     "Client and Connection errors as info in log": "客户端和连接错误作为日志中的信息",
     "Create default event objects (facesDetected, hideKeyboard, etc.) at the first adapter startup": "在第一次适配器启动时创建默认事件对象（facesDetected、hideKeyboard 等）",
     "Create default event objects at adapter start": "在适配器启动时创建默认事件对象",
@@ -19,16 +20,17 @@
     "MQTT Configuration": "MQTT 配置",
     "MQTT Password": "MQTT密码",
     "Main Settings": "主要设置",
+    "Other Settings": "其他设置",
     "Password": "密码",
     "Port is always required, but you can leave user name and password empty. Fully Browser App: Settings -> Other Settings -> MQTT Integration (PLUS)": "端口始终是必需的，但您可以将用户名和密码留空。完全浏览器应用程序：设置 -> 其他设置 -> MQTT 集成 (PLUS)",
     "Protocol": "协议书",
     "Remote Admin Password": "远程管理员密码",
+    "Set battery to zero if Tablet is offline": "如果平板电脑脱机, 电池设置为零",
     "Successful commands as debug in log": "日志中作为调试的成功命令",
     "This disables the username and password verification": "这将禁用用户名和密码验证",
     "User name": "用户名",
     "Welcome to Fully MQTT adapter": "欢迎使用 Fully MQTT 适配器",
     "in milliseconds (500-15000, default: 6000)": "以毫秒为单位（500-15000，默认值：6000）",
     "in seconds (2-120, default: 30)": "以秒为单位（2-120，默认值：30）",
-    "in seconds (min: 5, default: 60); ignored if MQTT is used": "以秒为单位（最小值：5，默认值：60）；如果使用 MQTT，则忽略",
-    "Api-Type": "请求类型"
+    "in seconds (min: 5, default: 60); ignored if MQTT is used": "以秒为单位（最小值：5，默认值：60）；如果使用 MQTT，则忽略"
 }

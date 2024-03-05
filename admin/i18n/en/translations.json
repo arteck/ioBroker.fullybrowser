@@ -3,6 +3,7 @@
     "Add new devices by clicking the plus (+) symbol...": "Add new devices by clicking the plus (+) symbol…",
     "Always update info objects, even if value did not change": "Always update info objects, even if value did not change",
     "Always update info states": "Always update info states",
+    "Api-Type": "Request Type",
     "Client and Connection errors as info in log": "Client and Connection errors as info in log",
     "Create default event objects (facesDetected, hideKeyboard, etc.) at the first adapter startup": "Create default event objects (facesDetected, hideKeyboard, etc.) at the first adapter startup",
     "Create default event objects at adapter start": "Create default event objects at adapter start",
@@ -19,16 +20,17 @@
     "MQTT Configuration": "MQTT Configuration",
     "MQTT Password": "MQTT Password",
     "Main Settings": "Main Settings",
+    "Other Settings": "Other Settings",
     "Password": "Password",
     "Port is always required, but you can leave user name and password empty. Fully Browser App: Settings -> Other Settings -> MQTT Integration (PLUS)": "Port is always required, but you can leave user name and password empty. Fully Browser App: Settings -> Other Settings -> MQTT Integration (PLUS)",
     "Protocol": "Protocol",
     "Remote Admin Password": "Remote Admin Password",
+    "Set battery to zero if Tablet is offline": "Set battery to zero if Tablet is offline",
     "Successful commands as debug in log": "Successful commands as debug in log",
     "This disables the username and password verification": "This disables the username and password verification",
     "User name": "Username",
     "Welcome to Fully MQTT adapter": "Welcome to Fully MQTT adapter",
     "in milliseconds (500-15000, default: 6000)": "in milliseconds (500-15000, default: 6000)",
     "in seconds (2-120, default: 30)": "in seconds (2-120, default: 30)",
-    "in seconds (min: 5, default: 60); ignored if MQTT is used": "in seconds (min: 5, default: 60); ignored if MQTT is used",
-    "Api-Type":"Request Type"
+    "in seconds (min: 5, default: 60); ignored if MQTT is used": "in seconds (min: 5, default: 60); ignored if MQTT is used"
 }

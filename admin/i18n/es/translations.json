@@ -3,6 +3,7 @@
     "Add new devices by clicking the plus (+) symbol...": "Agregue nuevos dispositivos haciendo clic en el símbolo más (+)...",
     "Always update info objects, even if value did not change": "Siempre actualice los objetos de información, incluso si el valor no cambió",
     "Always update info states": "Actualizar siempre los estados de información",
+    "Api-Type": "Tipo de solicitud",
     "Client and Connection errors as info in log": "Errores de cliente y conexión como información en el registro",
     "Create default event objects (facesDetected, hideKeyboard, etc.) at the first adapter startup": "Cree objetos de eventos predeterminados (facesDetected, hideKeyboard, etc.) en el primer inicio del adaptador",
     "Create default event objects at adapter start": "Crear objetos de eventos predeterminados al inicio del adaptador",
@@ -19,16 +20,17 @@
     "MQTT Configuration": "Configuración MQTT",
     "MQTT Password": "Contraseña MQTT",
     "Main Settings": "Ajustes principales",
+    "Other Settings": "Otras configuraciones",
     "Password": "Contraseña",
     "Port is always required, but you can leave user name and password empty. Fully Browser App: Settings -> Other Settings -> MQTT Integration (PLUS)": "El puerto siempre es obligatorio, pero puede dejar el nombre de usuario y la contraseña vacíos. Aplicación de navegador completo: Configuración -> Otras configuraciones -> Integración MQTT (MÁS)",
     "Protocol": "Protocolo",
     "Remote Admin Password": "Contraseña de administrador remoto",
+    "Set battery to zero if Tablet is offline": "Establecer la batería a cero si Tablet está fuera de línea",
     "Successful commands as debug in log": "Comandos exitosos como depuración en el registro",
     "This disables the username and password verification": "Esto deshabilita la verificación de nombre de usuario y contraseña.",
     "User name": "Nombre de usuario",
     "Welcome to Fully MQTT adapter": "Bienvenido al adaptador completamente MQTT",
     "in milliseconds (500-15000, default: 6000)": "en milisegundos (500-15000, predeterminado: 6000)",
     "in seconds (2-120, default: 30)": "en segundos (2-120, predeterminado: 30)",
-    "in seconds (min: 5, default: 60); ignored if MQTT is used": "en segundos (mín.: 5, predeterminado: 60); ignorado si se usa MQTT",
-    "Api-Type": "Tipo de solicitud"
+    "in seconds (min: 5, default: 60); ignored if MQTT is used": "en segundos (mín.: 5, predeterminado: 60); ignorado si se usa MQTT"
 }
