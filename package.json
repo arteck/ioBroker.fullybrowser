@@ -10,8 +10,7 @@
   "keywords": [
     "fullyBrowser",
     "Fully Browser",
-    "Android",
-    "iobroker"
+    "Android"    
   ],
   "author": {
     "name": "Arthur Rupp",
@@ -23,10 +22,10 @@
   },
   "homepage": "https://github.com/arteck/ioBroker.fullybrowser#readme",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.1.4",
+    "@iobroker/adapter-core": "^3.2.2",
     "aedes": "^0.51.3",
     "axios": "^1.7.9",
     "net": "^1.0.2"

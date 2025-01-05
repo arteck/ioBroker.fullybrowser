@@ -1,9 +1,6 @@
 {
     "i18n": true,
     "type": "tabs",
-    "tabsStyle": {
-        width: "calc(100% - 100px)"
-    },
     "items": {
         "_tab_Start": {
             "type": "panel",
