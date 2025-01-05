@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.0.12",
+    "version": "3.0.13",
     "news": {
+      "3.0.13": {
+        "en": "add setBooleanSetting",
+        "de": "setBooleanSetting hinzufügen",
+        "ru": "добавить setBooleanSetting",
+        "pt": "adicionar configuração",
+        "nl": "setBooleanSetting toevoegen",
+        "fr": "ajouter setBooleanSetting",
+        "it": "aggiungere setBooleanSetting",
+        "es": "añadir setBooleanSetting",
+        "pl": "dodaj setBooleanSetting",
+        "uk": "додати набірБолеанНалаштування",
+        "zh-cn": "添加设置 Boolean 设置"
+      },
       "3.0.12": {
         "en": "set batteryLevel to 0 if tablet is offline is configurable",
         "de": "set Batterie Ebene auf 0 wenn Tablet offline konfigurierbar ist",
@@ -80,19 +93,6 @@
         "pl": "credential",
         "uk": "перевірка облікових даних",
         "zh-cn": "检查"
-      },
-      "3.0.6": {
-        "en": "add mqttTimeout in settings",
-        "de": "mqtTimeout in Einstellungen hinzufügen",
-        "ru": "добавить mqttTimeout в настройках",
-        "pt": "adicionar mqttTimeout em configurações",
-        "nl": "voeg mqtTimeout toe in setting",
-        "fr": "ajouter mqttTimeout dans les paramètres",
-        "it": "aggiungere mqttTimeout nelle impostazioni",
-        "es": "añadir mqttTimeout en la configuración",
-        "pl": "dodaje mqttTimeout w ustawieniach",
-        "uk": "додати mqttTimeout в налаштуваннях",
-        "zh-cn": "增加环境的系统"
       }
     },
     "titleLang": {

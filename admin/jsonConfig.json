@@ -1,6 +1,9 @@
 {
     "i18n": true,
     "type": "tabs",
+    "tabsStyle": {
+        width: "calc(100% - 100px)"
+    },
     "items": {
         "_tab_Start": {
             "type": "panel",
@@ -14,9 +17,11 @@
                 "_textStart": {
                     "type": "staticText",
                     "text": "A detailed documentation with explanations and all further information can be found on this GitHub page:",
+                    "xs": 12,
                     "sm": 12,
-                    "md": 12,
-                    "lg": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
                     "style": {
                         "fontSize": 16,
                         "marginTop": 0
@@ -27,9 +32,11 @@
                     "label": "🇩🇪 Deutsche Dokumentation",
                     "button": true,
                     "href": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/docs/de/README.md",
+                    "xs": 12,
                     "sm": 12,
-                    "md": 12,
-                    "lg": 2,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
                     "style": {
                         "fontSize": 16,
                         "marginTop": 0
@@ -40,9 +47,11 @@
                     "label": "🇬🇧 English Documentation",
                     "button": true,
                     "href": "https://github.com/arteck/ioBroker.fullybrowser/blob/master/docs/en/README.md",
+                    "xs": 12,
                     "sm": 12,
-                    "md": 12,
-                    "lg": 2,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4,
                     "style": {
                         "fontSize": 16,
                         "marginTop": 0
@@ -67,9 +76,11 @@
                 },
                 "tableDevices": {
                     "type": "table",
+                    "xs": 12,
                     "sm": 12,
                     "md": 12,
                     "lg": 12,
+                    "xl": 12,
                     "items": [
                         {
                             "type": "checkbox",
@@ -214,9 +225,11 @@
                     "max": 120,
                     "label": "Do not process published info more than every x seconds",
                     "help": "in seconds (2-120, default: 30)",
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
-                    "lg": 3
+                    "lg": 4,
+                    "xl": 4
                 }, 
                 "mqttTimeout": {
                     "type": "number",
@@ -225,27 +238,33 @@
                     "label": "MQTT Timeout",
                     "help": "in seconds (2-120, default: 70)",
                     "default": 70,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
-                    "lg": 3
+                    "lg": 4,
+                    "xl": 4
                 },
                 "mqttUpdateUnchangedObjects": {
                     "type": "checkbox",
                     "label": "Always update info states",
                     "help": "Always update info objects, even if value did not change",
                     "default": false,
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
-                    "lg": 3
+                    "lg": 4,
+                    "xl": 4
                 },
                 "mqttCreateDefaultEventObjects": {
                     "type": "checkbox",
                     "label": "Create default event objects at adapter start",
                     "help": "Create default event objects (facesDetected, hideKeyboard, etc.) at the first adapter startup",
                     "default": true,
+                    "xs": 12,
                     "sm": 12,
-                    "md": 7,
-                    "lg": 5
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "header_LOG_MQTT": {
                     "newLine": true,
@@ -257,9 +276,11 @@
                     "label": "Client and Connection errors as info in log",
                     "help": "Logs client and connection errors as 'info' and not as 'error'",
                     "default": true,
+                    "xs": 12,
                     "sm": 12,
-                    "md": 7,
-                    "lg": 5
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "messageMQTTAlive": {
                     "type": "checkbox",
@@ -267,9 +288,11 @@
                     "help": "Show lost/connected/alive as warning",
                     "default": true,
                     "hidden": "!data.mqttConnErrorsAsInfo",
+                    "xs": 12,
                     "sm": 12,
-                    "md": 7,
-                    "lg": 5
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "header_RESTAPI": {
                     "newLine": true,
@@ -284,9 +307,11 @@
                     "default": 2000,
                     "label": "Request Timeout",
                     "help": "in milliseconds (500-15000, default: 2000)",
+                    "xs": 12,
                     "sm": 12,
                     "md": 6,
-                    "lg": 3
+                    "lg": 4,
+                    "xl": 4
                 },
                 "restIntervall": {
                     "type": "number",
@@ -295,18 +320,22 @@
                     "default": 60000,
                     "label": "Request Intervall",
                     "help": "in milliseconds (10000-99999999, default: 60000 = 1 Min.)",
+                    "xs": 12,
                     "sm": 12,
-                    "md": 7,
-                    "lg": 3
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "restCommandLogAsDebug": {
                     "type": "checkbox",
                     "label": "Successful commands as debug in log",
                     "help": "Log '... Command xxx successfully set to x' as 'debug' and not 'info'",
                     "default": false,
+                    "xs": 12,
                     "sm": 12,
-                    "md": 8,
-                    "lg": 5
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "header_REST": {
                     "newLine": true,
@@ -318,9 +347,11 @@
                     "label": "Set battery to zero if Tablet is offline",
                     "help": "",
                     "default": false,
+                    "xs": 12,
                     "sm": 12,
-                    "md": 7,
-                    "lg": 5
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 }
             }
         }
