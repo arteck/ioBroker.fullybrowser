@@ -1,6 +1,9 @@
 {
     "i18n": true,
     "type": "tabs",
+    "tabsStyle": {
+        width: "calc(100% - 100px)"
+    },
     "items": {
         "_tab_Start": {
             "type": "panel",
@@ -69,7 +72,12 @@
                     "newLine": true,
                     "style": {
                         "fontSize": 16
-                    }
+                    },
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "tableDevices": {
                     "type": "table",
@@ -111,7 +119,7 @@
                             "attr": "name",
                             "maxLength": 50,
                             "trim": false,
-                            "width": "55%",
+                            "width": "35%",
                             "filter": true,
                             "sort": true,
                             "validator": "data.name.length > 1",
@@ -142,7 +150,7 @@
                             "attr": "ip",
                             "maxLength": 15,
                             "trim": true,
-                            "width": "15%",
+                            "width": "25%",
                             "validator": "data.ip != null && data.ip != undefined && data.ip.length > 5",
                             "validatorNoSaveOnError": true
                         },
@@ -159,7 +167,7 @@
                             "type": "password",
                             "title": "Remote Admin Password",
                             "attr": "restPassword",
-                            "width": "15%",
+                            "width": "25%",
                             "validator": "data.restPassword.length > 0",
                             "validatorNoSaveOnError": true
                         }
@@ -176,7 +184,12 @@
                     "label": "Port is always required, but you can leave user name and password empty. Fully Browser App: Settings -> Other Settings -> MQTT Integration (PLUS)",
                     "style": {
                         "fontSize": 16
-                    }
+                    },
+                    "xs": 16,
+                    "sm": 16,
+                    "md": 16,
+                    "lg": 8,
+                    "xl": 8
                 },
                 "mqttPort": {
                     "newLine": true,
@@ -185,19 +198,34 @@
                     "min": 1,
                     "max": 65535,
                     "default": 3000,
-                    "help": "MQTT Port (1-65535)"
+                    "help": "MQTT Port (1-65535)",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "mqttDoNotVerifyUserPw": {
                     "type": "checkbox",
                     "label": "Do not verify user and password",
                     "help": "This disables the username and password verification",
-                    "default": true
+                    "default": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "mqttUser": {
                     "type": "text",
                     "label": "User name",
                     "help": "MQTT User name",
-                    "hidden": "data.mqttDoNotVerifyUserPw"
+                    "hidden": "data.mqttDoNotVerifyUserPw",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "mqttPassword": {
                     "type": "password",
