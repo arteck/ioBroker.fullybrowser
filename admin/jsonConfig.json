@@ -90,7 +90,7 @@
                         {
                             "type": "checkbox",
                             "attr": "enabled",
-                            "width": "30px",
+                            "width": "20px",
                             "title": "Active",
                             "default": true
                         },
@@ -101,7 +101,6 @@
                             "default": "restapi",
                             "width": "6%",
                             "validator": "data.apiType.length > 3",
-                            "validatorNoSaveOnError": true,
                             "options": [
                                 {
                                     "label": "MQTT",
@@ -119,7 +118,7 @@
                             "attr": "name",
                             "maxLength": 50,
                             "trim": false,
-                            "width": "35%",
+                            "width": "25%",
                             "filter": true,
                             "sort": true,
                             "validator": "data.name.length > 1",
@@ -161,15 +160,32 @@
                             "min": 1,
                             "max": 65535,
                             "default": 2323,
-                            "width": "10%"
+                            "width": "5%"
                         },
                         {
                             "type": "password",
                             "title": "Remote Admin Password",
                             "attr": "restPassword",
-                            "width": "25%",
+                            "width": "15%",
                             "validator": "data.restPassword.length > 0",
                             "validatorNoSaveOnError": true
+                        },
+                        {
+                            "type": "instance",
+                            "adapter": "telegram",
+                            "title": "Telegram",
+                            "allowDeactivate": true,
+                            "attr": "telegramInstance",
+                            "width": "5%"
+                        },
+                        {
+                            "type": "text",
+                            "hidden": "!data.telegramInstance",
+                            "title": "Chatid",
+                            "attr": "chatid",
+                            "maxLength": 15,
+                            "trim": true,
+                            "width": "15%"
                         }
                     ]
                 },
@@ -206,6 +222,7 @@
                     "xl": 4
                 },
                 "mqttDoNotVerifyUserPw": {
+                    "newLine": true,
                     "type": "checkbox",
                     "label": "Do not verify user and password",
                     "help": "This disables the username and password verification",
@@ -217,6 +234,7 @@
                     "xl": 4
                 },
                 "mqttUser": {
+                    "newLine": true,
                     "type": "text",
                     "label": "User name",
                     "help": "MQTT User name",
@@ -228,6 +246,7 @@
                     "xl": 4
                 },
                 "mqttPassword": {
+                    "newLine": true,
                     "type": "password",
                     "label": "Password",
                     "help": "MQTT Password",
@@ -255,7 +274,7 @@
                     "md": 6,
                     "lg": 4,
                     "xl": 4
-                }, 
+                },
                 "mqttTimeout": {
                     "type": "number",
                     "min": 1,
@@ -296,7 +315,8 @@
                     "type": "header",
                     "text": "Log MQTT ",
                     "size": 2
-                },"mqttConnErrorsAsInfo": {
+                },
+                "mqttConnErrorsAsInfo": {
                     "type": "checkbox",
                     "label": "Client and Connection errors as info in log",
                     "help": "Logs client and connection errors as 'info' and not as 'error'",
@@ -367,11 +387,24 @@
                     "type": "header",
                     "text": "Other Settings",
                     "size": 2
-                },"zeroBattery": {
+                },
+                "zeroBattery": {
                     "type": "checkbox",
                     "label": "Set battery to zero if Tablet is offline",
                     "help": "",
                     "default": false,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
+                },
+                "picPath": {
+                    "newLine": true,
+                    "type": "text",
+                    "label": "Picture path",
+                    "help": "picture path for camera pictures, create the folder manually if it does not exist",
+                    "default": "",
                     "xs": 12,
                     "sm": 12,
                     "md": 6,

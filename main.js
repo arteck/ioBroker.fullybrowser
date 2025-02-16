@@ -419,7 +419,9 @@ class fullybrowserControll  extends utils.Adapter {
                     restPassword: '',
                     lastSeen: 0,
                     isAlive: false,
-                    apiType: ''
+                    apiType: '',
+                    chatid: '',
+                    telegramInstance: ''
                 };
                 if (!this.isIpAddressValid(lpDevice.ip)) {
                     this.log.error(`${finalDevice.name}: Provided IP address "${lpDevice.ip}" is not valid!`);
@@ -481,6 +483,9 @@ class fullybrowserControll  extends utils.Adapter {
                 } else {
                     finalDevice.restPassword = lpDevice.restPassword;
                 }
+
+                finalDevice.chatid = lpDevice.chatid;
+                finalDevice.telegramInstance = lpDevice.telegramInstance;
 
                 finalDevice.enabled = lpDevice.enabled ? true : false;
 

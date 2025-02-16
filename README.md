@@ -50,6 +50,9 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 -->
 
 ## Changelog
+### 3.1.0 (2025-02-16)
+* (arteck) add new command takePicture, check new settings
+
 ### 3.0.13 (2025-01-05)
 * (arteck) add setBooleanSetting
 

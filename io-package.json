@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.0.13",
+    "version": "3.1.0",
     "news": {
+      "3.1.0": {
+        "en": "add new command takePicture, check new settings",
+        "de": "neue Befehl TakePicture hinzufügen, neue Einstellungen überprüfen",
+        "ru": "добавить новую команду takePicture, проверить новые настройки",
+        "pt": "add new command takePicture, verifique novas configurações",
+        "nl": "nieuwe commando TakePicture toevoegen, nieuwe instellingen controleren",
+        "fr": "ajouter une nouvelle commande takePhoto, vérifier les nouveaux paramètres",
+        "it": "aggiungere nuovo comando takePicture, controllare nuove impostazioni",
+        "es": "añadir nuevo comando takePicture, comprobar nuevos ajustes",
+        "pl": "dodaj nowe polecenie Take Picture, sprawdź nowe ustawienia",
+        "uk": "додати нову команду TakePicture, перевірити нові налаштування",
+        "zh-cn": "添加新命令 takePicture, 检查新设置"
+      },
       "3.0.13": {
         "en": "add setBooleanSetting",
         "de": "setBooleanSetting hinzufügen",
@@ -80,19 +93,6 @@
         "pl": "toForeground (ang.)\n",
         "uk": "toForeground кор\n",
         "zh-cn": "地面政变\n"
-      },
-      "3.0.7": {
-        "en": "check credentials",
-        "de": "anmeldeinformationen überprüfen",
-        "ru": "проверить учетные данные",
-        "pt": "verificar as credenciais",
-        "nl": "controleer de referenties",
-        "fr": "vérification des pouvoirs",
-        "it": "controllare le credenziali",
-        "es": "verificación de credenciales",
-        "pl": "credential",
-        "uk": "перевірка облікових даних",
-        "zh-cn": "检查"
       }
     },
     "titleLang": {
@@ -194,7 +194,7 @@
           "zh-cn": "重要的提醒！ zigbee2mqtt 2.0"
         },
         "text": {
-         "en": "This new version has been completely revised.\nIt uses the MQTT connection or restAPI(request). it's configurable in Adapter settings.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts. \nAll settings from the old Adapter are deleted, save yours FullyBrowser list from old Adapter settings (screenshot)",
+          "en": "This new version has been completely revised.\nIt uses the MQTT connection or restAPI(request). it's configurable in Adapter settings.\nThe name in the tree structure is no longer the IP address.\nPlease adapt your scripts. \nAll settings from the old Adapter are deleted, save yours FullyBrowser list from old Adapter settings (screenshot)",
           "de": "Diese neue Version wurde komplett überarbeitet.\nEs verwendet die MQTT-Verbindung oder restAPI (Request.) es ist in Adapter-Einstellungen konfigurierbar.\nDer Name in der Baumstruktur ist nicht mehr die IP-Adresse.\nBitte passen Sie Ihre Skripte an.\nAlle Einstellungen aus dem alten Adapter werden gelöscht, speichern Sie Ihre FullyBrowser-Liste aus alten Adaptereinstellungen (screenshot)",
           "ru": "Эта новая версия была полностью пересмотрена.\nОн использует соединение MQTT или restAPI (запрос.) он настраивается в настройках адаптера.\nНазвание в структуре дерева больше не является IP-адресом.\nПожалуйста, приспособьте свои скрипты.\nВсе настройки от старого адаптера удаляются, сохраните список FullyBrowser из старых настроек адаптера (скриншот)",
           "pt": "Esta nova versão foi completamente revisada.\nEle usa a conexão MQTT ou restAPI (pedido.) é configurável em configurações do adaptador.\nO nome na estrutura da árvore não é mais o endereço IP.\nPor favor, adapte seus scripts.\nTodas as configurações do velho adaptador são excluídas, salve sua lista FullyBrowser de configurações antigas do adaptador (screenshot)",

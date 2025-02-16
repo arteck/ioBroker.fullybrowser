@@ -32,5 +32,7 @@
     "Welcome to Fully MQTT adapter": "Ласкаво просимо до адаптера Fully MQTT",
     "in milliseconds (500-15000, default: 6000)": "у мілісекундах (500-15000, за замовчуванням: 6000)",
     "in seconds (2-120, default: 30)": "за секунди (2-120, за замовчуванням: 30)",
-    "in seconds (min: 5, default: 60); ignored if MQTT is used": "у секундах (хв.: 5, за замовчуванням: 60); ігнорується, якщо використовується MQTT"
+    "in seconds (min: 5, default: 60); ignored if MQTT is used": "у секундах (хв.: 5, за замовчуванням: 60); ігнорується, якщо використовується MQTT",
+    "Picture path": "Шлях до зображення",
+    "picture path for camera pictures, create the folder manually if it does not exist": "шлях до зображень камери, створіть папку вручну, якщо її немає рекомендація /opt/iobroker/pics/"
 }
