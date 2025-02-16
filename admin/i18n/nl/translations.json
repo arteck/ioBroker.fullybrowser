@@ -34,5 +34,5 @@
     "in seconds (2-120, default: 30)": "in seconden (2-120, standaard: 30)",
     "in seconds (min: 5, default: 60); ignored if MQTT is used": "in seconden (min: 5, standaard: 60); genegeerd als MQTT wordt gebruikt",
     "Picture path": "Afbeeldingspad",
-    "picture path for camera pictures, create the folder manually if it does not exist": "afbeeldingspad voor camerabeelden, maak de map handmatig aan als deze niet bestaat aanbeveling /opt/iobroker/pics/"
+    "picture path for camera pictures": "afbeeldingspad voor camerabeelden, maak de map handmatig aan als deze niet bestaat aanbeveling /opt/iobroker/pics/"
 }

@@ -34,5 +34,5 @@
     "in seconds (2-120, default: 30)": "em segundos (2-120, padrão: 30)",
     "in seconds (min: 5, default: 60); ignored if MQTT is used": "em segundos (min: 5, padrão: 60); ignorado se o MQTT for usado",
     "Picture path": "Caminho da imagem",
-    "picture path for camera pictures, create the folder manually if it does not exist": "caminho da imagem para fotos da câmera, crie a pasta manualmente se ela não existir (como /opt/iobroker/pics/)"
+    "picture path for camera pictures": "caminho da imagem para fotos da câmera, crie a pasta manualmente se ela não existir (como /opt/iobroker/pics/)"
 }

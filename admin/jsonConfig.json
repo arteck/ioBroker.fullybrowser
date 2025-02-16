@@ -403,7 +403,7 @@
                     "newLine": true,
                     "type": "text",
                     "label": "Picture path",
-                    "help": "picture path for camera pictures, create the folder manually if it does not exist",
+                    "help": "picture path for camera pictures",
                     "default": "",
                     "xs": 12,
                     "sm": 12,
