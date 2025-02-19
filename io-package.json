@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.1.0",
+    "version": "3.1.1",
     "news": {
+      "3.1.1": {
+        "en": "typo",
+        "de": "typo",
+        "ru": "typo",
+        "pt": "tipo:",
+        "nl": "type",
+        "fr": "typo",
+        "it": "tipo",
+        "es": "typo",
+        "pl": "typo",
+        "uk": "типи",
+        "zh-cn": "类型"
+      },
       "3.1.0": {
         "en": "add new command takePicture, check new settings",
         "de": "neue Befehl TakePicture hinzufügen, neue Einstellungen überprüfen",
@@ -80,19 +93,6 @@
         "pl": "kor error message",
         "uk": "корр повідомлення про помилку",
         "zh-cn": "错误信息"
-      },
-      "3.0.8": {
-        "en": "toForeground corr\n",
-        "de": "toForeground corr\n",
-        "ru": "toForeground корр\n",
-        "pt": "toForeground corr\n",
-        "nl": "*Foreground corr\n",
-        "fr": "toForeground corr\n",
-        "it": "aCorretto anteriore\n",
-        "es": "toForeground corr\n",
-        "pl": "toForeground (ang.)\n",
-        "uk": "toForeground кор\n",
-        "zh-cn": "地面政变\n"
       }
     },
     "titleLang": {
