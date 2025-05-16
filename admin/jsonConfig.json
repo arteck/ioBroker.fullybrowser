@@ -201,9 +201,9 @@
                     "style": {
                         "fontSize": 16
                     },
-                    "xs": 16,
-                    "sm": 16,
-                    "md": 16,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
                     "lg": 8,
                     "xl": 8
                 },
@@ -250,7 +250,12 @@
                     "type": "password",
                     "label": "Password",
                     "help": "MQTT Password",
-                    "hidden": "data.mqttDoNotVerifyUserPw"
+                    "hidden": "data.mqttDoNotVerifyUserPw",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 4,
+                    "xl": 4
                 }
             }
         },
