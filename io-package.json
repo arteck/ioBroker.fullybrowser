@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.1.1",
+    "version": "3.1.2",
     "news": {
+      "3.1.2": {
+        "en": "add device name into the warning message\ndependency update",
+        "de": "gerätename in die warnmeldung einfügen\naktualisierung der abhängigkeit",
+        "ru": "добавить имя устройства в предупреждающее сообщение\nобновление зависимостей",
+        "pt": "adicionar o nome do dispositivo à mensagem de aviso\natualização de dependência",
+        "nl": "apparaatnaam toevoegen aan het waarschuwingsbericht\nafhankelijkheidsupdate",
+        "fr": "ajouter le nom du périphérique dans le message d'avertissement\nmise à jour de la dépendance",
+        "it": "aggiungere il nome del dispositivo nel messaggio di avviso\naggiornamento della dipendenza",
+        "es": "añadir el nombre del dispositivo en el mensaje de advertencia\nactualización de la dependencia",
+        "pl": "dodaj nazwę urządzenia do komunikatu ostrzegawczego\naktualizacja zależności",
+        "uk": "додати назву пристрою в повідомлення про попередження\nоновлення залежності",
+        "zh-cn": "在警告消息中添加设备名称\n依赖性更新"
+      },
       "3.1.1": {
         "en": "typo",
         "de": "typo",
@@ -80,19 +93,6 @@
         "pl": "zestaw baterii Poziom do 0, gdy urządzenie jest wyłączone",
         "uk": "акумулятор Рівень до 0 при вимкненні пристрою",
         "zh-cn": "设置电池 设备下线时等级为 0"
-      },
-      "3.0.9": {
-        "en": "corr error message",
-        "de": "korr fehlermeldung",
-        "ru": "сообщение об ошибке",
-        "pt": "mensagem de erro corr",
-        "nl": "vertaling:",
-        "fr": "corr error message",
-        "it": "messaggio di errore corr",
-        "es": "mensaje de error de corr",
-        "pl": "kor error message",
-        "uk": "корр повідомлення про помилку",
-        "zh-cn": "错误信息"
       }
     },
     "titleLang": {

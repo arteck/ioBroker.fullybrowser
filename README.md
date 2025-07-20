@@ -42,14 +42,18 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
     Placeholder for the next version (at the beginning of the line):
     
     https://github.com/AlCalzone/release-script#usage
-    npm run release minor -- --all 0.9.8 -> 0.10.0
-    npm run release patch -- --all 0.9.8 -> 0.9.9
-    npm run release prerelease beta -- --all v0.2.1 -> v0.2.2-beta.0
-    Placeholder for the next version (at the beginning of the line):
+    npm run release major -- -p iobroker license --all 0.9.8 -> 1.0.0
+    npm run release minor -- -p iobroker license --all 0.9.8 -> 0.10.0
+    npm run release patch -- -p iobroker license --all 0.9.8 -> 0.9.9
+    npm run release prerelease beta -- -p iobroker license --all v0.2.1 -> v0.2.2-beta.0
     ### **WORK IN PROGRESS**
 -->
 
 ## Changelog
+### 3.1.2 (2025-07-20)
+* (arteck) add device name into the warning message
+* (arteck) dependency update
+
 ### 3.1.1 (2025-02-19)
 * (arteck) typo
 
