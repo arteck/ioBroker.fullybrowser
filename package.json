@@ -40,7 +40,7 @@
     "@eslint/js": "^10.0.1",
     "@iobroker/adapter-dev": "^1.5.0",
     "@iobroker/testing": "^5.2.2",
-    "@types/chai": "^5.2.1",
+    "@types/chai": "^5.2.3",
     "@types/chai-as-promised": "^8.0.2",
     "@types/mocha": "^10.0.3",
     "@types/node": "^25.5.0",
