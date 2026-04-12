@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.1.2",
+    "version": "3.1.3",
     "news": {
+      "3.1.3": {
+        "en": "Dependencies have been updated",
+        "de": "Abhängigkeiten wurden aktualisiert",
+        "ru": "Зависимости были обновлены",
+        "pt": "As dependências foram atualizadas",
+        "nl": "Afhankelijkheden zijn bijgewerkt",
+        "fr": "Les dépendances ont été actualisées",
+        "it": "Le dipendenze sono state aggiornate",
+        "es": "Se han actualizado las dependencias",
+        "pl": "Zaktualizowano zależności",
+        "uk": "Залежність було оновлено",
+        "zh-cn": "依赖关系已更新"
+      },
       "3.1.2": {
         "en": "add device name into the warning message\ndependency update",
         "de": "gerätename in die warnmeldung einfügen\naktualisierung der abhängigkeit",
@@ -80,19 +93,6 @@
         "pl": "przetłumacz typ api-",
         "uk": "переклад api-типу",
         "zh-cn": "翻译 api 类型"
-      },
-      "3.0.10": {
-        "en": "set batteryLevel to 0 when device is offline",
-        "de": "set Batterie Ebene auf 0, wenn das Gerät offline ist",
-        "ru": "аккумулятор Уровень до 0, когда устройство отключено",
-        "pt": "bateria de conjunto Nível a 0 quando o dispositivo está offline",
-        "nl": "set batterij Niveau tot 0 wanneer het apparaat offline is",
-        "fr": "batterie de réglage Niveau à 0 lorsque l'appareil est hors ligne",
-        "it": "set batteria Livello a 0 quando il dispositivo è offline",
-        "es": "batería set Nivel a 0 cuando el dispositivo está fuera de línea",
-        "pl": "zestaw baterii Poziom do 0, gdy urządzenie jest wyłączone",
-        "uk": "акумулятор Рівень до 0 при вимкненні пристрою",
-        "zh-cn": "设置电池 设备下线时等级为 0"
       }
     },
     "titleLang": {

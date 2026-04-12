@@ -5,23 +5,25 @@
 version: 2
 updates:
 
-  - package-ecosystem: 'github-actions'
-    directory: '/'
-    schedule:
-      interval: 'cron'
-      timezone: 'Europe/Berlin'
-      cronjob: '24 3 18 * *'
-    open-pull-requests-limit: 15
-
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'cron'
       timezone: 'Europe/Berlin'
-      cronjob: '24 3 18 * *'
+      cronjob: '46 1 18 * *'
     open-pull-requests-limit: 15
     assignees:
       - 'arteck'
     versioning-strategy: 'increase'
     cooldown:
       default-days: 7
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'cron'
+      timezone: 'Europe/Berlin'
+      cronjob: '46 1 18 * *'
+    open-pull-requests-limit: 15
+    assignees:
+      - 'arteck'

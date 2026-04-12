@@ -56,20 +56,20 @@ class fullybrowserControll  extends utils.Adapter {
             for (const ip in this.fullysEnbl) {
                 const res = await this.createFullyDeviceObjects(this.fullysEnbl[ip]);
                 if (res) {
-                    await this.subscribeStatesAsync(this.fullysEnbl[ip].id + '.Commands.*');
+                    await this.subscribeStatesAsync(`${this.fullysEnbl[ip].id  }.Commands.*`);
                 }
                 if (this.fullysEnbl[ip].apiType == 'mqtt') {
                     this.startMQTTServer = true;
                 }
-                this.setState(this.fullysEnbl[ip].id + '.enabled', {
+                this.setState(`${this.fullysEnbl[ip].id  }.enabled`, {
                     val: true,
                     ack: true
                 });
-                this.setState(this.fullysEnbl[ip].id + '.apiType', {
+                this.setState(`${this.fullysEnbl[ip].id  }.apiType`, {
                     val: this.fullysEnbl[ip].apiType,
                     ack: true
                 });
-                this.setState(this.fullysEnbl[ip].id + '.alive', {
+                this.setState(`${this.fullysEnbl[ip].id  }.alive`, {
                     val: false,
                     ack: true
                 });
@@ -78,15 +78,15 @@ class fullybrowserControll  extends utils.Adapter {
             // all disabled
             for (const ip in this.fullysDisbl) {
                 if (await this.getObjectAsync(this.fullysAll[ip].id)) {
-                    this.setState(this.fullysDisbl[ip].id + '.enabled', {
+                    this.setState(`${this.fullysDisbl[ip].id  }.enabled`, {
                         val: false,
                         ack: true
                     });
-                    this.setState(this.fullysDisbl[ip].id + '.apiType', {
+                    this.setState(`${this.fullysDisbl[ip].id  }.apiType`, {
                         val: this.fullysDisbl[ip].apiType,
                         ack: true
                     });
-                    this.setState(this.fullysDisbl[ip].id + '.alive', {
+                    this.setState(`${this.fullysDisbl[ip].id  }.alive`, {
                         val: null,
                         ack: true
                     });
@@ -119,7 +119,7 @@ class fullybrowserControll  extends utils.Adapter {
             // if alive status changed
             if ((!calledBefore && isAlive === true) || prevIsAlive !== isAlive) {
                 // Set Device isAlive Status - we could also use setStateChanged()...
-                this.setState(this.fullysEnbl[ip].id + '.alive', { val: isAlive, ack: true });
+                this.setState(`${this.fullysEnbl[ip].id  }.alive`, { val: isAlive, ack: true });
 
                 if (this.config.messageMQTTAlive) {
                     if (isAlive) {
@@ -165,7 +165,7 @@ class fullybrowserControll  extends utils.Adapter {
                     await this.setObjectNotExistsAsync(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, {
                         type: 'state',
                         common: {
-                            name: 'Info: ' + key,
+                            name: `Info: ${  key}`,
                             type: valType,
                             role: valValue,
                             read: true,
@@ -195,10 +195,10 @@ class fullybrowserControll  extends utils.Adapter {
     }
 
     async aliveUpdate(dev,val) {
-        this.setState(dev + '.lastInfoUpdate', { val: Date.now(), ack: true });
-        this.setState(dev + '.alive', { val: val, ack: true });
+        this.setState(`${dev  }.lastInfoUpdate`, { val: Date.now(), ack: true });
+        this.setState(`${dev  }.alive`, { val: val, ack: true });
         if (!val && this.config.zeroBattery) {
-            this.setState(dev + '.Info.batteryLevel', { val: 0, ack: true });
+            this.setState(`${dev  }.Info.batteryLevel`, { val: 0, ack: true });
         }
     }
 
@@ -211,7 +211,7 @@ class fullybrowserControll  extends utils.Adapter {
                 await this.setObjectNotExistsAsync(pthEvent, {
                     type: 'state',
                     common: {
-                        name: 'Event: ' + obj.cmd,
+                        name: `Event: ${  obj.cmd}`,
                         type: 'boolean',
                         role: 'switch',
                         read: true,
@@ -223,7 +223,7 @@ class fullybrowserControll  extends utils.Adapter {
             this.setState(pthEvent, {val: true, ack: true});
             this.setState(pthEvent, {val: false, ack: true});   // und zurück auf false
 
-            const pthCmd = this.fullysMQTT[obj.ip].id + '.Commands';
+            const pthCmd = `${this.fullysMQTT[obj.ip].id  }.Commands`;
             const idx = this.getIndexFromConf(cmdsSwitches, ['mqttOn', 'mqttOff'], obj.cmd);
             if (idx !== -1) {
                 const conf = cmdsSwitches[idx];
@@ -248,22 +248,25 @@ class fullybrowserControll  extends utils.Adapter {
 
     async onStateChange(stateId, stateObj) {
         try {
-            if (!stateObj)
-                return;
-            if (stateObj.ack)
-                return;
+            if (!stateObj) {
+return;
+}
+            if (stateObj.ack) {
+return;
+}
             const idSplit = stateId.split('.');
             const deviceId = idSplit[2];
             const channel = idSplit[3];
             const cmd = idSplit[4];
-            const pth = deviceId + '.' + channel;
+            const pth = `${deviceId  }.${  channel}`;
 
             if (channel === 'Commands') {
                 this.log.debug(`state ${stateId} changed: ${stateObj.val} (ack = ${stateObj.ack})`);
                 const fully = this.getFullyByKey('id', deviceId);
 
-                if (!fully)
-                    throw `Fully object for deviceId '${deviceId}' not found!`;
+                if (!fully) {
+throw `Fully object for deviceId '${deviceId}' not found!`;
+}
 
                 let cmdToSend = cmd;
                 let switchConf;
@@ -278,8 +281,9 @@ class fullybrowserControll  extends utils.Adapter {
                     cmdToSend = stateObj.val ? switchConf.cmdOn : switchConf.cmdOff;
                 }
 
-                if (!cmdToSend)
-                    throw `onStateChange() - ${stateId}: fullyCmd could not be determined!`;
+                if (!cmdToSend) {
+throw `onStateChange() - ${stateId}: fullyCmd could not be determined!`;
+}
 
                 const sendCommand = await this.restApi.sendCmd(fully, cmdToSend, stateObj.val);
 
@@ -341,8 +345,9 @@ class fullybrowserControll  extends utils.Adapter {
             let index = -1;
             for (const key of keys) {
                 index = config.findIndex((x) => x[key] === cmd);
-                if (index !== -1)
-                    break;
+                if (index !== -1) {
+break;
+}
             }
             return index;
         } catch (e) {
@@ -353,12 +358,14 @@ class fullybrowserControll  extends utils.Adapter {
 
     async onUnload(callback) {
         try {
-            if (this._requestInterval) clearInterval(this._requestInterval);
+            if (this._requestInterval) {
+clearInterval(this._requestInterval);
+}
 
             if (this.fullysAll) {
                 for (const ip in this.fullysAll) {
                     if (await this.getObjectAsync(this.fullysAll[ip].id)) {
-                        this.setState(this.fullysAll[ip].id + '.alive', {
+                        this.setState(`${this.fullysAll[ip].id  }.alive`, {
                             val: null,
                             ack: true
                         });
@@ -367,8 +374,9 @@ class fullybrowserControll  extends utils.Adapter {
             }
             if (this.mqtt_Server) {
                 for (const clientId in this.mqtt_Server.devices) {
-                    if (this.mqtt_Server.devices[clientId].timeoutNoUpdate)
-                        this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
+                    if (this.mqtt_Server.devices[clientId].timeoutNoUpdate) {
+this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
+}
                 }
             }
             if (this.mqtt_Server) {
@@ -450,9 +458,9 @@ class fullybrowserControll  extends utils.Adapter {
                 if (deviceIds.includes(finalDevice.id)) {
                     this.log.error(`Device "${finalDevice.name}" -> id:"${finalDevice.id}" is used for more than once device.`);
                     return false;
-                } else {
+                } 
                     deviceIds.push(finalDevice.id);
-                }
+                
 
                 if (lpDevice.restProtocol !== 'http' && lpDevice.restProtocol !== 'https') {
                     this.log.warn(`${finalDevice.name}: REST API Protocol is empty, set to http as default.`);
@@ -467,22 +475,22 @@ class fullybrowserControll  extends utils.Adapter {
                 if (deviceIPs.includes(lpDevice.ip)) {
                     this.log.error(`Device "${finalDevice.name}" -> IP:"${lpDevice.ip}" is used for more than once device.`);
                     return false;
-                } else {
+                } 
                     deviceIPs.push(lpDevice.ip);
                     finalDevice.ip = lpDevice.ip;
-                }
+                
                 if (isNaN(lpDevice.restPort) || lpDevice.restPort < 0 || lpDevice.restPort > 65535) {
                     this.log.error(`Adapter config Fully port number ${lpDevice.restPort} is not valid, should be >= 0 and < 65536.`);
                     return false;
-                } else {
+                } 
                     finalDevice.restPort = Math.round(lpDevice.restPort);
-                }
+                
                 if ((0, _methods.isEmpty)(lpDevice.restPassword)) {
                     this.log.error(`Remote Admin (REST API) Password must not be empty!`);
                     return false;
-                } else {
+                } 
                     finalDevice.restPassword = lpDevice.restPassword;
-                }
+                
 
                 finalDevice.chatid = lpDevice.chatid;
                 finalDevice.telegramInstance = lpDevice.telegramInstance;
@@ -537,14 +545,14 @@ class fullybrowserControll  extends utils.Adapter {
                 },
                 native: {}
             });
-            await this.setObjectNotExistsAsync(device.id + '.Info', {
+            await this.setObjectNotExistsAsync(`${device.id  }.Info`, {
                 type: 'channel',
                 common: {
                     name: 'Device Information'
                 },
                 native: {}
             });
-            await this.setObjectNotExistsAsync(device.id + '.alive', {
+            await this.setObjectNotExistsAsync(`${device.id  }.alive`, {
                 type: 'state',
                 common: {
                     name: 'Is Fully alive?',
@@ -556,7 +564,7 @@ class fullybrowserControll  extends utils.Adapter {
                 },
                 native: {}
             });
-            await this.setObjectNotExistsAsync(device.id + '.lastInfoUpdate', {
+            await this.setObjectNotExistsAsync(`${device.id  }.lastInfoUpdate`, {
                 type: 'state',
                 common: {
                     name: 'Last information update',
@@ -568,7 +576,7 @@ class fullybrowserControll  extends utils.Adapter {
                 },
                 native: {}
             });
-            await this.setObjectNotExistsAsync(device.id + '.enabled', {
+            await this.setObjectNotExistsAsync(`${device.id  }.enabled`, {
                 type: 'state',
                 common: {
                     name: 'Is device enabled in adapter settings?',
@@ -580,7 +588,7 @@ class fullybrowserControll  extends utils.Adapter {
                 },
                 native: {}
             });
-            await this.setObjectNotExistsAsync(device.id + '.apiType', {
+            await this.setObjectNotExistsAsync(`${device.id  }.apiType`, {
                 type: 'state',
                 common: {
                     name: 'Which ApiType is selected for request?',
@@ -592,7 +600,7 @@ class fullybrowserControll  extends utils.Adapter {
                 native: {}
             });
 
-            await this.setObjectNotExistsAsync(device.id + '.Commands', {
+            await this.setObjectNotExistsAsync(`${device.id  }.Commands`, {
                 type: 'channel',
                 common: {
                     name: 'Commands'
@@ -634,7 +642,7 @@ class fullybrowserControll  extends utils.Adapter {
                     comm = 'Root Device : ';
                 }
 
-                await this.setObjectNotExistsAsync(device.id + '.Commands.' + cmdObj.id, {
+                await this.setObjectNotExistsAsync(`${device.id  }.Commands.${  cmdObj.id}`, {
                     type: 'state',
                     common: {
                         name: comm + cmdObj.name,
@@ -649,7 +657,7 @@ class fullybrowserControll  extends utils.Adapter {
             }
 
             if (device.apiType == 'mqtt') {
-                await this.setObjectNotExistsAsync(device.id + '.Events', {
+                await this.setObjectNotExistsAsync(`${device.id  }.Events`, {
                     type: 'channel',
                     common: {
                         name: 'MQTT Events'
@@ -659,10 +667,10 @@ class fullybrowserControll  extends utils.Adapter {
 
                 if (this.config.mqttCreateDefaultEventObjects) {
                     for (const event of mqttEvents) {
-                        await this.setObjectNotExistsAsync(device.id + '.Events.' + event, {
+                        await this.setObjectNotExistsAsync(`${device.id  }.Events.${  event}`, {
                             type: 'state',
                             common: {
-                                name: 'Event: ' + event,
+                                name: `Event: ${  event}`,
                                 type: 'boolean',
                                 role: 'switch',
                                 read: true,
@@ -690,8 +698,9 @@ class fullybrowserControll  extends utils.Adapter {
                 if (['info'].includes(deviceId)) {
                     this.log.silly(`Cleanup: Ignore non device related state ${objectId}.`);
                 } else {
-                    if (!allObjectDeviceIds.includes(deviceId))
-                        allObjectDeviceIds.push(deviceId);
+                    if (!allObjectDeviceIds.includes(deviceId)) {
+allObjectDeviceIds.push(deviceId);
+}
                 }
             }
             const allConfigDeviceIds = [];
@@ -713,12 +722,11 @@ class fullybrowserControll  extends utils.Adapter {
     }
 }
 
-// @ts-ignore parent is a valid property on module
 if (module.parent) {
     // Export the constructor in compact mode
     /**
-   * @param {Partial<utils.AdapterOptions>} [options={}]
-   */
+     * @param {Partial<utils.AdapterOptions>} [options]
+     */
     module.exports = (options) => new fullybrowserControll(options);
 } else {
     // otherwise start the instance directly
