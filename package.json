@@ -29,7 +29,7 @@
     "@iobroker/adapter-core": "^3.3.2",
     "@iobroker/dm-utils": "^3.0.3",
     "aedes": "^1.0.1",
-    "axios": "^1.13.6",
+    "axios": "^1.15.0",
     "net": "^1.0.2",
     "ws": "^8.20.0"
   },
