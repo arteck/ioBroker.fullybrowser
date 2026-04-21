@@ -33,7 +33,7 @@ class fullybrowserControll  extends utils.Adapter {
         this.fullysDisbl = {};
         this.fullysAll = {};
 
-        this.onMqttAlive_EverBeenCalledBefore = false;
+        this.onMqttAlive_FirstCallPerDevice = {}; // key = ip, value = boolean
         this._requestInterval = 0;
 
         this.on('ready', this.onReady.bind(this));
@@ -58,7 +58,7 @@ class fullybrowserControll  extends utils.Adapter {
                 if (res) {
                     await this.subscribeStatesAsync(`${this.fullysEnbl[ip].id  }.Commands.*`);
                 }
-                if (this.fullysEnbl[ip].apiType == 'mqtt') {
+                if (this.fullysEnbl[ip].apiType === 'mqtt') {
                     this.startMQTTServer = true;
                 }
                 this.setState(`${this.fullysEnbl[ip].id  }.enabled`, {
@@ -109,17 +109,20 @@ class fullybrowserControll  extends utils.Adapter {
 
     async onMqttAlive(ip, isAlive, msg) {
         try {
+            if (!this.fullysEnbl[ip]) {
+                this.log.warn(`onMqttAlive() - IP ${ip} not found in enabled devices.`);
+                return;
+            }
             const prevIsAlive = this.fullysEnbl[ip].isAlive;
             this.fullysEnbl[ip].isAlive = isAlive;
 
-            // Has this function ever been called before? If adapter is restarted, we ensure log, etc.
-            const calledBefore = this.onMqttAlive_EverBeenCalledBefore; // Keep old value
-            this.onMqttAlive_EverBeenCalledBefore = true; // Now it was called
+            // Has this function been called before for this device?
+            const calledBefore = this.onMqttAlive_FirstCallPerDevice[ip] === true;
+            this.onMqttAlive_FirstCallPerDevice[ip] = true;
 
-            // if alive status changed
+            // if alive status changed or first call
             if ((!calledBefore && isAlive === true) || prevIsAlive !== isAlive) {
-                // Set Device isAlive Status - we could also use setStateChanged()...
-                this.setState(`${this.fullysEnbl[ip].id  }.alive`, { val: isAlive, ack: true });
+                this.setState(`${this.fullysEnbl[ip].id}.alive`, { val: isAlive, ack: true });
 
                 if (this.config.messageMQTTAlive) {
                     if (isAlive) {
@@ -139,7 +142,10 @@ class fullybrowserControll  extends utils.Adapter {
 
     async onMqttInfo(obj) {
         try {
-            const newInfoKeysAdded = [];
+            if (!this.fullysEnbl[obj.ip]) {
+                this.log.warn(`onMqttInfo() - IP ${obj.ip} not found in enabled devices.`);
+                return;
+            }
             let valValue = 'value';
             let valType = '';
 
@@ -153,14 +159,12 @@ class fullybrowserControll  extends utils.Adapter {
                     continue;
                 }
 
-                if (key == 'timestamp') {
+                if (key === 'timestamp') {
                     valValue = 'value.time';
                 }
 
                 if (!this.fullysEnbl[obj.ip].mqttInfoKeys.includes(key)) {
                     this.fullysEnbl[obj.ip].mqttInfoKeys.push(key);
-
-                    newInfoKeysAdded.push(key);
 
                     await this.setObjectNotExistsAsync(`${this.fullysEnbl[obj.ip].id}.Info.${key}`, {
                         type: 'state',
@@ -194,7 +198,7 @@ class fullybrowserControll  extends utils.Adapter {
         }
     }
 
-    async aliveUpdate(dev,val) {
+    aliveUpdate(dev, val) {
         this.setState(`${dev  }.lastInfoUpdate`, { val: Date.now(), ack: true });
         this.setState(`${dev  }.alive`, { val: val, ack: true });
         if (!val && this.config.zeroBattery) {
@@ -204,6 +208,10 @@ class fullybrowserControll  extends utils.Adapter {
 
     async onMqttEvent(obj) {
         try {
+            if (!this.fullysMQTT[obj.ip]) {
+                this.log.warn(`onMqttEvent() - IP ${obj.ip} not found in MQTT devices.`);
+                return;
+            }
             this.log.debug(`[MQTT] \u{1F4E1} ${this.fullysMQTT[obj.ip].name} published event, topic: ${obj.topic}, cmd: ${obj.cmd}`);
             const pthEvent = `${this.fullysMQTT[obj.ip].id}.Events.${obj.cmd}`;
             if (!await this.getObjectAsync(pthEvent)) {
@@ -227,7 +235,7 @@ class fullybrowserControll  extends utils.Adapter {
             const idx = this.getIndexFromConf(cmdsSwitches, ['mqttOn', 'mqttOff'], obj.cmd);
             if (idx !== -1) {
                 const conf = cmdsSwitches[idx];
-                const onOrOffCmd = obj.cmd === conf.mqttOn ? true : false;
+                const onOrOffCmd = obj.cmd === conf.mqttOn;
                 await this.setStateAsync(`${pthCmd}.${conf.id}`, {val: onOrOffCmd, ack: true});
                 await this.setStateAsync(`${pthCmd}.${conf.cmdOn}`, {val: onOrOffCmd, ack: true});
                 await this.setStateAsync(`${pthCmd}.${conf.cmdOff}`, {val: !onOrOffCmd, ack: true});
@@ -249,11 +257,11 @@ class fullybrowserControll  extends utils.Adapter {
     async onStateChange(stateId, stateObj) {
         try {
             if (!stateObj) {
-return;
-}
+                return;
+            }
             if (stateObj.ack) {
-return;
-}
+                return;
+            }
             const idSplit = stateId.split('.');
             const deviceId = idSplit[2];
             const channel = idSplit[3];
@@ -265,8 +273,8 @@ return;
                 const fully = this.getFullyByKey('id', deviceId);
 
                 if (!fully) {
-throw `Fully object for deviceId '${deviceId}' not found!`;
-}
+                    throw `Fully object for deviceId '${deviceId}' not found!`;
+                }
 
                 let cmdToSend = cmd;
                 let switchConf;
@@ -282,8 +290,8 @@ throw `Fully object for deviceId '${deviceId}' not found!`;
                 }
 
                 if (!cmdToSend) {
-throw `onStateChange() - ${stateId}: fullyCmd could not be determined!`;
-}
+                    throw `onStateChange() - ${stateId}: fullyCmd could not be determined!`;
+                }
 
                 const sendCommand = await this.restApi.sendCmd(fully, cmdToSend, stateObj.val);
 
@@ -295,7 +303,7 @@ throw `onStateChange() - ${stateId}: fullyCmd could not be determined!`;
                     }
 
                     if (switchConf !== undefined) {
-                        const onOrOffCmdVal = cmd === switchConf.cmdOn ? true : false;
+                        const onOrOffCmdVal = cmd === switchConf.cmdOn;
                         await this.setStateAsync(`${pth}.${switchConf.id}`, { val: onOrOffCmdVal, ack: true });
                         await this.setStateAsync(`${pth}.${switchConf.cmdOn}`, {val: onOrOffCmdVal, ack: true});
                         await this.setStateAsync(`${pth}.${switchConf.cmdOff}`, { val: !onOrOffCmdVal, ack: true });
@@ -330,9 +338,7 @@ throw `onStateChange() - ${stateId}: fullyCmd could not be determined!`;
     getFullyByKey(keyId, value) {
         for (const ip in this.fullysEnbl) {
             if (keyId in this.fullysEnbl[ip]) {
-                const lpKeyId = keyId;
-                const lpVal = this.fullysEnbl[ip][lpKeyId];
-                if (lpVal === value) {
+                if (this.fullysEnbl[ip][keyId] === value) {
                     return this.fullysEnbl[ip];
                 }
             }
@@ -346,8 +352,8 @@ throw `onStateChange() - ${stateId}: fullyCmd could not be determined!`;
             for (const key of keys) {
                 index = config.findIndex((x) => x[key] === cmd);
                 if (index !== -1) {
-break;
-}
+                    break;
+                }
             }
             return index;
         } catch (e) {
@@ -359,8 +365,8 @@ break;
     async onUnload(callback) {
         try {
             if (this._requestInterval) {
-clearInterval(this._requestInterval);
-}
+                this.clearInterval(this._requestInterval);
+            }
 
             if (this.fullysAll) {
                 for (const ip in this.fullysAll) {
@@ -375,8 +381,8 @@ clearInterval(this._requestInterval);
             if (this.mqtt_Server) {
                 for (const clientId in this.mqtt_Server.devices) {
                     if (this.mqtt_Server.devices[clientId].timeoutNoUpdate) {
-this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
-}
+                        this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
+                    }
                 }
             }
             if (this.mqtt_Server) {
@@ -432,7 +438,7 @@ this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
                     telegramInstance: ''
                 };
                 if (!this.isIpAddressValid(lpDevice.ip)) {
-                    this.log.error(`${finalDevice.name}: Provided IP address "${lpDevice.ip}" is not valid!`);
+                    this.log.error(`Device "${lpDevice.name || '?'}": Provided IP address "${lpDevice.ip}" is not valid!`);
                     return false;
                 }
                 if (this.isEmpty(lpDevice.name)) {
@@ -440,7 +446,7 @@ this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
                     return false;
                 }
 
-                finalDevice.name = lpDevice.ip.trim();
+                finalDevice.name = lpDevice.name.trim();
                 finalDevice.id = this.cleanDeviceName(lpDevice.name);
 
                 if (finalDevice.id.length < 1) {
@@ -450,7 +456,7 @@ this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
 
                 if (lpDevice.apiType !== 'mqtt' && lpDevice.apiType !== 'restapi') {
                     this.log.warn(`${finalDevice.name}: apiType is empty, set to mqtt as default.`);
-                    finalDevice.restProtocol = 'mqtt';
+                    finalDevice.apiType = 'mqtt';
                 } else {
                     finalDevice.apiType = lpDevice.apiType;
                 }
@@ -458,9 +464,9 @@ this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
                 if (deviceIds.includes(finalDevice.id)) {
                     this.log.error(`Device "${finalDevice.name}" -> id:"${finalDevice.id}" is used for more than once device.`);
                     return false;
-                } 
+                } else {
                     deviceIds.push(finalDevice.id);
-                
+                }
 
                 if (lpDevice.restProtocol !== 'http' && lpDevice.restProtocol !== 'https') {
                     this.log.warn(`${finalDevice.name}: REST API Protocol is empty, set to http as default.`);
@@ -468,34 +474,30 @@ this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
                 } else {
                     finalDevice.restProtocol = lpDevice.restProtocol;
                 }
-                if (!this.isIpAddressValid(lpDevice.ip)) {
-                    this.log.error(`${finalDevice.name}: Provided IP address "${lpDevice.ip}" is not valid!`);
-                    return false;
-                }
                 if (deviceIPs.includes(lpDevice.ip)) {
                     this.log.error(`Device "${finalDevice.name}" -> IP:"${lpDevice.ip}" is used for more than once device.`);
                     return false;
-                } 
+                } else {
                     deviceIPs.push(lpDevice.ip);
                     finalDevice.ip = lpDevice.ip;
-                
+                }
                 if (isNaN(lpDevice.restPort) || lpDevice.restPort < 0 || lpDevice.restPort > 65535) {
                     this.log.error(`Adapter config Fully port number ${lpDevice.restPort} is not valid, should be >= 0 and < 65536.`);
                     return false;
-                } 
+                } else {
                     finalDevice.restPort = Math.round(lpDevice.restPort);
-                
-                if ((0, _methods.isEmpty)(lpDevice.restPassword)) {
+                }
+                if (this.isEmpty(lpDevice.restPassword)) {
                     this.log.error(`Remote Admin (REST API) Password must not be empty!`);
                     return false;
-                } 
+                } else {
                     finalDevice.restPassword = lpDevice.restPassword;
-                
+                }
 
                 finalDevice.chatid = lpDevice.chatid;
                 finalDevice.telegramInstance = lpDevice.telegramInstance;
 
-                finalDevice.enabled = lpDevice.enabled ? true : false;
+                finalDevice.enabled = !!lpDevice.enabled;
 
                 const logConfig = {
                     ...finalDevice
@@ -508,7 +510,7 @@ this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
                 if (lpDevice.enabled) {
                     this.fullysEnbl[finalDevice.ip] = finalDevice;
 
-                    if (finalDevice.apiType == 'mqtt') {
+                    if (finalDevice.apiType === 'mqtt') {
                         this.fullysMQTT[finalDevice.ip] = finalDevice;
                     } else {
                         this.fullysRESTApi[finalDevice.ip] = finalDevice;
@@ -656,7 +658,7 @@ this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
                 });
             }
 
-            if (device.apiType == 'mqtt') {
+            if (device.apiType === 'mqtt') {
                 await this.setObjectNotExistsAsync(`${device.id  }.Events`, {
                     type: 'channel',
                     common: {
@@ -699,8 +701,8 @@ this.clearTimeout(this.mqtt_Server.devices[clientId].timeoutNoUpdate);
                     this.log.silly(`Cleanup: Ignore non device related state ${objectId}.`);
                 } else {
                     if (!allObjectDeviceIds.includes(deviceId)) {
-allObjectDeviceIds.push(deviceId);
-}
+                        allObjectDeviceIds.push(deviceId);
+                    }
                 }
             }
             const allConfigDeviceIds = [];
