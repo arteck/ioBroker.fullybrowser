@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.1.4",
+    "version": "3.1.5",
     "news": {
+      "3.1.5": {
+        "en": "fix aedes",
+        "de": "aeden reparieren",
+        "ru": "фиксировать aedes",
+        "pt": "fixar aedes",
+        "nl": "aedes herstellen",
+        "fr": "fixer les orteils",
+        "it": "fissare aedes",
+        "es": "arreglar aedes",
+        "pl": "fix aedes",
+        "uk": "закріпити оголені",
+        "zh-cn": "修补艾迪斯"
+      },
       "3.1.4": {
         "en": "refactoring\nfix aedes",
         "de": "refaktor\naeden reparieren",
@@ -15,7 +28,7 @@
         "pl": "refaktoring\nfix aedes",
         "uk": "рефакторинг\nзакріпити оголені",
         "zh-cn": "正在重构\n修补艾迪斯"
-      },      
+      },
       "3.1.2": {
         "en": "add device name into the warning message\ndependency update",
         "de": "gerätename in die warnmeldung einfügen\naktualisierung der abhängigkeit",

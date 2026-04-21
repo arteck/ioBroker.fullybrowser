@@ -50,6 +50,9 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 -->
 
 ## Changelog
+### 3.1.5 (2026-04-21)
+* (arteck) fix aedes
+
 ### 3.1.4 (2026-04-21)
 * (arteck) refactoring
 * (arteck) fix aedes
