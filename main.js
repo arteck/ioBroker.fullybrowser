@@ -464,9 +464,9 @@ class fullybrowserControll  extends utils.Adapter {
                 if (deviceIds.includes(finalDevice.id)) {
                     this.log.error(`Device "${finalDevice.name}" -> id:"${finalDevice.id}" is used for more than once device.`);
                     return false;
-                } else {
+                } 
                     deviceIds.push(finalDevice.id);
-                }
+                
 
                 if (lpDevice.restProtocol !== 'http' && lpDevice.restProtocol !== 'https') {
                     this.log.warn(`${finalDevice.name}: REST API Protocol is empty, set to http as default.`);
@@ -477,22 +477,22 @@ class fullybrowserControll  extends utils.Adapter {
                 if (deviceIPs.includes(lpDevice.ip)) {
                     this.log.error(`Device "${finalDevice.name}" -> IP:"${lpDevice.ip}" is used for more than once device.`);
                     return false;
-                } else {
+                } 
                     deviceIPs.push(lpDevice.ip);
                     finalDevice.ip = lpDevice.ip;
-                }
+                
                 if (isNaN(lpDevice.restPort) || lpDevice.restPort < 0 || lpDevice.restPort > 65535) {
                     this.log.error(`Adapter config Fully port number ${lpDevice.restPort} is not valid, should be >= 0 and < 65536.`);
                     return false;
-                } else {
+                } 
                     finalDevice.restPort = Math.round(lpDevice.restPort);
-                }
+                
                 if (this.isEmpty(lpDevice.restPassword)) {
                     this.log.error(`Remote Admin (REST API) Password must not be empty!`);
                     return false;
-                } else {
+                } 
                     finalDevice.restPassword = lpDevice.restPassword;
-                }
+                
 
                 finalDevice.chatid = lpDevice.chatid;
                 finalDevice.telegramInstance = lpDevice.telegramInstance;
