@@ -15,20 +15,7 @@
         "pl": "refaktoring\nfix aedes",
         "uk": "рефакторинг\nзакріпити оголені",
         "zh-cn": "正在重构\n修补艾迪斯"
-      },
-      "3.1.3": {
-        "en": "Dependencies have been updated",
-        "de": "Abhängigkeiten wurden aktualisiert",
-        "ru": "Зависимости были обновлены",
-        "pt": "As dependências foram atualizadas",
-        "nl": "Afhankelijkheden zijn bijgewerkt",
-        "fr": "Les dépendances ont été actualisées",
-        "it": "Le dipendenze sono state aggiornate",
-        "es": "Se han actualizado las dependencias",
-        "pl": "Zaktualizowano zależności",
-        "uk": "Залежність було оновлено",
-        "zh-cn": "依赖关系已更新"
-      },
+      },      
       "3.1.2": {
         "en": "add device name into the warning message\ndependency update",
         "de": "gerätename in die warnmeldung einfügen\naktualisierung der abhängigkeit",
@@ -163,12 +150,12 @@
     },
     "globalDependencies": [
       {
-        "admin": ">=7.4.10"
+        "admin": ">=7.6.17"
       }
     ],
     "dependencies": [
       {
-        "js-controller": ">=5.0.19"
+        "js-controller": ">=6.0.11"
       }
     ],
     "messages": [
