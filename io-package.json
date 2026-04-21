@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "fullybrowser",
-    "version": "3.1.3",
+    "version": "3.1.4",
     "news": {
+      "3.1.4": {
+        "en": "refactoring\nfix aedes",
+        "de": "refaktor\naeden reparieren",
+        "ru": "рефакторинг\nфиксировать aedes",
+        "pt": "refatorização\nfixar aedes",
+        "nl": "refactoring\naedes herstellen",
+        "fr": "refactoration\nfixer les orteils",
+        "it": "refactoring\nfissare aedes",
+        "es": "refactoring\narreglar aedes",
+        "pl": "refaktoring\nfix aedes",
+        "uk": "рефакторинг\nзакріпити оголені",
+        "zh-cn": "正在重构\n修补艾迪斯"
+      },
       "3.1.3": {
         "en": "Dependencies have been updated",
         "de": "Abhängigkeiten wurden aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "zestaw baterii Poziom do 0, jeśli tabletka jest offline jest konfigurowalna",
         "uk": "акумулятор Рівень до 0, якщо планшет вимкнено",
         "zh-cn": "设置电池 平板电脑离线时为 0级"
-      },
-      "3.0.11": {
-        "en": "translate api-type",
-        "de": "übersetzen api-typ",
-        "ru": "перевод api-type",
-        "pt": "traduzir api-tipo",
-        "nl": "api-type vertalen",
-        "fr": "traduire le type api",
-        "it": "tradurre api-tipo",
-        "es": "traducir tipo api",
-        "pl": "przetłumacz typ api-",
-        "uk": "переклад api-типу",
-        "zh-cn": "翻译 api 类型"
       }
     },
     "titleLang": {
