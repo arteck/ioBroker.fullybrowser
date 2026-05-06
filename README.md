@@ -144,6 +144,8 @@ Many thanks to @Acgua (https://github.com/Acgua) for [ioBroker.fully-mqtt](https
 ### 1.0.1 (2019-06-20)
 * (arteck) encodeURL
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 The MIT License (MIT)
 
