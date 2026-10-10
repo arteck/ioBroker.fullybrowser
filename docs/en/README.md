@@ -1,4 +1,4 @@
-![Logo](../../admin/fully-mqtt_500.png)
+![Logo](../../admin/fully.png)
 
 ## About this adapter
 
