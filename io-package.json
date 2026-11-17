@@ -44,16 +44,16 @@
       },
       "3.1.1": {
         "en": "typo",
-        "de": "typo",
-        "ru": "typo",
-        "pt": "tipo:",
-        "nl": "type",
-        "fr": "typo",
-        "it": "tipo",
-        "es": "typo",
-        "pl": "typo",
-        "uk": "типи",
-        "zh-cn": "类型"
+        "de": "Tippfehler",
+        "ru": "опечатка",
+        "pt": "erro de digitação",
+        "nl": "typfout",
+        "fr": "faute de frappe",
+        "it": "errore di battitura",
+        "es": "error de tipografía",
+        "pl": "literówka",
+        "uk": "друкарська помилка",
+        "zh-cn": "拼写错误"
       },
       "3.1.0": {
         "en": "add new command takePicture, check new settings",
